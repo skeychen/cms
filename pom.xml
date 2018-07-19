@@ -84,7 +84,7 @@
 	
 	</dependencies>
 <build>
-	<finalName>DsWorkJava</finalName>
+	<finalName>cms</finalName>
 	<outputDirectory>web/WEB-INF/classes</outputDirectory>
 </build>
 </project>
