@@ -4,7 +4,7 @@
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
 	<profiles>
 		<profile>
-			<id>NexusRepository</id>
+			<id>sonatype</id>
 			<repositories>
 				<repository>
 					<id>sonatypeReleases</id>
@@ -17,12 +17,10 @@
 					<releases><enabled>false</enabled></releases>
 					<snapshots><enabled>true</enabled><updatePolicy>always</updatePolicy></snapshots>
 				</repository>
-			<!--
-				always、daily（默认）、interval:X（X是一分钟为单位的整数）和never
-				<url>http://repo.maven.apache.org/maven2/</url>
-				<url>http://mvnrepository.com/artifact/</url>
-			-->
 			</repositories>
 		</profile>
 	</profiles>
+	<activeProfiles>
+		<activeProfile>sonatype</activeProfile>
+	</activeProfiles>
 </settings>
