@@ -36,13 +36,18 @@
 	</properties>
 	
 	<dependencies>
+		<dependency><groupId>aopalliance</groupId><artifactId>aopalliance</artifactId><version>${v.aopalliance}</version></dependency>
+		<dependency><groupId>com.google.code.gson</groupId><artifactId>gson</artifactId><version>${v.gson}</version></dependency>
+		
 		<dependency><groupId>commons-collections</groupId><artifactId>commons-collections</artifactId><version>${v.commons.collections}</version></dependency>
+		<dependency><groupId>commons-dbcp       </groupId><artifactId>commons-dbcp       </artifactId><version>${v.commons.dbcp}</version></dependency>
 		<dependency><groupId>commons-io         </groupId><artifactId>commons-io         </artifactId><version>${v.commons.io}</version></dependency>
 		<dependency><groupId>commons-lang       </groupId><artifactId>commons-lang       </artifactId><version>${v.commons.lang}</version></dependency>
-		<dependency><groupId>commons-pool       </groupId><artifactId>commons-pool       </artifactId><version>${v.commons.pool}</version></dependency>
-		<dependency><groupId>commons-dbcp       </groupId><artifactId>commons-dbcp       </artifactId><version>${v.commons.dbcp}</version></dependency>
 		<dependency><groupId>commons-logging    </groupId><artifactId>commons-logging    </artifactId><version>${v.commons.logging}</version></dependency>
+		<dependency><groupId>commons-pool       </groupId><artifactId>commons-pool       </artifactId><version>${v.commons.pool}</version></dependency>
 	
+		<dependency><groupId>javax.servlet</groupId><artifactId>jstl</artifactId><version>${v.jstl}</version></dependency>
+		
 		<dependency><groupId>org.apache.logging.log4j</groupId><artifactId>log4j-api       </artifactId><version>${v.log4j}</version></dependency>
 		<dependency><groupId>org.apache.logging.log4j</groupId><artifactId>log4j-web       </artifactId><version>${v.log4j}</version></dependency>
 		<dependency><groupId>org.apache.logging.log4j</groupId><artifactId>log4j-core      </artifactId><version>${v.log4j}</version></dependency>
@@ -50,9 +55,6 @@
 		
 		<dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>${v.slf4j}</version></dependency>
 		
-		<dependency><groupId>aopalliance</groupId><artifactId>aopalliance</artifactId><version>${v.aopalliance}</version></dependency>
-		
-		<dependency><groupId>javax.servlet</groupId><artifactId>jstl</artifactId><version>${v.jstl}</version></dependency>
 		<dependency><groupId>org.springframework</groupId><artifactId>spring-aop       </artifactId><version>${v.spring}</version></dependency>
 		<dependency><groupId>org.springframework</groupId><artifactId>spring-beans     </artifactId><version>${v.spring}</version></dependency>
 		<dependency><groupId>org.springframework</groupId><artifactId>spring-context   </artifactId><version>${v.spring}</version></dependency>
@@ -65,8 +67,6 @@
 		
 		<dependency><groupId>org.mybatis</groupId><artifactId>mybatis       </artifactId><version>${v.mybatis}       </version></dependency>
 		<dependency><groupId>org.mybatis</groupId><artifactId>mybatis-spring</artifactId><version>${v.mybatis.spring}</version></dependency>
-		
-		<dependency><groupId>com.google.code.gson</groupId><artifactId>gson</artifactId><version>${v.gson}</version></dependency>
 		
 		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-core  </artifactId><version>${v.dswork}</version></dependency>
 		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-http  </artifactId><version>${v.dswork}</version></dependency>
