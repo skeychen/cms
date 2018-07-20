@@ -170,8 +170,6 @@
 			<dependency><groupId>org.jboss.logging               </groupId><artifactId>jboss-logging                 </artifactId><version>${v.hibernate.jboss.logging}</version></dependency>
 			<dependency><groupId>org.jboss.spec.javax.transaction</groupId><artifactId>jboss-transaction-api_1.1_spec</artifactId><version>${v.hibernate.jboss-transaction-api}</version></dependency>
 			
-			<dependency><groupId>org.apache.tomcat.embed</groupId><artifactId>tomcat-embed-core</artifactId><version>${v.tomcat-embed}</version><scope>provided</scope></dependency>
-			
 			<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-ee</artifactId><version>${v.dswork}</version></dependency>
 			
 			<dependency><groupId>mysql</groupId><artifactId>mysql-connector-java</artifactId><version>${v.mysql}</version></dependency>
