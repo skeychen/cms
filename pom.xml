@@ -10,7 +10,7 @@
 <url>https://github.com/skeychen/cms</url>
 
 <dependencies>
-	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-cms</artifactId><version>0.0.0-SNAPSHOT</version></dependency>
+	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-javaweb</artifactId><version>0.0.0-SNAPSHOT</version><type>pom</type></dependency>
 </dependencies>
 <build>
 	<finalName>cms</finalName>
