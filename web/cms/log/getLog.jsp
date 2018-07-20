@@ -1,5 +1,5 @@
 <%@page language="java" pageEncoding="UTF-8" import="
-common.authown.AuthOwnUtil,
+dswork.authown.AuthOwnUtil,
 dswork.web.MyRequest,
 dswork.spring.BeanFactory,
 dswork.core.page.Page,

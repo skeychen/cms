@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import common.authown.AuthOwn;
-import common.authown.AuthOwnUtil;
+import dswork.authown.AuthOwn;
+import dswork.authown.AuthOwnUtil;
 import dswork.cms.dao.DsCmsPermissionDao;
 import dswork.cms.model.DsCmsCategory;
 import dswork.cms.model.DsCmsPermission;
