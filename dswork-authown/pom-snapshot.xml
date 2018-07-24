@@ -18,8 +18,6 @@
 
 	<dependencies>
 		<dependency><groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId><scope>provided</scope></dependency>
-		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-core</artifactId><scope>provided</scope></dependency>
-		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-web</artifactId><scope>provided</scope></dependency>
 		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-sso</artifactId><scope>provided</scope></dependency>
 	</dependencies>
 
