@@ -266,7 +266,7 @@ public class DsCmsFileController extends DsCmsBaseController
 			print("{\"err\":\"上传失败\",\"msg\":\"\"}");
 		}
 	}
-	private static String hz = "avi,bmp,css,doc,docx,flv,gif,jpeg,jpg,mp3,mp4,pdf,png,ppt,pptx,rtf,swf,txt,xls,xlsx";
+	private static String hz = "avi,bmp,css,doc,docx,flv,gif,jpeg,jpg,js,mp3,mp4,pdf,png,ppt,pptx,rtf,swf,txt,webm,xls,xlsx";
 	private static String cc = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_0123456789.";
 	private static String[] hzArr = hz.split(",");
 
