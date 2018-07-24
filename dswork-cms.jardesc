@@ -11,6 +11,13 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <javaElement handleIdentifier="=cms/dswork-cms"/>
+        <javaElement handleIdentifier="=cms/dswork-cms&lt;common.cms.model"/>
+        <javaElement handleIdentifier="=cms/dswork-cms&lt;dswork.cms.mapper"/>
+        <javaElement handleIdentifier="=cms/dswork-cms&lt;dswork.cms.service"/>
+        <javaElement handleIdentifier="=cms/dswork-cms&lt;dswork.cms.model"/>
+        <javaElement handleIdentifier="=cms/dswork-cms&lt;dswork.cms.controller"/>
+        <javaElement handleIdentifier="=cms/dswork-cms&lt;common.cms"/>
+        <javaElement handleIdentifier="=cms/dswork-cms&lt;dswork.cms.dao"/>
+        <javaElement handleIdentifier="=cms/dswork-cms&lt;common.cms.controller"/>
     </selectedElements>
 </jardesc>
