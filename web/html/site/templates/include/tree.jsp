@@ -1,4 +1,4 @@
-<%@page language="java" pageEncoding="UTF-8" import="java.util.*"%>
+<%@page language="java" pageEncoding="UTF-8"%>
 <div class="vname">&nbsp;&nbsp;信息公开</div>
 <div class="vbox">
 <ul>

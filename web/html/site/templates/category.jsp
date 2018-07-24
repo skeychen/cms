@@ -1,7 +1,7 @@
-<%@page language="java" pageEncoding="UTF-8" import="common.cms.CmsFactory"%>
+<%@page language="java" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%CmsFactory cms = (CmsFactory)request.getAttribute("cms");%>
+<%common.cms.CmsFactory cms = (common.cms.CmsFactory)request.getAttribute("cms");%>
 <!DOCTYPE html>
 <html>
 <head>

@@ -50,7 +50,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 				}
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String filePath = getCmsRoot() + site.getFolder() + "/templates/";
+					String filePath = (getCmsRoot() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
 					File froot = new File(filePath);
 					File finclude = new File(filePath + "include");
 					File mroot = new File(filePath + "m");
@@ -58,10 +58,10 @@ public class DsCmsTemplateController extends DsCmsBaseController
 					File f = new File(filePath + uriPath);
 					// 限制为只能读取根目录、include目录、m根目录、m下include目录
 					if(f.isDirectory() && (
-							f.getCanonicalPath().equals(froot.getCanonicalPath())
-							|| f.getCanonicalPath().equals(finclude.getCanonicalPath())
-							|| f.getCanonicalPath().equals(mroot.getCanonicalPath())
-							|| f.getCanonicalPath().equals(minclude.getCanonicalPath())
+							f.getPath().equals(froot.getPath())
+							|| f.getPath().equals(finclude.getPath())
+							|| f.getPath().equals(mroot.getPath())
+							|| f.getPath().equals(minclude.getPath())
 					))
 					{
 						put("path", uriPath);
@@ -101,27 +101,26 @@ public class DsCmsTemplateController extends DsCmsBaseController
 				}
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String filePath = getCmsRoot() + site.getFolder() + "/templates/";
+					String filePath = (getCmsRoot() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
 					File froot = new File(filePath);
 					File finclude = new File(filePath + "include");
 					File mroot = new File(filePath + "m");
 					File minclude = new File(filePath + "m/include");
 					File f = new File(filePath + uriPath);
+					boolean isInclude = f.getPath().equals(finclude.getPath()) || f.getPath().equals(minclude.getPath());
 					// 限制为只能读取根目录、include目录、m根目录、m下include目录
 					if(f.isDirectory() && (
-							f.getCanonicalPath().equals(froot.getCanonicalPath())
-							|| f.getCanonicalPath().equals(finclude.getCanonicalPath())
-							|| f.getCanonicalPath().equals(mroot.getCanonicalPath())
-							|| f.getCanonicalPath().equals(minclude.getCanonicalPath())
+							f.getPath().equals(froot.getPath())
+							|| f.getPath().equals(mroot.getPath())
+							|| isInclude
 					))
 					{
-						File ff = new File(f.getCanonicalPath() + File.separator + filename + ".jsp");
+						File ff = new File(f.getPath() + File.separator + filename + ".jsp");
 						if(ff.isFile())
 						{
 							print("0:文件创建失败，已存在同名文件");
 							return;
 						}
-						boolean isInclude = f.getCanonicalPath().equals(finclude.getCanonicalPath()) || f.getCanonicalPath().equals(minclude.getCanonicalPath());
 						FileUtil.writeFile(ff.getPath(), isInclude?TopInc:Top, "UTF-8", false);
 						print("1");
 					}
@@ -196,22 +195,22 @@ public class DsCmsTemplateController extends DsCmsBaseController
 				}
 				if(s != null && s.getFolder().trim().length() > 0 && checkOwn(s.getId()))
 				{
-					String filePath = getCmsRoot() + s.getFolder() + "/templates/";
+					String filePath = (getCmsRoot() + s.getFolder() + "/templates/").replaceAll("\\\\", "/");
 					File froot = new File(filePath);
 					File finclude = new File(filePath + "include");
 					File mroot = new File(filePath + "m");
 					File minclude = new File(filePath + "m/include");
 					File f = new File(filePath + uriPath);
+					boolean isInclude = f.getPath().equals(finclude.getPath()) || f.getPath().equals(minclude.getPath());
 					// 限制为只能读取根目录、include目录、m根目录、m下include目录
 					if(f.isDirectory() && (
-							f.getCanonicalPath().equals(froot.getCanonicalPath())
-							|| f.getCanonicalPath().equals(finclude.getCanonicalPath())
-							|| f.getCanonicalPath().equals(mroot.getCanonicalPath())
-							|| f.getCanonicalPath().equals(minclude.getCanonicalPath())
+							f.getPath().equals(froot.getPath())
+							|| f.getPath().equals(mroot.getPath())
+							|| isInclude
 					))
 					{
 						boolean first = true;
-						if(f.getCanonicalPath().equals(froot.getCanonicalPath()))
+						if(f.getPath().equals(froot.getPath()))
 						{
 							sb.append("{id:1,pid:0,isParent:true,name:\"include\",path:\"include/\"}");
 							if(enablemobile)
@@ -220,7 +219,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 							}
 							first = false;
 						}
-						else if(f.getCanonicalPath().equals(mroot.getCanonicalPath()))
+						else if(f.getPath().equals(mroot.getPath()))
 						{
 							sb.append("{id:21,pid:0,isParent:true,name:\"include\",path:\"m/include/\"}");
 							first = false;
@@ -266,21 +265,22 @@ public class DsCmsTemplateController extends DsCmsBaseController
 				}
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String filePath = getCmsRoot() + site.getFolder() + "/templates/";
+					String filePath = (getCmsRoot() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
 					File froot = new File(filePath);
 					File finclude = new File(filePath + "include");
 					File mroot = new File(filePath + "m");
 					File minclude = new File(filePath + "m/include");
 					File f = new File(filePath + uriPath);
+					boolean isInclude = f.getParent().equals(finclude.getPath()) || f.getParent().equals(minclude.getPath());
 					// 限制为只能读取根目录、include目录、m根目录、m下include目录
 					if(f.isFile() && (
 							f.getParent().equals(froot.getPath())
-							|| f.getParent().equals(finclude.getPath())
 							|| f.getParent().equals(mroot.getPath())
-							|| f.getParent().equals(minclude.getPath())
+							|| isInclude
 					))
 					{
-						put("content", FileUtil.readFile(f.getPath(), "UTF-8"));
+						String content = FileUtil.readFile(f.getPath(), "UTF-8").replaceAll("\r", "");
+						put("content", content.substring(isInclude ? TopInc.length() : Top.length()));
 						put("path", uriPath);
 						put("siteid", siteid);
 						return "/cms/template/editTemplate.jsp";
@@ -312,7 +312,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 				}
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String filePath = getCmsRoot() + site.getFolder() + "/templates/";
+					String filePath = (getCmsRoot() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
 					File froot = new File(filePath);
 					File finclude = new File(filePath + "include");
 					File mroot = new File(filePath + "m");
@@ -320,12 +320,12 @@ public class DsCmsTemplateController extends DsCmsBaseController
 					File bak = new File(filePath + "bak");
 					bak.mkdirs();
 					File f = new File(filePath + uriPath);
+					boolean isInclude = f.getParent().equals(finclude.getPath()) || f.getParent().equals(minclude.getPath());
 					// 限制为只能读取根目录、include目录、m根目录、m下include目录
 					if(f.isFile() && (
 							f.getParent().equals(froot.getPath())
-							|| f.getParent().equals(finclude.getPath())
 							|| f.getParent().equals(mroot.getPath())
-							|| f.getParent().equals(minclude.getPath())
+							|| isInclude
 					))
 					{
 						try
@@ -337,7 +337,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 							print("0:文件备份失败，请重试");
 							return;
 						}
-						FileUtil.writeFile(f.getPath(), content, "UTF-8", true);
+						FileUtil.writeFile(f.getPath(), (isInclude?TopInc:Top) + content, "UTF-8", true);
 						print("1");
 					}
 				}
@@ -356,6 +356,6 @@ public class DsCmsTemplateController extends DsCmsBaseController
 		return "/cms/template/readme.jsp";
 	}
 	
-	private static String Top = "<%@page language=\"java\" pageEncoding=\"UTF-8\"%>\r\n<%@taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\"%>\r\n<%@taglib prefix=\"fn\" uri=\"http://java.sun.com/jsp/jstl/functions\" %>\r\n<%common.cms.CmsFactory cms = (common.cms.CmsFactory)request.getAttribute(\"cms\");%>";
-	private static String TopInc = "<%@page language=\"java\" pageEncoding=\"UTF-8\"%>\r\n";
+	private static String Top = "<%@page language=\"java\" pageEncoding=\"UTF-8\"%>\n<%@taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\"%>\n<%@taglib prefix=\"fn\" uri=\"http://java.sun.com/jsp/jstl/functions\" %>\n<%common.cms.CmsFactory cms = (common.cms.CmsFactory)request.getAttribute(\"cms\");%>\n";
+	private static String TopInc = "<%@page language=\"java\" pageEncoding=\"UTF-8\"%>\n";
 }
