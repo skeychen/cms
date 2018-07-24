@@ -43,10 +43,17 @@ $dswork.ztree.beforeClick = function(){
 	return true;
 };
 $dswork.ztree.click = function(){
-	attachUrl("editTemplate1.htm?siteid=${siteid}&path="+$dswork.ztree.getSelectedNode().path);
+	var treeNode = $dswork.ztree.getSelectedNode();
+	if(treeNode.isParent){
+		attachUrl();
+		// attachUrl("addTemplate1.htm?siteid=${siteid}&path="+$dswork.ztree.getSelectedNode().path);
+	}
+	else{
+		attachUrl("editTemplate1.htm?siteid=${siteid}&path="+$dswork.ztree.getSelectedNode().path);
+	}
 };
 $dswork.ztree.root.name = "模板文件";
-$dswork.ztree.root.path = "";
+$dswork.ztree.root.path = "/";
 $dswork.ztree.url = function(n){return "getTemplateTreeJson.htm?siteid=${siteid}&pid="+n.id+"&path="+n.path};
 $(function(){
 	var $z = $dswork.ztree;
@@ -62,6 +69,15 @@ $dswork.ztree.dataFilter = function (treeId, parentNode, data){
 	if(data){for(var i =0; i < data.length; i++){data[i].name = data[i].name.replace(".jsp", "");}}
 	return data;
 };
+function addTemplate(){
+	var treeNode = $dswork.ztree.getSelectedNode();
+	if(treeNode.isParent){
+		attachUrl("addTemplate1.htm?siteid=${siteid}&path="+$dswork.ztree.getSelectedNode().path);
+	}
+	else{
+		attachUrl("addTemplate1.htm?siteid=${siteid}&path="+$dswork.ztree.getSelectedNode().getParentNode().path);
+	}
+}
 </script>
 </head>
 <body class="easyui-layout treebody" fit="true">
@@ -77,6 +93,7 @@ $dswork.ztree.dataFilter = function (treeId, parentNode, data){
 			</select>
 		</td>
 		<td class="menuTool">
+			<a class="insert" onclick="addTemplate();return false;" href="#">增加模板</a>
 			<a class="select" href="readme.htm" target="_blank">说明</a>
 		</td>
 	</tr>

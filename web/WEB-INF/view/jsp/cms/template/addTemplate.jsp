@@ -7,16 +7,17 @@
 <title></title>
 <%@include file="/commons/include/addAjax.jsp"%>
 <script type="text/javascript">
-window.parent.setTextChange(false);
+window.parent.setTextChange(false);// 第一次进来时，重置父页面修改状态的标记信息
 $dswork.doAjax = true;
 $dswork.callback = function(){if($dswork.result.type == 1){
-	window.parent.setTextChange(false);
+	window.parent.location.reload();
 }};
 function onChangeListen(){
 	window.parent.setTextChange(true);
 }
 </script>
 <style type="text/css">
+	
 </style>
 </head>
 <body>
@@ -29,12 +30,15 @@ function onChangeListen(){
 	</tr>
 </table>
 <div class="line"></div>
-<form id="dataForm" method="post" action="editTemplate2.htm">
+<form id="dataForm" method="post" action="addTemplate2.htm">
 <table id="dataTable" border="0" cellspacing="1" cellpadding="0" class="listTable">
 	<tr>
-		<td>
-			<textarea style="width:100%;height:500px;font-size:14px;overflow:scroll;" name="content" onchange="onChangeListen()">${fn:escapeXml(content)}</textarea>
-		</td>
+		<td class="form_title">模板位置</td>
+		<td class="form_input">${path}</td>
+	</tr>
+	<tr>
+		<td class="form_title">模板名称</td>
+		<td class="form_input"><input type="text" name="filename" maxlength="100" style="width:400px;" datatype="Char" value="" /></td>
 	</tr>
 </table>
 <input type="hidden" name="path" value="${path}"/>

@@ -308,4 +308,24 @@ public class CmsFactory
 		}
 		return p.getList();
 	}
+	
+	/**
+	 * 获取变量
+	 * @param key
+	 * @return Object
+	 */
+	public Object value(String key)
+	{
+		return request.getAttribute(key);
+	}
+	
+	/**
+	 * 设置变量至页面
+	 * @param key
+	 * @param val
+	 */
+	public void value(String key, String val)
+	{
+		request.setAttribute(key, val);
+	}
 }

@@ -8,7 +8,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui"/>
 <title>${fn:escapeXml(title)}-${category.name}-${site.name}</title>
-<link rel="stylesheet" type="text/css" href="${ctx}/themes/web.css"/>
+<link rel="stylesheet" type="text/css" href="${ctx}/f/res/themes/web.css"/>
 <meta name="keywords" content="${category.metakeywords}"/>
 <meta name="description" content="${category.metadescription}"/>
 </head>

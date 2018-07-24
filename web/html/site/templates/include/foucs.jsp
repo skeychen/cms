@@ -2,7 +2,7 @@
 <div class="foucs">
 	<ul class="img">
 		<li href="http://browser.qq.com/">
-			<img alt="图片" src="${ctx}/themes/web/header.jpg"/><div></div><span>本网站</span>
+			<img alt="图片" src="${ctx}/f/res/themes/web/header.jpg"/><div></div><span>本网站</span>
 		</li>
 		<li href="http://msdn.itellyou.cn/">
 			<img alt="图片" src="http://msdn.itellyou.cn/images/itellyou.cn.png"/><div></div><span>与世界分享你的知识、经验和见解</span>
@@ -15,7 +15,7 @@
 		</li>
 	</ul>
 	<ul class="menu">
-		<li><img alt="图片" src="${ctx}/themes/web/header.jpg"/></li>
+		<li><img alt="图片" src="${ctx}/f/res/themes/web/header.jpg"/></li>
 		<li><img alt="图片" src="http://msdn.itellyou.cn/images/itellyou.cn.png"/></li>
 		<li><img alt="图片" src="http://mat1.gtimg.com/news/2015/zt/xwghz/img/logo.png"/></li>
 		<li><img alt="图片" src="https://www.baidu.com/img/bdlogo.png"/></li>

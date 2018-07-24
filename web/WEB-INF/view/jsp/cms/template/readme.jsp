@@ -117,7 +117,7 @@ p.title{font-size:20px;padding-bottom:5px;border-bottom:solid 1px #ccc;}
 			<p><span class="v">img</span><span class="c">图片</span><span class="t">String</span></p>
 			<p><span class="v">content</span><span class="c">内容</span><span class="t">String</span></p>
 			<p><span class="v">vo</span><span class="c">自定义字段</span><span class="t">Map</span></p>
-			<p><span class="v">parent</span><span class="c">父栏目</span><span class="t"><a href="#ViewCategory">ViewCategory</a></span></p>
+			<p><span class="v">parent</span><span class="c">父栏目，没有父栏目时指向当前栏目</span><span class="t"><a href="#ViewCategory">ViewCategory</a></span></p>
 			<p><span class="v">list</span><span class="c">子栏目列表</span><span class="t">List&lt;<a href="#ViewCategory">ViewCategory</a>&gt;</span></p>
 		</div>
 		<div class="box" id="ViewArticle">
