@@ -146,14 +146,9 @@
 		使用单点登录时，使用/cms/permission/getUser.jsp进行用户列表的获取
 		如果不使用单点登录，则使用/cms/permission/getUser.htm方式获取用户，需要进行如下操作
 		创建DS_CMS_USER视图
-			CREATE VIEW DS_CMS_USER AS
-			SELECT
-				ID,
-				ACCOUNT,
-				NAME,
-				'adminadmin' AS OWN
-			FROM
-				DS_COMMON_USER;
+			CREATE VIEW DS_CMS_USER AS 
+			SELECT ID, ACCOUNT, NAME, concat('admin', ACCOUNT) AS OWN FROM DS_COMMON_USER;
+
 		注：可选，用于授权时读用户。如果不用到授权功能，可不生成此视图；生成OWN的规则可由用户程序自己决定
 
 		将内容表里的数据拷贝至内容编辑表
