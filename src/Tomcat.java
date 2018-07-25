@@ -2,6 +2,6 @@ public class Tomcat
 {
 	public static void main(String[] args) throws Exception
 	{
-		dswork.ee.MyTomcat.class.newInstance().setPort(3333).setBaseDir("/WorkServer/TomcatEmbed").addWebapp().start();
+		dswork.ee.MyTomcat.class.newInstance().setPort(3333).addWebapp().start();
 	}
 }
