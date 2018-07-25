@@ -51,7 +51,7 @@ $(function(){
 			<a class="back" onclick="_revoke();" href="#">撤回审核</a>
 			<script type="text/javascript">
 			function _revoke(){if(confirm("确认撤回吗？")){
-				$('input[name="action"]').val('revoke');
+				$('#autosubmit').val('revoke');
 				$('#dataForm').ajaxSubmit($dswork.doAjaxOption);
 			}}
 			$(function(){$("input,textarea").attr("readonly", "readonly")});
@@ -62,7 +62,7 @@ $(function(){
 				<a class="back" onclick="_restore();" href="#">还原</a>
 				<script type="text/javascript">
 				function _restore(){if(confirm("确认还原吗？")){
-					$('input[name="action"]').val('restore');
+					$('#autosubmit').val('restore');
 					$('#dataForm').ajaxSubmit($dswork.doAjaxOption);
 				}}
 				</script>
@@ -71,11 +71,11 @@ $(function(){
 			<a class="submit" onclick="_submit();" href="#">保存并提交</a>
 			<script type="text/javascript">
 			function _save(){if(confirm("确认保存吗？")){
-				$('input[name="action"]').val('save');
+				$('#autosubmit').val('save');
 				$('#dataForm').ajaxSubmit($dswork.doAjaxOption);
 			}}
 			function _submit(){if(confirm("确认提交吗？")){
-				$('input[name="action"]').val('submit');
+				$('#autosubmit').val('submit');
 				$('#dataForm').ajaxSubmit($dswork.doAjaxOption);
 			}}
 			</script>
@@ -99,6 +99,10 @@ $(function(){
 </c:if>
 <c:if test="${!po.audit}">
 <table border="0" cellspacing="1" cellpadding="0" class="listTable">
+	<tr>
+		<td class="form_title">转换外链</td>
+		<td class="form_input"><label><input type="checkbox" name="autosave" value="1" />是否自动转换外链图片为本地图片</label></td>
+	</tr>
 	<tr>
 		<td class="form_title">是否外链</td>
 		<td class="form_input">
@@ -184,7 +188,8 @@ $(function(){
 </c:if>
 </c:if>
 <input type="hidden" name="id" value="${po.id}" />
-<input type="hidden" name="action" value="" />
+<input type="hidden" id="autosave" name="autosave" value="" />
+<input type="hidden" id="autosubmit" name="autosubmit" value="" />
 </form>
 </body>
 </html>
