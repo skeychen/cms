@@ -6,6 +6,9 @@
 <head>
 <title></title>
 <%@include file="/commons/include/get.jsp" %>
+<style type="text/css">
+tr.x td{text-align:left;padding-left:3px;}
+</style>
 </head> 
 <body>
 <table border="0" cellspacing="0" cellpadding="0" class="listLogo">
@@ -23,9 +26,9 @@
 		<td>引用地址</td>
 	</tr>
 <c:forEach items="${list}" var="d">
-	<tr>
+	<tr class="x">
 		<td>${fn:escapeXml(d.name)}</td>
-		<td style="text-align:left;">${fn:escapeXml(d.root)}${fn:escapeXml(d.path)}</td>
+		<td>${fn:escapeXml(d.root)}${fn:escapeXml(d.path)}</td>
 	</tr>
 </c:forEach>
 </table>

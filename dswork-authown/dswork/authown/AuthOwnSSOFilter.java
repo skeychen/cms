@@ -1,4 +1,4 @@
-package common.authown;
+package dswork.authown;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -55,6 +55,11 @@ public class AuthOwnSSOFilter implements Filter
 					{
 					}
 					AuthOwnUtil.clearUser(req);
+					return;
+				}
+				else
+				{
+					chain.doFilter(request, response);
 					return;
 				}
 			}

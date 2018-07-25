@@ -1,7 +1,7 @@
 <%@page language="java" contentType="text/html;charset=UTF-8" %><%
 String path = request.getContextPath();
-common.authown.AuthOwnUtil.logout(request, response);
-common.authown.AuthOwnUtil.login(request, response, "100000000", "admin", "系统管理", "adminadmin");
+dswork.authown.AuthOwnUtil.logout(request, response);
+dswork.authown.AuthOwnUtil.login(request, response, "100000000", "admin", "系统管理", "adminadmin");
 %>
 <!DOCTYPE html>
 <html>
@@ -48,10 +48,10 @@ var treedata = [
 </head>
 <body>
 <div style="overflow:hidden;height:100%;width:100%;">
-<div style="overflow:hidden;float:right;height:100%;width:80%;">
+<div style="overflow:hidden;float:right;height:100%;width:85%;">
 	<iframe id="main" name="main" style="height:100%;width:100%;" scrolling="auto" frameborder="0" src="about:blank"></iframe>
 </div>
-<div style="overflow:auto;float:left;height:100%;width:19.8%;border-right:1px solid #6ea5eb;">
+<div style="overflow:auto;float:left;height:100%;width:14.8%;border-right:1px solid #6ea5eb;">
 <script type="text/javascript">
 for(var i = 0; i < treedata.length; i++){
 	var item = treedata[i];

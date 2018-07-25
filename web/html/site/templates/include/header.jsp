@@ -1,13 +1,13 @@
 <%@page language="java" pageEncoding="UTF-8"%>
-<script type="text/javascript" src="${ctx}/js/jquery.js"></script>
-<script type="text/javascript" src="${ctx}/js/jskey_focus.js"></script>
+<script type="text/javascript" src="${ctx}/f/res/js/jquery.js"></script>
+<script type="text/javascript" src="${ctx}/f/res/js/jskey_focus.js"></script>
 <style type="text/css">
 	#showid1 img{width:100%;height:100%;margin:0 auto;}
 </style>
 <div id="showid1" style="width:990px;height:200px;margin:0 auto;overflow:hidden;background-color:#fff;clear:both;">
 	<div class="jskey_focus">
 		<ul>
-			<li><a href="#" target="_blank"><img src="${ctx}/themes/web/header.jpg"/></a></li>
+			<li><a href="#" target="_blank"><img src="${ctx}/f/res/themes/web/header.jpg"/></a></li>
 			<li><a href="#" target="_blank"><img src="http://msdn.itellyou.cn/images/itellyou.cn.png"/></a></li>
 			<li><a href="#" target="_blank"><img src="http://mat1.gtimg.com/news/2015/zt/xwghz/img/logo.png"/></a></li>
 			<li><a href="#" target="_blank"><img src="https://www.baidu.com/img/bdlogo.png"/></a></li>
@@ -18,8 +18,7 @@
 	$jskey.focus({target:"showid1",arrow:false,button:true});//,mode:"fit"
 </script>
 
-<script type="text/javascript" src="${ctx}/js/jskey_jquery_navtool.js"></script>
-<%request.setAttribute("mheader", cms.queryCategory(""));%>
+<script type="text/javascript" src="${ctx}/f/res/js/jskey_jquery_navtool.js"></script>
 <style>
 .nav-my .nav-up a{color:#fff;padding:0 35px;}
 .nav-my .nav-up .nav-up-hover a{color:yellow;}
@@ -36,7 +35,7 @@
 	<div class="nav-up">
 		<ul>
 			<li><a href="${ctx}/index.html">首页</a></li>
-			<c:forEach items="${mheader}" var="d">
+			<c:forEach items="${categorylist}" var="d">
 			<li data-nav="${d.id}"><a href="${ctx}${d.url}">${d.name}</a></li>
 			</c:forEach>
 	        <li><a target="_bank" href="http://wsbs.gz.gov.cn/gz/index.jsp">办事大厅</a></li>
@@ -45,7 +44,7 @@
 		</ul>
 	</div>
 	<div class="nav-down">
-		<c:forEach items="${mheader}" var="d"><c:if test="${fn:length(d.list)>0}">
+		<c:forEach items="${categorylist}" var="d"><c:if test="${fn:length(d.list)>0}">
 			<div class="nav-down-menu" data-nav="${d.id}"><c:forEach items="${d.list}" var="dd">
 				<dl><dt><a target="_blank"<c:if test="${dd.list==null || fn:length(dd.list)==0}"> href="${dd.status==2?'':ctx}${dd.url}"</c:if>>${dd.name}</a></dt>
 					<c:forEach items="${dd.list}" var="ddd">

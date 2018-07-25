@@ -1,4 +1,4 @@
-package common.authown;
+package dswork.authown;
 
 public class AuthOwn
 {

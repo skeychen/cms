@@ -1,20 +1,47 @@
-�ļ�Ŀ¼��Ҫ�ṹ
-/js
-	jquery.js
-/themes
-	/images    �������ʽ����Ҫʹ�õ�����ļ�������վ�ṹ��Ҫ�Ļ����ļ�
-	index.css  ��д������ҳ����ʽ�ļ�
-	web.css    ����ҳ���⣬������Ŀ������ҳ��Ҫ���ڵı�׼��ʽ�ļ�
+文件夹"site"对应DS_CMS_SITE表的FOLDER字段，用于存放一个网站的文件"html"和模板"templates"
+	/html              网站根目录
+		/a                     生成的文件目录
+		/f                     上传的附件、图片、文件
+			/img               采编上传的图片
+			/file              采编上传的文件
+			/res               附件管理上传的整个网站资源(avi,bmp,css,doc,docx,flv,gif,jpeg,jpg,js,mp3,mp4,pdf,png,ppt,pptx,rtf,swf,txt,webm,xls,xlsx)
+				/js            存放整个网站脚本相关文件
+					jquery.js  
+				/themes        存放整个网站样式相关文件
+					/img       样式文件引用的相对图片
+					index.css  仅写用于首页的样式
+					web.css    整站通用样式（除首页外），如头部、尾部、其余栏目和内容页需要的样式
 	
-��ʽ�ļ���Ҫ�ṹ
-	.header ͷ
-	.container ��Ϣ�飬�м�
-	.footer β
+	/templates         网站模板目录
+		/include               被模板文件包括的子模板目录
+		/m                     移动版模板目录
+			/include           被移动版模板文件包括的子模板目录
+
+模板文件命名说明
+	category.jsp       仅作用于栏目，以category作为前缀的模板，适用于父栏目（即其下还有子栏目的栏目）
+	list.jsp           仅作用于栏目，以list作为前缀的模板，适用于需要翻页显示文章的栏目（包括父栏目或子栏目）
+	page.jsp           仅作用于文章，以page作为前缀的模板，适用于文章（pageForX1.jsp pageForX2.jsp）
+	index.jsp          自定义模板，用于专题模板
+	default.jsp        同上
+
+包含模板文件命名说明
+	header.jsp         用于包括网站顶部代码
+	footer.jsp         用于包括网站底部代码
+	pageview.jsp       用于栏目翻页模板的翻页代码
+	tree.jsp           用于树型导航代码
+	foucs.jsp          其它自定义包括模板
+
+样式命名说明
+	搜索引擎相关
+		.searchseq     搜索排序，一般放内容id
+		.searchtype    搜索分类，一般不放或放置栏目名称（用于需要分类搜索的情况）
+		.searchtitle   搜索信息，搜索结果的标题
+		.searchcontent 搜索信息，搜索结果摘要部分
+	网页样式
+		.header 头
+		.container 信息块，中间
+		.footer 尾
+		
+		.nav 导航块
+		.listpage 翻页块
 	
-	.nav ������
-	.listpage ��ҳ��
-	
-	.searchseq     ��������һ�������id
-	.searchtype    �������࣬һ�㲻�Ż������Ŀ���ƣ�������Ҫ���������������
-	.searchtitle   ������Ϣ��һ���֣���������ı���
-	.searchcontent ������Ϣ��һ���֣��������ժҪ����

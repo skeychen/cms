@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -30,6 +31,107 @@ public class DsCmsTemplateController extends DsCmsBaseController
 	private String getCmsRoot()
 	{
 		return request.getSession().getServletContext().getRealPath("/html") + "/";
+	}
+
+	// 内容编辑
+	@RequestMapping("/addTemplate1")
+	public String addTemplate1()
+	{
+		try
+		{
+			long siteid = req.getLong("siteid", -1);
+			String uriPath = req.getString("path", "/");
+			if(siteid >= 0 && uriPath.indexOf("..") == -1)// 防止读取上级目录
+			{
+				DsCmsSite site = service.get(siteid);
+				if(site != null)
+				{
+					site.setFolder(String.valueOf(site.getFolder()).replace("\\", "").replace("/", ""));
+				}
+				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
+				{
+					String filePath = (getCmsRoot() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
+					File froot = new File(filePath);
+					File finclude = new File(filePath + "include");
+					File mroot = new File(filePath + "m");
+					File minclude = new File(filePath + "m/include");
+					File f = new File(filePath + uriPath);
+					// 限制为只能读取根目录、include目录、m根目录、m下include目录
+					if(f.isDirectory() && (
+							f.getPath().equals(froot.getPath())
+							|| f.getPath().equals(finclude.getPath())
+							|| f.getPath().equals(mroot.getPath())
+							|| f.getPath().equals(minclude.getPath())
+					))
+					{
+						put("path", uriPath);
+						put("siteid", siteid);
+						return "/cms/template/addTemplate.jsp";
+					}
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@RequestMapping("/addTemplate2")
+	public void addTemplate2()
+	{
+		try
+		{
+			long siteid = req.getLong("siteid", -1);
+			String uriPath = req.getString("path", "/");
+			String filename = req.getString("filename", "");
+			boolean isValid = Pattern.compile("^[A-Za-z0-9_]+$").matcher(filename).matches();
+			if(!isValid)
+			{
+				print("0:模板名称有误，请重新输入");
+				return;
+			}
+			if(siteid >= 0 && uriPath.indexOf("..") == -1)// 防止读取上级目录
+			{
+				DsCmsSite site = service.get(siteid);
+				if(site != null)
+				{
+					site.setFolder(String.valueOf(site.getFolder()).replace("\\", "").replace("/", ""));
+				}
+				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
+				{
+					String filePath = (getCmsRoot() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
+					File froot = new File(filePath);
+					File finclude = new File(filePath + "include");
+					File mroot = new File(filePath + "m");
+					File minclude = new File(filePath + "m/include");
+					File f = new File(filePath + uriPath);
+					boolean isInclude = f.getPath().equals(finclude.getPath()) || f.getPath().equals(minclude.getPath());
+					// 限制为只能读取根目录、include目录、m根目录、m下include目录
+					if(f.isDirectory() && (
+							f.getPath().equals(froot.getPath())
+							|| f.getPath().equals(mroot.getPath())
+							|| isInclude
+					))
+					{
+						File ff = new File(f.getPath() + File.separator + filename + ".jsp");
+						if(ff.isFile())
+						{
+							print("0:文件创建失败，已存在同名文件");
+							return;
+						}
+						FileUtil.writeFile(ff.getPath(), isInclude?TopInc:Top, "UTF-8", false);
+						print("1");
+					}
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			print("0:文件读写失败，请重试");
+		}
 	}
 
 	// 模块
@@ -93,18 +195,18 @@ public class DsCmsTemplateController extends DsCmsBaseController
 				}
 				if(s != null && s.getFolder().trim().length() > 0 && checkOwn(s.getId()))
 				{
-					String filePath = getCmsRoot() + s.getFolder() + "/templates/";
+					String filePath = (getCmsRoot() + s.getFolder() + "/templates/").replaceAll("\\\\", "/");
 					File froot = new File(filePath);
 					File finclude = new File(filePath + "include");
 					File mroot = new File(filePath + "m");
 					File minclude = new File(filePath + "m/include");
 					File f = new File(filePath + uriPath);
+					boolean isInclude = f.getPath().equals(finclude.getPath()) || f.getPath().equals(minclude.getPath());
 					// 限制为只能读取根目录、include目录、m根目录、m下include目录
 					if(f.isDirectory() && (
 							f.getPath().equals(froot.getPath())
-							|| f.getPath().equals(finclude.getPath())
 							|| f.getPath().equals(mroot.getPath())
-							|| f.getPath().equals(minclude.getPath())
+							|| isInclude
 					))
 					{
 						boolean first = true;
@@ -163,21 +265,22 @@ public class DsCmsTemplateController extends DsCmsBaseController
 				}
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String filePath = getCmsRoot() + site.getFolder() + "/templates/";
+					String filePath = (getCmsRoot() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
 					File froot = new File(filePath);
 					File finclude = new File(filePath + "include");
 					File mroot = new File(filePath + "m");
 					File minclude = new File(filePath + "m/include");
 					File f = new File(filePath + uriPath);
+					boolean isInclude = f.getParent().equals(finclude.getPath()) || f.getParent().equals(minclude.getPath());
 					// 限制为只能读取根目录、include目录、m根目录、m下include目录
 					if(f.isFile() && (
 							f.getParent().equals(froot.getPath())
-							|| f.getParent().equals(finclude.getPath())
 							|| f.getParent().equals(mroot.getPath())
-							|| f.getParent().equals(minclude.getPath())
+							|| isInclude
 					))
 					{
-						put("content", FileUtil.readFile(f.getPath(), "UTF-8"));
+						String content = FileUtil.readFile(f.getPath(), "UTF-8").replaceAll("\r", "");
+						put("content", content.substring(isInclude ? TopInc.length() : Top.length()));
 						put("path", uriPath);
 						put("siteid", siteid);
 						return "/cms/template/editTemplate.jsp";
@@ -209,7 +312,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 				}
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String filePath = getCmsRoot() + site.getFolder() + "/templates/";
+					String filePath = (getCmsRoot() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
 					File froot = new File(filePath);
 					File finclude = new File(filePath + "include");
 					File mroot = new File(filePath + "m");
@@ -217,12 +320,12 @@ public class DsCmsTemplateController extends DsCmsBaseController
 					File bak = new File(filePath + "bak");
 					bak.mkdirs();
 					File f = new File(filePath + uriPath);
+					boolean isInclude = f.getParent().equals(finclude.getPath()) || f.getParent().equals(minclude.getPath());
 					// 限制为只能读取根目录、include目录、m根目录、m下include目录
 					if(f.isFile() && (
 							f.getParent().equals(froot.getPath())
-							|| f.getParent().equals(finclude.getPath())
 							|| f.getParent().equals(mroot.getPath())
-							|| f.getParent().equals(minclude.getPath())
+							|| isInclude
 					))
 					{
 						try
@@ -234,7 +337,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 							print("0:文件备份失败，请重试");
 							return;
 						}
-						FileUtil.writeFile(f.getPath(), content, "UTF-8", true);
+						FileUtil.writeFile(f.getPath(), (isInclude?TopInc:Top) + content, "UTF-8", true);
 						print("1");
 					}
 				}
@@ -252,4 +355,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 	{
 		return "/cms/template/readme.jsp";
 	}
+	
+	private static String Top = "<%@page language=\"java\" pageEncoding=\"UTF-8\"%>\n<%@taglib prefix=\"c\" uri=\"http://java.sun.com/jsp/jstl/core\"%>\n<%@taglib prefix=\"fn\" uri=\"http://java.sun.com/jsp/jstl/functions\" %>\n<%common.cms.CmsFactory cms = (common.cms.CmsFactory)request.getAttribute(\"cms\");%>\n";
+	private static String TopInc = "<%@page language=\"java\" pageEncoding=\"UTF-8\"%>\n";
 }

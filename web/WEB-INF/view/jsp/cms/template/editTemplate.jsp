@@ -7,6 +7,7 @@
 <title></title>
 <%@include file="/commons/include/addAjax.jsp"%>
 <script type="text/javascript">
+window.parent.setTextChange(false);
 $dswork.doAjax = true;
 $dswork.callback = function(){if($dswork.result.type == 1){
 	window.parent.setTextChange(false);
@@ -32,7 +33,7 @@ function onChangeListen(){
 <table id="dataTable" border="0" cellspacing="1" cellpadding="0" class="listTable">
 	<tr>
 		<td>
-			<textarea style="width:100%;height:400px;font-size:14px;overflow:scroll;" name="content" onchange="onChangeListen()">${fn:escapeXml(content)}</textarea>
+			<textarea style="width:100%;height:500px;font-size:14px;overflow:scroll;" name="content" onchange="onChangeListen()">${fn:escapeXml(content)}</textarea>
 		</td>
 	</tr>
 </table>

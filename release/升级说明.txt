@@ -3,7 +3,7 @@
 	数据库升级：
 		为cms添加日志开关
 			ALTER TABLE DS_CMS_SITE
-			ADD COLUMN ENABLELOG  int(1) NULL COMMENT 'meta关键词' AFTER VIEWSITE,
+			ADD COLUMN ENABLELOG int(1) NULL COMMENT 'meta关键词' AFTER VIEWSITE,
 
 		创建DS_CMS_LOG表
 		注：如果网站没有开启日志功能可不用创建此表
@@ -51,8 +51,8 @@
 		为cms添加默认的meta信息
 		注：如果DS_CMS_SITE表已有METAKEYWORDS、METADESCRIPTION字段则跳过
 			ALTER TABLE DS_CMS_SITE
-			ADD COLUMN METAKEYWORDS  varchar(300) NULL COMMENT 'meta关键词' AFTER ENABLELOG,
-			ADD COLUMN METADESCRIPTION  varchar(300) NULL COMMENT 'meta描述' AFTER METAKEYWORDS;
+			ADD COLUMN METAKEYWORDS    varchar(300) NULL COMMENT 'meta关键词' AFTER ENABLELOG,
+			ADD COLUMN METADESCRIPTION varchar(300) NULL COMMENT 'meta描述' AFTER METAKEYWORDS;
 
 		更新栏目和内容的url
 		注：如果栏目已经将ID作为URL目录则跳过
@@ -143,8 +143,9 @@
 			      REFERENCES DS_CMS_SITE (ID) ON DELETE CASCADE ON UPDATE CASCADE
 			) COMMENT '网站权限';
 
+		使用单点登录时，使用/cms/permission/getUser.jsp进行用户列表的获取
+		如果不使用单点登录，则使用/cms/permission/getUser.htm方式获取用户，需要进行如下操作
 		创建DS_CMS_USER视图
-		注：可选，用于授权时读用户。如果不用到授权功能，可不生成此视图；生成OWN的规则可由用户程序自己决定
 			CREATE VIEW DS_CMS_USER AS
 			SELECT
 				ID,
@@ -153,6 +154,7 @@
 				'adminadmin' AS OWN
 			FROM
 				DS_COMMON_USER;
+		注：可选，用于授权时读用户。如果不用到授权功能，可不生成此视图；生成OWN的规则可由用户程序自己决定
 
 		将内容表里的数据拷贝至内容编辑表
 		注：用于之前没有独立的内容编辑模块的CMS升级
@@ -183,19 +185,12 @@
 
 	过滤器配置：
 	注：新版CMS必须在web.xml中配置相关过滤器才能工作
-		使用单点登录SSO时：
-			<filter>
-				<filter-name>authOwnSSOFilter</filter-name>
-				<filter-class>common.authown.AuthOwnSSOFilter</filter-class>
-			</filter>
-			<filter-mapping><filter-name>authOwnSSOFilter</filter-name><url-pattern>/cms/*</url-pattern></filter-mapping>
-		简单系统登陆时：
-			<filter>
-				<filter-name>authOwnFilter</filter-name>
-				<filter-class>common.authown.AuthOwnFilter</filter-class>
-			</filter>
-			<filter-mapping><filter-name>authOwnFilter</filter-name><url-pattern>/cms/*</url-pattern></filter-mapping>
-
+		<filter>
+			<filter-name>authOwnSSOFilter</filter-name>
+			<filter-class>dswork.authown.AuthOwnSSOFilter</filter-class>
+		</filter>
+		<filter-mapping><filter-name>authOwnSSOFilter</filter-name><url-pattern>/cms/*</url-pattern></filter-mapping>
+		
 	移动版配置：
 		开启移动版：将DS_CMS_SITE表中的ENABLEMOBILE置1
 		设置模板：将移动版模板拷贝至templates/m下
@@ -206,15 +201,18 @@
 		ALTER TABLE DS_CMS_CATEGORY
 		ADD COLUMN JSONTABLE text NULL COMMENT '数据结构' AFTER CONTENT,
 		ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER JSONTABLE;
+		
 		ALTER TABLE DS_CMS_CATEGORY_EDIT
 		ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER CONTENT;
+		
 		ALTER TABLE DS_CMS_PAGE
 		ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER CONTENT;
+		
 		ALTER TABLE DS_CMS_PAGE_EDIT
 		ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER PUSHKEY;
 
-2018.7.18 上线专题发布功能，并用发布专题取代发布首页
-	运行以下SQL创建专题表
+2018.7.18 上线专题发布功能，并用发布专题取代发布首页，同时删除DS_CMS_SITE表中的VIEWSITE和MVIEWSITE字段
+	运行以下SQL创建专题表和删除站点表视图字段
 	CREATE TABLE IF NOT EXISTS DS_CMS_SPECIAL (
 	  ID bigint(20) NOT NULL COMMENT '主键',
 	  SITEID bigint(20) DEFAULT NULL COMMENT '站点ID',
@@ -224,3 +222,14 @@
 	  URL varchar(300) DEFAULT NULL COMMENT '链接',
 	  PRIMARY KEY (ID)
 	) COMMENT='专题';
+	
+	ALTER TABLE DS_CMS_SITE
+	DROP COLUMN VIEWSITE,
+	DROP COLUMN MVIEWSITE;
+	
+	
+
+
+2018.7.19 移除common.authown类至dswork.authown，注意修改权限过滤器
+	需要更新/web/cms/log/getLog.jsp
+	修改所有引用common.authown类的代码
