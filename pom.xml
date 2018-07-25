@@ -25,7 +25,6 @@
 	
 </dependencies>
 <build>
-	<finalName>cms</finalName>
 	<outputDirectory>web/WEB-INF/classes</outputDirectory>
 </build>
 
