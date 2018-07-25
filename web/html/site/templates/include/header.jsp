@@ -30,7 +30,7 @@
 .nav-my .nav-down dd a:link {color:#aaa;}
 .nav-my .nav-down dd a:hover{color:yellow;}
 </style>
-<div style="width:990px;height:44px;margin:0 auto;">
+<div style="width:1028px;height:44px;margin:0 auto;">
   <div id="v1" class="nav-tool nav-my">
 	<div class="nav-up">
 		<ul>
@@ -38,9 +38,6 @@
 			<c:forEach items="${categorylist}" var="d">
 			<li data-nav="${d.id}"><a href="${ctx}${d.url}">${d.name}</a></li>
 			</c:forEach>
-	        <li><a target="_bank" href="http://wsbs.gz.gov.cn/gz/index.jsp">办事大厅</a></li>
-	        <li><a target="_bank" href="http://www.weibo.com/">新浪微博</a></li>
-	        <li class="last"><a target="_blank" href="https://www.baidu.com/">百度搜索</a></li>
 		</ul>
 	</div>
 	<div class="nav-down">

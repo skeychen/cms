@@ -93,6 +93,7 @@ public class DsCmsEditController extends DsCmsBaseController
 		try
 		{
 			Long categoryid = req.getLong("categoryid");
+			int autosave = req.getInt("autosave", 0);
 			DsCmsCategory c = service.getCategory(categoryid);
 			DsCmsSite s = service.getSite(c.getSiteid());
 			if(c.getScope() == 0)
@@ -117,19 +118,22 @@ public class DsCmsEditController extends DsCmsBaseController
 						map.put(ctitleArr[i], cvalueArr[i]);
 					}
 					po.setJsondata(GsonUtil.toJson(map));
-					po.setImg(changeImageToLocal(s, po.getImg()));
-					po.setContent(changeContentToLocal(s, po.getContent()));
+					if(autosave == 1)
+					{
+						po.setImg(changeImageToLocal(s, po.getImg()));
+						po.setContent(changeContentToLocal(s, po.getContent()));
+					}
 					po.setStatus(0);
 
-					String action = req.getString("action");
-					if("save".equals(action))
+					String autosubmit = req.getString("autosubmit");
+					if("save".equals(autosubmit))
 					{
 						po.setAuditstatus(0);
 						service.savePageEdit(po, false, s.isWriteLog(), getAccount(), getName());// url拼接/id.html
 						print(1);
 						return;
 					}
-					if("submit".equals(action))
+					if("submit".equals(autosubmit))
 					{
 						if(categoryNotNeedAudit(s.getId(), c.getId()))
 						{
@@ -367,6 +371,7 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
+			int autosave = req.getInt("autosave", 0);
 			DsCmsPageEdit p = service.getPageEdit(po.getId());
 			DsCmsSite s = service.getSite(p.getSiteid());
 			if(
@@ -374,8 +379,8 @@ public class DsCmsEditController extends DsCmsBaseController
 				|| (checkEditown(s.getId(), p.getCategoryid()) && checkEditid(p.getEditid()))
 			)
 			{
-				String action = req.getString("action");
-				if("revoke".equals(action))
+				String autosubmit = req.getString("autosubmit");
+				if("revoke".equals(autosubmit))
 				{
 					if(p.isAudit())
 					{
@@ -387,7 +392,7 @@ public class DsCmsEditController extends DsCmsBaseController
 					print("0:状态错误");
 					return;
 				}
-				if("restore".equals(action))
+				if("restore".equals(autosubmit))
 				{
 					if(p.getStatus() > 0 && (p.isEdit() || p.isNopass()))
 					{
@@ -425,8 +430,16 @@ public class DsCmsEditController extends DsCmsBaseController
 				p.setReleasetime(po.getReleasetime());
 				p.setImgtop(po.getImgtop());
 				p.setPagetop(po.getPagetop());
-				p.setImg(changeImageToLocal(s, po.getImg()));
-				p.setContent(changeContentToLocal(s, po.getContent()));
+				if(autosave == 1)
+				{
+					p.setImg(changeImageToLocal(s, po.getImg()));
+					p.setContent(changeContentToLocal(s, po.getContent()));
+				}
+				else
+				{
+					p.setImg(po.getImg());
+					p.setContent(po.getContent());
+				}
 				p.setStatus(0);
 
 				Map<String, String> map = new LinkedHashMap<String, String>();
@@ -438,7 +451,7 @@ public class DsCmsEditController extends DsCmsBaseController
 				}
 				p.setJsondata(GsonUtil.toJson(map));
 
-				if("save".equals(action))
+				if("save".equals(autosubmit))
 				{
 					if(p.isEdit() || p.isNopass() || p.isPass())
 					{
@@ -452,7 +465,7 @@ public class DsCmsEditController extends DsCmsBaseController
 					print("0:状态错误");
 					return;
 				}
-				if("submit".equals(action))
+				if("submit".equals(autosubmit))
 				{
 					if(categoryNotNeedAudit(p.getSiteid(), p.getCategoryid()))
 					{
@@ -544,13 +557,14 @@ public class DsCmsEditController extends DsCmsBaseController
 	{ 
 		try
 		{
+			int autosave = req.getInt("autosave", 0);
 			DsCmsCategory c = service.getCategory(po.getId());
 			DsCmsSite s = service.getSite(c.getSiteid());
 			if(checkEdit(s.getId(), c.getId()))
 			{
 				DsCmsCategoryEdit p = service.getCategoryEdit(po.getId());
-				String action = req.getString("action");
-				if("revoke".equals(action))
+				String autosubmit = req.getString("autosubmit");
+				if("revoke".equals(autosubmit))
 				{
 					if(p.isAudit())
 					{
@@ -562,7 +576,7 @@ public class DsCmsEditController extends DsCmsBaseController
 					print("0:状态错误");
 					return;
 				}
-				if("restore".equals(action))
+				if("restore".equals(autosubmit))
 				{
 					if(p.getStatus() > 0 && (p.isEdit() || p.isNopass()))
 					{
@@ -592,8 +606,16 @@ public class DsCmsEditController extends DsCmsBaseController
 				p.setUrl(po.getUrl());
 				p.pushEditidAndEditname(getAccount(), getName());
 				p.setEdittime(TimeUtil.getCurrentTime());
-				p.setImg(changeImageToLocal(s, po.getImg()));
-				p.setContent(changeContentToLocal(s, po.getContent()));
+				if(autosave == 1)
+				{
+					p.setImg(changeImageToLocal(s, po.getImg()));
+					p.setContent(changeContentToLocal(s, po.getContent()));
+				}
+				else
+				{
+					p.setImg(po.getImg());
+					p.setContent(po.getContent());
+				}
 				p.setStatus(0);
 
 				Map<String, String> map = new LinkedHashMap<String, String>();
@@ -605,7 +627,7 @@ public class DsCmsEditController extends DsCmsBaseController
 				}
 				p.setJsondata(GsonUtil.toJson(map));
 
-				if("save".equals(action))
+				if("save".equals(autosubmit))
 				{
 					if(p.isEdit() || p.isNopass() || p.isPass())
 					{
@@ -617,7 +639,7 @@ public class DsCmsEditController extends DsCmsBaseController
 					print("0:状态错误");
 					return;
 				}
-				if("submit".equals(action))
+				if("submit".equals(autosubmit))
 				{
 					if(categoryNotNeedAudit(p.getSiteid(), p.getId()))
 					{

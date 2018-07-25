@@ -46,7 +46,7 @@ td.k input{border:none;background-color:transparent;text-align:center;}
 <table border="0" cellspacing="0" cellpadding="0" class="listLogo">
 	<tr>
 		<td class="title">
-			切换站点：<select id="site"><c:forEach items="${siteList}" var="d"><option value="${d.id}"<c:if test="${d.id==siteid}"> selected="selected"</c:if>>${fn:escapeXml(d.name)}</option></c:forEach></select>
+			授权情况  - 切换站点：<select id="site"><c:forEach items="${siteList}" var="d"><option value="${d.id}"<c:if test="${d.id==siteid}"> selected="selected"</c:if>>${fn:escapeXml(d.name)}</option></c:forEach></select>
 		</td>
 	</tr>
 </table>

@@ -32,15 +32,26 @@ a:hover {background-color:#0f9ae0;}
 </style>
 <script type="text/javascript">
 var treedata = [
-	{id:10, name:"CMS", img:"", imgOpen:"", url:"", items:[
-		 {id:11,name:'用户授权', img:"", imgOpen:"", url:'/cms/permission/getUser.htm', items:[]}
-		,{id:12,name:"栏目管理", img:"", imgOpen:"", url:'/cms/category/getCategory.htm', items:[]}
-		,{id:13,name:"模板编辑", img:"", imgOpen:"", url:'/cms/template/getTemplateTree.htm', items:[]}
-		,{id:14,name:"附件管理", img:"", imgOpen:"", url:'/cms/file/getFileTree.htm', items:[]}
-		,{id:15, name:"内容管理", img:"", imgOpen:"", url:"", items:[
-	   		 {id:151,name:'信息采编', img:"023.png", imgOpen:"023.png", url:'/cms/edit/getCategoryTree.htm', items:[]}
-			,{id:152,name:'信息审核', img:"023.png", imgOpen:"023.png", url:'/cms/audit/getCategoryTree.htm', items:[]}
-			,{id:153,name:'信息发布', img:"023.png", imgOpen:"023.png", url:'/cms/publish/getCategoryTree.htm', items:[]}
+	{id:900, name:"CMS", img:"", imgOpen:"", url:"", items:[
+		 {id:910,name:"栏目管理", img:"", imgOpen:"", url:'/cms/category/getCategory.htm', items:[]}
+		,{id:920,name:"专题管理", img:"", imgOpen:"", url:'/cms/special/getSpecial.htm', items:[]}
+		,{id:930,name:"内容管理", img:"", imgOpen:"", url:"", items:[
+	   		 {id:931,name:'信息采编', img:"", imgOpen:"", url:'/cms/edit/getCategoryTree.htm', items:[]}
+			,{id:932,name:'信息审核', img:"", imgOpen:"", url:'/cms/audit/getCategoryTree.htm', items:[]}
+			,{id:933,name:'信息发布', img:"", imgOpen:"", url:'/cms/publish/getCategoryTree.htm', items:[]}
+		]}
+		,{id:940,name:"模板编辑", img:"", imgOpen:"", url:'/cms/template/getTemplateTree.htm', items:[]}
+		,{id:950,name:"附件管理", img:"", imgOpen:"", url:'/cms/file/getFileTree.htm', items:[]}
+		,{id:960,name:"栏目回收站", img:"", imgOpen:"", url:'/cms/category/getRecycledCategory.htm', items:[]}
+		,{id:970,name:"权限管理", img:"", imgOpen:"", url:"", items:[
+			 {id:971,name:'授权管理(SSO)', img:"", imgOpen:"", url:'/cms/permission/getUser.jsp', items:[]}
+			,{id:972,name:'授权管理', img:"", imgOpen:"", url:'/cms/permission/getUser.htm', items:[]}
+			,{id:973,name:'授权情况', img:"", imgOpen:"", url:'/cms/permission/getCategory.htm', items:[]}
+		]}
+		,{id:990,name:"附加功能", img:"", imgOpen:"", url:'', items:[
+			 {id:991,name:'CMS日志', img:"", imgOpen:"", url:'/cms/log/getLog.jsp', items:[]}
+			,{id:992,name:'信息总数', img:"", imgOpen:"", url:'/cms/page/main.html', items:[]}
+			,{id:993,name:'批量更新', img:"", imgOpen:"", url:'/cms/page/updBatchPage.jsp', items:[]}
 		]}
 	]}
 ];

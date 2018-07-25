@@ -61,12 +61,12 @@ $(function(){
 	$("#site").bind("click",function(){if($(this).val()!="${siteid}"){location.href="getCategoryTree.htm?siteid="+$(this).val();}});
 	$("#special").bind("click",function(){$(this).val()!="0"?$(".view_special").show():$(".view_special").hide();});
 	$("#category").bind("click",function(){$(this).val()!="0"?$(".view_category").show():$(".view_category").hide();});
-	$("#publish_special").bind("click",function(){var m=$("#special").find("option:selected");if(confirm("是否发布专题\""+m.text()+"\"")){build(-1,-1,m.val());}});
-	$("#publish_category").bind("click",function(){var m=$("#category").find("option:selected");if(confirm("是否发布栏目\""+m.text()+"\"")){build(m.val(),-1);}});
-	$("#publish_page").bind("click",function(){var m=$("#category").find("option:selected");if(confirm("是否发布栏目\""+m.text()+"\"内容")){build(m.val(),0);}});
-	$("#delete_special").bind("click",function(){var m=$("#special").find("option:selected");if(confirm("是否删除专题\""+m.text()+"\"")){unbuild(-1,-1,m.val());}});
-	$("#delete_category").bind("click",function(){var m=$("#category").find("option:selected");if(confirm("是否删除栏目\""+m.text()+"\"已发布首页")){unbuild(m.val(),-1);}});
-	$("#delete_page").bind("click",function(){var m=$("#category").find("option:selected");if(confirm("是否删除栏目\""+m.text()+"\"已发布内容")){unbuild(m.val(),0);}});
+	$("#publish_special").bind("click",function(){var m=$("#special").find("option:selected");if(confirm("是否发布\""+m.text()+"\"专题页")){build(-1,-1,m.val());}});
+	$("#publish_category").bind("click",function(){var m=$("#category").find("option:selected");if(confirm("是否发布\""+m.text()+"\"栏目首页")){build(m.val(),-1);}});
+	$("#publish_page").bind("click",function(){var m=$("#category").find("option:selected");if(confirm("是否发布\""+m.text()+"\"栏目内容")){build(m.val(),0);}});
+	$("#delete_special").bind("click",function(){var m=$("#special").find("option:selected");if(confirm("是否删除\""+m.text()+"\"已发布专题页")){unbuild(-1,-1,m.val());}});
+	$("#delete_category").bind("click",function(){var m=$("#category").find("option:selected");if(confirm("是否删除\""+m.text()+"\"已发布栏目首页")){unbuild(m.val(),-1);}});
+	$("#delete_page").bind("click",function(){var m=$("#category").find("option:selected");if(confirm("是否删除\""+m.text()+"\"已发布栏目内容")){unbuild(m.val(),0);}});
 	$("#special").click();
 	$("#category").click();
 });

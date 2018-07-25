@@ -1,3 +1,11 @@
+/**
+ * 翻页控件类
+ * @version 8.8.1
+ * @datetime 2018-06-27 14:30
+ * @author skey_chen
+ * @copyright 2011-2018 &copy; 249725997@qq.com
+ * @license LGPL-3.0 https://github.com/skeychen/dswork/blob/master/LICENSE
+ */
 var $jskey=$jskey||{};
 $jskey.on=function($e,et,fn){$e.attachEvent ? $e.attachEvent('on'+et,fn):$e.addEventListener(et,fn,false);return $jskey;};$jskey.$=function(id){return document.getElementById(id);};$jskey.$replace=function(str,t,u){str=str+"";var i=str.indexOf(t);var r="";while(i !=-1){r+=str.substring(0,i)+u;str=str.substring(i+t.length,str.length);i=str.indexOf(t);}r=r+str;return r;};
 
