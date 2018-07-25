@@ -23,7 +23,7 @@
 	  <div class="logo">&nbsp;&nbsp;当前位置：${category.name}</div>
 	  <c:forEach items="${category.list}" var="c" varStatus="status">
 		<c:set var="ccid" value="${c.id}" scope="request" />
-		<%cms.put("vlist", true, 1, 8, false, false, true, "", request.getAttribute("ccid")));%>
+		<%cms.put("vlist", true, 1, 8, false, false, true, "", cms.value("ccid")));%>
 		<div class="list">
 			<dl class="logo"><dt>${c.name}</dt><dd><a class="more"${c.status==2?' target="_blank"':''} href="<c:if test="${c.status != 2}">${ctx}</c:if>${c.url}">&raquo; 更多</a></dd></dl>
 			<dl class="title"><dt>标题</dt><dd>发布日期</dd></dl>

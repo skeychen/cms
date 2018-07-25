@@ -8,14 +8,14 @@
 <%@include file="/commons/include/get.jsp"%>
 <script type="text/javascript">
 function empower(account){
-	$jskey.dialog.showDialog({url:"${ctx}/cms/permission/updPermission1.htm?account="+account,title:"分配权限",fit:true,draggable:false});
+	$jskey.dialog.showDialog({url:"${ctx}/cms/permission/updPermission1.htm?account="+account,title:"为 "+account+" 分配权限",fit:true,draggable:false});
 }
 </script>
 </head> 
 <body>
 <table border="0" cellspacing="0" cellpadding="0" class="listLogo">
 	<tr>
-		<td class="title">用户采编授权</td>
+		<td class="title">授权管理</td>
 	</tr>
 </table>
 <div class="line"></div>
