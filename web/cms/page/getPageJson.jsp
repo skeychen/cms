@@ -32,5 +32,5 @@ catch(Exception e)
 	map.put("status", "fail");
 	map.put("error", "获取栏目统计数失败！");
 }
-out.print(common.json.GsonUtil.toJson(map));
+out.print(common.cms.GsonUtil.toJson(map));
 %>
