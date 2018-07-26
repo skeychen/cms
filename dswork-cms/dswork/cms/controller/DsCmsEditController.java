@@ -835,7 +835,7 @@ public class DsCmsEditController extends DsCmsBaseController
 		{
 			extName = "jpg";
 		}
-		String imgName = System.currentTimeMillis() + "." + extName;
+		String imgName = System.currentTimeMillis() + "." + extName.toLowerCase();
 		String ym = TimeUtil.getCurrentTime("yyyyMM");
 		String imgPath = getCmsRoot() + "/html/" + siteFolder + "/html/f/img/" + ym + "/" + imgName;
 		HttpUtil httpUtil = new HttpUtil().create(imgUrl);
