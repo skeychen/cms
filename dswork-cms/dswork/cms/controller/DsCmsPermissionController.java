@@ -172,6 +172,7 @@ public class DsCmsPermissionController extends DsCmsBaseController
 			po.setEditown(req.getString("editown", ""));
 			po.setPublish(req.getString("publish", ""));
 			service.save(po);
+			super.refresh();
 			print(msg.length() > 0 ? "2:" + msg : 1);
 		}
 		catch(Exception e)
