@@ -7,7 +7,7 @@ dswork.cms.dao.DsCmsPageDao,
 dswork.cms.dao.DsCmsPageEditDao,
 java.util.Map,
 java.util.HashMap,
-common.json.GsonUtil
+common.cms.GsonUtil
 "%><%
 Map<String, String> map = new HashMap<String, String>();
 map.put("msg", "");
