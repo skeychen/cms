@@ -21,18 +21,6 @@ function empower(account){
 	</tr>
 </table>
 <div class="line"></div>
-<form id="queryForm" method="post" action="getCommonUser.htm">
-<table border="0" cellspacing="0" cellpadding="0" class="queryTable">
-	<tr>
-		<td class="input">
-			&nbsp;账号：<input type="text" name="account" value="${fn:escapeXml(param.account)}" />
-			&nbsp;姓名：<input type="text" name="name" value="${fn:escapeXml(param.name)}" />
-		</td>
-		<td class="query"><input id="_querySubmit_" type="submit" class="button" value="查询" /></td>
-	</tr>
-</table>
-</form>
-<div class="line"></div>
 <table id="dataTable" border="0" cellspacing="1" cellpadding="0" class="listTable">
 	<tr class="list_title">
 		<td>用户名(帐号)</td>
