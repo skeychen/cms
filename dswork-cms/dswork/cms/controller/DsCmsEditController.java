@@ -128,7 +128,7 @@ public class DsCmsEditController extends DsCmsBaseController
 					String autosubmit = req.getString("autosubmit");
 					if("save".equals(autosubmit))
 					{
-						po.setAuditstatus(0);
+						po.setAuditstatus(DsCmsCategoryEdit.EDIT);
 						service.savePageEdit(po, false, s.isWriteLog(), getAccount(), getName());// url拼接/id.html
 						print(1);
 						return;
@@ -138,12 +138,12 @@ public class DsCmsEditController extends DsCmsBaseController
 						if(categoryNotNeedAudit(s.getId(), c.getId()))
 						{
 							po.setStatus(1);
-							po.setAuditstatus(0);
+							po.setAuditstatus(DsCmsCategoryEdit.EDIT);
 							service.savePageEdit(po, true, s.isWriteLog(), getAccount(), getName());// url拼接/id.html
 						}
 						else
 						{
-							po.setAuditstatus(1);
+							po.setAuditstatus(DsCmsCategoryEdit.AUDIT);
 							service.savePageEdit(po, false, s.isWriteLog(), getAccount(), getName());// url拼接/id.html
 						}
 						print(1);
@@ -203,7 +203,7 @@ public class DsCmsEditController extends DsCmsBaseController
 					{
 						page.setCategoryid(categoryid);
 						page.setStatus(0);// 拷贝新增
-						page.setAuditstatus(0);// 草稿状态
+						page.setAuditstatus(DsCmsCategoryEdit.EDIT);// 草稿状态
 						service.savePageEdit(page, false, s.isWriteLog(), getAccount(), getName());
 						print("1:拷贝成功");
 						return;
@@ -384,7 +384,7 @@ public class DsCmsEditController extends DsCmsBaseController
 				{
 					if(p.isAudit())
 					{
-						p.setAuditstatus(0);
+						p.setAuditstatus(DsCmsCategoryEdit.EDIT);
 						service.updateRevokePageEdit(p, s.isWriteLog(), getAccount(), getName());
 						print(1);
 						return;
@@ -455,7 +455,7 @@ public class DsCmsEditController extends DsCmsBaseController
 				{
 					if(p.isEdit() || p.isNopass() || p.isPass())
 					{
-						p.setAuditstatus(0);
+						p.setAuditstatus(DsCmsCategoryEdit.EDIT);
 						p.pushEditidAndEditname(getAccount(), getName());
 						p.setEdittime(TimeUtil.getCurrentTime());
 						service.updatePageEdit(p, false, s.isWriteLog(), getAccount(), getName());
@@ -470,7 +470,7 @@ public class DsCmsEditController extends DsCmsBaseController
 					if(categoryNotNeedAudit(p.getSiteid(), p.getCategoryid()))
 					{
 						p.setStatus(1);
-						p.setAuditstatus(0);
+						p.setAuditstatus(DsCmsCategoryEdit.EDIT);
 						p.pushEditidAndEditname(getAccount(), getName());
 						p.setEdittime(TimeUtil.getCurrentTime());
 						service.updatePageEdit(p, true, s.isWriteLog(), getAccount(), getName());
@@ -479,7 +479,7 @@ public class DsCmsEditController extends DsCmsBaseController
 					}
 					if(p.isEdit() || p.isNopass() || p.isPass())
 					{
-						p.setAuditstatus(1);
+						p.setAuditstatus(DsCmsCategoryEdit.AUDIT);
 						p.pushEditidAndEditname(getAccount(), getName());
 						p.setEdittime(TimeUtil.getCurrentTime());
 						service.updatePageEdit(p, false, s.isWriteLog(), getAccount(), getName());
@@ -568,7 +568,7 @@ public class DsCmsEditController extends DsCmsBaseController
 				{
 					if(p.isAudit())
 					{
-						p.setAuditstatus(0);
+						p.setAuditstatus(DsCmsCategoryEdit.EDIT);
 						service.updateRevokeCategoryEdit(p, s.isWriteLog(), getAccount(), getName());
 						print(1);
 						return;
@@ -631,7 +631,7 @@ public class DsCmsEditController extends DsCmsBaseController
 				{
 					if(p.isEdit() || p.isNopass() || p.isPass())
 					{
-						p.setAuditstatus(0);
+						p.setAuditstatus(DsCmsCategoryEdit.EDIT);
 						service.updateCategoryEdit(p, false, s.isWriteLog(), getAccount(), getName());
 						print(1);
 						return;
@@ -644,14 +644,14 @@ public class DsCmsEditController extends DsCmsBaseController
 					if(categoryNotNeedAudit(p.getSiteid(), p.getId()))
 					{
 						p.setStatus(1);
-						po.setAuditstatus(0);
+						po.setAuditstatus(DsCmsCategoryEdit.EDIT);
 						service.updateCategoryEdit(p, true, s.isWriteLog(), getAccount(), getName());
 						print(1);
 						return;
 					}
 					if(p.isEdit() || p.isNopass() || p.isPass())
 					{
-						p.setAuditstatus(1);
+						p.setAuditstatus(DsCmsCategoryEdit.AUDIT);
 						service.updateCategoryEdit(p, false, s.isWriteLog(), getAccount(), getName());
 						print(1);
 						return;

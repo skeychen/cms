@@ -10,7 +10,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dswork.cms.controller.DsCmsBaseController;
 import dswork.cms.dao.DsCmsCategoryDao;
 import dswork.cms.dao.DsCmsCategoryEditDao;
 import dswork.cms.dao.DsCmsPageEditDao;
@@ -19,7 +18,6 @@ import dswork.cms.dao.DsCmsSiteDao;
 import dswork.cms.dao.DsCmsUserDao;
 import dswork.cms.model.DsCmsCategory;
 import dswork.cms.model.DsCmsCategoryEdit;
-import dswork.cms.model.DsCmsPageEdit;
 import dswork.cms.model.DsCmsPermission;
 import dswork.cms.model.DsCmsSite;
 import dswork.core.page.Page;
@@ -61,7 +59,6 @@ public class DsCmsPermissionService
 		{
 			dao.save(po);
 		}
-		DsCmsBaseController.refresh();
 		return 1;
 	}
 
