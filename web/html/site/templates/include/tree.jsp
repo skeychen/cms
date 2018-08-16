@@ -1,5 +1,5 @@
 <%@page language="java" pageEncoding="UTF-8"%>
-<div class="vname">&nbsp;&nbsp;信息公开</div>
+<div class="vname">&nbsp;&nbsp;${category.name}</div>
 <div class="vbox">
 <ul>
 <c:forEach items="${categorylist}" var="d"><li><a${d.id==category.id?' class="selected"':''}${d.status==2?' target="_blank"':''}<c:if test="${d.list==null || fn:length(d.list)==0}"> href="${d.status==2?'':ctx}${d.url}"</c:if>>&raquo;&nbsp;${d.name}</a></li>
