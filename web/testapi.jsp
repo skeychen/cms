@@ -10,7 +10,7 @@
 <br />
 
 
-<%=dswork.sso.AuthFactory.getUser(dswork.sso.WebFilter.getAccount(request.getSession())).getWorkcard() %>
+<%=common.cms.GsonUtil.toJson(dswork.sso.AuthFactory.getUser(dswork.sso.WebFilter.getAccount(request.getSession()))) %>
 <br />
 
 
