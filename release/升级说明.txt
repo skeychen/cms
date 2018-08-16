@@ -203,5 +203,7 @@
 	
 	更新/WEB-INF/view/jsp/cms/audit/auditCategory.jsp
 	更新/WEB-INF/view/jsp/cms/audit/auditPage.jsp
+	更新/WEB-INF/view/jsp/cms/edit/updCategory.jsp
+	更新/WEB-INF/view/jsp/cms/edit/updPage.jsp
 	更新dswork-cms.jar
 	
