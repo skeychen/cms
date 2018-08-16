@@ -7,9 +7,9 @@
 
 <insert id="insert" parameterType="dswork.cms.model.DsCmsCategoryEdit">
 	insert into DS_CMS_CATEGORY_EDIT
-	(ID, SITEID, STATUS, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, CONTENT, URL, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, MSG, JSONDATA)
+	(ID, SITEID, STATUS, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, CONTENT, URL, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, AUDITMSG, JSONDATA)
 	values
-	(#{id}, #{siteid}, #{status}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{content}, #{url}, #{editid}, #{editname}, #{edittime}, #{auditstatus}, #{auditid}, #{auditname}, #{audittime}, #{msg}, #{jsondata})
+	(#{id}, #{siteid}, #{status}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{content}, #{url}, #{editid}, #{editname}, #{edittime}, #{auditstatus}, #{auditid}, #{auditname}, #{audittime}, #{auditmsg}, #{jsondata})
 </insert>
 
 <delete id="delete">
@@ -35,7 +35,7 @@
 		AUDITID=#{auditid},
 		AUDITNAME=#{auditname},
 		AUDITTIME=#{audittime},
-		MSG=#{msg},
+		AUDITMSG=#{auditmsg},
 		JSONDATA=#{jsondata}
 	where ID=#{id}
 </update>
@@ -60,14 +60,14 @@
 	<result property="auditname" column="AUDITNAME" />
 	<result property="audittime" column="AUDITTIME" />
 	<result property="url" column="URL" />
-	<result property="msg" column="MSG" />
+	<result property="auditmsg" column="AUDITMSG" />
 	<result property="name" column="NAME" />
 	<result property="scope" column="SCOPE" />
 	<result property="jsondata" column="JSONDATA" />
 </resultMap>
 
 <sql id="columns">
-	a.ID, a.SITEID, a.STATUS, a.METAKEYWORDS, a.METADESCRIPTION, a.SUMMARY, a.RELEASETIME, a.RELEASESOURCE, a.RELEASEUSER, a.IMG, a.CONTENT, a.URL, a.EDITID, a.EDITNAME, a.EDITTIME, a.AUDITSTATUS, a.AUDITID, a.AUDITNAME, a.AUDITTIME, a.MSG, a.JSONDATA
+	a.ID, a.SITEID, a.STATUS, a.METAKEYWORDS, a.METADESCRIPTION, a.SUMMARY, a.RELEASETIME, a.RELEASESOURCE, a.RELEASEUSER, a.IMG, a.CONTENT, a.URL, a.EDITID, a.EDITNAME, a.EDITTIME, a.AUDITSTATUS, a.AUDITID, a.AUDITNAME, a.AUDITTIME, a.AUDITMSG, a.JSONDATA
 	, b.NAME, b.SCOPE
 </sql>
 

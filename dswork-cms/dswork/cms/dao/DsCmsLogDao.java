@@ -95,7 +95,7 @@ public class DsCmsLogDao extends BaseDao<DsCmsLog, Long>
 		log.setCategoryid(po.getCategoryid());
 		log.setPageid(po.getId());
 		log.setAuditid(po.getAuditid());
-		log.setAuditmsg(po.getMsg());
+		log.setAuditmsg(po.getAuditmsg());
 		log.setAuditname(po.getAuditname());
 		log.setAudittime(po.getAudittime());
 		log.setStatus(po.getStatus());
@@ -123,7 +123,7 @@ public class DsCmsLogDao extends BaseDao<DsCmsLog, Long>
 		log.setSiteid(po.getSiteid());
 		log.setCategoryid(po.getId());
 		log.setAuditid(po.getAuditid());
-		log.setAuditmsg(po.getMsg());
+		log.setAuditmsg(po.getAuditmsg());
 		log.setAuditname(po.getAuditname());
 		log.setAudittime(po.getAudittime());
 		log.setStatus(po.getStatus());

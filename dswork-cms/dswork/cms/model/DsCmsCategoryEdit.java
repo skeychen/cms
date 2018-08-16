@@ -22,7 +22,7 @@ public class DsCmsCategoryEdit extends DsCmsCategory
 	// 审核时间
 	private String audittime = "";
 	// 审核意见
-	private String msg = "";
+	private String auditmsg = "";
 
 	public static final int EDIT = 0;
 	public static final int AUDIT = 1;
@@ -119,14 +119,14 @@ public class DsCmsCategoryEdit extends DsCmsCategory
 		this.audittime = audittime;
 	}
 
-	public String getMsg()
+	public String getAuditmsg()
 	{
-		return msg;
+		return auditmsg;
 	}
 
-	public void setMsg(String msg)
+	public void setAuditmsg(String auditmsg)
 	{
-		this.msg = msg;
+		this.auditmsg = auditmsg;
 	}
 
 	public void pushEditidAndEditname(String editid, String editname)

@@ -152,7 +152,7 @@ public class DsCmsAuditController extends DsCmsBaseController
 			{
 				if(p.isAudit())
 				{
-					p.setMsg(po.getMsg());
+					p.setAuditmsg(po.getAuditmsg());
 					p.setAuditid(getAccount());
 					p.setAuditname(getName());
 					p.setAudittime(TimeUtil.getCurrentTime());
@@ -256,7 +256,7 @@ public class DsCmsAuditController extends DsCmsBaseController
 			{
 				if(p.isAudit())
 				{
-					p.setMsg(po.getMsg());
+					p.setAuditmsg(po.getAuditmsg());
 					p.setAuditid(getAccount());
 					p.setAuditname(getName());
 					p.setAudittime(TimeUtil.getCurrentTime());

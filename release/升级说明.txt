@@ -22,7 +22,6 @@
 			   ID                   BIGINT NOT NULL COMMENT '主键',
 			   SITEID               BIGINT COMMENT '站点ID',
 			   STATUS               INT COMMENT '状态(-1删除,0新增,1更新)',
-			   MSG                  VARCHAR(300) COMMENT '审核意见',
 			   METAKEYWORDS         VARCHAR(300) COMMENT 'meta关键词',
 			   METADESCRIPTION      VARCHAR(300) COMMENT 'meta描述',
 			   SUMMARY              VARCHAR(300) COMMENT '摘要',
@@ -38,6 +37,7 @@
 			   AUDITID              VARCHAR(64) COMMENT '审核人员ID',
 			   AUDITNAME            VARCHAR(30) COMMENT '审核人员名称',
 			   AUDITTIME            VARCHAR(19) COMMENT '审核时间',
+			   AUDITMSG             VARCHAR(300) COMMENT '审核意见',
 			   CONTENT              MEDIUMTEXT COMMENT '内容',
 			   PRIMARY KEY (ID),
 			   CONSTRAINT FK_DS_CMS_CATEGORY_EDIT_S FOREIGN KEY (SITEID)
@@ -53,7 +53,6 @@
 			   SITEID               BIGINT COMMENT '站点ID',
 			   CATEGORYID           BIGINT COMMENT '栏目ID',
 			   STATUS               INT COMMENT '状态(-1删除,0新增,1更新)',
-			   MSG                  VARCHAR(300) COMMENT '审核意见',
 			   TITLE                VARCHAR(300) COMMENT '标题',
 			   SCOPE                INT COMMENT '类型(1单页,2外链)',
 			   URL                  VARCHAR(300) COMMENT '链接',
@@ -73,6 +72,7 @@
 			   AUDITID              VARCHAR(64) COMMENT '审核人员ID',
 			   AUDITNAME            VARCHAR(30) COMMENT '审核人员名称',
 			   AUDITTIME            VARCHAR(19) COMMENT '审核时间',
+			   AUDITMSG             VARCHAR(300) COMMENT '审核意见',
 			   CONTENT              MEDIUMTEXT COMMENT '内容',
 			   PRIMARY KEY (ID),
 			   CONSTRAINT FK_DS_CMS_PAGE_EDIT_S FOREIGN KEY (SITEID)
@@ -185,3 +185,23 @@
 2018.7.19 移除common.authown类至dswork.authown，注意修改权限过滤器
 	需要更新/web/cms/log/getLog.jsp
 	修改所有引用common.authown类的代码
+	
+2018.8.16 修改审核意见列
+	运行以下SQL修改审核意见列
+	ALTER TABLE DS_CMS_CATEGORY_EDIT
+	ADD COLUMN AUDITMSG varchar(300) NULL COMMENT '审核意见' AFTER AUDITTIME;
+	ALTER TABLE DS_CMS_PAGE_EDIT
+	ADD COLUMN AUDITMSG varchar(300) NULL COMMENT '审核意见' AFTER AUDITTIME;
+	
+	update DS_CMS_CATEGORY_EDIT set AUDITMSG=MSG;
+	update DS_CMS_PAGE_EDIT set AUDITMSG=MSG;
+	
+	ALTER TABLE DS_CMS_CATEGORY_EDIT
+	DROP COLUMN MSG;
+	ALTER TABLE DS_CMS_PAGE_EDIT
+	DROP COLUMN MSG;
+	
+	更新/WEB-INF/view/jsp/cms/audit/auditCategory.jsp
+	更新/WEB-INF/view/jsp/cms/audit/auditPage.jsp
+	更新dswork-cms.jar
+	
