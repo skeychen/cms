@@ -55,6 +55,16 @@ var treedata = [
 		]}
 	]}
 ];
+<%--
+ {id:910,name:"栏目管理", img:"", imgOpen:"", url:'/cms/category/getCategory.htm', items:[]}
+,{id:920,name:"专题管理", img:"", imgOpen:"", url:'/cms/special/getSpecial.htm', items:[]}
+,{id:931,name:'信息采编', img:"", imgOpen:"", url:'/cms/edit/getCategoryTree.htm', items:[]}
+,{id:932,name:'信息审核', img:"", imgOpen:"", url:'/cms/audit/getCategoryTree.htm', items:[]}
+,{id:933,name:'信息发布', img:"", imgOpen:"", url:'/cms/publish/getCategoryTree.htm', items:[]}
+,{id:940,name:"模板编辑", img:"", imgOpen:"", url:'/cms/template/getTemplateTree.htm', items:[]}
+,{id:950,name:"附件管理", img:"", imgOpen:"", url:'/cms/file/getFileTree.htm', items:[]}
+,{id:960,name:"栏目回收站", img:"", imgOpen:"", url:'/cms/category/getRecycledCategory.htm', items:[]}
+--%>
 </script>
 </head>
 <body>
