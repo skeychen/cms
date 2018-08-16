@@ -181,7 +181,7 @@ $(function(){
 <c:if test="${po.nopass}">
 	<tr>
 		<td class="form_title">审核意见</td>
-		<td class="form_input">${fn:escapeXml(po.msg)}</td>
+		<td class="form_input">${fn:escapeXml(po.auditmsg)}</td>
 	</tr>
 </c:if>
 </table>
