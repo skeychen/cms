@@ -159,7 +159,7 @@
 		ALTER TABLE DS_CMS_PAGE_EDIT
 		ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER PUSHKEY;
 
-2018.7.18 上线专题发布功能，并用发布专题取代发布首页，同时删除DS_CMS_SITE表中的VIEWSITE和MVIEWSITE字段
+2018.07.18 上线专题发布功能，并用发布专题取代发布首页，同时删除DS_CMS_SITE表中的VIEWSITE和MVIEWSITE字段
 	运行以下SQL创建专题表和删除站点表视图字段
 	CREATE TABLE IF NOT EXISTS DS_CMS_SPECIAL (
 	  ID bigint(20) NOT NULL COMMENT '主键',
@@ -182,11 +182,11 @@
 	
 
 
-2018.7.19 移除common.authown类至dswork.authown，注意修改权限过滤器
+2018.07.19 移除common.authown类至dswork.authown，注意修改权限过滤器
 	需要更新/web/cms/log/getLog.jsp
 	修改所有引用common.authown类的代码
 	
-2018.8.16 修改审核意见列
+2018.08.16 修改审核意见列
 	运行以下SQL修改审核意见列
 	ALTER TABLE DS_CMS_CATEGORY_EDIT
 	ADD COLUMN AUDITMSG varchar(300) NULL COMMENT '审核意见' AFTER AUDITTIME;
