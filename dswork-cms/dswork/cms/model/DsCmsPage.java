@@ -11,20 +11,20 @@ public class DsCmsPage
 	private long siteid = 0L;
 	// 栏目ID
 	private long categoryid = 0L;
+	// 类型(1单页,2外链)
+	private int scope = 1;
 	// 状态(-1删除,0新增,1修改,8已发)
 	private int status = 0;
 	// 标题
 	private String title = "";
-	// 类型(1单页,2外链)
-	private int scope = 1;
+	// 链接
+	private String url = "";
 	// meta关键词
 	private String metakeywords = "";
 	// meta描述
 	private String metadescription = "";
 	// 摘要
 	private String summary = "";
-	// 内容
-	private String content = "";
 	// 发布时间
 	private String releasetime = "";
 	// 来源
@@ -37,8 +37,8 @@ public class DsCmsPage
 	private int imgtop = 0;
 	// 首页推荐(0否,1是)
 	private int pagetop = 0;
-	// 链接
-	private String url = "";
+	// 内容
+	private String content = "";
 	// 数据集
 	private String jsondata = "{}";
 
@@ -72,6 +72,16 @@ public class DsCmsPage
 		this.categoryid = categoryid;
 	}
 
+	public int getScope()
+	{
+		return scope;
+	}
+
+	public void setScope(int scope)
+	{
+		this.scope = scope;
+	}
+
 	public int getStatus()
 	{
 		return status;
@@ -92,14 +102,14 @@ public class DsCmsPage
 		this.title = title;
 	}
 
-	public int getScope()
+	public String getUrl()
 	{
-		return scope;
+		return url;
 	}
 
-	public void setScope(int scope)
+	public void setUrl(String url)
 	{
-		this.scope = scope;
+		this.url = url;
 	}
 
 	public String getMetakeywords()
@@ -130,16 +140,6 @@ public class DsCmsPage
 	public void setSummary(String summary)
 	{
 		this.summary = summary;
-	}
-
-	public String getContent()
-	{
-		return content;
-	}
-
-	public void setContent(String content)
-	{
-		this.content = content;
 	}
 
 	public String getReleasetime()
@@ -202,14 +202,14 @@ public class DsCmsPage
 		this.pagetop = pagetop;
 	}
 
-	public String getUrl()
+	public String getContent()
 	{
-		return url;
+		return content;
 	}
 
-	public void setUrl(String url)
+	public void setContent(String content)
 	{
-		this.url = url;
+		this.content = content;
 	}
 
 	public String getJsondata()

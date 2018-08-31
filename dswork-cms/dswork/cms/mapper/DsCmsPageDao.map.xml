@@ -10,9 +10,9 @@
 		<include refid="dswork.cms.rowid" />
 	</selectKey>
 	insert into DS_CMS_PAGE
-	(<if test="id!=null and id!=0">ID, </if>SITEID, CATEGORYID, SCOPE, STATUS, TITLE, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, URL, CONTENT, JSONDATA)
+	(<if test="id!=null and id!=0">ID, </if>SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, CONTENT, JSONDATA)
 	values
-	(<if test="id!=null and id!=0">#{id}, </if>#{siteid}, #{categoryid}, #{scope}, #{status}, #{title}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{imgtop}, #{pagetop}, #{url}, #{content}, #{jsondata})
+	(<if test="id!=null and id!=0">#{id}, </if>#{siteid}, #{categoryid}, #{scope}, #{status}, #{title}, #{url}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{imgtop}, #{pagetop}, #{content}, #{jsondata})
 </insert>
 
 <delete id="delete">
@@ -32,6 +32,7 @@
 		SCOPE=#{scope},
 		STATUS=#{status},
 		TITLE=#{title},
+		URL=#{url},
 		METAKEYWORDS=#{metakeywords},
 		METADESCRIPTION=#{metadescription},
 		SUMMARY=#{summary},
@@ -41,7 +42,6 @@
 		IMG=#{img},
 		IMGTOP=#{imgtop},
 		PAGETOP=#{pagetop},
-		URL=#{url},
 		CONTENT=#{content},
 		JSONDATA=#{jsondata}
 	where ID=#{id}
@@ -58,6 +58,7 @@
 	<result property="scope" column="SCOPE" />
 	<result property="status" column="STATUS" />
 	<result property="title" column="TITLE" />
+	<result property="url" column="URL" />
 	<result property="metakeywords" column="METAKEYWORDS" />
 	<result property="metadescription" column="METADESCRIPTION" />
 	<result property="summary" column="SUMMARY" />
@@ -67,13 +68,12 @@
 	<result property="img" column="IMG" />
 	<result property="imgtop" column="IMGTOP" />
 	<result property="pagetop" column="PAGETOP" />
-	<result property="url" column="URL" />
 	<result property="content" column="CONTENT" />
 	<result property="jsondata" column="JSONDATA" />
 </resultMap>
 
 <sql id="columns">
-	ID, SITEID, CATEGORYID, STATUS, TITLE, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, SCOPE, URL, CONTENT, JSONDATA
+	ID, SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, CONTENT, JSONDATA
 </sql>
 
 <sql id="dynamicWhere">
