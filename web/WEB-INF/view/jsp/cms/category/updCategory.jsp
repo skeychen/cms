@@ -126,7 +126,32 @@ $(function(){
 	<tr class="list">
 		<td><input type="text" name="ctitle" dataType="Char" value="${fn:escapeXml(d.ctitle)}" /></td>
 		<td><input type="text" name="cname" value="${fn:escapeXml(d.cname)}" /></td>
-		<td><select name="cdatatype" v="${fn:escapeXml(d.cdatatype)}"><option value="">无校验</option></select></td>
+		<td><select name="cdatatype" v="${fn:escapeXml(d.cdatatype)}">
+			<option value="">无校验</option>
+			<option value="Char">Char</option>
+			<option value="Chinese">Chinese</option>
+			<option value="Email">Email</option>
+			<option value="IdCard">IdCard</option>
+			<option value="UserCard">UserCard</option>
+			<option value="UnitCode">UnitCode</option>
+			<option value="OrgCode">OrgCode</option>
+			<option value="Mobile">Mobile</option>
+			<option value="Money">Money</option>
+			<option value="Numeral">Numeral</option>
+			<option value="Phone">Phone</option>
+			<option value="Require">Require</option>
+			<option value="RequireCompact">RequireCompact</option>
+			<option value="RequireTrim">RequireTrim</option>
+			<option value="Url">Url</option>
+			<option value="Zip">Zip</option>
+			<option value="Number">Number</option>
+			<option value="NumberPlus">NumberPlus</option>
+			<option value="NumberMinus">NumberMinus</option>
+			<option value="Integer">Integer</option>
+			<option value="IntegerPlus">IntegerPlus</option>
+			<option value="IntegerMinus">IntegerMinus</option>
+			<option value="Filename">Filename</option>
+			<option value="Password">Password</option></select></td>
 		<td><input type="button" class="delete" onclick="$dswork.deleteRow(this)" /></td>
 	</tr>
 </c:forEach>
