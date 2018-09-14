@@ -6,7 +6,7 @@
 <head>
 <title></title>
 <%@include file="/commons/include/updAjax.jsp" %>
-<%@include file="/commons/include/editor.jsp" %>
+<%@include file="/commons/include/cmsEditor.jsp" %>
 <script type="text/javascript">
 $dswork.callback = function(){if($dswork.result.type == 1){
 	location.href = "getPage.htm?id=${po.categoryid}&page=${param.page}";
@@ -14,7 +14,15 @@ $dswork.callback = function(){if($dswork.result.type == 1){
 $(function(){
 	$(".form_title").css("width", "8%");
 <c:if test="${!po.audit}">
-	$('#content').xheditor({html5Upload:true,upMultiple:1,upLinkUrl:"uploadFile.htm?categoryid=${po.categoryid}",upImgUrl:"uploadImage.htm?categoryid=${po.categoryid}",internalScript:true});
+	KindEditor.ready(function(K) {
+		K.create('#content', {
+			cssPath : '',
+			uploadJson : 'upload.htm?categoryid=${po.categoryid}',
+			afterBlur:function(){this.sync();}
+		});
+	});
+	$dswork.readySubmit = function(){editor.sync();};
+	// $('#content').xheditor({html5Upload:true,upMultiple:1,upLinkUrl:"uploadFile.htm?categoryid=${po.categoryid}",upImgUrl:"uploadImage.htm?categoryid=${po.categoryid}",internalScript:true});
 	function show(){
 		var i = new Image();
 		i.src = $("#inputImg").val();

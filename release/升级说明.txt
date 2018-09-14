@@ -119,45 +119,45 @@
 			UPDATE DS_CMS_LOG SET AUDITSTATUS=4 WHERE (AUDITNAME!='' AND AUDITNAME IS NOT NULL) AND AUDITSTATUS='2';
 			UPDATE DS_CMS_LOG SET AUDITSTATUS=5 WHERE (AUDITNAME!='' AND AUDITNAME IS NOT NULL) AND AUDITSTATUS='4';
 
-		移动版升级
-			ALTER TABLE DS_CMS_CATEGORY
-			ADD COLUMN MVIEWSITE varchar(300) NULL DEFAULT NULL COMMENT '移动版栏目模板' AFTER PAGEVIEWSITE,
-			ADD COLUMN MPAGEVIEWSITE varchar(300) NULL DEFAULT NULL COMMENT '移动版内容模板' AFTER MVIEWSITE;
-			ALTER TABLE DS_CMS_SITE
-			ADD COLUMN MVIEWSITE varchar(300) NULL DEFAULT NULL COMMENT '移动版网站模板' AFTER VIEWSITE,
-			ADD COLUMN ENABLEMOBILE int(1) NULL DEFAULT NULL COMMENT '开启移动版(0否,1是)' AFTER ENABLELOG;
+移动版升级
+	ALTER TABLE DS_CMS_CATEGORY
+	ADD COLUMN MVIEWSITE varchar(300) NULL DEFAULT NULL COMMENT '移动版栏目模板' AFTER PAGEVIEWSITE,
+	ADD COLUMN MPAGEVIEWSITE varchar(300) NULL DEFAULT NULL COMMENT '移动版内容模板' AFTER MVIEWSITE;
+	ALTER TABLE DS_CMS_SITE
+	ADD COLUMN MVIEWSITE varchar(300) NULL DEFAULT NULL COMMENT '移动版网站模板' AFTER VIEWSITE,
+	ADD COLUMN ENABLEMOBILE int(1) NULL DEFAULT NULL COMMENT '开启移动版(0否,1是)' AFTER ENABLELOG;
 
-		用于接收数据推送
-			ALTER TABLE DS_CMS_PAGE_EDIT
-			ADD COLUMN PUSHKEY  varchar(300) NULL COMMENT '推送KEY' AFTER CONTENT;
+用于接收数据推送
+	ALTER TABLE DS_CMS_PAGE_EDIT
+	ADD COLUMN PUSHKEY  varchar(300) NULL COMMENT '推送KEY' AFTER CONTENT;
 
-	过滤器配置：
-	注：新版CMS必须在web.xml中配置相关过滤器才能工作
-		<filter>
-			<filter-name>authOwnSSOFilter</filter-name>
-			<filter-class>dswork.authown.AuthOwnSSOFilter</filter-class>
-		</filter>
-		<filter-mapping><filter-name>authOwnSSOFilter</filter-name><url-pattern>/cms/*</url-pattern></filter-mapping>
-		
-	移动版配置：
-		开启移动版：将DS_CMS_SITE表中的ENABLEMOBILE置1
-		设置模板：将移动版模板拷贝至templates/m下
-		设置资源：将移动版web资源（js/css/img等）拷贝至html/m下
-		在管理界面中配置栏目的移动版模板，并将DS_CMS_SITE表的MVIEWSITE设置为移动版首页模板
+过滤器配置：
+注：新版CMS必须在web.xml中配置相关过滤器才能工作
+	<filter>
+		<filter-name>authOwnSSOFilter</filter-name>
+		<filter-class>dswork.authown.AuthOwnSSOFilter</filter-class>
+	</filter>
+	<filter-mapping><filter-name>authOwnSSOFilter</filter-name><url-pattern>/cms/*</url-pattern></filter-mapping>
+	
+移动版配置：
+	开启移动版：将DS_CMS_SITE表中的ENABLEMOBILE置1
+	设置模板：将移动版模板拷贝至templates/m下
+	设置资源：将移动版web资源（js/css/img等）拷贝至html/m下
+	在管理界面中配置栏目的移动版模板，并将DS_CMS_SITE表的MVIEWSITE设置为移动版首页模板
 
-	支持自定义字段，需要运行以下SQL
-		ALTER TABLE DS_CMS_CATEGORY
-		ADD COLUMN JSONTABLE text NULL COMMENT '数据结构' AFTER CONTENT,
-		ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER JSONTABLE;
-		
-		ALTER TABLE DS_CMS_CATEGORY_EDIT
-		ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER CONTENT;
-		
-		ALTER TABLE DS_CMS_PAGE
-		ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER CONTENT;
-		
-		ALTER TABLE DS_CMS_PAGE_EDIT
-		ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER PUSHKEY;
+支持自定义字段，需要运行以下SQL
+	ALTER TABLE DS_CMS_CATEGORY
+	ADD COLUMN JSONTABLE text NULL COMMENT '数据结构' AFTER CONTENT,
+	ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER JSONTABLE;
+	
+	ALTER TABLE DS_CMS_CATEGORY_EDIT
+	ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER CONTENT;
+	
+	ALTER TABLE DS_CMS_PAGE
+	ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER CONTENT;
+	
+	ALTER TABLE DS_CMS_PAGE_EDIT
+	ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER PUSHKEY;
 
 2018.07.18 上线专题发布功能，并用发布专题取代发布首页，同时删除DS_CMS_SITE表中的VIEWSITE和MVIEWSITE字段
 	运行以下SQL创建专题表和删除站点表视图字段
@@ -178,14 +178,11 @@
 	ALTER TABLE DS_CMS_SITE
 	DROP COLUMN VIEWSITE,
 	DROP COLUMN MVIEWSITE;
-	
-	
-
 
 2018.07.19 移除common.authown类至dswork.authown，注意修改权限过滤器
 	需要更新/web/cms/log/getLog.jsp
 	修改所有引用common.authown类的代码
-	
+
 2018.08.16 修改审核意见列
 	运行以下SQL修改审核意见列
 	ALTER TABLE DS_CMS_CATEGORY_EDIT
@@ -206,4 +203,20 @@
 	更新/WEB-INF/view/jsp/cms/edit/updCategory.jsp
 	更新/WEB-INF/view/jsp/cms/edit/updPage.jsp
 	更新dswork-cms.jar
+	
+2018.09.12 去掉多余引用
+	更新/WEB-INF/view/jsp/cms/audit/auditPage.jsp
+	更新/WEB-INF/view/jsp/cms/publish/getCategoryById.jsp
+	更新/WEB-INF/view/jsp/cms/publish/getPageById.jsp
+
+2018.09.13 升级web工具
+	增加/commons/include/cmsEditor.jsp
+	删除/commons/include/editor.jsp
+	更新/WEB-INF/view/jsp/cms/edit/addPage.jsp
+	更新/WEB-INF/view/jsp/cms/edit/updCategory.jsp
+	更新/WEB-INF/view/jsp/cms/edit/updPage.jsp
+	更新dswork-cms.jar
+	
+	依赖更新
+		web项目，删除后再重新增加/web/js/editor目录
 	

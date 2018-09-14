@@ -670,9 +670,23 @@ public class DsCmsEditController extends DsCmsBaseController
 			print("0:" + e.getMessage());
 		}
 	}
+	
+	@RequestMapping("/upload")
+	public void upload()
+	{
+		String dir = req.getString("dir");
+		if(dir.equals("image"))
+		{
+			uploadImage();
+		}
+		else//flash、media、file
+		{
+			uploadFile();
+		}
+	}
 
-	@RequestMapping("/uploadImage")
-	public void uploadImage()
+	// @RequestMapping("/uploadImage")
+	private void uploadImage()
 	{
 		try
 		{
@@ -714,13 +728,13 @@ public class DsCmsEditController extends DsCmsBaseController
 						{
 							FileUtil.writeFile(root + path + v, FileUtil.getToInputStream(byteArray), true);
 						}
-						print("{\"err\":\"\",\"msg\":\"!" + webpath + v + "\"}");
+						print("{\"error\":0,\"url\":\"" + webpath + v + "\"}");
 						return;
 					}
 					catch(Exception e)
 					{
 						e.printStackTrace();
-						print("{\"err\":\"上传失败\",\"msg\":\"\"}");
+						print("{\"error\":1,\"message\":\"上传失败\"}");
 						return;
 					}
 				}
@@ -730,11 +744,11 @@ public class DsCmsEditController extends DsCmsBaseController
 		{
 			e.printStackTrace();
 		}
-		print("{\"err\":\"上传失败！\",\"msg\":\"\"}");
+		print("{\"error\":1,\"message\":\"上传失败\"}");
 	}
 
-	@RequestMapping("/uploadFile")
-	public void uploadFile()
+	// @RequestMapping("/uploadFile")
+	private void uploadFile()
 	{
 		try
 		{
@@ -762,13 +776,13 @@ public class DsCmsEditController extends DsCmsBaseController
 					try
 					{
 						FileUtil.writeFile(root + path + v, FileUtil.getToInputStream(byteArray), true);
-						print("{\"err\":\"\",\"msg\":\"!" + webpath + v + "\"}");
+						print("{\"error\":0,\"url\":\"" + webpath + v + "\"}");
 						return;
 					}
 					catch(Exception e)
 					{
 						e.printStackTrace();
-						print("{\"err\":\"上传失败\",\"msg\":\"\"}");
+						print("{\"error\":1,\"message\":\"上传失败\"}");
 						return;
 					}
 				}
@@ -778,7 +792,7 @@ public class DsCmsEditController extends DsCmsBaseController
 		{
 			e.printStackTrace();
 		}
-		print("{\"err\":\"上传失败！\",\"msg\":\"\"}");
+		print("{\"error\":1,\"message\":\"上传失败\"}");
 	}
 
 	private String changeContentToLocal(DsCmsSite site, String content)

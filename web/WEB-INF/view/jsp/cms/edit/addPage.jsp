@@ -6,14 +6,21 @@
 <head>
 <title></title>
 <%@include file="/commons/include/addAjax.jsp" %>
-<%@include file="/commons/include/editor.jsp" %>
+<%@include file="/commons/include/cmsEditor.jsp" %>
 <script type="text/javascript">
 $dswork.callback = function(){if($dswork.result.type == 1){
 	location.href = "getPage.htm?id=${fn:escapeXml(param.categoryid)}";
 }};
 $(function(){
 	$(".form_title").css("width", "8%");
-	$('#content').xheditor({html5Upload:true,upMultiple:1,upLinkUrl:"uploadFile.htm?categoryid=${fn:escapeXml(param.categoryid)}",upImgUrl:"uploadImage.htm?categoryid=${fn:escapeXml(param.categoryid)}"});
+	KindEditor.ready(function(K) {
+		K.create('#content', {
+			cssPath : '',
+			uploadJson : 'upload.htm?categoryid=${fn:escapeXml(param.categoryid)}',
+			afterBlur:function(){this.sync();}
+		});
+	});
+	// $('#content').xheditor({html5Upload:true,upMultiple:1,upLinkUrl:"uploadFile.htm?categoryid=${fn:escapeXml(param.categoryid)}",upImgUrl:"uploadImage.htm?categoryid=${fn:escapeXml(param.categoryid)}"});
 	function show(){
 		var i = new Image();
 		i.src = $("#inputImg").val();
