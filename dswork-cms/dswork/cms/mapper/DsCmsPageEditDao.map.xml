@@ -51,7 +51,7 @@
 		AUDITID=#{auditid},
 		AUDITNAME=#{auditname},
 		AUDITTIME=#{audittime},
-		AUDIT=#{auditmsg}
+		AUDITMSG=#{auditmsg}
 	where ID=#{id}
 </update>
 
