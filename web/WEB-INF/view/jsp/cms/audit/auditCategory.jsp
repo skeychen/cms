@@ -103,7 +103,7 @@ $(function(){
 <table border="0" cellspacing="1" cellpadding="0" class="listTable">
 	<tr>
 		<td class="form_title">审核意见</td>
-		<td class="form_input"><textarea name="msg" style="width:99%;heigth:100px;"></textarea></td>
+		<td class="form_input"><textarea name="auditmsg" style="width:99%;heigth:100px;"></textarea></td>
 	</tr>
 </table>
 <input type="hidden" name="id" value="${po.id}" />

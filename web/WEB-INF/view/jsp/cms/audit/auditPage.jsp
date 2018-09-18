@@ -6,7 +6,6 @@
 <head>
 <title></title>
 <%@include file="/commons/include/updAjax.jsp" %>
-<%@include file="/commons/include/editor.jsp" %>
 <script type="text/javascript">
 $dswork.callback = function(){if($dswork.result.type == 1){
 	location.href = "getPage.htm?id=${po.categoryid}&page=${param.page}";
@@ -113,7 +112,7 @@ $(function(){
 <table border="0" cellspacing="1" cellpadding="0" class="listTable">
 	<tr>
 		<td class="form_title">审核意见</td>
-		<td class="form_input"><textarea name="msg" style="width:99%;height:100px;"></textarea></td>
+		<td class="form_input"><textarea name="auditmsg" style="width:99%;height:100px;"></textarea></td>
 	</tr>
 </table>
 <input type="hidden" name="id" value="${po.id}" />

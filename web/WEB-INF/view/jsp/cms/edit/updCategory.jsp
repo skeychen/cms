@@ -6,7 +6,7 @@
 <head>
 <title></title>
 <%@include file="/commons/include/updAjax.jsp" %>
-<%@include file="/commons/include/editor.jsp" %>
+<%@include file="/commons/include/cmsEditor.jsp" %>
 <script type="text/javascript">
 $dswork.callback = function(){if($dswork.result.type==1){
 	<c:if test="${scope==0}">location.href = 'getPage.htm?id=${po.id}';</c:if>
@@ -15,7 +15,16 @@ $dswork.callback = function(){if($dswork.result.type==1){
 $(function(){
 	$(".form_title").css("width", "8%");
 <c:if test="${!po.audit}">
-	<c:if test="${scope==0||scope==1}">$('#content').xheditor({html5Upload:true,upMultiple:1,upLinkUrl:"uploadFile.htm?categoryid=${po.id}",upImgUrl:"uploadImage.htm?categoryid=${po.id}"});</c:if>
+	<c:if test="${scope==0||scope==1}">
+	KindEditor.ready(function(K) {
+		K.create('#content', {
+			cssPath : '',
+			uploadJson : 'upload.htm?categoryid=${po.id}',
+			afterBlur:function(){this.sync();}
+		});
+	});
+	// $('#content').xheditor({html5Upload:true,upMultiple:1,upLinkUrl:"uploadFile.htm?categoryid=${po.id}",upImgUrl:"uploadImage.htm?categoryid=${po.id}"});
+	</c:if>
 	function show(){
 		var i = new Image();
 		i.src = $("#inputImg").val();
@@ -174,7 +183,7 @@ $(function(){
 <c:if test="${po.nopass}">
 	<tr>
 		<td class="form_title">审核意见</td>
-		<td class="form_input">${fn:escapeXml(po.msg)}</td>
+		<td class="form_input">${fn:escapeXml(po.auditmsg)}</td>
 	</tr>
 </c:if>
 </table>

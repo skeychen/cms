@@ -7,9 +7,9 @@
 
 <insert id="insert" parameterType="dswork.cms.model.DsCmsCategoryEdit">
 	insert into DS_CMS_CATEGORY_EDIT
-	(ID, SITEID, STATUS, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, CONTENT, URL, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, MSG, JSONDATA)
+	(ID, SITEID, STATUS, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, CONTENT, JSONDATA, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, AUDITMSG)
 	values
-	(#{id}, #{siteid}, #{status}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{content}, #{url}, #{editid}, #{editname}, #{edittime}, #{auditstatus}, #{auditid}, #{auditname}, #{audittime}, #{msg}, #{jsondata})
+	(#{id}, #{siteid}, #{status}, #{url}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{content}, #{jsondata}, #{editid}, #{editname}, #{edittime}, #{auditstatus}, #{auditid}, #{auditname}, #{audittime}, #{auditmsg})
 </insert>
 
 <delete id="delete">
@@ -19,6 +19,7 @@
 <update id="update" parameterType="dswork.cms.model.DsCmsCategoryEdit">
 	update DS_CMS_CATEGORY_EDIT set
 		STATUS=#{status},
+		URL=#{url},
 		METAKEYWORDS=#{metakeywords},
 		METADESCRIPTION=#{metadescription},
 		SUMMARY=#{summary},
@@ -27,7 +28,7 @@
 		RELEASEUSER=#{releaseuser},
 		IMG=#{img},
 		CONTENT=#{content},
-		URL=#{url},
+		JSONDATA=#{jsondata},
 		EDITID=#{editid},
 		EDITNAME=#{editname},
 		EDITTIME=#{edittime},
@@ -35,8 +36,7 @@
 		AUDITID=#{auditid},
 		AUDITNAME=#{auditname},
 		AUDITTIME=#{audittime},
-		MSG=#{msg},
-		JSONDATA=#{jsondata}
+		AUDITMSG=#{auditmsg}
 	where ID=#{id}
 </update>
 
@@ -44,6 +44,7 @@
 	<id property="id" column="ID" />
 	<result property="siteid" column="SITEID" />
 	<result property="status" column="STATUS" />
+	<result property="url" column="URL" />
 	<result property="metakeywords" column="METAKEYWORDS" />
 	<result property="metadescription" column="METADESCRIPTION" />
 	<result property="summary" column="SUMMARY" />
@@ -52,6 +53,7 @@
 	<result property="releaseuser" column="RELEASEUSER" />
 	<result property="img" column="IMG" />
 	<result property="content" column="CONTENT" />
+	<result property="jsondata" column="JSONDATA" />
 	<result property="editid" column="EDITID" />
 	<result property="editname" column="EDITNAME" />
 	<result property="edittime" column="EDITTIME" />
@@ -59,15 +61,13 @@
 	<result property="auditid" column="AUDITID" />
 	<result property="auditname" column="AUDITNAME" />
 	<result property="audittime" column="AUDITTIME" />
-	<result property="url" column="URL" />
-	<result property="msg" column="MSG" />
-	<result property="name" column="NAME" />
+	<result property="auditmsg" column="AUDITMSG" />
 	<result property="scope" column="SCOPE" />
-	<result property="jsondata" column="JSONDATA" />
+	<result property="name" column="NAME" />
 </resultMap>
 
 <sql id="columns">
-	a.ID, a.SITEID, a.STATUS, a.METAKEYWORDS, a.METADESCRIPTION, a.SUMMARY, a.RELEASETIME, a.RELEASESOURCE, a.RELEASEUSER, a.IMG, a.CONTENT, a.URL, a.EDITID, a.EDITNAME, a.EDITTIME, a.AUDITSTATUS, a.AUDITID, a.AUDITNAME, a.AUDITTIME, a.MSG, a.JSONDATA
+	a.ID, a.SITEID, a.STATUS, a.URL, a.METAKEYWORDS, a.METADESCRIPTION, a.SUMMARY, a.RELEASETIME, a.RELEASESOURCE, a.RELEASEUSER, a.IMG, a.CONTENT, a.JSONDATA, a.EDITID, a.EDITNAME, a.EDITTIME, a.AUDITSTATUS, a.AUDITID, a.AUDITNAME, a.AUDITTIME, a.AUDITMSG
 	, b.NAME, b.SCOPE
 </sql>
 

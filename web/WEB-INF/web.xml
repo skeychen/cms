@@ -7,7 +7,6 @@
 		<filter-class>dswork.sso.WebFilter</filter-class>
 	</filter>
 	<filter-mapping><filter-name>websso</filter-name><url-pattern>/cms/*</url-pattern></filter-mapping>
-	
 -->
 
 	<filter>

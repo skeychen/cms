@@ -22,7 +22,7 @@ public class DsCmsPageEdit extends DsCmsPage
 	// 审核时间
 	private String audittime = "";
 	// 审核意见
-	private String msg = "";
+	private String auditmsg = "";
 	// 推送KEY
 	private String pushkey = "";
 
@@ -117,14 +117,14 @@ public class DsCmsPageEdit extends DsCmsPage
 		this.audittime = audittime;
 	}
 
-	public String getMsg()
+	public String getAuditmsg()
 	{
-		return msg;
+		return auditmsg;
 	}
 
-	public void setMsg(String msg)
+	public void setAuditmsg(String auditmsg)
 	{
-		this.msg = msg;
+		this.auditmsg = auditmsg;
 	}
 
 	public String getPushkey()

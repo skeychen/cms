@@ -1,9 +1,10 @@
 发布说明：
 
-复制www里的内容替换至生产环境中项目目录内容即可
+复制www里的内容替换至生产环境中项目目录内容
+增加dswork-html.jar
 
 如果使用单点登录，则需要再增加如下操作：
-
+复制dswork-sso.jar
 web.xml过滤器配置：
 修改"www"目录下的/WEB-INF/classes/config/sso.properties
 使用单点登录SSO时增加单点登录相关配置过滤器至最顶层：

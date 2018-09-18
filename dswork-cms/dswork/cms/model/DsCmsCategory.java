@@ -14,14 +14,14 @@ public class DsCmsCategory
 	private Long pid = null;
 	// 站点ID
 	private long siteid = 0L;
+	// 类型(0列表,1单页,2外链)
+	private int scope = 0;
 	// 状态(-1删除,0新增,1修改,8已发)
 	private int status = 0;
 	// 栏目名称
 	private String name = "";
-	// 类型(0列表,1单页,2外链)
-	private int scope = 0;
-	// 链接
-	private String url = "";
+	// 排序
+	private int seq = 0;
 	// 栏目模板
 	private String viewsite = "";
 	// 内容模板
@@ -30,8 +30,8 @@ public class DsCmsCategory
 	private String mviewsite = "";
 	// 移动版内容模板
 	private String mpageviewsite = "";
-	// 排序
-	private int seq = 0;
+	// 链接
+	private String url = "";
 	// meta关键词
 	private String metakeywords = "";
 	// meta描述
@@ -92,6 +92,16 @@ public class DsCmsCategory
 		this.siteid = siteid;
 	}
 
+	public int getScope()
+	{
+		return scope;
+	}
+
+	public void setScope(int scope)
+	{
+		this.scope = scope;
+	}
+
 	public int getStatus()
 	{
 		return status;
@@ -112,24 +122,14 @@ public class DsCmsCategory
 		this.name = name;
 	}
 
-	public int getScope()
+	public int getSeq()
 	{
-		return scope;
+		return seq;
 	}
 
-	public void setScope(int scope)
+	public void setSeq(int seq)
 	{
-		this.scope = scope;
-	}
-
-	public String getUrl()
-	{
-		return url;
-	}
-
-	public void setUrl(String url)
-	{
-		this.url = url;
+		this.seq = seq;
 	}
 
 	public String getViewsite()
@@ -172,14 +172,14 @@ public class DsCmsCategory
 		this.mpageviewsite = mpageviewsite;
 	}
 
-	public int getSeq()
+	public String getUrl()
 	{
-		return seq;
+		return url;
 	}
 
-	public void setSeq(int seq)
+	public void setUrl(String url)
 	{
-		this.seq = seq;
+		this.url = url;
 	}
 
 	public String getMetakeywords()

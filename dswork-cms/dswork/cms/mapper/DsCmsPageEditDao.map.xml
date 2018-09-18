@@ -10,9 +10,9 @@
 		<include refid="dswork.cms.rowid" />
 	</selectKey>
 	insert into DS_CMS_PAGE_EDIT
-	(SITEID, CATEGORYID, STATUS, TITLE, SCOPE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, CONTENT, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, MSG, PUSHKEY, JSONDATA)
+	(SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, CONTENT, JSONDATA, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, AUDITMSG, PUSHKEY)
 	values
-	(#{siteid}, #{categoryid}, #{status}, #{title}, #{scope}, #{url}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{imgtop}, #{pagetop}, #{content}, #{editid}, #{editname}, #{edittime}, #{auditstatus}, #{auditid}, #{auditname}, #{audittime}, #{msg}, #{pushkey}, #{jsondata})
+	(#{siteid}, #{categoryid}, #{scope}, #{status}, #{title}, #{url}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{imgtop}, #{pagetop}, #{content}, #{jsondata}, #{editid}, #{editname}, #{edittime}, #{auditstatus}, #{auditid}, #{auditname}, #{audittime}, #{auditmsg}, #{pushkey})
 </insert>
 
 <delete id="delete">
@@ -29,9 +29,9 @@
 
 <update id="update" parameterType="dswork.cms.model.DsCmsPageEdit">
 	update DS_CMS_PAGE_EDIT set
+		SCOPE=#{scope},
 		STATUS=#{status},
 		TITLE=#{title},
-		SCOPE=#{scope},
 		URL=#{url},
 		METAKEYWORDS=#{metakeywords},
 		METADESCRIPTION=#{metadescription},
@@ -43,6 +43,7 @@
 		IMGTOP=#{imgtop},
 		PAGETOP=#{pagetop},
 		CONTENT=#{content},
+		JSONDATA=#{jsondata},
 		EDITID=#{editid},
 		EDITNAME=#{editname},
 		EDITTIME=#{edittime},
@@ -50,8 +51,7 @@
 		AUDITID=#{auditid},
 		AUDITNAME=#{auditname},
 		AUDITTIME=#{audittime},
-		MSG=#{msg},
-		JSONDATA=#{jsondata}
+		AUDITMSG=#{auditmsg}
 	where ID=#{id}
 </update>
 
@@ -63,9 +63,9 @@
 	<id property="id" column="ID" />
 	<result property="siteid" column="SITEID" />
 	<result property="categoryid" column="CATEGORYID" />
+	<result property="scope" column="SCOPE" />
 	<result property="status" column="STATUS" />
 	<result property="title" column="TITLE" />
-	<result property="scope" column="SCOPE" />
 	<result property="url" column="URL" />
 	<result property="metakeywords" column="METAKEYWORDS" />
 	<result property="metadescription" column="METADESCRIPTION" />
@@ -77,6 +77,7 @@
 	<result property="imgtop" column="IMGTOP" />
 	<result property="pagetop" column="PAGETOP" />
 	<result property="content" column="CONTENT" />
+	<result property="jsondata" column="JSONDATA" />
 	<result property="editid" column="EDITID" />
 	<result property="editname" column="EDITNAME" />
 	<result property="edittime" column="EDITTIME" />
@@ -84,12 +85,11 @@
 	<result property="auditid" column="AUDITID" />
 	<result property="auditname" column="AUDITNAME" />
 	<result property="audittime" column="AUDITTIME" />
-	<result property="msg" column="MSG" />
+	<result property="auditmsg" column="AUDITMSG" />
 	<result property="pushkey" column="PUSHKEY" />
-	<result property="jsondata" column="JSONDATA" />
 </resultMap>
 
-<sql id="columns">ID, SITEID, CATEGORYID, STATUS, TITLE, SCOPE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, CONTENT, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, MSG, PUSHKEY, JSONDATA</sql>
+<sql id="columns">ID, SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, CONTENT, JSONDATA, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, AUDITMSG, PUSHKEY</sql>
 	
 <sql id="dynamicWhere">
 	<where>
