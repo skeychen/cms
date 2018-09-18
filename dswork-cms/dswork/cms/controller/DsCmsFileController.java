@@ -324,7 +324,7 @@ public class DsCmsFileController extends DsCmsBaseController
 					}
 					else
 					{
-						if(i > 1)
+						if(i > 0)
 						{
 							boolean ok = false;
 							String sup = zfilename.substring(i + 1);
