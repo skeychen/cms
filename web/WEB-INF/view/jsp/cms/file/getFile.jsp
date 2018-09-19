@@ -24,11 +24,13 @@ tr.x td{text-align:left;padding-left:3px;}
 	<tr class="list_title">
 		<td style="width:40%;">文件名称</td>
 		<td>引用地址</td>
+		<td>修改日期</td>
 	</tr>
 <c:forEach items="${list}" var="d">
 	<tr class="x">
 		<td>${fn:escapeXml(d.name)}</td>
 		<td>${fn:escapeXml(d.root)}${fn:escapeXml(d.path)}</td>
+		<td>${fn:escapeXml(d.lasttime)}</td>
 	</tr>
 </c:forEach>
 </table>

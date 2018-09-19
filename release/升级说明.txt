@@ -219,4 +219,17 @@
 	
 	依赖更新
 		web项目，删除后再重新增加/web/js/editor目录
-	
+
+2018.09.19 升级样式兼容及附件更新时间
+	升级样式兼容，easyui中的北部高度改为css可设置
+		更新/WEB-INF/view/jsp/cms/audit/getCategoryTree.jsp
+		更新/WEB-INF/view/jsp/cms/edit/getCategoryTree.jsp
+		更新/WEB-INF/view/jsp/cms/template/getTemplateTree.jsp
+		更新/WEB-INF/view/jsp/cms/publish/getCategoryTree.jsp
+		依赖更新
+			web项目，/web/themes/default/frame.css 增加了.treeheader{height:30px;}
+	附件更新时间
+		更新/WEB-INF/view/jsp/cms/file/getFile.jsp
+		更新dswork-cms.jar
+
+

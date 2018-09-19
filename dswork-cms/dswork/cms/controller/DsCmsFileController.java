@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import dswork.cms.model.DsCmsSite;
 import dswork.cms.service.DsCmsSiteService;
 import dswork.core.util.FileUtil;
+import dswork.core.util.TimeUtil;
 import dswork.core.util.UniqueId;
 import dswork.web.MyFile;
 
@@ -156,6 +157,7 @@ public class DsCmsFileController extends DsCmsBaseController
 					// 限制为只能读取根目录下的信息
 					if(f.isDirectory() && (f.getPath().startsWith(froot.getPath())))
 					{
+						java.util.Date d = new java.util.Date();
 						for(File o : f.listFiles())
 						{
 							if(o.isFile())
@@ -164,6 +166,8 @@ public class DsCmsFileController extends DsCmsBaseController
 								m.put("name", o.getName());
 								m.put("path", uriPath + o.getName());
 								m.put("root", site.getUrl() + "/f/res/");
+								d.setTime(o.lastModified());
+								m.put("lasttime", TimeUtil.formatDate(d, "yyyy-MM-dd HH:mm:ss"));
 								list.add(m);
 							}
 						}
