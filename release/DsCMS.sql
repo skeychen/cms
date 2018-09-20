@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS DS_CMS_CATEGORY
    SCOPE                INT COMMENT '类型(0列表,1单页,2外链)',
    STATUS               INT COMMENT '状态(-1删除,0新增,1修改,8已发)',
    NAME                 VARCHAR(300) COMMENT '栏目名称',
-   SEQ                  VARCHAR(300) COMMENT '排序',
+   SEQ                  INT COMMENT '排序',
    VIEWSITE             VARCHAR(300) COMMENT '栏目模板',
    PAGEVIEWSITE         VARCHAR(300) COMMENT '内容模板',
    MVIEWSITE            VARCHAR(300) COMMENT '移动版栏目模板',

@@ -232,4 +232,7 @@
 		更新/WEB-INF/view/jsp/cms/file/getFile.jsp
 		更新dswork-cms.jar
 
-
+2018.09.20 修复排序字段类型错误
+	运行以下SQL修改排序字段列
+	ALTER TABLE DS_CMS_CATEGORY
+	MODIFY COLUMN SEQ int NULL DEFAULT NULL COMMENT '排序' AFTER URL;
