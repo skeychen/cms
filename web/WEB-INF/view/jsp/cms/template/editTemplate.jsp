@@ -16,7 +16,7 @@ function onChangeListen(){
 	window.parent.setTextChange(true);
 }
 $(function(){
-	$("#showname").text(window.parent.$dswork.ztree.getSelectedNode().name);
+	$("#showname").text(window.parent.$dswork.ztree.getSelectedNode().path.replace(".jsp", ""));
 });
 </script>
 <style type="text/css">
