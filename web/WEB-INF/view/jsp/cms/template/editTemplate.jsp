@@ -15,6 +15,9 @@ $dswork.callback = function(){if($dswork.result.type == 1){
 function onChangeListen(){
 	window.parent.setTextChange(true);
 }
+$(function(){
+	$("#showname").text(window.parent.$dswork.ztree.getSelectedNode().path.replace(".jsp", ""));
+});
 </script>
 <style type="text/css">
 </style>
@@ -22,7 +25,7 @@ function onChangeListen(){
 <body>
 <table border="0" cellspacing="0" cellpadding="0" class="listLogo">
 	<tr>
-		<td class="title">&nbsp;</td>
+		<td class="title">修改模板：<span id="showname"></span></td>
 		<td class="menuTool">
 			<a class="save" href="#" id="dataFormSave">保存</a>
 		</td>

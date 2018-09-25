@@ -20,7 +20,7 @@
 		<div class="logo">&nbsp;&nbsp;当前位置：${category.name}</div>
 		<div class="title">
 			${title}
-			<div class="subtitle">${releasetime}</div>
+			<div class="subtitle">发布日期 :${fn:substring(releasetime, 0, 10)} 信息来源 : ${releasesource} 文章作者 : ${releaseuser}</div>
 		</div>
 		<div class="content">${content}</div>
 	</div>
@@ -30,5 +30,7 @@
   </div>
 </div>
 <%@include file="include/footer.jsp"%>
+<div class="searchseq" style="display:none;">${id}</div>
+<div class="searchtype" style="display:none;">${category.name}</div>
 </body>
 </html>
