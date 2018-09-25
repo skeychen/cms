@@ -340,6 +340,11 @@ public class DsCmsPublishController extends DsCmsBaseController
 						else if(categoryid > 0)// 指定栏目首页
 						{
 							DsCmsCategory c = service.getCategory(categoryid);
+							if(c == null || c.getStatus() == -1)
+							{
+								print("0:栏目已被删除，请刷新页面");
+								return;
+							}
 							if(c.getSiteid() == siteid && checkPublish(c.getSiteid(), c.getId()))
 							{
 								list.add(c);
