@@ -84,6 +84,10 @@ $(function(){
 		<td class="form_input">${po.scope==2?'是'.concat(' 链接:').concat(po.url):'否'}</td>
 	</tr>
 	<tr>
+		<td class="form_title">URL</td>
+		<td class="form_input">${fn:escapeXml(po.url)}</td>
+	</tr>
+	<tr>
 		<td class="form_title">图片</td>
 		<td class="form_input">
 			图片地址：${fn:escapeXml(po.img)}<br/>

@@ -150,6 +150,10 @@ $(function(){
 			发布时间：<input type="text" name="releasetime" class="WebDate" format="yyyy-MM-dd HH:mm:ss" value="${fn:escapeXml(po.releasetime)}" />
 		</td>
 	</tr>
+	<tr>
+		<td class="form_title">URL</td>
+		<td class="form_input">${fn:escapeXml(po.url)}</td>
+	</tr>
 <c:forEach items="${columns}" var="d">
 	<tr>
 		<td class="form_title"><input type="hidden" name="ctitle" value="${fn:escapeXml(d.ctitle)}" />${fn:escapeXml(d.cname)}</td>

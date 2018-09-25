@@ -88,16 +88,16 @@ $(function(){
 </c:if>
 <c:if test="${scope==2}">
 	<tr>
-		<td class="form_title">URL</td>
-		<td class="form_input">${fn:escapeXml(po.url)}</td>
-	</tr>
-	<tr>
 		<td class="form_title">预览</td>
 		<td class="form_input menuTool">
 			<a class="look" target="_blank" href="${po.url}">查看外链</a>
 		</td>
 	</tr>
 </c:if>
+	<tr>
+		<td class="form_title">URL</td>
+		<td class="form_input">${fn:escapeXml(po.url)}</td>
+	</tr>
 </table>
 <div class="line"></div>
 <table border="0" cellspacing="1" cellpadding="0" class="listTable">
