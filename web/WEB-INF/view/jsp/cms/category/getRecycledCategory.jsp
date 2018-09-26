@@ -11,7 +11,7 @@
 <body>
 <table border="0" cellspacing="0" cellpadding="0" class="listLogo">
 	<tr>
-		<td class="title">栏目管理：没有可管理的站点</td>
+		<td class="title">栏目回收站：没有可管理的站点</td>
 	</tr>
 </table>
 </body>
@@ -61,7 +61,7 @@ $dswork.callback = function(){if($dswork.result.type == 1){
 <div region="west" split="true" style="width:800px;">
 <table border="0" cellspacing="0" cellpadding="0" class="listLogo">
 	<tr>
-		<td class="title">回收站栏目列表</td>
+		<td class="title">栏目回收站</td>
 		<td class="menuTool">
 			<a class="delete" id="listFormDelAll" href="#">删除所选</a>
 		</td>
