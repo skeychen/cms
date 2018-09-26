@@ -116,14 +116,15 @@ $(function(){
 		<td class="form_input">
 			<label><input type="radio" name="scope" value="2" onclick="showUrl(this);" />是</label>
 			<label><input type="radio" name="scope" value="1" onclick="showUrl(this);" v="${po.scope}" />否</label>
-			<span id="spanUrl">&nbsp;&nbsp;链接&nbsp;<input id="xurl" type="text" name="url" style="width:400px;" value="" /></span>
+			<span id="spanUrl">&nbsp;&nbsp;链接&nbsp;<input id="xurl" type="text" name="url" style="width:400px;" value=""${fn:escapeXml(po.url)}"" /></span>
+			<span id="spanUrlX">&nbsp;&nbsp;链接&nbsp;/a/${po.categoryid}/${po.id}.html</span>
 			<script type="text/javascript">
 			function showUrl(e){
-				if($(e).val()=="2"){$("#spanUrl").show();$("#xurl").val("${fn:escapeXml(po.url)}");}
-				else{$("#spanUrl").hide();}
+				if($(e).val()=="2"){$("#spanUrl").show();$("#spanUrlX").hide();$("#xurl").val("${fn:escapeXml(po.url)}");}
+				else{$("#spanUrl").hide();$("#spanUrlX").show();}
 			}
-			<c:if test="${po.scope==2}">$("#spanUrl").show();$("#xurl").val("${fn:escapeXml(po.url)}");</c:if>
-			<c:if test="${po.scope!=2}">$("#spanUrl").hide();</c:if>
+			<c:if test="${po.scope==2}">$("#spanUrl").show();$("#spanUrlX").hide();</c:if>
+			<c:if test="${po.scope!=2}">$("#spanUrl").hide();$("#spanUrlX").show();</c:if>
 			</script>
 		</td>
 	</tr>

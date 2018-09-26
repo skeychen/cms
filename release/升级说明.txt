@@ -237,9 +237,9 @@
 	ALTER TABLE DS_CMS_CATEGORY
 	MODIFY COLUMN SEQ int NULL DEFAULT NULL COMMENT '排序' AFTER URL;
 	
-2018.09.25 扩展可上传附件后缀
+2018.09.26 扩展可上传附件后缀
 	更新dswork-cms.jar，字体相关、ico
-	更新部分jsp视图，显示url地址引用
+	更新全部jsp视图，显示url地址引用
 
 
 
