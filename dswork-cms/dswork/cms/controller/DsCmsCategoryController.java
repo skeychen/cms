@@ -465,11 +465,6 @@ public class DsCmsCategoryController extends DsCmsBaseController
 		return service.queryList(filters);
 	}
 
-	private String getCmsRoot()
-	{
-		return request.getSession().getServletContext().getRealPath("/html") + "/";
-	}
-
 	private void deleteCategoryFolder(String siteFolder, String categoryFolder, boolean enablemobile)
 	{
 		if(siteFolder != null && siteFolder.trim().length() > 0 && categoryFolder != null && categoryFolder.trim().length() > 0)
