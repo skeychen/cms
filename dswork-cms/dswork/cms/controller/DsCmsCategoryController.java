@@ -474,11 +474,11 @@ public class DsCmsCategoryController extends DsCmsBaseController
 	{
 		if(siteFolder != null && siteFolder.trim().length() > 0 && categoryFolder != null && categoryFolder.trim().length() > 0)
 		{
-			File file = new File(getCmsRoot() + "/html/" + siteFolder + "/html/a/" + categoryFolder);
+			File file = new File(getCmsRoot() + siteFolder + "/html/a/" + categoryFolder);
 			FileUtil.delete(file.getPath());
 			if(enablemobile)
 			{
-				file = new File(getCmsRoot() + "/html/" + siteFolder + "/html/m/a/" + categoryFolder);
+				file = new File(getCmsRoot() + siteFolder + "/html/m/a/" + categoryFolder);
 				FileUtil.delete(file.getPath());
 			}
 		}
