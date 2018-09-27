@@ -706,7 +706,7 @@ public class DsCmsEditController extends DsCmsBaseController
 				if(!ext.equals("") && "jpg,jpeg,gif,png".indexOf(ext) != -1)
 				{
 					String zoom = req.getString("zoom", "true");
-					String root = getCmsRoot();
+					String root = getPathRoot();
 					String ym = TimeUtil.getCurrentTime("yyyyMM");
 					String path = "/html/" + site.getFolder() + "/html/f/img/" + ym + "/";
 					FileUtil.createFolder(root + path);
@@ -767,7 +767,7 @@ public class DsCmsEditController extends DsCmsBaseController
 				}
 				if(!ext.equals("") && "bmp,doc,docx,gif,jpeg,jpg,pdf,png,ppt,pptx,rar,rtf,txt,xls,xlsx,zip,7z".indexOf(ext) != -1)
 				{
-					String root = getCmsRoot();
+					String root = getPathRoot();
 					String ym = TimeUtil.getCurrentTime("yyyyMM");
 					String path = "/html/" + site.getFolder() + "/html/f/file/" + ym + "/";
 					FileUtil.createFolder(root + path);
@@ -851,7 +851,7 @@ public class DsCmsEditController extends DsCmsBaseController
 		}
 		String imgName = System.currentTimeMillis() + "." + extName.toLowerCase();
 		String ym = TimeUtil.getCurrentTime("yyyyMM");
-		String imgPath = getCmsRoot() + "/html/" + siteFolder + "/html/f/img/" + ym + "/" + imgName;
+		String imgPath = getPathHtml() + siteFolder + "/html/f/img/" + ym + "/" + imgName;
 		HttpUtil httpUtil = new HttpUtil().create(imgUrl);
 		try
 		{
@@ -875,11 +875,6 @@ public class DsCmsEditController extends DsCmsBaseController
 			e.printStackTrace();
 		}
 		return imgUrl;
-	}
-
-	private String getCmsRoot()
-	{
-		return request.getSession().getServletContext().getRealPath("/") + "/";
 	}
 
 	private boolean checkEditid(String editid)

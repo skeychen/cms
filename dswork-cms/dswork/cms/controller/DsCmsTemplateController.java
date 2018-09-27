@@ -28,11 +28,6 @@ public class DsCmsTemplateController extends DsCmsBaseController
 	@Autowired
 	private DsCmsSiteService service;
 
-	private String getCmsRoot()
-	{
-		return request.getSession().getServletContext().getRealPath("/html") + "/";
-	}
-
 	// 内容编辑
 	@RequestMapping("/addTemplate1")
 	public String addTemplate1()
@@ -50,7 +45,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 				}
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String filePath = (getCmsRoot() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
+					String filePath = (getPathHtml() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
 					File froot = new File(filePath);
 					File finclude = new File(filePath + "include");
 					File mroot = new File(filePath + "m");
@@ -101,7 +96,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 				}
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String filePath = (getCmsRoot() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
+					String filePath = (getPathHtml() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
 					File froot = new File(filePath);
 					File finclude = new File(filePath + "include");
 					File mroot = new File(filePath + "m");
@@ -195,7 +190,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 				}
 				if(s != null && s.getFolder().trim().length() > 0 && checkOwn(s.getId()))
 				{
-					String filePath = (getCmsRoot() + s.getFolder() + "/templates/").replaceAll("\\\\", "/");
+					String filePath = (getPathHtml() + s.getFolder() + "/templates/").replaceAll("\\\\", "/");
 					File froot = new File(filePath);
 					File finclude = new File(filePath + "include");
 					File mroot = new File(filePath + "m");
@@ -265,7 +260,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 				}
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String filePath = (getCmsRoot() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
+					String filePath = (getPathHtml() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
 					File froot = new File(filePath);
 					File finclude = new File(filePath + "include");
 					File mroot = new File(filePath + "m");
@@ -312,7 +307,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 				}
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String filePath = (getCmsRoot() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
+					String filePath = (getPathHtml() + site.getFolder() + "/templates/").replaceAll("\\\\", "/");
 					File froot = new File(filePath);
 					File finclude = new File(filePath + "include");
 					File mroot = new File(filePath + "m");

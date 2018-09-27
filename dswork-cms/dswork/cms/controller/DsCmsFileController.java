@@ -33,11 +33,6 @@ public class DsCmsFileController extends DsCmsBaseController
 	@Autowired
 	private DsCmsSiteService service;
 
-	private String getCmsRoot()
-	{
-		return request.getSession().getServletContext().getRealPath("/html") + "/";
-	}
-
 	@RequestMapping("/getFileTree")
 	public String getFileTree()
 	{
@@ -100,7 +95,7 @@ public class DsCmsFileController extends DsCmsBaseController
 				}
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String filePath = getCmsRoot() + site.getFolder() + "/html/f/res/";
+					String filePath = getPathHtml() + site.getFolder() + "/html/f/res/";
 					File froot = new File(filePath);
 					File f = new File(filePath + uriPath);
 					// 限制为只能读取根目录下的信息
@@ -151,7 +146,7 @@ public class DsCmsFileController extends DsCmsBaseController
 				List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String resPath = getCmsRoot() + site.getFolder() + "/html/f/res/";
+					String resPath = getPathHtml() + site.getFolder() + "/html/f/res/";
 					File froot = new File(resPath);
 					File f = new File(resPath + uriPath);
 					// 限制为只能读取根目录下的信息
@@ -207,7 +202,7 @@ public class DsCmsFileController extends DsCmsBaseController
 				List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String resPath = getCmsRoot() + site.getFolder() + "/html/f/res/";
+					String resPath = getPathHtml() + site.getFolder() + "/html/f/res/";
 					File froot = new File(resPath);
 					froot.mkdirs();
 					File f = new File(resPath + uriPath);
@@ -252,7 +247,7 @@ public class DsCmsFileController extends DsCmsBaseController
 				// List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 				if(site != null && site.getFolder().trim().length() > 0 && checkOwn(site.getId()))
 				{
-					String resPath = getCmsRoot() + site.getFolder() + "/html/f/res/";
+					String resPath = getPathHtml() + site.getFolder() + "/html/f/res/";
 					File froot = new File(resPath);
 					File f = new File(resPath + uriPath);
 					// 限制为只能读取根目录下的信息

@@ -521,11 +521,11 @@ public class DsCmsPublishController extends DsCmsBaseController
 		// 这部分处理不当，整个站点的都会被删除
 		if(siteFolder != null && siteFolder.trim().length() > 0 && categoryFolder != null && categoryFolder.trim().length() > 0)
 		{
-			File file = new File(getCmsRoot() + siteFolder + "/html/a/" + categoryFolder);
+			File file = new File(getPathHtml() + siteFolder + "/html/a/" + categoryFolder);
 			_doDeleteFile(file, deleteCategory, deletePage);
 			if(enablemobile)
 			{
-				file = new File(getCmsRoot() + siteFolder + "/html/a/m/" + categoryFolder);
+				file = new File(getPathHtml() + siteFolder + "/html/a/m/" + categoryFolder);
 				_doDeleteFile(file, deleteCategory, deletePage);
 			}
 		}
@@ -568,7 +568,7 @@ public class DsCmsPublishController extends DsCmsBaseController
 	{
 		try
 		{
-			String p = getCmsRoot() + siteFolder + "/html/" + urlpath;
+			String p = getPathHtml() + siteFolder + "/html/" + urlpath;
 			if(path == null)
 			{
 				FileUtil.delete(p);
@@ -579,7 +579,7 @@ public class DsCmsPublishController extends DsCmsBaseController
 			}
 			if(enablemobile)
 			{
-				p = getCmsRoot() + siteFolder + "/html/m/" + urlpath;
+				p = getPathHtml() + siteFolder + "/html/m/" + urlpath;
 				if(path == null)
 				{
 					FileUtil.delete(p);
@@ -593,11 +593,6 @@ public class DsCmsPublishController extends DsCmsBaseController
 		catch(Exception e)
 		{
 		}
-	}
-
-	private String getCmsRoot()
-	{
-		return request.getSession().getServletContext().getRealPath("/html") + "/";
 	}
 
 	private String getLocalAddr()

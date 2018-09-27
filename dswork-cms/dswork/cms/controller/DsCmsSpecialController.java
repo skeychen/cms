@@ -135,7 +135,7 @@ public class DsCmsSpecialController extends DsCmsBaseController
 		List<String> list = new ArrayList<String>();
 		try
 		{
-			File file = new File(getCmsRoot() + sitename + (mobile ? "/templates/m" : "/templates"));
+			File file = new File(getPathHtml() + sitename + (mobile ? "/templates/m" : "/templates"));
 			for(File f : file.listFiles())
 			{
 				if(f.isFile() && !f.isHidden() && f.getPath().endsWith(".jsp"))
@@ -149,10 +149,5 @@ public class DsCmsSpecialController extends DsCmsBaseController
 			e.printStackTrace();
 		}
 		return list;
-	}
-
-	private String getCmsRoot()
-	{
-		return request.getSession().getServletContext().getRealPath("/html") + "/";
 	}
 }

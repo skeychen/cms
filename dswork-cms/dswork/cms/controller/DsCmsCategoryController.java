@@ -465,20 +465,15 @@ public class DsCmsCategoryController extends DsCmsBaseController
 		return service.queryList(filters);
 	}
 
-	private String getCmsRoot()
-	{
-		return request.getSession().getServletContext().getRealPath("/html") + "/";
-	}
-
 	private void deleteCategoryFolder(String siteFolder, String categoryFolder, boolean enablemobile)
 	{
 		if(siteFolder != null && siteFolder.trim().length() > 0 && categoryFolder != null && categoryFolder.trim().length() > 0)
 		{
-			File file = new File(getCmsRoot() + siteFolder + "/html/a/" + categoryFolder);
+			File file = new File(getPathHtml() + siteFolder + "/html/a/" + categoryFolder);
 			FileUtil.delete(file.getPath());
 			if(enablemobile)
 			{
-				file = new File(getCmsRoot() + siteFolder + "/html/m/a/" + categoryFolder);
+				file = new File(getPathHtml() + siteFolder + "/html/m/a/" + categoryFolder);
 				FileUtil.delete(file.getPath());
 			}
 		}
@@ -489,7 +484,7 @@ public class DsCmsCategoryController extends DsCmsBaseController
 		List<String> list = new ArrayList<String>();
 		try
 		{
-			File file = new File(getCmsRoot() + sitename + (mobile ? "/templates/m" : "/templates"));
+			File file = new File(getPathHtml() + sitename + (mobile ? "/templates/m" : "/templates"));
 			for(File f : file.listFiles())
 			{
 				if(f.isFile() && !f.isHidden() && f.getPath().endsWith(".jsp"))
