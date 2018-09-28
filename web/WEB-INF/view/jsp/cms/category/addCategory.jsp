@@ -19,20 +19,20 @@ $(function(){
 			$("#template_page").val("").hide();
 			$(".viewsite").val("");
 			$(".pageviewsite").val("");
-			$("#url").attr("require", "true");
+			$("#url").attr("datatype", "Require");
 		}
 		else if($("#scope").val() == 1){
 			$("#mylink").val("").hide();
 			$("#template_category").show();
 			$("#template_page").val("").hide();
 			$(".pageviewsite").val("");
-			$("#url").attr("require", "false");
+			$("#url").attr("datatype", "!Require");
 		}
 		else{
 			$("#mylink").val("").hide();
 			$("#template_category").show();
 			$("#template_page").show();
-			$("#url").attr("require", "false");
+			$("#url").attr("datatype", "Require");
 		}
 	}).bind("change", function(){
 		$("#scope").click();
@@ -64,7 +64,7 @@ $(function(){
 	</tr>
 	<tr>
 		<td class="form_title">栏目名称</td>
-		<td class="form_input"><input type="text" name="name" maxlength="100" dataType="Require" value="" /></td>
+		<td class="form_input"><input type="text" name="name" maxlength="100" datatype="Require" value="" /></td>
 	</tr>
 	<tr>
 		<td class="form_title">类型</td>
@@ -79,7 +79,7 @@ $(function(){
 	<tbody id="mylink">
 	<tr>
 		<td class="form_title">链接</td>
-		<td class="form_input"><input type="text" id="url" name="url" maxlength="100" style="width:400px;" dataType="Require" require="false" value="" /></td>
+		<td class="form_input"><input type="text" id="url" name="url" maxlength="100" style="width:400px;" datatype="!Require" value="" /></td>
 	</tr>
 	</tbody>
 	<tbody id="template_category">
@@ -126,7 +126,7 @@ $(function(){
 </table>
 <script type="text/template" id="cloneTable">
 	<tr class="list">
-		<td><input type="text" name="ctitle" dataType="Char" value="" /></td>
+		<td><input type="text" name="ctitle" datatype="Char" value="" /></td>
 		<td><input type="text" name="cname" value="" /></td>
 		<td><select name="cdatatype">
 			<option value="">无校验</option>

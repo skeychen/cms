@@ -130,7 +130,7 @@ $(function(){
 	</tr>
 	<tr>
 		<td class="form_title">标题</td>
-		<td class="form_input"><input type="text" name="title" maxlength="100" style="width:400px;" dataType="Require" value="${fn:escapeXml(po.title)}" /></td>
+		<td class="form_input"><input type="text" name="title" maxlength="100" style="width:400px;" datatype="Require" value="${fn:escapeXml(po.title)}" /></td>
 	</tr>
 	<tr>
 		<td class="form_title">摘要</td>

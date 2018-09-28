@@ -38,7 +38,7 @@ $(function(){
 <script type="text/template" id="scope_2">
 	<tr class="choice">
 		<td class="form_title">链接</td>
-		<td class="form_input"><input type="text" id="url" name="url" maxlength="100" style="width:400px;" dataType="Require" require="false" value="${fn:escapeXml(po.url)}" /></td>
+		<td class="form_input"><input type="text" id="url" name="url" maxlength="100" style="width:400px;" datatype="!Require" value="${fn:escapeXml(po.url)}" /></td>
 	</tr>
 </script>
 <script type="text/template" id="scope_0_1">
@@ -101,7 +101,7 @@ $(function(){
 	</tr>
 	<tr>
 		<td class="form_title">栏目名称</td>
-		<td class="form_input"><input type="text" name="name" maxlength="100" dataType="Require" value="${fn:escapeXml(po.name)}" /></td>
+		<td class="form_input"><input type="text" name="name" maxlength="100" datatype="Require" value="${fn:escapeXml(po.name)}" /></td>
 	</tr>
 	<tr>
 		<td class="form_title">类型</td>
@@ -124,7 +124,7 @@ $(function(){
 	</tr>
 <c:forEach items="${columns}" var="d">
 	<tr class="list">
-		<td><input type="text" name="ctitle" dataType="Char" value="${fn:escapeXml(d.ctitle)}" /></td>
+		<td><input type="text" name="ctitle" datatype="Char" value="${fn:escapeXml(d.ctitle)}" /></td>
 		<td><input type="text" name="cname" value="${fn:escapeXml(d.cname)}" /></td>
 		<td><select name="cdatatype" v="${fn:escapeXml(d.cdatatype)}">
 			<option value="">无校验</option>
@@ -158,7 +158,7 @@ $(function(){
 </table>
 <script type="text/template" id="cloneTable">
 	<tr class="list">
-		<td><input type="text" name="ctitle" dataType="Char" value="" /></td>
+		<td><input type="text" name="ctitle" datatype="Char" value="" /></td>
 		<td><input type="text" name="cname" value="" /></td>
 		<td><select name="cdatatype">
 			<option value="">无校验</option>
