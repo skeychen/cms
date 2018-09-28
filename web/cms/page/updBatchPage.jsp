@@ -114,7 +114,7 @@ function _vtype(v){
 	<td class="form_title fsize">选择需要更新的时间段</td>
 	<td class="form_input">
 		&nbsp;起始时间：<input type="text" name="begintime" id="begintime" class="WebDate" format="yyyy-MM-dd HH:mm:ss" value=""/>
-		&nbsp;结束时间：<input type="text" name="endtime" id="endtime" dataType="DateCheck" require="false" operator=">=" to="begintime" class="WebDate" format="yyyy-MM-dd HH:mm:ss" value=""/>
+		&nbsp;结束时间：<input type="text" name="endtime" id="endtime" datatype="!DateCheck" operator=">=" to="begintime" class="WebDate" format="yyyy-MM-dd HH:mm:ss" value=""/>
 	</td>
 </tr>
 <tr id="updtime"  style="display:">

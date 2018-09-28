@@ -13,7 +13,7 @@ $(function(){
 		if(data.status == "success"){
 			var v="<tr class=\"rl\"><td class=\"rl\" colspan=\"2\">"
 				+"开始：<input type=\"text\" id=\"mindate\" style=\"height:20px;\" name=\"mindate\" class=\"WebDate\" onclick=\"$jskey.calendar.show(this, {format:'yyyy-MM-dd',show:'yyyy-MM-dd'})\" readonly=\"readonly\" value=\"\" />"
-				+"&nbsp;结束：<input type=\"text\" id=\"maxdate\" style=\"height:20px;\" name=\"maxdate\" class=\"WebDate\" onclick=\"$jskey.calendar.show(this, {format:'yyyy-MM-dd',show:'yyyy-MM-dd'})\" readonly=\"readonly\" dataType=\"DateCheck\" operator=\">=\" to=\"mindate\" value=\"\" />"
+				+"&nbsp;结束：<input type=\"text\" id=\"maxdate\" style=\"height:20px;\" name=\"maxdate\" class=\"WebDate\" onclick=\"$jskey.calendar.show(this, {format:'yyyy-MM-dd',show:'yyyy-MM-dd'})\" readonly=\"readonly\" datatype=\"DateCheck\" operator=\">=\" to=\"mindate\" value=\"\" />"
 				+"&nbsp;&nbsp;<input type=\"button\" value=\"查 询\" onclick=\"getQueryData()\" style=\"background-color:#0192D0;border:0px;width:80px;height:25px;color:#fff;\">"
 				+"</td></tr>"
 				+"<tr class=\"list-title\"><td class=\"rl\" colspan=\"2\">信息统计</td></tr>"
@@ -34,7 +34,7 @@ function getQueryData(){
 				if(data.status == "success"){
 					var v="<tr class=\"rl\"><td class=\"rl\" colspan=\"2\">"
 						+"开始：<input type=\"text\" id=\"mindate\" style=\"height:20px;\" name=\"mindate\" class=\"WebDate\" onclick=\"$jskey.calendar.show(this, {format:'yyyy-MM-dd',show:'yyyy-MM-dd'})\" readonly=\"readonly\" value=\"\" />"
-						+"&nbsp;结束：<input type=\"text\" id=\"maxdate\" style=\"height:20px;\" name=\"maxdate\" class=\"WebDate\" onclick=\"$jskey.calendar.show(this, {format:'yyyy-MM-dd',show:'yyyy-MM-dd'})\" readonly=\"readonly\" dataType=\"DateCheck\" operator=\">=\" to=\"mindate\" value=\"\" />"
+						+"&nbsp;结束：<input type=\"text\" id=\"maxdate\" style=\"height:20px;\" name=\"maxdate\" class=\"WebDate\" onclick=\"$jskey.calendar.show(this, {format:'yyyy-MM-dd',show:'yyyy-MM-dd'})\" readonly=\"readonly\" datatype=\"DateCheck\" operator=\">=\" to=\"mindate\" value=\"\" />"
 						+"&nbsp;&nbsp;<input type=\"button\" value=\"查 询\" onclick=\"getQueryData()\" style=\"background-color:#0192D0;border:0px;width:80px;height:25px;color:#fff;\">"
 						+"</td></tr>"
 						+"<tr class=\"list-title\"><td class=\"rl\" colspan=\"2\">信息统计</td></tr>"

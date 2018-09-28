@@ -131,8 +131,8 @@ $(function(){
 					<td><input type="text" name="editname" value="${fn:escapeXml(param.editname)}"></td>
 					<td>&nbsp;采编时间：</td>
 					<td>
-						<input type="text" name="editname_left" class="WebDate" style="width:90px;" format="yyyy-MM-dd" value="${fn:escapeXml(param.editname_left)}" require="false" id="editname_left" /> 至
-						<input type="text" name="editname_right" class="WebDate" style="width:90px;" format="yyyy-MM-dd" value="${fn:escapeXml(param.editname_right)}" require="false" datatype="DateCheck" operator=">=" to="editname_left" />
+						<input type="text" name="editname_left" class="WebDate" style="width:90px;" format="yyyy-MM-dd" value="${fn:escapeXml(param.editname_left)}" id="editname_left" /> 至
+						<input type="text" name="editname_right" class="WebDate" style="width:90px;" format="yyyy-MM-dd" value="${fn:escapeXml(param.editname_right)}" datatype="!DateCheck" operator=">=" to="editname_left" />
 					</td>
 				</tr>
 				<tr>
@@ -140,8 +140,8 @@ $(function(){
 					<td><input type="text" name="auditname" value="${fn:escapeXml(param.auditname)}"></td>
 					<td>&nbsp;审核时间：</td>
 					<td>
-						<input type="text" name="auditname_left" class="WebDate" style="width:90px;" format="yyyy-MM-dd" value="${fn:escapeXml(param.auditname_left)}" require="false" id="auditname_left" /> 至
-						<input type="text" name="auditname_right" class="WebDate" style="width:90px;" format="yyyy-MM-dd" value="${fn:escapeXml(param.auditname_right)}" require="false" datatype="DateCheck" operator=">=" to="auditname_left" />
+						<input type="text" name="auditname_left" class="WebDate" style="width:90px;" format="yyyy-MM-dd" value="${fn:escapeXml(param.auditname_left)}" id="auditname_left" /> 至
+						<input type="text" name="auditname_right" class="WebDate" style="width:90px;" format="yyyy-MM-dd" value="${fn:escapeXml(param.auditname_right)}" datatype="!DateCheck" operator=">=" to="auditname_left" />
 					</td>
 				</tr>
 			</table>
