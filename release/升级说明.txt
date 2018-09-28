@@ -241,7 +241,8 @@
 	更新dswork-cms.jar，字体相关、ico
 	更新全部jsp视图，显示url地址引用
 
-
+2018.09.27 修复删除栏目未删文件的bug
+	更新dswork-cms.jar，修复删除栏目未删文件的bug
 
 
 
