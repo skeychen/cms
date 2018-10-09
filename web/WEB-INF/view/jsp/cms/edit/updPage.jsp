@@ -17,6 +17,7 @@ $(function(){
 	KindEditor.ready(function(K) {
 		K.create('#content', {
 			cssPath : '',
+			filterMode : false,
 			uploadJson : 'upload.htm?categoryid=${po.categoryid}',
 			afterBlur:function(){this.sync();}
 		});
