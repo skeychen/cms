@@ -31,14 +31,12 @@ CREATE VIEW IF NOT EXISTS DS_CMS_USER AS SELECT ID, ACCOUNT, NAME, concat('admin
 
 CREATE TABLE IF NOT EXISTS DS_CMS_SITE
 (
-   ID                   BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
+   ID                   BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT '主键',
    OWN                  VARCHAR(300) COMMENT '拥有者',
    NAME                 VARCHAR(300) COMMENT '站点名称',
    FOLDER               VARCHAR(300) COMMENT '目录名称',
    URL                  VARCHAR(300) COMMENT '链接',
    IMG                  VARCHAR(300) COMMENT '图片',
-   VIEWSITE             VARCHAR(300) COMMENT '网站模板',
-   MVIEWSITE            VARCHAR(300) COMMENT '移动版网站模板',
    ENABLELOG            INT(1) COMMENT '开启日志(0否,1是)',
    ENABLEMOBILE         INT(1) COMMENT '开启移动版(0否,1是)',
    METAKEYWORDS         VARCHAR(300) COMMENT 'meta关键词',
@@ -47,9 +45,9 @@ CREATE TABLE IF NOT EXISTS DS_CMS_SITE
 ) COMMENT '网站站点';
 CREATE TABLE IF NOT EXISTS DS_CMS_CATEGORY
 (
-   ID                   BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
-   PID                  BIGINT COMMENT '父ID',
-   SITEID               BIGINT COMMENT '站点ID',
+   ID                   BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT '主键',
+   PID                  BIGINT(18) COMMENT '父ID',
+   SITEID               BIGINT(18) COMMENT '站点ID',
    SCOPE                INT COMMENT '类型(0列表,1单页,2外链)',
    STATUS               INT COMMENT '状态(-1删除,0新增,1修改,8已发)',
    NAME                 VARCHAR(300) COMMENT '栏目名称',
@@ -77,9 +75,9 @@ CREATE TABLE IF NOT EXISTS DS_CMS_CATEGORY
 ) COMMENT '栏目';
 CREATE TABLE IF NOT EXISTS DS_CMS_PAGE
 (
-   ID                   BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
-   SITEID               BIGINT COMMENT '站点ID',
-   CATEGORYID           BIGINT COMMENT '栏目ID',
+   ID                   BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT '主键',
+   SITEID               BIGINT(18) COMMENT '站点ID',
+   CATEGORYID           BIGINT(18) COMMENT '栏目ID',
    SCOPE                INT COMMENT '类型(1单页,2外链)',
    STATUS               INT COMMENT '状态(-1删除,0新增,1修改,8已发)',
    TITLE                VARCHAR(300) COMMENT '标题',
@@ -101,10 +99,10 @@ CREATE TABLE IF NOT EXISTS DS_CMS_PAGE
 ) COMMENT '内容';
 CREATE TABLE IF NOT EXISTS DS_CMS_LOG
 (
-   ID                   BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
-   SITEID               BIGINT COMMENT '站点ID',
-   CATEGORYID           BIGINT COMMENT '栏目ID',
-   PAGEID               BIGINT COMMENT '内容ID',
+   ID                   BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT '主键',
+   SITEID               BIGINT(18) COMMENT '站点ID',
+   CATEGORYID           BIGINT(18) COMMENT '栏目ID',
+   PAGEID               BIGINT(18) COMMENT '内容ID',
    EDITID               VARCHAR(64) COMMENT '采编员ID',
    EDITNAME             VARCHAR(300) COMMENT '采编员姓名',
    EDITTIME             VARCHAR(19) COMMENT '采编时间',
@@ -127,17 +125,17 @@ CREATE TABLE IF NOT EXISTS DS_CMS_LOG
    RELEASESOURCE        VARCHAR(300) COMMENT '信息来源',
    RELEASEUSER          VARCHAR(300) COMMENT '作者',
    IMG                  VARCHAR(300) COMMENT '图片',
-   CONTENT              MEDIUMTEXT COMMENT '内容',
    IMGTOP               INT COMMENT '焦点图(0否,1是)',
    PAGETOP              INT COMMENT '首页推荐(0否,1是)',
+   CONTENT              MEDIUMTEXT COMMENT '内容',
    PRIMARY KEY (ID)
 ) COMMENT '网站日志';
 CREATE TABLE IF NOT EXISTS DS_CMS_CATEGORY_EDIT
 (
-   ID                   BIGINT NOT NULL COMMENT '主键',
-   SITEID               BIGINT COMMENT '站点ID',
+   ID                   BIGINT(18) NOT NULL COMMENT '主键',
+   SITEID               BIGINT(18) COMMENT '站点ID',
    STATUS               INT COMMENT '状态(-1删除,0新增,1更新)',
-   URL                  VARCHAR(255) COMMENT '外链URL',
+   URL                  VARCHAR(300) COMMENT '外链URL',
    METAKEYWORDS         VARCHAR(300) COMMENT 'meta关键词',
    METADESCRIPTION      VARCHAR(300) COMMENT 'meta描述',
    SUMMARY              VARCHAR(300) COMMENT '摘要',
@@ -163,9 +161,9 @@ CREATE TABLE IF NOT EXISTS DS_CMS_CATEGORY_EDIT
 ) COMMENT '审核栏目';
 CREATE TABLE IF NOT EXISTS DS_CMS_PAGE_EDIT
 (
-   ID                   BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
-   SITEID               BIGINT COMMENT '站点ID',
-   CATEGORYID           BIGINT COMMENT '栏目ID',
+   ID                   BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT '主键',
+   SITEID               BIGINT(18) COMMENT '站点ID',
+   CATEGORYID           BIGINT(18) COMMENT '栏目ID',
    SCOPE                INT COMMENT '类型(1单页,2外链)',
    STATUS               INT COMMENT '状态(-1删除,0新增,1更新)',
    TITLE                VARCHAR(300) COMMENT '标题',
@@ -189,6 +187,7 @@ CREATE TABLE IF NOT EXISTS DS_CMS_PAGE_EDIT
    AUDITNAME            VARCHAR(30) COMMENT '审核人员名称',
    AUDITTIME            VARCHAR(19) COMMENT '审核时间',
    AUDITMSG             VARCHAR(300) COMMENT '审核意见',
+   PUSHKEY              VARCHAR(300) COMMENT '推送KEY',
    PRIMARY KEY (ID),
    CONSTRAINT FK_DS_CMS_PAGE_EDIT_S FOREIGN KEY (SITEID)
       REFERENCES DS_CMS_SITE (ID) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -197,8 +196,8 @@ CREATE TABLE IF NOT EXISTS DS_CMS_PAGE_EDIT
 ) COMMENT '审核内容';
 CREATE TABLE IF NOT EXISTS DS_CMS_PERMISSION
 (
-   ID                   BIGINT NOT NULL COMMENT '主键',
-   SITEID               BIGINT COMMENT '站点ID',
+   ID                   BIGINT(18) NOT NULL COMMENT '主键',
+   SITEID               BIGINT(18) COMMENT '站点ID',
    ACCOUNT              VARCHAR(300) COMMENT '用户账号',
    EDITOWN              VARCHAR(3000) COMMENT '可采编栏目（限个人）',
    EDITALL              VARCHAR(3000) COMMENT '可采编栏目',
@@ -210,8 +209,8 @@ CREATE TABLE IF NOT EXISTS DS_CMS_PERMISSION
 ) COMMENT '网站权限';
 
 CREATE TABLE IF NOT EXISTS DS_CMS_SPECIAL (
-  ID bigint(20) NOT NULL COMMENT '主键',
-  SITEID bigint(20) DEFAULT NULL COMMENT '站点ID',
+  ID bigint(18) NOT NULL COMMENT '主键',
+  SITEID bigint(18) DEFAULT NULL COMMENT '站点ID',
   TITLE varchar(300) DEFAULT NULL COMMENT '标题',
   VIEWSITE varchar(300) DEFAULT NULL COMMENT '模板',
   MVIEWSITE varchar(300) DEFAULT NULL COMMENT '移动版模板',

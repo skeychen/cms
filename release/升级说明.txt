@@ -19,8 +19,8 @@
 		创建栏目编辑表
 		注：如果已存在DS_CMS_CATEGORY_EDIT表则跳过
 			CREATE TABLE IF NOT EXISTS DS_CMS_CATEGORY_EDIT (
-			   ID                   BIGINT NOT NULL COMMENT '主键',
-			   SITEID               BIGINT COMMENT '站点ID',
+			   ID                   BIGINT(18) NOT NULL COMMENT '主键',
+			   SITEID               BIGINT(18) COMMENT '站点ID',
 			   STATUS               INT COMMENT '状态(-1删除,0新增,1更新)',
 			   METAKEYWORDS         VARCHAR(300) COMMENT 'meta关键词',
 			   METADESCRIPTION      VARCHAR(300) COMMENT 'meta描述',
@@ -30,6 +30,7 @@
 			   RELEASEUSER          VARCHAR(300) COMMENT '作者',
 			   IMG                  VARCHAR(300) COMMENT '图片',
 			   URL                  VARCHAR(255) COMMENT '外链URL',
+			   CONTENT              MEDIUMTEXT COMMENT '内容',
 			   EDITID               VARCHAR(64) COMMENT '编辑人员ID',
 			   EDITNAME             VARCHAR(30) COMMENT '编辑人员名称',
 			   EDITTIME             VARCHAR(19) COMMENT '编辑时间',
@@ -38,7 +39,6 @@
 			   AUDITNAME            VARCHAR(30) COMMENT '审核人员名称',
 			   AUDITTIME            VARCHAR(19) COMMENT '审核时间',
 			   AUDITMSG             VARCHAR(300) COMMENT '审核意见',
-			   CONTENT              MEDIUMTEXT COMMENT '内容',
 			   PRIMARY KEY (ID),
 			   CONSTRAINT FK_DS_CMS_CATEGORY_EDIT_S FOREIGN KEY (SITEID)
 			      REFERENCES DS_CMS_SITE (ID) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -49,9 +49,9 @@
 		创建内容编辑表
 		注：如果已存在DS_CMS_PAGE_EDIT表则跳过
 			CREATE TABLE IF NOT EXISTS DS_CMS_PAGE_EDIT (
-			   ID                   BIGINT NOT NULL AUTO_INCREMENT COMMENT '主键',
-			   SITEID               BIGINT COMMENT '站点ID',
-			   CATEGORYID           BIGINT COMMENT '栏目ID',
+			   ID                   BIGINT(18) NOT NULL AUTO_INCREMENT COMMENT '主键',
+			   SITEID               BIGINT(18) COMMENT '站点ID',
+			   CATEGORYID           BIGINT(18) COMMENT '栏目ID',
 			   STATUS               INT COMMENT '状态(-1删除,0新增,1更新)',
 			   TITLE                VARCHAR(300) COMMENT '标题',
 			   SCOPE                INT COMMENT '类型(1单页,2外链)',
@@ -84,8 +84,8 @@
 		创建采编审发权限表
 		注：如果已存在DS_CMS_PERMISSION表则跳过
 			CREATE TABLE IF NOT EXISTS DS_CMS_PERMISSION (
-			   ID                   BIGINT NOT NULL COMMENT '主键',
-			   SITEID               BIGINT COMMENT '站点ID',
+			   ID                   BIGINT(18) NOT NULL COMMENT '主键',
+			   SITEID               BIGINT(18) COMMENT '站点ID',
 			   ACCOUNT              VARCHAR(300) COMMENT '用户账号',
 			   EDITOWN              VARCHAR(3000) COMMENT '可采编栏目（限个人）',
 			   EDITALL              VARCHAR(3000) COMMENT '可采编栏目',
@@ -157,13 +157,13 @@
 	ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER CONTENT;
 	
 	ALTER TABLE DS_CMS_PAGE_EDIT
-	ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER PUSHKEY;
+	ADD COLUMN JSONDATA text NULL COMMENT '数据集' AFTER CONTENT;
 
 2018.07.18 上线专题发布功能，并用发布专题取代发布首页，同时删除DS_CMS_SITE表中的VIEWSITE和MVIEWSITE字段
 	运行以下SQL创建专题表和删除站点表视图字段
 	CREATE TABLE IF NOT EXISTS DS_CMS_SPECIAL (
-	  ID bigint(20) NOT NULL COMMENT '主键',
-	  SITEID bigint(20) DEFAULT NULL COMMENT '站点ID',
+	  ID bigint(18) NOT NULL COMMENT '主键',
+	  SITEID bigint(18) DEFAULT NULL COMMENT '站点ID',
 	  TITLE varchar(300) DEFAULT NULL COMMENT '标题',
 	  VIEWSITE varchar(300) DEFAULT NULL COMMENT '模板',
 	  MVIEWSITE varchar(300) DEFAULT NULL COMMENT '移动版模板',
