@@ -13,7 +13,7 @@ function empower(account){
 	$jskey.dialog.showDialog({url:"${ctx}/cms/permission/updPermission1.htm?account="+account,title:"为 "+account+" 分配权限",fit:true,draggable:false});
 }
 </script>
-</head> 
+</head>
 <body>
 <table border="0" cellspacing="0" cellpadding="0" class="listLogo">
 	<tr>
