@@ -5,10 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import common.cms.CmsFactory;
-import common.cms.CmsFactoryMobile;
-import common.cms.model.ViewCategory;
 import common.cms.model.ViewArticle;
 import common.cms.model.ViewArticleNav;
+import common.cms.model.ViewCategory;
 import common.cms.model.ViewSite;
 import common.cms.model.ViewSpecial;
 import dswork.core.util.TimeUtil;
@@ -20,65 +19,52 @@ public class DsCmsbuildController extends BaseController
 {
 	private static final String CMS_FACTORY_KEY = "CMS_FACTORY_KEY";
 	private static final String CMS_FACTORY_KEY_M = "CMS_FACTORY_KEY_M";
-//	private static final String CMS_FACTORY_KEY_SITEID = "CMS_FACTORY_KEY_SITEID";
-
-	@RequestMapping("/cmsbuild/buildHTML")
+	
+	@RequestMapping({"/cmsbuild/buildHTML", "/cmsbuild/preview"})
 	public String buildHTML()
 	{
-		Long siteid = req.getLong("siteid", -1);
+		Long siteid     = req.getLong("siteid", -1);
 		Long categoryid = req.getLong("categoryid", -1);
-		Long pageid = req.getLong("pageid", -1);
-		Long specialid = req.getLong("specialid", -1);
-		boolean mobile = req.getString("mobile", "false").equals("true");
-		boolean view = req.getString("view", "false").equals("true");
-
+		Long pageid     = req.getLong("pageid", -1);
+		Long specialid  = req.getLong("specialid", -1);
+		boolean mobile  = req.getString("mobile", "false").equals("true");
+		boolean view    = req.getString("view", "false").equals("true");
+		boolean isedit  = req.getString("isedit", "false").equals("true");// true是采编的预览
+		
 		CmsFactory cms = (CmsFactory) request.getSession().getAttribute(mobile ? CMS_FACTORY_KEY_M : CMS_FACTORY_KEY);
-		if(view || cms == null)
+		if(cms == null || (cms != null && (isedit != cms.isIsedit() || mobile != cms.isMobile())))
 		{
-			cms = new CmsFactory(siteid);
-			CmsFactory cms_m = new CmsFactoryMobile(cms);
-			request.getSession().setAttribute(CMS_FACTORY_KEY, cms);
-			request.getSession().setAttribute(CMS_FACTORY_KEY_M, cms_m);
+			cms = new CmsFactory(siteid, mobile, isedit);
 			if(mobile)
 			{
-				cms = cms_m;
+				request.getSession().setAttribute(CMS_FACTORY_KEY_M, cms);
+			}
+			else
+			{
+				request.getSession().setAttribute(CMS_FACTORY_KEY, cms);
 			}
 		}
 		cms.setRequest(request);
-//		if(cms == null)
-//		{
-//			cms = new CmsFactory(siteid);
-//			request.getSession().setAttribute(CMS_FACTORY_KEY, cms);
-//			request.getSession().setAttribute(CMS_FACTORY_KEY_SITEID, siteid + "");
-//		}
-//		else
-//		{
-//			String siteidstr = String.valueOf(request.getSession().getAttribute(CMS_FACTORY_KEY_SITEID));
-//			if(!siteidstr.equals(String.valueOf(cms.getSite().get("id"))))
-//			{
-//				cms = new CmsFactory(siteid);
-//				request.getSession().setAttribute(CMS_FACTORY_KEY, cms);
-//				request.getSession().setAttribute(CMS_FACTORY_KEY_SITEID, siteid + "");
-//			}
-//		}
-
+		
 		put("cms", cms);
 		put("year", TimeUtil.getCurrentTime("yyyy"));
 		ViewSite s = cms.getSite();
 		put("site", s);
-		put("categorylist", cms.queryCategory("0"));// 顶层节点列表
-		if(view)
+		put("mobile", "/m");
+		if(view || isedit)
 		{
-			put("ctx", request.getContextPath() + "/html/" + s.getFolder() + (mobile ? "/html/m" : "/html"));// 预览时，现在可以不需要运行服务器，即可浏览相对地址
+			put("ctx", request.getContextPath() + "/pvctx/" + (isedit ? "_" + s.getId() : s.getId()));
 		}
 		else
 		{
-			put("ctx", s.getUrl() + (mobile ? "/m" : ""));
+			put("ctx", s.getUrl());
 		}
+		
 		if(pageid > 0)// 内容页
 		{
-			ViewArticle p = cms.get(pageid + "");
+			ViewArticle p  = cms.get(pageid + "");
 			ViewCategory c = cms.getCategory(p.getCategoryid() + "");
+			put("categorylist", cms.queryCategory("0"));// 顶层节点列表
 			put("category", c);
 			put("vo", p.getVo());
 			put("id", p.getId());
@@ -97,7 +83,7 @@ public class DsCmsbuildController extends BaseController
 		}
 		if(categoryid > 0)// 栏目页
 		{
-			int page = req.getInt("page", 1);
+			int page     = req.getInt("page", 1);
 			int pagesize = req.getInt("pagesize", 25);
 			ViewCategory c = cms.getCategory(categoryid + "");
 			if(c.getScope() == 2)

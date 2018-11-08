@@ -38,13 +38,15 @@ public class CmsFactory
 
 	protected List<ViewCategory> categoryList = new ArrayList<ViewCategory>();
 	protected Map<String, ViewCategory> categoryMap = new HashMap<String, ViewCategory>();
+	protected boolean isedit = false;
+	protected boolean mobile = false;
 
-	public CmsFactory()
-	{
-	}
+	public CmsFactory(){}
 
-	public CmsFactory(long siteid)
+	public CmsFactory(long siteid, boolean mobile, boolean isedit)
 	{
+		this.mobile = mobile;
+		this.isedit = isedit;
 		this.site = getDao().getSite(siteid);
 		if(this.site != null)
 		{
@@ -76,7 +78,14 @@ public class CmsFactory
 	{
 		if(dao == null)
 		{
-			dao = (DsCmsDao) dswork.spring.BeanFactory.getBean("dsCmsDao");
+			if(isedit)
+			{
+				dao = (DsCmsDao) dswork.spring.BeanFactory.getBean("dsCmsPreviewDao");
+			}
+			else
+			{
+				dao = (DsCmsDao) dswork.spring.BeanFactory.getBean("dsCmsDao");
+			}
 		}
 		return dao;
 	}
@@ -126,7 +135,6 @@ public class CmsFactory
 		Page<ViewArticle> page = getDao().queryArticlePage(site.getId(), currentPage, pageSize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, null);
 		ViewArticleNav nav = new ViewArticleNav();
 		currentPage = page.getCurrentPage();// 更新当前页
-		nav.addListAll(page.getResult());
 		nav.getDatapage().setPage(currentPage);
 		nav.getDatapage().setPagesize(pageSize);
 		nav.getDatapage().setFirst(1);
@@ -141,6 +149,15 @@ public class CmsFactory
 		nav.getDatapage().setLast(tmp);
 		nav.getDatapage().setLasturl(tmp == 1 ? url : (url.replaceAll("\\.html", "_" + tmp + ".html")));
 		nav.setDatauri(url.replaceAll("\\.html", ""));
+		if(this.mobile)
+		{
+			url = "/m" + url;
+			for (ViewArticle va : page.getResult())
+			{
+				va.setUrl("/m" + va.getUrl());
+			}
+		}
+		nav.addListAll(page.getResult());
 		StringBuilder sb = new StringBuilder();
 		int viewpage = 3, temppage = 1;// 左右显示个数
 		sb.append("<a");
@@ -150,14 +167,14 @@ public class CmsFactory
 		}
 		else
 		{
-			sb.append(" href=\"").append(site.getUrl()).append(url).append("\"");
+			sb.append(" href=\"").append(value("ctx")).append(site.getUrl()).append(url).append("\"");
 		}
 		sb.append(">1</a>");
 		temppage = currentPage - viewpage - 1;
 		if(temppage > 1)
 		{
 			String u = url.replaceAll("\\.html", "_" + temppage + ".html");
-			sb.append("<a href=\"").append(site.getUrl()).append(u).append("\">...</a>");
+			sb.append("<a href=\"").append(value("ctx")).append(site.getUrl()).append(u).append("\">...</a>");
 		}
 		for(int i = currentPage - viewpage; i <= currentPage + viewpage && i < page.getLastPage(); i++)
 		{
@@ -171,7 +188,7 @@ public class CmsFactory
 				}
 				else
 				{
-					sb.append(" href=\"").append(site.getUrl()).append(u).append("\"");
+					sb.append(" href=\"").append(value("ctx")).append(site.getUrl()).append(u).append("\"");
 				}
 				sb.append(">").append(i).append("</a>");
 			}
@@ -180,7 +197,7 @@ public class CmsFactory
 		if(temppage < page.getLastPage())
 		{
 			String u = url.replaceAll("\\.html", "_" + temppage + ".html");
-			sb.append("<a href=\"").append(site.getUrl()).append(u).append("\">...</a>");
+			sb.append("<a href=\"").append(request.getAttribute("ctx")).append(site.getUrl()).append(u).append("\">...</a>");
 		}
 		if(page.getLastPage() != 1)
 		{
@@ -192,7 +209,7 @@ public class CmsFactory
 			}
 			else
 			{
-				sb.append(" href=\"").append(site.getUrl()).append(u).append("\"");
+				sb.append(" href=\"").append(value("ctx")).append(site.getUrl()).append(u).append("\"");
 			}
 			sb.append(">").append(page.getLastPage()).append("</a>");
 		}
@@ -216,7 +233,15 @@ public class CmsFactory
 				idArray.append(",").append(toLong(categoryids[i]));
 			}
 		}
-		return getDao().queryArticlePage(site.getId(), currentPage, pageSize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, keyvalue).getResult();
+		Page<ViewArticle> page = getDao().queryArticlePage(site.getId(), currentPage, pageSize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, keyvalue);
+		if(this.mobile)
+		{
+			for (ViewArticle va : page.getResult())
+			{
+				va.setUrl("/m" + va.getUrl());
+			}
+		}
+		return page.getResult();
 	}
 
 	private ViewArticleSet doQueryPage(int currentPage, int pageSize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String keyvalue, Object... categoryids)
@@ -240,6 +265,13 @@ public class CmsFactory
 			set.setPage(page.getCurrentPage());
 			set.setPagesize(page.getPageSize());
 			set.setTotalpage(page.getTotalPage());
+			if(this.mobile)
+			{
+				for (ViewArticle va : page.getResult())
+				{
+					va.setUrl("/m" + va.getUrl());
+				}
+			}
 			set.addRowsAll(page.getResult());
 		}
 		catch(Exception e)
@@ -327,5 +359,25 @@ public class CmsFactory
 	public void value(String key, String val)
 	{
 		request.setAttribute(key, val);
+	}
+
+	public boolean isIsedit()
+	{
+		return isedit;
+	}
+
+	public void setIsedit(boolean isedit)
+	{
+		this.isedit = isedit;
+	}
+
+	public boolean isMobile()
+	{
+		return mobile;
+	}
+
+	public void setMobile(boolean mobile)
+	{
+		this.mobile = mobile;
 	}
 }
