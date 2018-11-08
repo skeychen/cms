@@ -23,6 +23,7 @@ p.title{font-size:20px;padding-bottom:5px;border-bottom:solid 1px #ccc;}
 		<p><span class="v">site</span><span class="c">站点信息</span><span class="t"><a href="#ViewSite">ViewSite</a></span></p>
 		<p><span class="v">categorylist</span><span class="c">顶级栏目列表</span><span class="t">List&lt;<a href="#ViewCategory">ViewCategory</a>&gt;</span></p>
 		<p><span class="v">ctx</span><span class="c">站点路径前缀</span><span class="t">String</span></p>
+		<p><span class="v">mobile</span><span class="c">移动版路径前缀（与变量ctx一起使用，为移动版站点路径前缀，放在变量ctx的后面）</span><span class="t">String</span></p>
 		<div class="box">
 			<p class="title">文章页变量</p>
 			<p><span class="v">category</span><span class="c">文章所属的栏目</span><span class="t"><a href="#ViewCategory">ViewCategory</a></span></p>

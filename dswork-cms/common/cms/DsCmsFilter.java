@@ -45,6 +45,7 @@ public class DsCmsFilter implements Filter
 		
 		String myURI = req.getRequestURI().replace(req.getContextPath(), ""); // /pvctx/siteid/* , /pvctx/siteid/m/*
 		boolean mobile = false;
+		boolean isedit = false;
 		if(myURI.startsWith(pvctx))
 		{
 			myURI = myURI.replace(pvctx, "");
@@ -62,6 +63,7 @@ public class DsCmsFilter implements Filter
 			{
 				siteid = siteid.replace("_", "");
 				vURI += "&isedit=true&siteid=" + siteid;
+				isedit = true;
 			}
 			else
 			{
@@ -102,9 +104,21 @@ public class DsCmsFilter implements Filter
 			{
 				if(rURI.indexOf(".html") > 0)
 				{
-					// 在同一客户端同时刷新多页面时缓存的对接可能会出错（如为空或使用了错误的站点数据）
 					CmsFactory cms = (CmsFactory) req.getSession().getAttribute(mobile ? "CMS_FACTORY_KEY_M" : "CMS_FACTORY_KEY");
-					List<ViewSpecial> specialList = cms.querySpecialList();
+					Long site = Long.parseLong(siteid);
+					if(cms == null || (cms != null && (site != cms.getSite().getId() || mobile != cms.isMobile() || isedit != cms.isIsedit())))
+					{
+						cms = new CmsFactory(site, mobile, isedit);
+						if(mobile)
+						{
+							req.getSession().setAttribute("CMS_FACTORY_KEY_M", cms);
+						}
+						else
+						{
+							req.getSession().setAttribute("CMS_FACTORY_KEY", cms);
+						}
+					}
+					List<ViewSpecial> specialList = cms.querySpecial();
 					if(specialList.size() > 0)
 					{
 						for (ViewSpecial vs : specialList)

@@ -137,7 +137,7 @@ public class CmsFactory
 		return getDao().getSpecial(site.getId(), toLong(specialid));
 	}
 
-	public List<ViewSpecial> querySpecialList()
+	public List<ViewSpecial> querySpecial()
 	{
 		return specialList;
 	}

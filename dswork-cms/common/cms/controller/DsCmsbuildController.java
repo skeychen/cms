@@ -32,7 +32,7 @@ public class DsCmsbuildController extends BaseController
 		boolean isedit  = req.getString("isedit", "false").equals("true");// true是采编的预览
 		
 		CmsFactory cms = (CmsFactory) request.getSession().getAttribute(mobile ? CMS_FACTORY_KEY_M : CMS_FACTORY_KEY);
-		if(cms == null || (cms != null && (isedit != cms.isIsedit() || mobile != cms.isMobile())))
+		if(cms == null || (cms != null && (siteid != cms.getSite().getId() || mobile != cms.isMobile() || isedit != cms.isIsedit())))
 		{
 			cms = new CmsFactory(siteid, mobile, isedit);
 			if(mobile)
@@ -60,7 +60,7 @@ public class DsCmsbuildController extends BaseController
 			put("ctx", s.getUrl());
 		}
 		put("categorylist", cms.queryCategory("0"));// 顶层节点列表
-		put("speciallist", cms.queryCategory("0"));// 顶层节点列表
+		put("speciallist", cms.querySpecial());
 		if(pageid > 0)// 内容页
 		{
 			ViewArticle p  = cms.get(pageid + "");
