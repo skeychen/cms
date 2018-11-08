@@ -59,12 +59,12 @@ public class DsCmsbuildController extends BaseController
 		{
 			put("ctx", s.getUrl());
 		}
-		
+		put("categorylist", cms.queryCategory("0"));// 顶层节点列表
+		put("speciallist", cms.queryCategory("0"));// 顶层节点列表
 		if(pageid > 0)// 内容页
 		{
 			ViewArticle p  = cms.get(pageid + "");
 			ViewCategory c = cms.getCategory(p.getCategoryid() + "");
-			put("categorylist", cms.queryCategory("0"));// 顶层节点列表
 			put("category", c);
 			put("vo", p.getVo());
 			put("id", p.getId());

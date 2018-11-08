@@ -81,11 +81,10 @@ public class DsCmsDao extends MyBatisDao
 		return (ViewSpecial)executeSelect("getSpecial", map);
 	}
 	
-	public ViewSpecial getSpecialBySiteidAndURL(Long siteid, String url)
+	public List<ViewSpecial> querySpecialList(Long siteid)
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("siteid", siteid);
-		map.put("url", url);
-		return (ViewSpecial)executeSelect("getSpecialBySiteidAndURL", map);
+		return queryList("querySpecialList", map);
 	}
 }

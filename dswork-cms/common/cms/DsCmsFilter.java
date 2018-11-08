@@ -1,6 +1,7 @@
 package common.cms;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 import common.cms.model.ViewSpecial;
-import dswork.spring.BeanFactory;
 
 @WebFilter(filterName="dsCmsFilter", urlPatterns="/pvctx/*")
 public class DsCmsFilter implements Filter
@@ -44,6 +44,7 @@ public class DsCmsFilter implements Filter
 		HttpServletResponseWrapper responseWraper = new HttpServletResponseWrapper(res);
 		
 		String myURI = req.getRequestURI().replace(req.getContextPath(), ""); // /pvctx/siteid/* , /pvctx/siteid/m/*
+		boolean mobile = false;
 		if(myURI.startsWith(pvctx))
 		{
 			myURI = myURI.replace(pvctx, "");
@@ -55,6 +56,7 @@ public class DsCmsFilter implements Filter
 			{
 				rURI = rURI.replace(pvm, "/");
 				vURI += "&mobile=true";
+				mobile = true;
 			}
 			if(siteid.startsWith("_"))// 采编的预览
 			{
@@ -100,13 +102,20 @@ public class DsCmsFilter implements Filter
 			{
 				if(rURI.indexOf(".html") > 0)
 				{
-					DsCmsDao dao = (DsCmsDao) BeanFactory.getBean("dsCmsDao");
-					ViewSpecial special = dao.getSpecialBySiteidAndURL(Long.parseLong(siteid), rURI);
-					if(special != null)
+					// 在同一客户端同时刷新多页面时缓存的对接可能会出错（如为空或使用了错误的站点数据）
+					CmsFactory cms = (CmsFactory) req.getSession().getAttribute(mobile ? "CMS_FACTORY_KEY_M" : "CMS_FACTORY_KEY");
+					List<ViewSpecial> specialList = cms.querySpecialList();
+					if(specialList.size() > 0)
 					{
-						vURI += "&specialid=" + special.getId();
-						res.sendRedirect(vURI + (qs != null ? qs : ""));
-						return;
+						for (ViewSpecial vs : specialList)
+						{
+							if(rURI.equals(vs.getUrl()))
+							{
+								vURI += "&specialid=" + vs.getId();
+								res.sendRedirect(vURI + (qs != null ? qs : ""));
+								return;
+							}
+						}
 					}
 					else
 					{

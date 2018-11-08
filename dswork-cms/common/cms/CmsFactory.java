@@ -36,8 +36,9 @@ public class CmsFactory
 	protected ViewSite site;
 	protected HttpServletRequest request;
 
-	protected List<ViewCategory> categoryList = new ArrayList<ViewCategory>();
-	protected Map<String, ViewCategory> categoryMap = new HashMap<String, ViewCategory>();
+	protected List<ViewCategory>        categoryList = new ArrayList<ViewCategory>();
+	protected List<ViewSpecial>         specialList  = new ArrayList<ViewSpecial>();
+	protected Map<String, ViewCategory> categoryMap  = new HashMap<String, ViewCategory>();
 	protected boolean isedit = false;
 	protected boolean mobile = false;
 
@@ -47,7 +48,7 @@ public class CmsFactory
 	{
 		this.mobile = mobile;
 		this.isedit = isedit;
-		this.site = getDao().getSite(siteid);
+		this.site   = getDao().getSite(siteid);
 		if(this.site != null)
 		{
 			List<ViewCategory> clist = getDao().queryCategoryList(siteid);
@@ -71,6 +72,7 @@ public class CmsFactory
 					p.addList(m);
 				}
 			}
+			specialList = getDao().querySpecialList(siteid);
 		}
 	}
 
@@ -105,6 +107,26 @@ public class CmsFactory
 		return categoryMap.get(String.valueOf(categoryid));
 	}
 
+	/**
+	 * 查询指定栏目下的子栏目(包括所有递归子栏目)
+	 * @param categoryid 父栏目，查询根栏目为空
+	 * @return List&lt;Map&lt;String, Object&gt;&gt;
+	 */
+	public List<ViewCategory> queryCategory(Object categoryid)
+	{
+		String pid = String.valueOf(toLong(categoryid));
+		if(pid.equals("0"))
+		{
+			return categoryList;
+		}
+		ViewCategory p = categoryMap.get(pid);
+		if(p == null)
+		{
+			p = new ViewCategory(); 
+		}
+		return p.getList();
+	}
+
 	public ViewArticle get(String pageid)
 	{
 		return getDao().getArticle(site.getId(), toLong(pageid));
@@ -113,6 +135,11 @@ public class CmsFactory
 	public ViewSpecial getSpecial(String specialid)
 	{
 		return getDao().getSpecial(site.getId(), toLong(specialid));
+	}
+
+	public List<ViewSpecial> querySpecialList()
+	{
+		return specialList;
 	}
 
 	public List<ViewArticle> queryList(int currentPage, int pageSize, boolean onlyImageTop, boolean onlyPageTop, boolean isDesc, Object... categoryids)
@@ -318,27 +345,6 @@ public class CmsFactory
 			page = total;
 		}
 		return page;
-	}
-
-	/**
-	 * 查询指定栏目下的子栏目(包括所有递归子栏目)
-	 * @param categoryid
-	 *        父栏目，查询根栏目为空
-	 * @return List&lt;Map&lt;String, Object&gt;&gt;
-	 */
-	public List<ViewCategory> queryCategory(Object categoryid)
-	{
-		String pid = String.valueOf(toLong(categoryid));
-		if(pid.equals("0"))
-		{
-			return categoryList;
-		}
-		ViewCategory p = categoryMap.get(pid);
-		if(p == null)
-		{
-			p = new ViewCategory(); 
-		}
-		return p.getList();
 	}
 	
 	/**
