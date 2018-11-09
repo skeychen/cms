@@ -21,6 +21,7 @@ p.title{font-size:20px;padding-bottom:5px;border-bottom:solid 1px #ccc;}
 		<p><span class="v">cms</span><span class="c">cms变量，可用来获取数据</span></p>
 		<p><span class="v">year</span><span class="c">当前年</span><span class="t">String</span></p>
 		<p><span class="v">site</span><span class="c">站点信息</span><span class="t"><a href="#ViewSite">ViewSite</a></span></p>
+		<p><span class="v">speciallist</span><span class="c">专题列表</span><span class="t">List&lt;<a href="#ViewSpecial">ViewSpecial</a>&gt;</span></p>
 		<p><span class="v">categorylist</span><span class="c">顶级栏目列表</span><span class="t">List&lt;<a href="#ViewCategory">ViewCategory</a>&gt;</span></p>
 		<p><span class="v">ctx</span><span class="c">站点路径前缀</span><span class="t">String</span></p>
 		<p><span class="v">mobile</span><span class="c">移动版路径前缀（与变量ctx一起使用，为移动版站点路径前缀，放在变量ctx的后面）</span><span class="t">String</span></p>
@@ -100,6 +101,13 @@ p.title{font-size:20px;padding-bottom:5px;border-bottom:solid 1px #ccc;}
 			<p><span class="v">img</span><span class="c">图片</span><span class="t">String</span></p>
 			<p><span class="v">metakeywords</span><span class="c">meta关键词</span><span class="t">String</span></p>
 			<p><span class="v">metadescription</span><span class="c">meta描述</span><span class="t">String</span></p>
+		</div>
+		<div class="box" id="ViewSpecial">
+			<p class="title">ViewSpecial<span class="c">专题</span></p>
+			<p><span class="v">id</span><span class="c">编号</span><span class="t">Long</span></p>
+			<p><span class="v">viewsite</span><span class="c">模板</span><span class="t">String</span></p>
+			<p><span class="v">mviewsite</span><span class="c">移动版模板</span><span class="t">String</span></p>
+			<p><span class="v">url</span><span class="c">链接</span><span class="t">String</span></p>
 		</div>
 		<div class="box" id="ViewCategory">
 			<p class="title">ViewCategory<span class="c">栏目</span></p>

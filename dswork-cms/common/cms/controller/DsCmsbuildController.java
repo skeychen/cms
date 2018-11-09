@@ -18,7 +18,6 @@ import dswork.mvc.BaseController;
 public class DsCmsbuildController extends BaseController
 {
 	private static final String CMS_FACTORY_KEY = "CMS_FACTORY_KEY";
-	private static final String CMS_FACTORY_KEY_M = "CMS_FACTORY_KEY_M";
 	
 	@RequestMapping({"/cmsbuild/buildHTML", "/cmsbuild/preview"})
 	public String buildHTML()
@@ -30,19 +29,26 @@ public class DsCmsbuildController extends BaseController
 		boolean mobile  = req.getString("mobile", "false").equals("true");
 		boolean view    = req.getString("view", "false").equals("true");
 		boolean isedit  = req.getString("isedit", "false").equals("true");// true是采编的预览
-		
-		CmsFactory cms = (CmsFactory) request.getSession().getAttribute(mobile ? CMS_FACTORY_KEY_M : CMS_FACTORY_KEY);
-		if(cms == null || (cms != null && (siteid != cms.getSite().getId() || mobile != cms.isMobile() || isedit != cms.isIsedit())))
+		CmsFactory cms  = null;
+		if(!view && !isedit)
 		{
-			cms = new CmsFactory(siteid, mobile, isedit);
-			if(mobile)
+			cms = (CmsFactory) request.getSession().getAttribute(CMS_FACTORY_KEY);
+			if(cms == null || (cms != null && (siteid != cms.getSite().getId() || mobile != cms.isMobile())))
 			{
-				request.getSession().setAttribute(CMS_FACTORY_KEY_M, cms);
-			}
-			else
-			{
+				if(cms != null && mobile != cms.isMobile())
+				{
+					cms.setMobile(mobile);
+				}
+				else
+				{
+					cms = new CmsFactory(siteid, mobile, false);
+				}
 				request.getSession().setAttribute(CMS_FACTORY_KEY, cms);
 			}
+		}
+		else
+		{
+			cms = new CmsFactory(siteid, mobile, isedit);
 		}
 		cms.setRequest(request);
 		

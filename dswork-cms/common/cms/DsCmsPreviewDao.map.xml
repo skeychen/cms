@@ -36,6 +36,10 @@
 	select <include refid="c_special" /> from DS_CMS_SPECIAL
 	where ID=#{id} and SITEID=#{siteid}
 </select>
+<select id="querySpecialList" resultType="common.cms.model.ViewSpecial">
+	select <include refid="c_special" /> from DS_CMS_SPECIAL
+	where SITEID=#{siteid}
+</select>
 
 <select id="query" resultType="common.cms.model.ViewArticle">
 	select <include refid="c_article" /> from DS_CMS_PAGE_EDIT
