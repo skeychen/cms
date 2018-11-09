@@ -38,10 +38,13 @@ public class CmsFactory
 	protected boolean mobile = false;
 	protected List<ViewSpecial> specialList = new ArrayList<ViewSpecial>();
 	protected Map<String, ViewSpecial> specialMap = new HashMap<String, ViewSpecial>();
+	
 	protected List<ViewCategory> categoryList = new ArrayList<ViewCategory>();
 	protected Map<String, ViewCategory> categoryMap = new HashMap<String, ViewCategory>();
+	
 	protected List<ViewSpecial> mspecialList = new ArrayList<ViewSpecial>();
 	protected Map<String, ViewSpecial> mspecialMap = new HashMap<String, ViewSpecial>();
+	
 	protected List<ViewCategory> mcategoryList = new ArrayList<ViewCategory>();
 	protected Map<String, ViewCategory> mcategoryMap = new HashMap<String, ViewCategory>();
 

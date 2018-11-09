@@ -18,6 +18,7 @@ import dswork.mvc.BaseController;
 public class DsCmsbuildController extends BaseController
 {
 	private static final String CMS_FACTORY_KEY = "CMS_FACTORY_KEY";
+	private static final String CMS_FACTORY_KEY_M = "CMS_FACTORY_KEY_M";
 	
 	@RequestMapping({"/cmsbuild/buildHTML", "/cmsbuild/preview"})
 	public String buildHTML()
@@ -32,18 +33,23 @@ public class DsCmsbuildController extends BaseController
 		CmsFactory cms  = null;
 		if(!view && !isedit)
 		{
-			cms = (CmsFactory) request.getSession().getAttribute(CMS_FACTORY_KEY);
-			if(cms == null || (cms != null && (siteid != cms.getSite().getId() || mobile != cms.isMobile())))
+			if(mobile)
 			{
-				if(cms != null && mobile != cms.isMobile())
-				{
-					cms.setMobile(mobile);
-				}
-				else
+				cms = (CmsFactory) request.getSession().getAttribute(CMS_FACTORY_KEY_M);
+				if(cms == null || (cms != null && (siteid != cms.getSite().getId())))
 				{
 					cms = new CmsFactory(siteid, mobile, false);
+					request.getSession().setAttribute(CMS_FACTORY_KEY_M, cms);
 				}
-				request.getSession().setAttribute(CMS_FACTORY_KEY, cms);
+			}
+			else
+			{
+				cms = (CmsFactory) request.getSession().getAttribute(CMS_FACTORY_KEY);
+				if(cms == null || (cms != null && (siteid != cms.getSite().getId())))
+				{
+					cms = new CmsFactory(siteid, mobile, false);
+					request.getSession().setAttribute(CMS_FACTORY_KEY, cms);
+				}
 			}
 		}
 		else
