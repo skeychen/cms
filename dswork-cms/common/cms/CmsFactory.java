@@ -38,15 +38,8 @@ public class CmsFactory
 	protected boolean mobile = false;
 	protected List<ViewSpecial> specialList = new ArrayList<ViewSpecial>();
 	protected Map<String, ViewSpecial> specialMap = new HashMap<String, ViewSpecial>();
-	
 	protected List<ViewCategory> categoryList = new ArrayList<ViewCategory>();
 	protected Map<String, ViewCategory> categoryMap = new HashMap<String, ViewCategory>();
-	
-	protected List<ViewSpecial> mspecialList = new ArrayList<ViewSpecial>();
-	protected Map<String, ViewSpecial> mspecialMap = new HashMap<String, ViewSpecial>();
-	
-	protected List<ViewCategory> mcategoryList = new ArrayList<ViewCategory>();
-	protected Map<String, ViewCategory> mcategoryMap = new HashMap<String, ViewCategory>();
 
 	public CmsFactory()
 	{
@@ -63,41 +56,39 @@ public class CmsFactory
 			for(ViewSpecial v : slist)
 			{
 				specialMap.put(String.valueOf(v.getId()), v);
-				ViewSpecial m = cloneViewSpecialForMobile(v);
-				mspecialMap.put(String.valueOf(m.getId()), m);
-				mspecialList.add(m);
+				if(mobile)
+				{
+					v.setUrl("/m" + v.getUrl());
+				}
 			}
 			specialList = slist;
 			List<ViewCategory> clist = getDao().queryCategoryList(siteid);
 			for(ViewCategory v : clist)
 			{
-				ViewCategory m = cloneViewSpecialForMobile(v);
+				if(mobile)
+				{
+					if(v.getScope() != 2 || (v.getScope() == 2 && v.getUrl().startsWith("/a/")))
+					{
+						v.setUrl("/m" + v.getUrl());
+					}
+				}
 				if(v.getPid() == null)
 				{
 					v.setPid(0L);
-					m.setPid(0L);
-					// 顶层节点的父节点为节点自己
-					v.setParent(v);
-					m.setParent(m);
+					v.setParent(v);// 顶层节点的父节点为节点自己
 				}
 				categoryList.add(v);
-				mcategoryList.add(m);
 				categoryMap.put(String.valueOf(v.getId()), v);
-				mcategoryMap.put(String.valueOf(m.getId()), m);
 			}
 			for(int i = 0; i < categoryList.size(); i++)
 			{
 				ViewCategory v = categoryList.get(i);
-				ViewCategory m = mcategoryList.get(i);
 				String pid = String.valueOf(v.getPid());
 				if(!pid.equals("0") && categoryMap.get(pid) != null)
 				{
 					ViewCategory _v = categoryMap.get(pid);
 					v.setParent(_v);// 上级
 					_v.addList(v);// 下级
-					ViewCategory _m = mcategoryMap.get(pid);
-					m.setParent(_m);// 上级
-					_m.addList(m);// 下级
 				}
 			}
 		}
@@ -149,30 +140,12 @@ public class CmsFactory
 
 	public ViewCategory getCategory(Object categoryid)
 	{
-		ViewCategory m;
-		if(this.mobile)
-		{
-			m = mcategoryMap.get(String.valueOf(categoryid));
-		}
-		else
-		{
-			m = categoryMap.get(String.valueOf(categoryid));
-		}
-		return m;
+		return categoryMap.get(String.valueOf(categoryid));
 	}
 
 	public ViewSpecial getSpecial(String specialid)
 	{
-		ViewSpecial m;
-		if(this.mobile)
-		{
-			m = mspecialMap.get(String.valueOf(specialid));
-		}
-		else
-		{
-			m = specialMap.get(String.valueOf(specialid));
-		}
-		return m;
+		return specialMap.get(String.valueOf(specialid));
 	}
 
 	/**
@@ -185,9 +158,9 @@ public class CmsFactory
 		String pid = String.valueOf(toLong(categoryid));
 		if(pid.equals("0"))
 		{
-			return this.mobile ? mcategoryList : categoryList;
+			return categoryList;
 		}
-		ViewCategory p = this.mobile ? mcategoryMap.get(pid) : categoryMap.get(pid);
+		ViewCategory p = categoryMap.get(pid);
 		if(p == null)
 		{
 			p = new ViewCategory();
@@ -197,7 +170,7 @@ public class CmsFactory
 
 	public List<ViewSpecial> querySpecial()
 	{
-		return this.mobile ? mspecialList : specialList;
+		return specialList;
 	}
 
 	public List<ViewArticle> queryList(int currentPage, int pageSize, boolean onlyImageTop, boolean onlyPageTop, boolean isDesc, Object... categoryids)
@@ -360,10 +333,8 @@ public class CmsFactory
 		nav.getDatapage().setLasturl(tmp == 1 ? url : (url.replaceAll("\\.html", "_" + tmp + ".html")));
 		nav.setDatauri(url.replaceAll("\\.html", ""));
 		nav.addListAll(page.getResult());
-		
 		StringBuilder sb = new StringBuilder();
 		int viewpage = 3, temppage = 1;// 左右显示个数
-		
 		sb.append("<a");
 		if(currentPage == 1)
 		{
@@ -374,14 +345,12 @@ public class CmsFactory
 			sb.append(" href=\"").append(value("ctx")).append(url).append("\"");
 		}
 		sb.append(">1</a>");
-		
 		temppage = currentPage - viewpage - 1;
 		if(temppage > 1)
 		{
 			String u = url.replaceAll("\\.html", "_" + temppage + ".html");
 			sb.append("<a href=\"").append(value("ctx")).append(u).append("\">...</a>");
 		}
-		
 		for(int i = currentPage - viewpage; i <= currentPage + viewpage && i < page.getLastPage(); i++)
 		{
 			if(i > 1)
@@ -399,14 +368,12 @@ public class CmsFactory
 				sb.append(">").append(i).append("</a>");
 			}
 		}
-		
 		temppage = currentPage + viewpage + 1;
 		if(temppage < page.getLastPage())
 		{
 			String u = url.replaceAll("\\.html", "_" + temppage + ".html");
 			sb.append("<a href=\"").append(value("ctx")).append(u).append("\">...</a>");
 		}
-		
 		if(page.getLastPage() != 1)
 		{
 			String u = url.replaceAll("\\.html", "_" + page.getLastPage() + ".html");
@@ -421,7 +388,6 @@ public class CmsFactory
 			}
 			sb.append(">").append(page.getLastPage()).append("</a>");
 		}
-		
 		nav.setDatapageview(sb.toString());// 翻页字符串
 		return nav;
 	}
@@ -457,49 +423,5 @@ public class CmsFactory
 	public void setMobile(boolean mobile)
 	{
 		this.mobile = mobile;
-	}
-
-	private ViewSpecial cloneViewSpecialForMobile(ViewSpecial v)
-	{
-		ViewSpecial m = new ViewSpecial();
-		m.setId(v.getId());
-		m.setViewsite(v.getViewsite());
-		m.setMviewsite(v.getMviewsite());
-		m.setUrl("/m" + v.getUrl());
-		return m;
-	}
-
-	private ViewCategory cloneViewSpecialForMobile(ViewCategory v)
-	{
-		ViewCategory m = new ViewCategory();
-		m.setId(v.getId());
-		m.setPid(v.getPid());
-		m.setSiteid(v.getSiteid());
-		m.setName(v.getName());
-		m.setTitle(v.getTitle());
-		m.setScope(v.getScope());
-		m.setStatus(v.getStatus());
-		if(v.getScope() != 2 || (v.getScope() == 2 && v.getUrl().startsWith("/a/")))
-		{
-			m.setUrl("/m" + v.getUrl());
-		}
-		else
-		{
-			m.setUrl(v.getUrl());
-		}
-		m.setViewsite(v.getViewsite());
-		m.setPageviewsite(v.getPageviewsite());
-		m.setMviewsite(v.getMviewsite());
-		m.setMpageviewsite(v.getMpageviewsite());
-		m.setMetakeywords(v.getMetakeywords());
-		m.setMetadescription(v.getMetadescription());
-		m.setSummary(v.getSummary());
-		m.setReleasetime(v.getReleasetime());
-		m.setReleasesource(v.getReleasesource());
-		m.setReleaseuser(v.getReleaseuser());
-		m.setImg(v.getImg());
-		m.setContent(v.getContent());
-		m.setJsondata(v.getJsondata());
-		return m;
 	}
 }

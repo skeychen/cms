@@ -19,18 +19,21 @@ public class DsCmsbuildController extends BaseController
 {
 	private static final String CMS_FACTORY_KEY = "CMS_FACTORY_KEY";
 	private static final String CMS_FACTORY_KEY_M = "CMS_FACTORY_KEY_M";
-	
-	@RequestMapping({"/cmsbuild/buildHTML", "/cmsbuild/preview"})
+
+	@RequestMapping(
+	{
+			"/cmsbuild/buildHTML", "/cmsbuild/preview"
+	})
 	public String buildHTML()
 	{
-		Long siteid     = req.getLong("siteid", -1);
+		Long siteid = req.getLong("siteid", -1);
 		Long categoryid = req.getLong("categoryid", -1);
-		Long pageid     = req.getLong("pageid", -1);
-		Long specialid  = req.getLong("specialid", -1);
-		boolean mobile  = req.getString("mobile", "false").equals("true");
-		boolean view    = req.getString("view", "false").equals("true");
-		boolean isedit  = req.getString("isedit", "false").equals("true");// true是采编的预览
-		CmsFactory cms  = null;
+		Long pageid = req.getLong("pageid", -1);
+		Long specialid = req.getLong("specialid", -1);
+		boolean mobile = req.getString("mobile", "false").equals("true");
+		boolean view = req.getString("view", "false").equals("true");
+		boolean isedit = req.getString("isedit", "false").equals("true");// true是采编的预览
+		CmsFactory cms = null;
 		if(!view && !isedit)
 		{
 			if(mobile)
@@ -57,7 +60,6 @@ public class DsCmsbuildController extends BaseController
 			cms = new CmsFactory(siteid, mobile, isedit);
 		}
 		cms.setRequest(request);
-		
 		put("cms", cms);
 		put("year", TimeUtil.getCurrentTime("yyyy"));
 		ViewSite s = cms.getSite();
@@ -75,7 +77,7 @@ public class DsCmsbuildController extends BaseController
 		put("speciallist", cms.querySpecial());
 		if(pageid > 0)// 内容页
 		{
-			ViewArticle p  = cms.get(pageid + "");
+			ViewArticle p = cms.get(pageid + "");
 			ViewCategory c = cms.getCategory(p.getCategoryid() + "");
 			put("category", c);
 			put("vo", p.getVo());
@@ -91,11 +93,11 @@ public class DsCmsbuildController extends BaseController
 			put("img", p.getImg());
 			put("url", p.getUrl());
 			put("content", p.getContent());
-			return "/" + s.getFolder() + (mobile ? "/templates/m/"+c.getMpageviewsite() : "/templates/"+c.getPageviewsite());
+			return "/" + s.getFolder() + (mobile ? "/templates/m/" + c.getMpageviewsite() : "/templates/" + c.getPageviewsite());
 		}
 		if(categoryid > 0)// 栏目页
 		{
-			int page     = req.getInt("page", 1);
+			int page = req.getInt("page", 1);
 			int pagesize = req.getInt("pagesize", 25);
 			ViewCategory c = cms.getCategory(categoryid + "");
 			if(c.getScope() == 2)
@@ -115,12 +117,12 @@ public class DsCmsbuildController extends BaseController
 			put("datapageview", nav.getDatapageview());
 			put("datauri", nav.getDatauri());
 			put("datapage", nav.getDatapage());
-			return "/" + s.getFolder() + (mobile ? "/templates/m/"+c.getMviewsite() : "/templates/"+c.getViewsite());
+			return "/" + s.getFolder() + (mobile ? "/templates/m/" + c.getMviewsite() : "/templates/" + c.getViewsite());
 		}
 		if(specialid > 0)// 专题页
 		{
 			ViewSpecial sp = cms.getSpecial(specialid + "");
-			return "/" + s.getFolder() + (mobile ? "/templates/m/"+sp.getMviewsite() : "/templates/"+sp.getViewsite());
+			return "/" + s.getFolder() + (mobile ? "/templates/m/" + sp.getMviewsite() : "/templates/" + sp.getViewsite());
 		}
 		return null;
 	}
