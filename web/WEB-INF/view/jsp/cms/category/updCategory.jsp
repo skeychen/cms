@@ -38,7 +38,7 @@ $(function(){
 <script type="text/template" id="scope_2">
 	<tr class="choice">
 		<td class="form_title">链接</td>
-		<td class="form_input"><input type="text" id="url" name="url" maxlength="100" style="width:400px;" datatype="!Require" value="${fn:escapeXml(po.url)}" /></td>
+		<td class="form_input"><input type="text" id="url" name="url" maxlength="100" style="width:400px;" datatype="Require" value="${fn:escapeXml(po.url)}" /></td>
 	</tr>
 </script>
 <script type="text/template" id="scope_0_1">

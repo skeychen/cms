@@ -32,7 +32,7 @@ $(function(){
 			$("#mylink").val("").hide();
 			$("#template_category").show();
 			$("#template_page").show();
-			$("#url").attr("datatype", "Require");
+			$("#url").attr("datatype", "!Require");
 		}
 	}).bind("change", function(){
 		$("#scope").click();
