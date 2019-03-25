@@ -173,17 +173,17 @@ public class CmsFactory
 		return specialList;
 	}
 
-	public List<ViewArticle> queryList(int currentPage, int pageSize, boolean onlyImageTop, boolean onlyPageTop, boolean isDesc, Object... categoryids)
+	public List<ViewArticle> queryList(int page, int pagesize, boolean onlyImageTop, boolean onlyPageTop, boolean isDesc, Object... categoryids)
 	{
-		return doQueryList(currentPage, pageSize, isDesc, onlyImageTop, onlyPageTop, null, categoryids);
+		return doQueryList(page, pagesize, isDesc, onlyImageTop, onlyPageTop, null, categoryids);
 	}
 
-	public ViewArticleSet queryPage(int currentPage, int pageSize, boolean isDesc, String keyvalue, Object... categoryids)
+	public ViewArticleSet queryPage(int page, int pagesize, boolean isDesc, String keyvalue, Object... categoryids)
 	{
-		return doQueryPage(currentPage, pageSize, isDesc, false, false, keyvalue, categoryids);
+		return doQueryPage(page, pagesize, isDesc, false, false, keyvalue, categoryids);
 	}
 
-	private List<ViewArticle> doQueryList(int currentPage, int pageSize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String keyvalue, Object... categoryids)
+	private List<ViewArticle> doQueryList(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String keyvalue, Object... categoryids)
 	{
 		StringBuilder idArray = new StringBuilder();
 		if(categoryids.length > 0)
@@ -194,10 +194,10 @@ public class CmsFactory
 				idArray.append(",").append(toLong(categoryids[i]));
 			}
 		}
-		Page<ViewArticle> page = getDao().queryArticlePage(site.getId(), currentPage, pageSize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, keyvalue);
+		Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, keyvalue);
 		if(this.mobile)
 		{
-			for(ViewArticle va : page.getResult())
+			for(ViewArticle va : pageModel.getResult())
 			{
 				if(va.getScope() != 2 || (va.getScope() == 2 && va.getUrl().startsWith("/a/")))
 				{
@@ -205,10 +205,10 @@ public class CmsFactory
 				}
 			}
 		}
-		return page.getResult();
+		return pageModel.getResult();
 	}
 
-	private ViewArticleSet doQueryPage(int currentPage, int pageSize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String keyvalue, Object... categoryids)
+	private ViewArticleSet doQueryPage(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String keyvalue, Object... categoryids)
 	{
 		StringBuilder idArray = new StringBuilder();
 		if(categoryids.length > 0)
@@ -222,16 +222,16 @@ public class CmsFactory
 		ViewArticleSet set = new ViewArticleSet();
 		try
 		{
-			Page<ViewArticle> page = getDao().queryArticlePage(site.getId(), currentPage, pageSize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, keyvalue);
+			Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, keyvalue);
 			set.setStatus(1);// success
 			set.setMsg("success");
-			set.setSize(page.getTotalCount());
-			set.setPage(page.getCurrentPage());
-			set.setPagesize(page.getPageSize());
-			set.setTotalpage(page.getTotalPage());
+			set.setSize(pageModel.getTotalCount());
+			set.setPage(pageModel.getCurrentPage());
+			set.setPagesize(pageModel.getPageSize());
+			set.setTotalpage(pageModel.getTotalPage());
 			if(this.mobile)
 			{
-				for(ViewArticle va : page.getResult())
+				for(ViewArticle va : pageModel.getResult())
 				{
 					if(va.getScope() != 2 || (va.getScope() == 2 && va.getUrl().startsWith("/a/")))
 					{
@@ -239,7 +239,7 @@ public class CmsFactory
 					}
 				}
 			}
-			set.addRowsAll(page.getResult());
+			set.addRowsAll(pageModel.getResult());
 		}
 		catch(Exception e)
 		{
@@ -249,15 +249,15 @@ public class CmsFactory
 		return set;
 	}
 
-	public void put(String name, boolean listOrPage, int currentPage, int pageSize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String keyvalue, Object... categoryids)
+	public void put(String name, boolean listOrPage, int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String keyvalue, Object... categoryids)
 	{
 		if(listOrPage)
 		{
-			request.setAttribute(name, doQueryList(currentPage, pageSize, isDesc, onlyImageTop, onlyPageTop, keyvalue, categoryids));
+			request.setAttribute(name, doQueryList(page, pagesize, isDesc, onlyImageTop, onlyPageTop, keyvalue, categoryids));
 		}
 		else
 		{
-			request.setAttribute(name, doQueryPage(currentPage, pageSize, isDesc, onlyImageTop, onlyPageTop, keyvalue, categoryids));
+			request.setAttribute(name, doQueryPage(page, pagesize, isDesc, onlyImageTop, onlyPageTop, keyvalue, categoryids));
 		}
 	}
 
@@ -293,22 +293,22 @@ public class CmsFactory
 		request.setAttribute(key, val);
 	}
 
-	public ViewArticleNav queryPage(int currentPage, int pageSize, boolean onlyImageTop, boolean onlyPageTop, boolean isDesc, String url, Object categoryid)
+	public ViewArticleNav queryPage(int page, int pagesize, boolean onlyImageTop, boolean onlyPageTop, boolean isDesc, String url, Object categoryid)
 	{
-		if(currentPage <= 0)
+		if(page <= 0)
 		{
-			currentPage = 1;
+			page = 1;
 		}
-		if(pageSize <= 0)
+		if(pagesize <= 0)
 		{
-			pageSize = 25;
+			pagesize = 25;
 		}
 		StringBuilder idArray = new StringBuilder();
 		idArray.append(toLong(categoryid));
-		Page<ViewArticle> page = getDao().queryArticlePage(site.getId(), currentPage, pageSize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, null);
+		Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, null);
 		if(this.mobile)
 		{
-			for(ViewArticle va : page.getResult())
+			for(ViewArticle va : pageModel.getResult())
 			{
 				if(va.getScope() != 2 || (va.getScope() == 2 && va.getUrl().startsWith("/a/")))
 				{
@@ -317,26 +317,26 @@ public class CmsFactory
 			}
 		}
 		ViewArticleNav nav = new ViewArticleNav();
-		currentPage = page.getCurrentPage();// 更新当前页
-		nav.getDatapage().setPage(currentPage);
-		nav.getDatapage().setPagesize(pageSize);
+		page = pageModel.getCurrentPage();// 更新当前页
+		nav.getDatapage().setPage(page);
+		nav.getDatapage().setPagesize(pagesize);
 		nav.getDatapage().setFirst(1);
 		nav.getDatapage().setFirsturl(url);
-		int tmp = initpage(currentPage - 1, page.getLastPage());
+		int tmp = initpage(page - 1, pageModel.getLastPage());
 		nav.getDatapage().setPrev(tmp);
 		nav.getDatapage().setPrevurl(tmp == 1 ? url : (url.replaceAll("\\.html", "_" + tmp + ".html")));
-		tmp = initpage(currentPage + 1, page.getLastPage());
+		tmp = initpage(page + 1, pageModel.getLastPage());
 		nav.getDatapage().setNext(tmp);
 		nav.getDatapage().setNexturl(tmp == 1 ? url : (url.replaceAll("\\.html", "_" + tmp + ".html")));
-		tmp = page.getLastPage();
+		tmp = pageModel.getLastPage();
 		nav.getDatapage().setLast(tmp);
 		nav.getDatapage().setLasturl(tmp == 1 ? url : (url.replaceAll("\\.html", "_" + tmp + ".html")));
 		nav.setDatauri(url.replaceAll("\\.html", ""));
-		nav.addListAll(page.getResult());
+		nav.addListAll(pageModel.getResult());
 		StringBuilder sb = new StringBuilder();
 		int viewpage = 3, temppage = 1;// 左右显示个数
 		sb.append("<a");
-		if(currentPage == 1)
+		if(page == 1)
 		{
 			sb.append(" class=\"selected\"");
 		}
@@ -345,19 +345,19 @@ public class CmsFactory
 			sb.append(" href=\"").append(value("ctx")).append(url).append("\"");
 		}
 		sb.append(">1</a>");
-		temppage = currentPage - viewpage - 1;
+		temppage = page - viewpage - 1;
 		if(temppage > 1)
 		{
 			String u = url.replaceAll("\\.html", "_" + temppage + ".html");
 			sb.append("<a href=\"").append(value("ctx")).append(u).append("\">...</a>");
 		}
-		for(int i = currentPage - viewpage; i <= currentPage + viewpage && i < page.getLastPage(); i++)
+		for(int i = page - viewpage; i <= page + viewpage && i < pageModel.getLastPage(); i++)
 		{
 			if(i > 1)
 			{
 				String u = (i == 1 ? url : (url.replaceAll("\\.html", "_" + i + ".html")));
 				sb.append("<a");
-				if(currentPage == i)
+				if(page == i)
 				{
 					sb.append(" class=\"selected\"");
 				}
@@ -368,17 +368,17 @@ public class CmsFactory
 				sb.append(">").append(i).append("</a>");
 			}
 		}
-		temppage = currentPage + viewpage + 1;
-		if(temppage < page.getLastPage())
+		temppage = page + viewpage + 1;
+		if(temppage < pageModel.getLastPage())
 		{
 			String u = url.replaceAll("\\.html", "_" + temppage + ".html");
 			sb.append("<a href=\"").append(value("ctx")).append(u).append("\">...</a>");
 		}
-		if(page.getLastPage() != 1)
+		if(pageModel.getLastPage() != 1)
 		{
-			String u = url.replaceAll("\\.html", "_" + page.getLastPage() + ".html");
+			String u = url.replaceAll("\\.html", "_" + pageModel.getLastPage() + ".html");
 			sb.append("<a");
-			if(currentPage == page.getLastPage())
+			if(page == pageModel.getLastPage())
 			{
 				sb.append(" class=\"selected\"");
 			}
@@ -386,7 +386,7 @@ public class CmsFactory
 			{
 				sb.append(" href=\"").append(value("ctx")).append(u).append("\"");
 			}
-			sb.append(">").append(page.getLastPage()).append("</a>");
+			sb.append(">").append(pageModel.getLastPage()).append("</a>");
 		}
 		nav.setDatapageview(sb.toString());// 翻页字符串
 		return nav;
