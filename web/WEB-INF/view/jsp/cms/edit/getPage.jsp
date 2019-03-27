@@ -8,7 +8,7 @@
 <%@include file="/commons/include/get.jsp" %>
 <script type="text/javascript">
 $(function(){
-	$dswork.page.menu("", "updPage1.htm", "", "${pageModel.currentPage}");
+	$dswork.page.menu("", "updPage1.htm", "", "${pageModel.page}");
 });
 <c:if test="${po.siteid==0}">$dswork.page.join = function(td, menu, id){
 	$(menu).append($('<div iconCls="menuTool-graph">同步到栏目</div>').bind("click", function(){
@@ -17,7 +17,7 @@ $(function(){
 };</c:if>
 $dswork.doAjax = true;
 $dswork.callback = function(){if($dswork.result.type == 1){
-	location.href = "getPage.htm?id=${po.id}&page=${pageModel.currentPage}";
+	location.href = "getPage.htm?id=${po.id}&page=${pageModel.page}";
 }};
 </script>
 </head> 
@@ -29,7 +29,7 @@ $dswork.callback = function(){if($dswork.result.type == 1){
 			<a class="look" target="_blank" href="${ctx}/cmsbuild/preview.chtml?siteid=${po.siteid}&categoryid=${po.id}&isedit=true">预览本栏目</a><c:if test="${enablemobile}">
 			<a class="look" target="_blank" href="${ctx}/cmsbuild/preview.chtml?siteid=${po.siteid}&categoryid=${po.id}&mobile=true&isedit=true">预览移动版本栏目</a></c:if>
 			<a class="update" href="updCategory1.htm?id=${po.id}">编辑本栏目</a>
-			<a class="insert" href="addPage1.htm?categoryid=${po.id}&page=${pageModel.currentPage}">添加</a>
+			<a class="insert" href="addPage1.htm?categoryid=${po.id}&page=${pageModel.page}">添加</a>
 			<a class="delete" id="listFormDelAll" href="#">删除所选</a>
 		</td>
 	</tr>
@@ -74,7 +74,7 @@ $dswork.callback = function(){if($dswork.result.type == 1){
 	</tr>
 </c:forEach>
 </table>
-<input name="page" type="hidden" value="${pageModel.currentPage}" />
+<input name="page" type="hidden" value="${pageModel.page}" />
 </form>
 <table border="0" cellspacing="0" cellpadding="0" class="bottomTable">
 	<tr><td>${pageNav.page}</td></tr>

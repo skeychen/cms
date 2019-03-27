@@ -12,11 +12,11 @@ $(function(){
 });
 $dswork.doAjax = true;
 $dswork.callback = function(){if($dswork.result.type == 1){
-	location.href = "getPage.htm?id=${po.id}&page=${pageModel.currentPage}";
+	location.href = "getPage.htm?id=${po.id}&page=${pageModel.page}";
 }};
 $dswork.page.join = function(td, menu, id){
 	$(menu).append($('<div iconCls="menuTool-user">审核</div>').bind("click", function(){
-		location.href = "auditPage1.htm?page=${pageModel.currentPage}&keyIndex=" + id;
+		location.href = "auditPage1.htm?page=${pageModel.page}&keyIndex=" + id;
 	}));
 };
 </script>
@@ -65,7 +65,7 @@ $dswork.page.join = function(td, menu, id){
 	</tr>
 </c:forEach>
 </table>
-<input name="page" type="hidden" value="${pageModel.currentPage}" />
+<input name="page" type="hidden" value="${pageModel.page}" />
 </form>
 <table border="0" cellspacing="0" cellpadding="0" class="bottomTable">
 	<tr><td>${pageNav.page}</td></tr>

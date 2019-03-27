@@ -78,7 +78,7 @@
 	</tr>
 </c:forEach>
 </table>
-<input name="page" type="hidden" value="${pageModel.currentPage}" />
+<input name="page" type="hidden" value="${pageModel.page}" />
 </form>
 <div class="line"></div>
 <table border="0" cellspacing="0" cellpadding="0" class="bottomTable" style="border-top:#c2c2c2 solid 1px;border-bottom:#c2c2c2 solid 1px;">

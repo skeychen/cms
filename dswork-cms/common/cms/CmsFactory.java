@@ -225,10 +225,10 @@ public class CmsFactory
 			Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, keyvalue);
 			set.setStatus(1);// success
 			set.setMsg("success");
-			set.setSize(pageModel.getTotalCount());
-			set.setPage(pageModel.getCurrentPage());
-			set.setPagesize(pageModel.getPageSize());
-			set.setTotalpage(pageModel.getTotalPage());
+			set.setSize(pageModel.getTotalsize());
+			set.setPage(pageModel.getPage());
+			set.setPagesize(pageModel.getPagesize());
+			set.setTotalpage(pageModel.getTotalpage());
 			if(this.mobile)
 			{
 				for(ViewArticle va : pageModel.getResult())
@@ -317,18 +317,18 @@ public class CmsFactory
 			}
 		}
 		ViewArticleNav nav = new ViewArticleNav();
-		page = pageModel.getCurrentPage();// 更新当前页
+		page = pageModel.getPage();// 更新当前页
 		nav.getDatapage().setPage(page);
 		nav.getDatapage().setPagesize(pagesize);
 		nav.getDatapage().setFirst(1);
 		nav.getDatapage().setFirsturl(url);
-		int tmp = initpage(page - 1, pageModel.getLastPage());
+		int tmp = initpage(page - 1, pageModel.getTotalpage());
 		nav.getDatapage().setPrev(tmp);
 		nav.getDatapage().setPrevurl(tmp == 1 ? url : (url.replaceAll("\\.html", "_" + tmp + ".html")));
-		tmp = initpage(page + 1, pageModel.getLastPage());
+		tmp = initpage(page + 1, pageModel.getTotalpage());
 		nav.getDatapage().setNext(tmp);
 		nav.getDatapage().setNexturl(tmp == 1 ? url : (url.replaceAll("\\.html", "_" + tmp + ".html")));
-		tmp = pageModel.getLastPage();
+		tmp = pageModel.getTotalpage();
 		nav.getDatapage().setLast(tmp);
 		nav.getDatapage().setLasturl(tmp == 1 ? url : (url.replaceAll("\\.html", "_" + tmp + ".html")));
 		nav.setDatauri(url.replaceAll("\\.html", ""));
@@ -351,7 +351,7 @@ public class CmsFactory
 			String u = url.replaceAll("\\.html", "_" + temppage + ".html");
 			sb.append("<a href=\"").append(value("ctx")).append(u).append("\">...</a>");
 		}
-		for(int i = page - viewpage; i <= page + viewpage && i < pageModel.getLastPage(); i++)
+		for(int i = page - viewpage; i <= page + viewpage && i < pageModel.getTotalpage(); i++)
 		{
 			if(i > 1)
 			{
@@ -369,16 +369,16 @@ public class CmsFactory
 			}
 		}
 		temppage = page + viewpage + 1;
-		if(temppage < pageModel.getLastPage())
+		if(temppage < pageModel.getTotalpage())
 		{
 			String u = url.replaceAll("\\.html", "_" + temppage + ".html");
 			sb.append("<a href=\"").append(value("ctx")).append(u).append("\">...</a>");
 		}
-		if(pageModel.getLastPage() != 1)
+		if(pageModel.getTotalpage() != 1)
 		{
-			String u = url.replaceAll("\\.html", "_" + pageModel.getLastPage() + ".html");
+			String u = url.replaceAll("\\.html", "_" + pageModel.getTotalpage() + ".html");
 			sb.append("<a");
-			if(page == pageModel.getLastPage())
+			if(page == pageModel.getTotalpage())
 			{
 				sb.append(" class=\"selected\"");
 			}
@@ -386,7 +386,7 @@ public class CmsFactory
 			{
 				sb.append(" href=\"").append(value("ctx")).append(u).append("\"");
 			}
-			sb.append(">").append(pageModel.getLastPage()).append("</a>");
+			sb.append(">").append(pageModel.getTotalpage()).append("</a>");
 		}
 		nav.setDatapageview(sb.toString());// 翻页字符串
 		return nav;

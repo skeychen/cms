@@ -371,10 +371,10 @@ public class DsCmsPublishController extends DsCmsBaseController
 										map.put("categoryid", c.getId());
 										map.put("releasetime", TimeUtil.getCurrentTime());
 										PageRequest rq = new PageRequest(map);
-										rq.setPageSize(pagesize);
-										rq.setCurrentPage(1);
+										rq.setPagesize(pagesize);
+										rq.setPage(1);
 										Page<DsCmsPage> pageModel = service.queryPage(rq);
-										for(int i = 2; i <= pageModel.getLastPage(); i++)
+										for(int i = 2; i <= pageModel.getTotalpage(); i++)
 										{
 											_buildFile(path + "&categoryid=" + c.getId() + "&page=" + i + "&pagesize=" + pagesize, c.getUrl().replaceAll("\\.html", "_" + i + ".html"), site.getFolder(), enablemobile);
 										}
@@ -465,15 +465,15 @@ public class DsCmsPublishController extends DsCmsBaseController
 									{
 									}
 								}
-								for(int i = 2; i <= pageModel.getLastPage(); i++)
+								for(int i = 2; i <= pageModel.getTotalpage(); i++)
 								{
 									map.clear();
 									map.put("siteid", site.getId());
 									map.put("releasetime", TimeUtil.getCurrentTime());
 									map.put("categoryid", c.getId());
 									rq.setFilters(map);
-									rq.setPageSize(pagesize);
-									rq.setCurrentPage(i);
+									rq.setPagesize(pagesize);
+									rq.setPage(i);
 									List<DsCmsPage> pageList = service.queryList(rq);
 									for(DsCmsPage p : pageList)
 									{

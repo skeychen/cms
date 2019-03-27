@@ -52,11 +52,11 @@ $dswork.page.join = function(td, menu, id){
 	}));
 };
 $(function(){
-	$dswork.page.menu("", "", "getPageById.htm", "${pageModel.currentPage}");
+	$dswork.page.menu("", "", "getPageById.htm", "${pageModel.page}");
 });
 $dswork.doAjax = true;
 $dswork.callback = function(){if($dswork.result.type == 1){
-	location.href = "getPage.htm?id=${po.id}&page=${pageModel.currentPage}";
+	location.href = "getPage.htm?id=${po.id}&page=${pageModel.page}";
 }};
 $(function(){
 	$("#btn_category_d").bind("click", function(){
