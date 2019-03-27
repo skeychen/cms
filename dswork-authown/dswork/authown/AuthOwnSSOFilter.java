@@ -16,12 +16,10 @@ public class AuthOwnSSOFilter implements Filter
 	{
 	}
 
-	@Override
 	public void destroy()
 	{
 	}
 
-	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
 		HttpServletRequest req = (HttpServletRequest) request;
@@ -30,23 +28,22 @@ public class AuthOwnSSOFilter implements Filter
 		{
 			if(dswork.sso.WebFilter.isUse())
 			{
-				String userAccount = dswork.sso.WebFilter.getAccount(req.getSession());
-				if(userAccount.length() == 0)
+				dswork.sso.model.IUser m = dswork.sso.WebFilter.getLoginer(req.getSession());
+				if(m.getId() == Long.MIN_VALUE)
 				{
 					AuthOwnUtil.clearUser(req);
 					return;
 				}
 				AuthOwn auth = AuthOwnUtil.getUser(req);
-				if(auth == null || !auth.getAccount().equals(userAccount))
+				if(auth == null || !auth.getAccount().equals(m.getAccount()))
 				{
 					try
 					{
-						dswork.sso.model.IUser m = dswork.sso.AuthFactory.getUser(userAccount);
 						if(m.getStatus() != 0)
 						{
 							String c = String.valueOf(m.getWorkcard()).trim();
-							AuthOwnUtil.login(req, res, m.getId().toString(), m.getAccount(), m.getName(), (c.length() > 0 ? m.getWorkcard() : "admin" + m.getAccount()));
-							AuthOwnUtil.setUser(req, m.getId().toString(), m.getAccount(), m.getName(), (c.length() > 0 ? m.getWorkcard() : "admin" + m.getAccount()));
+							AuthOwnUtil.login(req, res, String.valueOf(m.getId()), m.getAccount(), m.getName(), (c.length() > 0 ? m.getWorkcard() : "admin" + m.getAccount()));
+							AuthOwnUtil.setUser(req, String.valueOf(m.getId()), m.getAccount(), m.getName(), (c.length() > 0 ? m.getWorkcard() : "admin" + m.getAccount()));
 							chain.doFilter(request, response);
 							return;
 						}
@@ -84,7 +81,6 @@ public class AuthOwnSSOFilter implements Filter
 		}
 	}
 
-	@Override
 	public void init(FilterConfig fConfig) throws ServletException
 	{
 	}
