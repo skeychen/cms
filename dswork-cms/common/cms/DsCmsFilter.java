@@ -24,16 +24,13 @@ public class DsCmsFilter implements Filter
 	private String pvm    = "/m/";
 	private String pvurl  = "/cmsbuild/buildHTML.chtml";
 	
-	@Override
 	public void init(FilterConfig config)
 	{
 		System.out.println("DsCmsFilter Initialization");
 	}
 
-	@Override
 	public void destroy(){}
 
-	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 	{
 		HttpServletRequest req  = (HttpServletRequest) request;

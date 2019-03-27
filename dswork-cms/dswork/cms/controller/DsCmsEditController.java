@@ -535,7 +535,7 @@ public class DsCmsEditController extends DsCmsBaseController
 				}
 				put("columns", jsontable);
 
-				if(po.getReleasetime().isEmpty())
+				if(po.getReleasetime() == null || po.getReleasetime().length() == 0)
 				{
 					po.setReleasetime(TimeUtil.getCurrentTime());
 				}
