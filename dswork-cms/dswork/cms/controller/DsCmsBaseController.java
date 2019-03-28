@@ -1,5 +1,6 @@
 package dswork.cms.controller;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -85,12 +86,12 @@ public class DsCmsBaseController extends BaseController
 		}
 	}
 
-	public Map<Long, Map<String, Set<String>>> getSitePermission(long siteid)
+	public static Map<Long, Map<String, Set<String>>> getSitePermission(long siteid)
 	{
 		return siteMap.get(siteid);
 	}
 
-	public boolean categoryNotNeedAudit(long siteid, long categoryid)
+	public static boolean categoryNotNeedAudit(long siteid, long categoryid)
 	{
 		if(!checkOwn(siteid))
 		{
@@ -101,7 +102,7 @@ public class DsCmsBaseController extends BaseController
 			|| siteMap.get(siteid).get(categoryid).get("audit") == null;
 	}
 
-	public boolean checkEditall(long siteid, long categoryid)
+	public static boolean checkEditall(long siteid, long categoryid)
 	{
 		if(!checkOwn(siteid))
 		{
@@ -113,7 +114,7 @@ public class DsCmsBaseController extends BaseController
 			&& siteMap.get(siteid).get(categoryid).get("editall").contains(getAccount()));
 	}
 
-	public boolean checkEditown(long siteid, long categoryid)
+	public static boolean checkEditown(long siteid, long categoryid)
 	{
 		if(!checkOwn(siteid))
 		{
@@ -125,7 +126,7 @@ public class DsCmsBaseController extends BaseController
 			&& siteMap.get(siteid).get(categoryid).get("editown").contains(getAccount());
 	}
 
-	public boolean checkEdit(long siteid, long categoryid)
+	public static boolean checkEdit(long siteid, long categoryid)
 	{
 		if(!checkOwn(siteid))
 		{
@@ -135,7 +136,7 @@ public class DsCmsBaseController extends BaseController
 			|| checkEditall(siteid, categoryid);
 	}
 
-	public boolean checkAudit(long siteid, long categoryid)
+	public static boolean checkAudit(long siteid, long categoryid)
 	{
 		if(!checkOwn(siteid))
 		{
@@ -147,7 +148,7 @@ public class DsCmsBaseController extends BaseController
 			&& siteMap.get(siteid).get(categoryid).get("audit").contains(getAccount());
 	}
 
-	public boolean checkPublish(long siteid, long categoryid)
+	public static boolean checkPublish(long siteid, long categoryid)
 	{
 		if(!checkOwn(siteid))
 		{
@@ -159,7 +160,7 @@ public class DsCmsBaseController extends BaseController
 			&& siteMap.get(siteid).get(categoryid).get("publish").contains(getAccount()));
 	}
 
-	public boolean checkOwn(long siteid)
+	public static boolean checkOwn(long siteid)
 	{
 		return getOwn().equals(ownMap.get(siteid));
 	}
@@ -320,10 +321,10 @@ public class DsCmsBaseController extends BaseController
 		return list;
 	}
 
-	private String id;
-	private String own;
-	private String account;
-	private String name;
+	private static final ThreadLocal<String> id = new ThreadLocal<String>();
+	private static final ThreadLocal<String> own = new ThreadLocal<String>();
+	private static final ThreadLocal<String> account = new ThreadLocal<String>();
+	private static final ThreadLocal<String> name = new ThreadLocal<String>();
 
 	@Override
 	@ModelAttribute
@@ -331,10 +332,10 @@ public class DsCmsBaseController extends BaseController
 	{
 		super.BaseInitialization(request, response);
 		AuthOwn m = AuthOwnUtil.getUser(request);
-		id = m.getId();
-		own = m.getOwn();
-		account = m.getAccount();
-		name = m.getName();
+		id.set(m.getId());
+		own.set(m.getOwn());
+		account.set(m.getAccount());
+		name.set(m.getName());
 	}
 
 	public boolean checkCategory(DsCmsCategory category)
@@ -342,33 +343,33 @@ public class DsCmsBaseController extends BaseController
 		return false;
 	}
 
-	protected String getId()
+	protected static String getId()
 	{
-		return id;
+		return id.get();
 	}
 
-	protected String getAccount()
+	protected static String getAccount()
 	{
-		return account;
+		return account.get();
 	}
 
-	protected String getName()
+	protected static String getName()
 	{
-		return name;
+		return name.get();
 	}
 
-	protected String getOwn()
+	protected static String getOwn()
 	{
-		return own;
+		return own.get();
 	}
 
 	protected String getPathRoot()
 	{
-		return request.getSession().getServletContext().getRealPath("/") + "/";
+		return session().getServletContext().getRealPath("/") + "/";
 	}
 
 	protected String getPathHtml()
 	{
-		return request.getSession().getServletContext().getRealPath("/html") + "/";
+		return session().getServletContext().getRealPath("/html") + "/";
 	}
 }

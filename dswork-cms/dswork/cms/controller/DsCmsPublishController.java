@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,7 +24,6 @@ import dswork.core.util.FileUtil;
 import dswork.core.util.TimeUtil;
 import dswork.http.HttpUtil;
 
-@Scope("prototype")
 @Controller
 @RequestMapping("/cms/publish")
 public class DsCmsPublishController extends DsCmsBaseController
@@ -38,7 +36,7 @@ public class DsCmsPublishController extends DsCmsBaseController
 	{
 		try
 		{
-			Long id = req.getLong("siteid", -1), siteid = -1L;
+			Long id = req().getLong("siteid", -1), siteid = -1L;
 			List<DsCmsSite> siteList = service.queryListSite(getOwn());
 			if(siteList != null && siteList.size() > 0)
 			{
@@ -84,7 +82,7 @@ public class DsCmsPublishController extends DsCmsBaseController
 	{
 		try
 		{
-			long siteid = req.getLong("siteid", -1);
+			long siteid = req().getLong("siteid", -1);
 			if(siteid == -1)
 			{
 				return null;
@@ -131,7 +129,7 @@ public class DsCmsPublishController extends DsCmsBaseController
 	@RequestMapping("/getPage")
 	public String getPage()
 	{
-		Long categoryid = req.getLong("id");
+		Long categoryid = req().getLong("id");
 		DsCmsCategory m = service.getCategory(categoryid);
 		if(m.getScope() == 0)
 		{
@@ -144,7 +142,7 @@ public class DsCmsPublishController extends DsCmsBaseController
 				pr.getFilters().put("categoryid", m.getId());
 				Page<DsCmsPage> pageModel = service.queryPage(pr);
 				put("pageModel", pageModel);
-				put("pageNav", new PageNav<DsCmsPage>(request, pageModel));
+				put("pageNav", new PageNav<DsCmsPage>(request(), pageModel));
 				put("enablemobile", s.getEnablemobile() == 1);
 				put("po", m);
 				return "/cms/publish/getPage.jsp";
@@ -160,7 +158,7 @@ public class DsCmsPublishController extends DsCmsBaseController
 	{
 		try
 		{
-			Long id = req.getLong("keyIndex");
+			Long id = req().getLong("keyIndex");
 			DsCmsPage po = service.get(id);
 			DsCmsSite s = service.getSite(po.getSiteid());
 			if(checkPublish(s.getId(), po.getCategoryid()))
@@ -201,7 +199,7 @@ public class DsCmsPublishController extends DsCmsBaseController
 	{
 		try
 		{
-			Long id = req.getLong("id");
+			Long id = req().getLong("id");
 			DsCmsCategory po = service.getCategory(id);
 			DsCmsSite s = service.getSite(po.getSiteid());
 			if(checkPublish(s.getId(), po.getId()))
@@ -239,11 +237,11 @@ public class DsCmsPublishController extends DsCmsBaseController
 	@RequestMapping("/build")
 	public void build()
 	{
-		Long siteid = req.getLong("siteid", -1);
-		Long categoryid = req.getLong("categoryid", -1);
-		Long pageid = req.getLong("pageid", -1);
-		Long specialid = req.getLong("specialid", -1);
-		int pagesize = req.getInt("pagesize", 25);
+		Long siteid = req().getLong("siteid", -1);
+		Long categoryid = req().getLong("categoryid", -1);
+		Long pageid = req().getLong("pageid", -1);
+		Long specialid = req().getLong("specialid", -1);
+		int pagesize = req().getInt("pagesize", 25);
 		_building(true, siteid, categoryid, pageid, specialid, pagesize);
 	}
 
@@ -251,11 +249,11 @@ public class DsCmsPublishController extends DsCmsBaseController
 	@RequestMapping("/unbuild")
 	public void unbuild()
 	{
-		Long siteid = req.getLong("siteid", -1);
-		Long categoryid = req.getLong("categoryid", -1);
-		Long pageid = req.getLong("pageid", -1);
-		int pagesize = req.getInt("pagesize", 25);
-		Long specialid = req.getLong("specialid", -1);
+		Long siteid = req().getLong("siteid", -1);
+		Long categoryid = req().getLong("categoryid", -1);
+		Long pageid = req().getLong("pageid", -1);
+		int pagesize = req().getInt("pagesize", 25);
+		Long specialid = req().getLong("specialid", -1);
 		_building(false, siteid, categoryid, pageid, specialid, pagesize);
 	}
 
