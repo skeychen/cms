@@ -1,6 +1,5 @@
 package common.cms.controller;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,7 +12,6 @@ import common.cms.model.ViewSpecial;
 import dswork.core.util.TimeUtil;
 import dswork.mvc.BaseController;
 
-@Scope("prototype")
 @Controller
 public class DsCmsbuildController extends BaseController
 {
@@ -26,32 +24,32 @@ public class DsCmsbuildController extends BaseController
 	})
 	public String buildHTML()
 	{
-		Long siteid = req.getLong("siteid", -1);
-		Long categoryid = req.getLong("categoryid", -1);
-		Long pageid = req.getLong("pageid", -1);
-		Long specialid = req.getLong("specialid", -1);
-		boolean mobile = req.getString("mobile", "false").equals("true");
-		boolean view = req.getString("view", "false").equals("true");
-		boolean isedit = req.getString("isedit", "false").equals("true");// true是采编的预览
+		Long siteid = req().getLong("siteid", -1);
+		Long categoryid = req().getLong("categoryid", -1);
+		Long pageid = req().getLong("pageid", -1);
+		Long specialid = req().getLong("specialid", -1);
+		boolean mobile = req().getString("mobile", "false").equals("true");
+		boolean view = req().getString("view", "false").equals("true");
+		boolean isedit = req().getString("isedit", "false").equals("true");// true是采编的预览
 		CmsFactory cms = null;
 		if(!view && !isedit)
 		{
 			if(mobile)
 			{
-				cms = (CmsFactory) request.getSession().getAttribute(CMS_FACTORY_KEY_M);
+				cms = (CmsFactory) session().getAttribute(CMS_FACTORY_KEY_M);
 				if(cms == null || (cms != null && (siteid != cms.getSite().getId())))
 				{
 					cms = new CmsFactory(siteid, mobile, false);
-					request.getSession().setAttribute(CMS_FACTORY_KEY_M, cms);
+					session().setAttribute(CMS_FACTORY_KEY_M, cms);
 				}
 			}
 			else
 			{
-				cms = (CmsFactory) request.getSession().getAttribute(CMS_FACTORY_KEY);
+				cms = (CmsFactory) session().getAttribute(CMS_FACTORY_KEY);
 				if(cms == null || (cms != null && (siteid != cms.getSite().getId())))
 				{
 					cms = new CmsFactory(siteid, mobile, false);
-					request.getSession().setAttribute(CMS_FACTORY_KEY, cms);
+					session().setAttribute(CMS_FACTORY_KEY, cms);
 				}
 			}
 		}
@@ -59,7 +57,7 @@ public class DsCmsbuildController extends BaseController
 		{
 			cms = new CmsFactory(siteid, mobile, isedit);
 		}
-		cms.setRequest(request);
+		cms.setRequest(request());
 		put("cms", cms);
 		put("year", TimeUtil.getCurrentTime("yyyy"));
 		ViewSite s = cms.getSite();
@@ -67,7 +65,7 @@ public class DsCmsbuildController extends BaseController
 		put("mobile", "/m");
 		if(view || isedit)
 		{
-			put("ctx", request.getContextPath() + "/pvctx/" + (isedit ? "_" + s.getId() : s.getId()));
+			put("ctx", request().getContextPath() + "/pvctx/" + (isedit ? "_" + s.getId() : s.getId()));
 		}
 		else
 		{
@@ -97,8 +95,8 @@ public class DsCmsbuildController extends BaseController
 		}
 		if(categoryid > 0)// 栏目页
 		{
-			int page = req.getInt("page", 1);
-			int pagesize = req.getInt("pagesize", 25);
+			int page = req().getInt("page", 1);
+			int pagesize = req().getInt("pagesize", 25);
 			ViewCategory c = cms.getCategory(categoryid + "");
 			if(c.getScope() == 2)
 			{
