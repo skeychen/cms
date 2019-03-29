@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,7 +19,6 @@ import dswork.core.util.FileUtil;
 import dswork.core.util.TimeUtil;
 import dswork.core.util.UniqueId;
 
-@Scope("prototype")
 @Controller
 @RequestMapping("/cms/template")
 public class DsCmsTemplateController extends DsCmsBaseController
@@ -34,8 +32,8 @@ public class DsCmsTemplateController extends DsCmsBaseController
 	{
 		try
 		{
-			long siteid = req.getLong("siteid", -1);
-			String uriPath = req.getString("path", "/");
+			long siteid = req().getLong("siteid", -1);
+			String uriPath = req().getString("path", "/");
 			if(siteid >= 0 && uriPath.indexOf("..") == -1)// 防止读取上级目录
 			{
 				DsCmsSite site = service.get(siteid);
@@ -78,9 +76,9 @@ public class DsCmsTemplateController extends DsCmsBaseController
 	{
 		try
 		{
-			long siteid = req.getLong("siteid", -1);
-			String uriPath = req.getString("path", "/");
-			String filename = req.getString("filename", "");
+			long siteid = req().getLong("siteid", -1);
+			String uriPath = req().getString("path", "/");
+			String filename = req().getString("filename", "");
 			boolean isValid = Pattern.compile("^[A-Za-z0-9_]+$").matcher(filename).matches();
 			if(!isValid)
 			{
@@ -135,7 +133,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 	{
 		try
 		{
-			Long id = req.getLong("siteid"), siteid = -1L;
+			Long id = req().getLong("siteid"), siteid = -1L;
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("own", getOwn());
 			List<DsCmsSite> siteList = service.queryList(map);
@@ -177,9 +175,9 @@ public class DsCmsTemplateController extends DsCmsBaseController
 		sb.append("[");
 		try
 		{
-			long siteid = req.getLong("siteid", -1);
-			String uriPath = req.getString("path", "");
-			long pid = req.getLong("pid", 0);
+			long siteid = req().getLong("siteid", -1);
+			String uriPath = req().getString("path", "");
+			long pid = req().getLong("pid", 0);
 			if(siteid >= 0 && uriPath.indexOf("..") == -1)// 防止读取上级目录
 			{
 				DsCmsSite s = service.get(siteid);
@@ -249,8 +247,8 @@ public class DsCmsTemplateController extends DsCmsBaseController
 	{
 		try
 		{
-			long siteid = req.getLong("siteid", -1);
-			String uriPath = req.getString("path", "/");
+			long siteid = req().getLong("siteid", -1);
+			String uriPath = req().getString("path", "/");
 			if(siteid >= 0 && uriPath.indexOf("..") == -1)// 防止读取上级目录
 			{
 				DsCmsSite site = service.get(siteid);
@@ -295,9 +293,9 @@ public class DsCmsTemplateController extends DsCmsBaseController
 	{
 		try
 		{
-			String content = req.getString("content");
-			long siteid = req.getLong("siteid", -1);
-			String uriPath = req.getString("path", "/");
+			String content = req().getString("content");
+			long siteid = req().getLong("siteid", -1);
+			String uriPath = req().getString("path", "/");
 			if(siteid >= 0 && uriPath.indexOf("..") == -1)// 防止读取上级目录
 			{
 				DsCmsSite site = service.get(siteid);

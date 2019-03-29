@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,7 +26,6 @@ import dswork.html.nodes.Element;
 import dswork.http.HttpUtil;
 import dswork.web.MyFile;
 
-@Scope("prototype")
 @Controller
 @RequestMapping("/cms/edit")
 public class DsCmsEditController extends DsCmsBaseController
@@ -40,7 +38,7 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
-			Long id = req.getLong("siteid", -1), siteid = -1L;
+			Long id = req().getLong("siteid", -1), siteid = -1L;
 			List<DsCmsSite> siteList = service.queryListSite(getOwn());
 			if(siteList != null && siteList.size() > 0)
 			{
@@ -82,7 +80,7 @@ public class DsCmsEditController extends DsCmsBaseController
 	public String addPage1()
 	{
 		put("releasetime", TimeUtil.getCurrentTime());
-		DsCmsCategory c = service.getCategory(req.getLong("categoryid"));
+		DsCmsCategory c = service.getCategory(req().getLong("categoryid"));
 		put("columns", GsonUtil.toBean(c.getJsontable(), List.class));
 		return "/cms/edit/addPage.jsp";
 	}
@@ -92,8 +90,8 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
-			Long categoryid = req.getLong("categoryid");
-			int autosave = req.getInt("autosave", 0);
+			Long categoryid = req().getLong("categoryid");
+			int autosave = req().getInt("autosave", 0);
 			DsCmsCategory c = service.getCategory(categoryid);
 			DsCmsSite s = service.getSite(c.getSiteid());
 			if(c.getScope() == 0)
@@ -111,8 +109,8 @@ public class DsCmsEditController extends DsCmsBaseController
 					}
 
 					Map<String, String> map = new LinkedHashMap<String, String>();
-					String[] ctitleArr = req.getStringArray("ctitle", false);
-					String[] cvalueArr = req.getStringArray("cvalue", false);
+					String[] ctitleArr = req().getStringArray("ctitle", false);
+					String[] cvalueArr = req().getStringArray("cvalue", false);
 					for(int i = 0; i < ctitleArr.length; i++)
 					{
 						map.put(ctitleArr[i], cvalueArr[i]);
@@ -125,7 +123,7 @@ public class DsCmsEditController extends DsCmsBaseController
 					}
 					po.setStatus(0);
 
-					String autosubmit = req.getString("autosubmit");
+					String autosubmit = req().getString("autosubmit");
 					if("save".equals(autosubmit))
 					{
 						po.setAuditstatus(DsCmsCategoryEdit.EDIT);
@@ -168,7 +166,7 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
-			long categoryid = req.getLong("id");
+			long categoryid = req().getLong("id");
 			DsCmsCategory po = service.getCategory(categoryid);
 			if(po.getScope() == 0)
 			{
@@ -191,14 +189,14 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
-			long categoryid = req.getLong("id");
+			long categoryid = req().getLong("id");
 			DsCmsCategory po = service.getCategory(categoryid);
 			if(po.getScope() == 0)
 			{
 				DsCmsSite s = service.getSite(po.getSiteid());
 				if(checkOwn(s.getId()))
 				{
-					DsCmsPageEdit page = service.getPageEdit(req.getLong("keyIndex"));
+					DsCmsPageEdit page = service.getPageEdit(req().getLong("keyIndex"));
 					if(page.getCategoryid() != categoryid)
 					{
 						page.setCategoryid(categoryid);
@@ -229,7 +227,7 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
-			Long categoryid = req.getLong("id");
+			Long categoryid = req().getLong("id");
 			DsCmsCategory c = service.getCategory(categoryid);
 			if(c.getScope() == 0)
 			{
@@ -247,7 +245,7 @@ public class DsCmsEditController extends DsCmsBaseController
 					}
 					Page<DsCmsPageEdit> pageModel = service.queryPagePageEdit(pr);
 					put("pageModel", pageModel);
-					put("pageNav", new PageNav<DsCmsPageEdit>(request, pageModel));
+					put("pageNav", new PageNav<DsCmsPageEdit>(request(), pageModel));
 					put("po", c);
 					put("enablemobile", s.getEnablemobile() == 1);
 					put("categoryNeedAudit", !categoryNotNeedAudit(s.getId(), c.getId()));
@@ -267,11 +265,11 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
-			DsCmsCategory c = service.getCategory(req.getLong("id"));
+			DsCmsCategory c = service.getCategory(req().getLong("id"));
 			DsCmsSite s = service.getSite(c.getSiteid());
 			if(c.getScope() == 0)
 			{
-				long[] idArray = req.getLongArray("keyIndex", 0);
+				long[] idArray = req().getLongArray("keyIndex", 0);
 				if(categoryNotNeedAudit(s.getId(), c.getId()))
 				{
 					for(long id : idArray)
@@ -329,7 +327,7 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
-			Long id = req.getLong("keyIndex");
+			Long id = req().getLong("keyIndex");
 			DsCmsPageEdit po = service.getPageEdit(id);
 			DsCmsSite s = service.getSite(po.getSiteid());
 			if(
@@ -371,7 +369,7 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
-			int autosave = req.getInt("autosave", 0);
+			int autosave = req().getInt("autosave", 0);
 			DsCmsPageEdit p = service.getPageEdit(po.getId());
 			DsCmsSite s = service.getSite(p.getSiteid());
 			if(
@@ -379,7 +377,7 @@ public class DsCmsEditController extends DsCmsBaseController
 				|| (checkEditown(s.getId(), p.getCategoryid()) && checkEditid(p.getEditid()))
 			)
 			{
-				String autosubmit = req.getString("autosubmit");
+				String autosubmit = req().getString("autosubmit");
 				if("revoke".equals(autosubmit))
 				{
 					if(p.isAudit())
@@ -443,8 +441,8 @@ public class DsCmsEditController extends DsCmsBaseController
 				p.setStatus(0);
 
 				Map<String, String> map = new LinkedHashMap<String, String>();
-				String[] ctitleArr = req.getStringArray("ctitle", false);
-				String[] cvalueArr = req.getStringArray("cvalue", false);
+				String[] ctitleArr = req().getStringArray("ctitle", false);
+				String[] cvalueArr = req().getStringArray("cvalue", false);
 				for(int i = 0; i < ctitleArr.length; i++)
 				{
 					map.put(ctitleArr[i], cvalueArr[i]);
@@ -508,7 +506,7 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
-			long id = req.getLong("id");
+			long id = req().getLong("id");
 			DsCmsCategoryEdit po = service.getCategoryEdit(id);
 			if(po == null)
 			{
@@ -557,13 +555,13 @@ public class DsCmsEditController extends DsCmsBaseController
 	{ 
 		try
 		{
-			int autosave = req.getInt("autosave", 0);
+			int autosave = req().getInt("autosave", 0);
 			DsCmsCategory c = service.getCategory(po.getId());
 			DsCmsSite s = service.getSite(c.getSiteid());
 			if(checkEdit(s.getId(), c.getId()))
 			{
 				DsCmsCategoryEdit p = service.getCategoryEdit(po.getId());
-				String autosubmit = req.getString("autosubmit");
+				String autosubmit = req().getString("autosubmit");
 				if("revoke".equals(autosubmit))
 				{
 					if(p.isAudit())
@@ -619,8 +617,8 @@ public class DsCmsEditController extends DsCmsBaseController
 				p.setStatus(0);
 
 				Map<String, String> map = new LinkedHashMap<String, String>();
-				String[] ctitleArr = req.getStringArray("ctitle", false);
-				String[] cvalueArr = req.getStringArray("cvalue", false);
+				String[] ctitleArr = req().getStringArray("ctitle", false);
+				String[] cvalueArr = req().getStringArray("cvalue", false);
 				for(int i = 0; i < ctitleArr.length; i++)
 				{
 					map.put(ctitleArr[i], cvalueArr[i]);
@@ -674,7 +672,7 @@ public class DsCmsEditController extends DsCmsBaseController
 	@RequestMapping("/upload")
 	public void upload()
 	{
-		String dir = req.getString("dir");
+		String dir = req().getString("dir");
 		if(dir.equals("image"))
 		{
 			uploadImage();
@@ -690,22 +688,22 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
-			Long categoryid = req.getLong("categoryid");
+			Long categoryid = req().getLong("categoryid");
 			DsCmsCategory m = service.getCategory(categoryid);
 			DsCmsSite site = service.getSite(m.getSiteid());
 			if(checkOwn(site.getId()))
 			{
 				String ext = "";
 				byte[] byteArray = null;
-				if(req.getFileArray().length > 0)
+				if(req().getFileArray().length > 0)
 				{
-					MyFile file = req.getFileArray()[0];
+					MyFile file = req().getFileArray()[0];
 					byteArray = file.getFileData();
 					ext = file.getFileExt();
 				}
 				if(!ext.equals("") && "jpg,jpeg,gif,png".indexOf(ext) != -1)
 				{
-					String zoom = req.getString("zoom", "true");
+					String zoom = req().getString("zoom", "true");
 					String root = getPathRoot();
 					String ym = TimeUtil.getCurrentTime("yyyyMM");
 					String path = "/html/" + site.getFolder() + "/html/f/img/" + ym + "/";
@@ -752,16 +750,16 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
-			Long categoryid = req.getLong("categoryid");
+			Long categoryid = req().getLong("categoryid");
 			DsCmsCategory m = service.getCategory(categoryid);
 			DsCmsSite site = service.getSite(m.getSiteid());
 			if(checkOwn(site.getId()))
 			{
 				String ext = "";
 				byte[] byteArray = null;
-				if(req.getFileArray().length > 0)
+				if(req().getFileArray().length > 0)
 				{
-					MyFile file = req.getFileArray()[0];
+					MyFile file = req().getFileArray()[0];
 					byteArray = file.getFileData();
 					ext = file.getFileExt();
 				}

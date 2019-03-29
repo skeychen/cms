@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,7 +17,6 @@ import dswork.cms.service.DsCmsSpecialService;
 import dswork.core.util.CollectionUtil;
 import dswork.core.util.UniqueId;
 
-@Scope("prototype")
 @Controller
 @RequestMapping("/cms/special")
 public class DsCmsSpecialController extends DsCmsBaseController
@@ -31,7 +29,7 @@ public class DsCmsSpecialController extends DsCmsBaseController
 	{
 		try
 		{
-			Long id = req.getLong("siteid");
+			Long id = req().getLong("siteid");
 			DsCmsSite s = null;
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("own", getOwn());
@@ -76,19 +74,19 @@ public class DsCmsSpecialController extends DsCmsBaseController
 	{
 		try
 		{
-			long siteid = req.getLong("siteid", -1);
+			long siteid = req().getLong("siteid", -1);
 			DsCmsSite s = service.getSite(siteid);
 			boolean enablemobile = s.getEnablemobile() == 1;
 			if(checkOwn(s.getId()))
 			{
-				long [] ids = req.getLongArray("id", -1);
-				String[] titles = req.getStringArray("title");
-				String[] viewsites = req.getStringArray("viewsite");
-				String[] mviewsites = req.getStringArray("mviewsite");
-				String[] urls = req.getStringArray("url");
+				long [] ids = req().getLongArray("id", -1);
+				String[] titles = req().getStringArray("title");
+				String[] viewsites = req().getStringArray("viewsite");
+				String[] mviewsites = req().getStringArray("mviewsite");
+				String[] urls = req().getStringArray("url");
 				List<DsCmsSpecial> updList = new ArrayList<DsCmsSpecial>();
 				List<DsCmsSpecial> addList = new ArrayList<DsCmsSpecial>();
-				List<Long> delList = Arrays.asList(CollectionUtil.toLongArray(req.getLongArray("deleteId", -1)));
+				List<Long> delList = Arrays.asList(CollectionUtil.toLongArray(req().getLongArray("deleteId", -1)));
 				for(int i = 0; i < ids.length; i++)
 				{
 					DsCmsSpecial m = new DsCmsSpecial();

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,7 +20,6 @@ import dswork.core.page.PageNav;
 import dswork.core.page.PageRequest;
 import dswork.core.util.TimeUtil;
 
-@Scope("prototype")
 @Controller
 @RequestMapping("/cms/audit")
 public class DsCmsAuditController extends DsCmsBaseController
@@ -34,7 +32,7 @@ public class DsCmsAuditController extends DsCmsBaseController
 	{
 		try
 		{
-			Long id = req.getLong("siteid", -1), siteid = -1L;
+			Long id = req().getLong("siteid", -1), siteid = -1L;
 			List<DsCmsSite> siteList = service.queryListSite(getOwn());
 			if(siteList != null && siteList.size() > 0)
 			{
@@ -76,7 +74,7 @@ public class DsCmsAuditController extends DsCmsBaseController
 	{
 		try
 		{
-			long siteid = req.getLong("siteid", -1);
+			long siteid = req().getLong("siteid", -1);
 			if(siteid == -1)
 			{
 				return null;
@@ -120,7 +118,7 @@ public class DsCmsAuditController extends DsCmsBaseController
 	{
 		try
 		{
-			long id = req.getLong("id");
+			long id = req().getLong("id");
 			DsCmsCategoryEdit po = service.getCategoryEdit(id);
 			if(po == null)
 			{
@@ -157,7 +155,7 @@ public class DsCmsAuditController extends DsCmsBaseController
 					p.setAuditname(getName());
 					p.setAudittime(TimeUtil.getCurrentTime());
 
-					String action = req.getString("action");
+					String action = req().getString("action");
 					DsCmsSite s = service.getSite(p.getSiteid());
 					if("pass".equals(action))
 					{
@@ -194,7 +192,7 @@ public class DsCmsAuditController extends DsCmsBaseController
 	{
 		try
 		{
-			Long categoryid = req.getLong("id");
+			Long categoryid = req().getLong("id");
 			DsCmsCategory m = service.getCategory(categoryid);
 			DsCmsSite s = service.getSite(m.getSiteid());
 			if(checkAudit(s.getId(), m.getId()))
@@ -208,7 +206,7 @@ public class DsCmsAuditController extends DsCmsBaseController
 					pr.getFilters().put("auditstatus", DsCmsPageEdit.AUDIT);
 					Page<DsCmsPageEdit> pageModel = service.queryPagePageEdit(pr);
 					put("pageModel", pageModel);
-					put("pageNav", new PageNav<DsCmsPageEdit>(request, pageModel));
+					put("pageNav", new PageNav<DsCmsPageEdit>(request(), pageModel));
 					put("po", m);
 					DsCmsCategoryEdit c = service.getCategoryEdit(categoryid);
 					put("audit", c == null ? false : c.isAudit());
@@ -228,13 +226,13 @@ public class DsCmsAuditController extends DsCmsBaseController
 	{
 		try
 		{
-			Long id = req.getLong("keyIndex");
+			Long id = req().getLong("keyIndex");
 			DsCmsPageEdit po = service.getPageEdit(id);
 			DsCmsSite s = service.getSite(po.getSiteid());
 			if(checkAudit(s.getId(), po.getCategoryid()))
 			{
 				put("po", po);
-				put("page", req.getInt("page", 1));
+				put("page", req().getInt("page", 1));
 				put("enablemobile", s.getEnablemobile() == 1);
 				return "/cms/audit/auditPage.jsp";
 			}
@@ -261,7 +259,7 @@ public class DsCmsAuditController extends DsCmsBaseController
 					p.setAuditname(getName());
 					p.setAudittime(TimeUtil.getCurrentTime());
 
-					String action = req.getString("action");
+					String action = req().getString("action");
 					if("pass".equals(action))
 					{
 						p.setAuditstatus(DsCmsCategoryEdit.PASS);

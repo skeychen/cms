@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Queue;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -22,7 +21,6 @@ import dswork.core.page.Page;
 import dswork.core.page.PageNav;
 import dswork.core.util.FileUtil;
 
-@Scope("prototype")
 @Controller
 @RequestMapping("/cms/category")
 public class DsCmsCategoryController extends DsCmsBaseController
@@ -36,7 +34,7 @@ public class DsCmsCategoryController extends DsCmsBaseController
 	{
 		try
 		{
-			Long id = req.getLong("siteid"), siteid = -1L;
+			Long id = req().getLong("siteid"), siteid = -1L;
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("own", getOwn());
 			List<DsCmsSite> siteList = service.queryListSite(map);
@@ -80,7 +78,7 @@ public class DsCmsCategoryController extends DsCmsBaseController
 	{
 		try
 		{
-			Long id = req.getLong("siteid"), siteid = -1L;
+			Long id = req().getLong("siteid"), siteid = -1L;
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("own", getOwn());
 			List<DsCmsSite> siteList = service.queryListSite(map);
@@ -121,7 +119,7 @@ public class DsCmsCategoryController extends DsCmsBaseController
 	{
 		try
 		{
-			Long siteid = req.getLong("siteid");
+			Long siteid = req().getLong("siteid");
 			DsCmsSite s = service.getSite(siteid);
 			put("enablemobile", s.getEnablemobile() == 1);
 			put("templates", getTemplateName(s.getFolder(), false));
@@ -147,9 +145,9 @@ public class DsCmsCategoryController extends DsCmsBaseController
 				{
 					List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 					Map<String, String> map = new HashMap<String, String>();
-					String[] cnameArr = req.getStringArray("cname", false);
-					String[] ctitleArr = req.getStringArray("ctitle", false);
-					String[] cdatatypeArr = req.getStringArray("cdatatype", false);
+					String[] cnameArr = req().getStringArray("cname", false);
+					String[] ctitleArr = req().getStringArray("ctitle", false);
+					String[] cdatatypeArr = req().getStringArray("cdatatype", false);
 					for(int i = 0; i < cnameArr.length; i++)
 					{
 						if(ctitleArr[i].length() > 0 && map.get(ctitleArr[i]) == null)
@@ -184,7 +182,7 @@ public class DsCmsCategoryController extends DsCmsBaseController
 	{
 		try
 		{
-			long id = req.getLong("keyIndex", -1);
+			long id = req().getLong("keyIndex", -1);
 			DsCmsCategory po = service.get(id);
 			DsCmsSite s = service.getSite(po.getSiteid());
 			if(checkOwn(s.getId()))
@@ -226,7 +224,7 @@ public class DsCmsCategoryController extends DsCmsBaseController
 	{
 		try
 		{
-			long[] ids = req.getLongArray("keyIndex", -1);
+			long[] ids = req().getLongArray("keyIndex", -1);
 			if(ids.length == 0)
 			{
 				print("0:没有指定栏目");
@@ -274,8 +272,8 @@ public class DsCmsCategoryController extends DsCmsBaseController
 	{
 		try
 		{
-			long siteid = req.getLong("siteid", -1);
-			long id = req.getLong("keyIndex", -1);
+			long siteid = req().getLong("siteid", -1);
+			long id = req().getLong("keyIndex", -1);
 			if(checkOwn(siteid))
 			{
 				put("id", id);
@@ -296,11 +294,11 @@ public class DsCmsCategoryController extends DsCmsBaseController
 	{
 		try
 		{
-			long id = req.getLong("keyIndex", -1);
+			long id = req().getLong("keyIndex", -1);
 			DsCmsCategory po = service.get(id);
 			if(checkOwn(po.getSiteid()))
 			{
-				po.setPid(req.getLong("pid"));
+				po.setPid(req().getLong("pid"));
 				service.updateRestore(po);
 				print(1);
 				return;
@@ -319,7 +317,7 @@ public class DsCmsCategoryController extends DsCmsBaseController
 	{
 		try
 		{
-			long id = req.getLong("keyIndex", -1);
+			long id = req().getLong("keyIndex", -1);
 			DsCmsCategory po = service.get(id);
 			DsCmsSite s = service.getSite(po.getSiteid());
 			if(checkOwn(s.getId()))
@@ -330,7 +328,7 @@ public class DsCmsCategoryController extends DsCmsBaseController
 				{
 					Page<DsCmsPageEdit> page = service.queryPagePageEdit(getPageRequest());
 					put("pageModel", page);
-					put("pageNav", new PageNav<DsCmsPageEdit>(request, page));
+					put("pageNav", new PageNav<DsCmsPageEdit>(request(), page));
 				}
 				return "/cms/category/getRecycledCategoryById.jsp";
 			}
@@ -347,8 +345,8 @@ public class DsCmsCategoryController extends DsCmsBaseController
 	{
 		try
 		{
-			Long siteid = req.getLong("siteid");
-			Long id = req.getLong("keyIndex");
+			Long siteid = req().getLong("siteid");
+			Long id = req().getLong("keyIndex");
 			DsCmsCategory po = service.get(id);
 			if(siteid == po.getSiteid())
 			{
@@ -382,9 +380,9 @@ public class DsCmsCategoryController extends DsCmsBaseController
 			{
 				List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 				Map<String, String> map = new HashMap<String, String>();
-				String[] cnameArr = req.getStringArray("cname", false);
-				String[] ctitleArr = req.getStringArray("ctitle", false);
-				String[] cdatatypeArr = req.getStringArray("cdatatype", false);
+				String[] cnameArr = req().getStringArray("cname", false);
+				String[] ctitleArr = req().getStringArray("ctitle", false);
+				String[] cdatatypeArr = req().getStringArray("cdatatype", false);
 				for(int i = 0; i < cnameArr.length; i++)
 				{
 					if(ctitleArr[i].length() > 0 && map.get(ctitleArr[i]) == null)
@@ -414,9 +412,9 @@ public class DsCmsCategoryController extends DsCmsBaseController
 	@RequestMapping("/updCategorySeq")
 	public void updCategorySeq()
 	{
-		Long siteid = req.getLong("siteid");
-		long[] idArr = req.getLongArray("keyIndex", 0);
-		int[] seqArr = req.getIntArray("seq", 0);
+		Long siteid = req().getLong("siteid");
+		long[] idArr = req().getLongArray("keyIndex", 0);
+		int[] seqArr = req().getIntArray("seq", 0);
 		try
 		{
 			if(idArr.length == seqArr.length)
