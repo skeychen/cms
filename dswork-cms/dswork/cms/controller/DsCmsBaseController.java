@@ -325,11 +325,9 @@ public class DsCmsBaseController extends BaseController
 	private static final ThreadLocal<String> account = new ThreadLocal<String>();
 	private static final ThreadLocal<String> name = new ThreadLocal<String>();
 
-	@Override
 	@ModelAttribute
-	public void BaseInitialization(HttpServletRequest request, HttpServletResponse response)
+	public void DsCmsInitialization(HttpServletRequest request, HttpServletResponse response)
 	{
-		super.BaseInitialization(request, response);
 		AuthOwn m = AuthOwnUtil.getUser(request);
 		id.set(m.getId());
 		own.set(m.getOwn());
