@@ -5,7 +5,7 @@ package dswork.cms.dao;
 
 import org.springframework.stereotype.Repository;
 import dswork.core.db.BaseDao;
-import dswork.core.util.UniqueId;
+import dswork.core.util.IdUtil;
 import dswork.cms.model.DsCmsCategoryEdit;
 import dswork.cms.model.DsCmsLog;
 import dswork.cms.model.DsCmsPageEdit;
@@ -37,7 +37,7 @@ public class DsCmsLogDao extends BaseDao<DsCmsLog, Long>
 	public void saveForEditPage(DsCmsPageEdit po, int action, String editid, String editname)
 	{
 		DsCmsLog log = new DsCmsLog();
-		log.setId(UniqueId.genId());
+		log.setId(IdUtil.genId());
 		log.setSiteid(po.getSiteid());
 		log.setCategoryid(po.getCategoryid());
 		log.setPageid(po.getId());
@@ -65,7 +65,7 @@ public class DsCmsLogDao extends BaseDao<DsCmsLog, Long>
 	public void saveForEditCategory(DsCmsCategoryEdit po, int action, String editid, String editname)
 	{
 		DsCmsLog log = new DsCmsLog();
-		log.setId(UniqueId.genId());
+		log.setId(IdUtil.genId());
 		log.setSiteid(po.getSiteid());
 		log.setCategoryid(po.getId());
 		log.setEditid(editid);
@@ -90,7 +90,7 @@ public class DsCmsLogDao extends BaseDao<DsCmsLog, Long>
 	public void saveForAuditPage(DsCmsPageEdit po, int action)
 	{
 		DsCmsLog log = new DsCmsLog();
-		log.setId(UniqueId.genId());
+		log.setId(IdUtil.genId());
 		log.setSiteid(po.getSiteid());
 		log.setCategoryid(po.getCategoryid());
 		log.setPageid(po.getId());
@@ -119,7 +119,7 @@ public class DsCmsLogDao extends BaseDao<DsCmsLog, Long>
 	public void saveForAuditCategory(DsCmsCategoryEdit po, int action)
 	{
 		DsCmsLog log = new DsCmsLog();
-		log.setId(UniqueId.genId());
+		log.setId(IdUtil.genId());
 		log.setSiteid(po.getSiteid());
 		log.setCategoryid(po.getId());
 		log.setAuditid(po.getAuditid());

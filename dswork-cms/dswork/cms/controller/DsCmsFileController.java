@@ -21,7 +21,7 @@ import dswork.cms.model.DsCmsSite;
 import dswork.cms.service.DsCmsSiteService;
 import dswork.core.util.FileUtil;
 import dswork.core.util.TimeUtil;
-import dswork.core.util.UniqueId;
+import dswork.core.util.IdUtil;
 import dswork.web.MyFile;
 
 @Controller
@@ -108,7 +108,7 @@ public class DsCmsFileController extends DsCmsBaseController
 								{
 									sb.append(",");
 								}
-								sb.append("{id:").append(UniqueId.genId()).append(",pid:").append(pid).append(",isParent:").append(o.isDirectory()).append(",name:\"").append(o.getName()).append("\",path:\"").append(uriPath).append(o.getName()).append("/\"}");
+								sb.append("{id:").append(IdUtil.genId()).append(",pid:").append(pid).append(",isParent:").append(o.isDirectory()).append(",name:\"").append(o.getName()).append("\",path:\"").append(uriPath).append(o.getName()).append("/\"}");
 								i++;
 							}
 						}

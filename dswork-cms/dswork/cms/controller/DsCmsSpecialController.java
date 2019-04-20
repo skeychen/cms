@@ -15,7 +15,7 @@ import dswork.cms.model.DsCmsSite;
 import dswork.cms.model.DsCmsSpecial;
 import dswork.cms.service.DsCmsSpecialService;
 import dswork.core.util.CollectionUtil;
-import dswork.core.util.UniqueId;
+import dswork.core.util.IdUtil;
 
 @Controller
 @RequestMapping("/cms/special")
@@ -104,7 +104,7 @@ public class DsCmsSpecialController extends DsCmsBaseController
 				for(int i = ids.length; i < titles.length; i++)
 				{
 					DsCmsSpecial m = new DsCmsSpecial();
-					m.setId(UniqueId.genId());
+					m.setId(IdUtil.genId());
 					m.setSiteid(siteid);
 					m.setTitle(titles[i]);
 					m.setViewsite(viewsites[i]);

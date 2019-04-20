@@ -20,7 +20,7 @@ import dswork.cms.service.DsCmsPermissionService;
 import dswork.core.page.Page;
 import dswork.core.page.PageNav;
 import dswork.core.page.PageRequest;
-import dswork.core.util.UniqueId;
+import dswork.core.util.IdUtil;
 
 @Controller
 @RequestMapping("/cms/permission")
@@ -106,7 +106,7 @@ public class DsCmsPermissionController extends DsCmsBaseController
 			if(po == null)
 			{
 				po = new DsCmsPermission();
-				po.setId(UniqueId.genId());
+				po.setId(IdUtil.genId());
 				po.setSiteid(siteid);
 				po.setAccount(account);
 			}

@@ -17,7 +17,7 @@ import dswork.cms.model.DsCmsSite;
 import dswork.cms.service.DsCmsSiteService;
 import dswork.core.util.FileUtil;
 import dswork.core.util.TimeUtil;
-import dswork.core.util.UniqueId;
+import dswork.core.util.IdUtil;
 
 @Controller
 @RequestMapping("/cms/template")
@@ -221,7 +221,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 						{
 							if(o.isFile())
 							{
-								sb.append(first? "{id:" : ",{id:").append(UniqueId.genId())
+								sb.append(first? "{id:" : ",{id:").append(IdUtil.genId())
 									.append(",pid:").append(pid)
 									.append(",name:\"").append(o.getName())
 									.append("\",path:\"").append(uriPath).append(o.getName())
