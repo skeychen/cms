@@ -275,7 +275,7 @@ public class CmsFactory
 
 	/**
 	 * 获取变量
-	 * @param key
+	 * @param key 键
 	 * @return Object
 	 */
 	public Object value(String key)
@@ -285,8 +285,8 @@ public class CmsFactory
 
 	/**
 	 * 设置变量至页面
-	 * @param key
-	 * @param val
+	 * @param key 键
+	 * @param val 值
 	 */
 	public void value(String key, String val)
 	{

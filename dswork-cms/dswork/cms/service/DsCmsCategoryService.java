@@ -78,7 +78,7 @@ public class DsCmsCategoryService extends BaseService<DsCmsCategory, Long>
 
 	/**
 	 * 更新排序
-	 * @param ids 主键数组
+	 * @param idArr 主键数组
 	 * @param seqArr 排序位置数组
 	 * @param siteid 站点ID
 	 */

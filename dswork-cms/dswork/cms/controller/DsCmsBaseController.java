@@ -187,9 +187,9 @@ public class DsCmsBaseController extends BaseController
 	}
 
 	/**
-	 *  接受整理成树形的栏目list
-	 * @param list
-	 * @return
+	 * 对关系完成的栏目进行树形排序
+	 * @param list 关系完整的栏目list
+	 * @return List&gt;DsCmsCategory&lt;
 	 */
 	public static List<DsCmsCategory> categorySettingList(List<DsCmsCategory> list)
 	{
@@ -205,9 +205,9 @@ public class DsCmsBaseController extends BaseController
 	}
 
 	/**
-	 *  接受关系完整的栏目list
-	 * @param list
-	 * @return
+	 * 对关系完成的栏目进行树形排序
+	 * @param list 关系完整的栏目list
+	 * @return List&gt;DsCmsCategory&lt;
 	 */
 	public static List<DsCmsCategory> categorySetting(List<DsCmsCategory> list)
 	{
@@ -235,10 +235,10 @@ public class DsCmsBaseController extends BaseController
 	}
 
 	/**
-	 *  接受关系完整的栏目list和权限字符串
-	 * @param list
-	 * @param ids
-	 * @return
+	 * 对关系完成的栏目进行树形排序
+	 * @param list 关系完整的栏目list
+	 * @param controller DsCmsBaseController
+	 * @return List&gt;DsCmsCategory&lt;
 	 */
 	public static List<DsCmsCategory> categoryAccess(List<DsCmsCategory> list, DsCmsBaseController controller)
 	{
@@ -271,6 +271,14 @@ public class DsCmsBaseController extends BaseController
 		return categorySetting(__list);
 	}
 
+
+	/**
+	 * 对关系完成的栏目进行树形排序
+	 * @param clist 关系完整的栏目list
+	 * @param exclude 是否包括外链
+	 * @param excludeId 需要排除的栏目
+	 * @return List&gt;DsCmsCategory&lt;
+	 */
 	public static List<DsCmsCategory> queryCategory(List<DsCmsCategory> clist, boolean exclude, long excludeId)
 	{
 		Map<Long, DsCmsCategory> map = new HashMap<Long, DsCmsCategory>();

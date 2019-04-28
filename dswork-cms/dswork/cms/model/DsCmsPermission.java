@@ -54,7 +54,7 @@ public class DsCmsPermission
 	 * 获取可采编栏目ID字符串<br>
 	 * 格式：[,[栏目ID,[栏目ID,...]]]<br>
 	 * 一个逗号或空字符串表示没有配置任何栏目的采编权限
-	 * @return
+	 * @return String
 	 */
 	public String getEditall()
 	{
@@ -65,18 +65,18 @@ public class DsCmsPermission
 	 * 设置可采编栏目ID字符串<br>
 	 * 格式：[,[栏目ID,[栏目ID,...]]]<br>
 	 * 一个逗号或空字符串表示没有配置任何栏目的采编权限
-	 * @return
+	 * @param idsArray 格式：[,[栏目ID,[栏目ID,...]]]
 	 */
-	public void setEditall(String editall)
+	public void setEditall(String idsArray)
 	{
-		this.editall = editall;
+		this.editall = idsArray;
 	}
 
 	/**
 	 * 获取个人可采编栏目ID字符串<br>
 	 * 格式：[,[栏目ID,[栏目ID,...]]]<br>
 	 * 一个逗号或空字符串表示没有配置任何栏目的个人采编权限
-	 * @return
+	 * @return String
 	 */
 	public String getEditown()
 	{
@@ -87,18 +87,18 @@ public class DsCmsPermission
 	 * 设置个人可采编栏目ID字符串<br>
 	 * 格式：[,[栏目ID,[栏目ID,...]]]<br>
 	 * 一个逗号或空字符串表示没有配置任何栏目的个人采编权限
-	 * @return
+	 * @param idsArray 格式：[,[栏目ID,[栏目ID,...]]]
 	 */
-	public void setEditown(String editown)
+	public void setEditown(String idsArray)
 	{
-		this.editown = editown;
+		this.editown = idsArray;
 	}
 
 	/**
 	 * 获取可审核栏目ID字符串<br>
 	 * 格式：[,[栏目ID,[栏目ID,...]]]<br>
 	 * 一个逗号或空字符串表示没有配置任何栏目的审核权限
-	 * @return
+	 * @return String
 	 */
 	public String getAudit()
 	{
@@ -109,18 +109,18 @@ public class DsCmsPermission
 	 * 设置可审核栏目ID字符串<br>
 	 * 格式：[,[栏目ID,[栏目ID,...]]]<br>
 	 * 一个逗号或空字符串表示没有配置任何栏目的审核权限
-	 * @return
+	 * @param idsArray 格式：[,[栏目ID,[栏目ID,...]]]
 	 */
-	public void setAudit(String audit)
+	public void setAudit(String idsArray)
 	{
-		this.audit = audit;
+		this.audit = idsArray;
 	}
 
 	/**
 	 * 获取可发布栏目ID字符串<br>
 	 * 格式：[,[栏目ID,[栏目ID,...]]]<br>
 	 * 一个逗号或空字符串表示没有配置任何栏目的发布权限
-	 * @return
+	 * @return String
 	 */
 	public String getPublish()
 	{
@@ -131,10 +131,10 @@ public class DsCmsPermission
 	 * 设置可发布栏目ID字符串<br>
 	 * 格式：[,[栏目ID,[栏目ID,...]]]<br>
 	 * 一个逗号或空字符串表示没有配置任何栏目的发布权限
-	 * @return
+	 * @param idsArray 格式：[,[栏目ID,[栏目ID,...]]]
 	 */
-	public void setPublish(String publish)
+	public void setPublish(String idsArray)
 	{
-		this.publish = publish;
+		this.publish = idsArray;
 	}
 }

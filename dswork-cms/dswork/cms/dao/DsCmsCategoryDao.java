@@ -66,8 +66,8 @@ public class DsCmsCategoryDao extends BaseDao<DsCmsCategory, Long>
 
 	/**
 	 * 更新发布状态
-	 * @param id 
-	 * @param status 
+	 * @param id 栏目ID
+	 * @param status 设置的状态
 	 * @return int
 	 */
 	public int updateStatus(Long id, int status)

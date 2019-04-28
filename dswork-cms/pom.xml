@@ -1,54 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.github.skeychen</groupId>
+	<parent><groupId>com.github.skeychen</groupId><artifactId>dswork-parent</artifactId><version>8.8.6</version></parent>
 	<artifactId>dswork-cms</artifactId>
-	<version>${v.dswork}</version>
-	<name>dswork-cms</name>
-	<description>dswork-cms</description>
-	<url>https://github.com/skeychen/dswork</url>
-
-	<parent>
-		<groupId>com.github.skeychen</groupId>
-		<artifactId>dswork-parent</artifactId>
-		<version>8.8.1</version>
-	</parent>
-
 	<dependencies>
-		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-javaweb</artifactId><type>pom</type></dependency>
-		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-html</artifactId></dependency>
-		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-sso</artifactId></dependency>
-		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-authown</artifactId></dependency>
+		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-javaweb</artifactId><version>${project.version}</version><type>pom</type></dependency>
+		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-html</artifactId><version>${project.version}</version></dependency>
+		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-sso</artifactId><version>${project.version}</version></dependency>
+		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-authown</artifactId><version>${project.version}</version></dependency>
 		<dependency><groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId><scope>provided</scope></dependency>
 	</dependencies>
-
 	<build>
 		<sourceDirectory>./</sourceDirectory>
 		<directory>E:/Workspaces/jar/pom/dswork-cms</directory>
-		<resources> 
-		     <resource>
-			     <directory>./</directory>
-			     <includes>
-			     	<include>dswork/cms/mapper/*.xml</include>
-			     	<include>common/cms/*.xml</include>
-			     </includes>
-			     <filtering>false</filtering>
-		     </resource>
-		 </resources>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<addMavenDescriptor>false</addMavenDescriptor>
-						<manifestFile>./MANIFEST.MF</manifestFile>
-					</archive>
-				</configuration>
-			</plugin>
-		</plugins>
 	</build>
-
 </project>

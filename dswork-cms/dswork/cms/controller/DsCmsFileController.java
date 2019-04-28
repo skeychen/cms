@@ -181,7 +181,7 @@ public class DsCmsFileController extends DsCmsBaseController
 
 	/**
 	 * 跳转文件上传页面
-	 * @return
+	 * @return String
 	 */
 	@RequestMapping("/uploadFile1")
 	public String uploadFile1()
@@ -269,8 +269,8 @@ public class DsCmsFileController extends DsCmsBaseController
 
 	/**
 	 * 解压文件
-	 * @param zipFilePath //要解压得文件路径
-	 * @param targetPath //要解压得目标路径
+	 * @param dataArray 文件进制数据
+	 * @param targetPath 要解压得目标路径
 	 */
 	public void unzipFile(byte[] dataArray, String targetPath)
 	{
