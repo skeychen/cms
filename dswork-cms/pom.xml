@@ -9,8 +9,4 @@
 		<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-authown</artifactId><version>${project.version}</version></dependency>
 		<dependency><groupId>javax.servlet</groupId><artifactId>javax.servlet-api</artifactId><scope>provided</scope></dependency>
 	</dependencies>
-	<build>
-		<sourceDirectory>./</sourceDirectory>
-		<directory>E:/Workspaces/jar/pom/dswork-cms</directory>
-	</build>
 </project>
