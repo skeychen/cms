@@ -5,7 +5,7 @@
 <html>
 <head>
 <title></title>
-<%@include file="/commons/include/get.jsp" %>
+<%@include file="/commons/include/list.jsp" %>
 <style type="text/css">
 tr.x td{text-align:left;padding-left:3px;}
 </style>

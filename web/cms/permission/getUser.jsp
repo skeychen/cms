@@ -7,7 +7,7 @@ request.setAttribute("arr", arr);
 <html>
 <head>
 <title></title>
-<%@include file="/commons/include/get.jsp"%>
+<%@include file="/commons/include/list.jsp"%>
 <script type="text/javascript">
 function empower(account){
 	$jskey.dialog.showDialog({url:"${ctx}/cms/permission/updPermission1.htm?account="+account,title:"为 "+account+" 分配权限",fit:true,draggable:false});

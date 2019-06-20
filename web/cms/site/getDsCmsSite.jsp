@@ -14,7 +14,7 @@ request.setAttribute("param", map);
 <html>
 <head>
 <title></title>
-<%@include file="/commons/include/get.jsp"%>
+<%@include file="/commons/include/list.jsp"%>
 <script type="text/javascript">
 $(function(){
 	$dswork.page.menu("delDsCmsSite.jsp", "updDsCmsSite1.jsp", "getDsCmsSiteById.jsp", "${pageModel.page}");

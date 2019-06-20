@@ -5,7 +5,7 @@
 <html>
 <head>
 <title></title>
-<%@include file="/commons/include/addAjax.jsp"%>
+<%@include file="/commons/include/add1.jsp"%>
 <script type="text/javascript">
 window.parent.setTextChange(false);// 第一次进来时，重置父页面修改状态的标记信息
 $dswork.doAjax = true;

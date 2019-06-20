@@ -6,7 +6,7 @@
 <c:if test="${siteid<0}">
 <head>
 <title></title>
-<%@include file="/commons/include/get.jsp" %>
+<%@include file="/commons/include/list.jsp" %>
 <body>
 <table border="0" cellspacing="0" cellpadding="0" class="listLogo">
 	<tr><td class="title">信息发布：没有可管理的站点</td></tr>
@@ -16,7 +16,7 @@
 <c:if test="${siteid>=0}">
 <head>
 <title></title>
-<%@include file="/commons/include/get.jsp"%>
+<%@include file="/commons/include/list.jsp"%>
 <%@include file="/commons/include/ztree.jsp"%>
 <script type="text/javascript">
 $dswork.callback=null;
