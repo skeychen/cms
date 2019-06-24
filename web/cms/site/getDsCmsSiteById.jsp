@@ -10,7 +10,7 @@ request.setAttribute("po", ((DsCmsSiteService)dswork.spring.BeanFactory.getBean(
 <html>
 <head>
 <title></title>
-<%@include file="/commons/include/get.jsp"%>
+<%@include file="/commons/include/web.jsp"%>
 </head>
 <body>
 <table border="0" cellspacing="0" cellpadding="0" class="listLogo">

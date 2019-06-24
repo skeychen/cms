@@ -76,7 +76,7 @@ catch(Exception e)
 <html>
 <head>
 <title></title>
-<%@include file="/commons/include/list.jsp"%>
+<%@include file="/commons/include/web.jsp"%>
 <script type="text/javascript">
 function chooseType(v)
 {

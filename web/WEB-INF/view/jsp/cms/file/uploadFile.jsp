@@ -5,7 +5,7 @@
 <html>
 <head>
 <title></title>
-<%@include file="/commons/include/upd.jsp" %>
+<%@include file="/commons/include/upd.jsp"%>
 <script type="text/javascript" src="/web/js/jskey/jskey_upload.js"></script>
 <script type="text/javascript">
 var o = new $dswork.upload({url:"uploadFile2.htm?siteid=${siteid}&path=${path}",ext:"zip,ZIP",limit:102400});

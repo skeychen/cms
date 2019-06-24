@@ -5,10 +5,10 @@
 <html>
 <head>
 <title></title>
-<%@include file="/commons/include/updAjax.jsp" %>
-<%@include file="/commons/include/cmsEditor.jsp" %>
+<%@include file="/commons/include/web.jsp"%>
+<%@include file="/commons/include/cmsEditor.jsp"%>
 <script type="text/javascript">
-$dswork.callback = function(){if($dswork.result.type==1){
+$dswork.callback = function(){if($dswork.result.code==1){
 	<c:if test="${scope==0}">location.href = 'getPage.htm?id=${po.id}';</c:if>
 	<c:if test="${scope!=0}">location.reload();</c:if>
 }}

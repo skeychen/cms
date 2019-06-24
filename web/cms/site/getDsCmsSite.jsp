@@ -14,13 +14,13 @@ request.setAttribute("param", map);
 <html>
 <head>
 <title></title>
-<%@include file="/commons/include/list.jsp"%>
+<%@include file="/commons/include/web.jsp"%>
 <script type="text/javascript">
 $(function(){
 	$dswork.page.menu("delDsCmsSite.jsp", "updDsCmsSite1.jsp", "getDsCmsSiteById.jsp", "${pageModel.page}");
 });
 $dswork.doAjax = true;
-$dswork.callback = function(){if($dswork.result.type == 1){
+$dswork.callback = function(){if($dswork.result.code == 1){
 	location.href = "getDsCmsSite.jsp?page=${pageModel.page}";
 }};
 </script>

@@ -6,7 +6,7 @@
 <c:if test="${siteid<0}">
 <head>
 <title></title>
-<%@include file="/commons/include/list.jsp" %>
+<%@include file="/commons/include/web.jsp"%>
 </head>
 <body>
 <table border="0" cellspacing="0" cellpadding="0" class="listLogo">
@@ -17,12 +17,12 @@
 <c:if test="${siteid>=0}">
 <head>
 <title></title>
-<%@include file="/commons/include/list.jsp" %>
+<%@include file="/commons/include/web.jsp"%>
 <script type="text/javascript">
 $dswork.callback = function(){
-	if($dswork.result.type == 1){
+	if($dswork.result.code == 1){
 		location.reload();
-	}else if($dswork.result.type == 2){
+	}else if($dswork.result.code == 2){
 		var ids = $dswork.result.msg.split(',');
 		for(var i = 0; i < ids.length - 1; i++){
 			$('#mark_' + ids[i]).css({'background-color':'red'});

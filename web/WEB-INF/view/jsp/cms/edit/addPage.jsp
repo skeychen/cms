@@ -5,10 +5,10 @@
 <html>
 <head>
 <title></title>
-<%@include file="/commons/include/add1.jsp" %>
-<%@include file="/commons/include/cmsEditor.jsp" %>
+<%@include file="/commons/include/add1.jsp"%>
+<%@include file="/commons/include/cmsEditor.jsp"%>
 <script type="text/javascript">
-$dswork.callback = function(){if($dswork.result.type == 1){
+$dswork.callback = function(){if($dswork.result.code == 1){
 	location.href = "getPage.htm?id=${fn:escapeXml(param.categoryid)}";
 }};
 $(function(){

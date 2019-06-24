@@ -5,7 +5,7 @@
 <html>
 <head>
 <title></title>
-<%@include file="/commons/include/list.jsp" %>
+<%@include file="/commons/include/web.jsp"%>
 <style type="text/css">
 .v{padding-left:3px;}
 .v img{line-height:20px;vertical-align:middle;}

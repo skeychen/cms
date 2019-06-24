@@ -6,7 +6,7 @@
 <c:if test="${siteid<0}">
 <head>
 <title></title>
-<%@include file="/commons/include/list.jsp" %>
+<%@include file="/commons/include/web.jsp"%>
 </head>
 <body>
 <table border="0" cellspacing="0" cellpadding="0" class="listLogo">
@@ -19,7 +19,7 @@
 <c:if test="${siteid>=0}">
 <head>
 <title></title>
-<%@include file="/commons/include/add1.jsp" %>
+<%@include file="/commons/include/add1.jsp"%>
 <script type="text/javascript">
 $dswork.deleteRow = function(obj){
 	var deleteId = $(obj).siblings('input[name="id"]');
@@ -28,7 +28,7 @@ $dswork.deleteRow = function(obj){
 	}
 	$(obj).parent().parent().remove();
 };
-$dswork.callback = function(){if($dswork.result.type == 1){
+$dswork.callback = function(){if($dswork.result.code == 1){
 	location.href = "getSpecial.htm?siteid=${fn:escapeXml(param.siteid)}";
 }};
 $(function(){

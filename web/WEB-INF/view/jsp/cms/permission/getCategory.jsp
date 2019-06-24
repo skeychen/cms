@@ -6,7 +6,7 @@
 <c:if test="${siteid<0}">
 <head>
 <title></title>
-<%@include file="/commons/include/list.jsp" %>
+<%@include file="/commons/include/web.jsp"%>
 </head>
 <body>
 <table border="0" cellspacing="0" cellpadding="0" class="listLogo">
@@ -19,7 +19,7 @@
 <c:if test="${siteid>=0}">
 <head>
 <title></title>
-<%@include file="/commons/include/list.jsp" %>
+<%@include file="/commons/include/web.jsp"%>
 <script type="text/javascript">
 $(function(){
 	$("#site").bind("click", function(){
