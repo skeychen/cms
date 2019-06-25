@@ -39,15 +39,15 @@ $dswork.ztree.click=function(){
 	return false;
 };
 function build(categoryid,pageid,specialid){
-	$dswork.doAjaxObject.autoDelayHide("发布中",2000);
-	$.post("build.htm",{"siteid":"${siteid}","categoryid":categoryid,"pageid":pageid,"specialid":specialid},function(data){
-		$dswork.doAjaxShow(data,function(){});
+	$dswork.show("发布中");
+	$.post("build.htm",{"siteid":"${siteid}","categoryid":categoryid,"pageid":pageid,"specialid":specialid},function(res){
+		$dswork.showResponse(res,function(){});
 	});
 }
 function unbuild(categoryid,pageid,specialid){
-	$dswork.doAjaxObject.autoDelayHide("删除中",2000);
-	$.post("unbuild.htm",{"siteid":"${siteid}","categoryid":categoryid,"pageid":pageid,"specialid":specialid},function(data){
-		$dswork.doAjaxShow(data,function(){});
+	$dswork.show("删除中");
+	$.post("unbuild.htm",{"siteid":"${siteid}","categoryid":categoryid,"pageid":pageid,"specialid":specialid},function(res){
+		$dswork.showResponse(res,function(){});
 	});
 }
 $(function(){

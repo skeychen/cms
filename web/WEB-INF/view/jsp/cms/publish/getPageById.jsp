@@ -20,9 +20,9 @@ $(function(){
 	$(".form_title").css("width", "8%");
 	$("#btn_category").bind("click", function(){
 		if(confirm("是否发布")){
-			$dswork.doAjaxObject.show("发布中");
-			$.post("build.htm",{siteid:"${po.siteid}",categoryid:"${po.categoryid}",pageid:"${po.id}"},function(data){
-				$dswork.doAjaxShow(data, $dswork.callback);
+			$dswork.showRequest("发布中");
+			$.post("build.htm",{siteid:"${po.siteid}",categoryid:"${po.categoryid}",pageid:"${po.id}"},function(res){
+				$dswork.showResponse(res);
 			});
 		}
 	});

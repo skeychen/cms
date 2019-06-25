@@ -21,18 +21,18 @@ $(function(){
 <c:if test="${scope==1}">
 	$("#btn_category").bind("click", function(){
 		if(confirm("是否发布栏目\"${fn:escapeXml(po.name)}\"")){
-			$dswork.doAjaxObject.show("发布中");
+			$dswork.showRequest("发布中");
 			$.post("build.htm",{"siteid":"${po.siteid}", "categoryid":"${po.id}"},function(data){
-				$dswork.doAjaxShow(data, $dswork.callback);
+				$dswork.showResponse(data);
 			});
 		}
 	});
 </c:if>
 	$("#btn_site").bind("click", function(){
 		if(confirm("是否发布首页")){
-			$dswork.doAjaxObject.show("发布中");
+			$dswork.showRequest("发布中");
 			$.post("build.htm",{"siteid":"${po.siteid}"},function(data){
-				$dswork.doAjaxShow(data, $dswork.callback);
+				$dswork.showResponse(data);
 			});
 		}
 	});

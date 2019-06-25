@@ -11,22 +11,22 @@ $dswork.callback = function(){if($dswork.result.code==1){
 	location.reload();
 }};
 function build(pageid){
-	$dswork.doAjaxObject.autoDelayHide("发布中", 2000);
+	$dswork.show("发布中");
 	var v = {"siteid":"${po.siteid}"};
 	if(pageid != null){
 		v.categoryid = "${po.id}";
 		v.pageid = pageid;
 	}
-	$.post("build.htm",v,function(data){$dswork.doAjaxShow(data, $dswork.callback);});
+	$.post("build.htm",v,function(res){$dswork.showResponse(res);});
 }
 function unbuild(pageid){
-	$dswork.doAjaxObject.autoDelayHide("删除中", 2000);
+	$dswork.show("删除中");
 	var v = {"siteid":"${po.siteid}"};
 	if(pageid != null){
 		v.categoryid = "${po.id}";
 		v.pageid = pageid;
 	}
-	$.post("unbuild.htm",v,function(data){$dswork.doAjaxShow(data, $dswork.callback);});
+	$.post("unbuild.htm",v,function(res){$dswork.showResponse(res);});
 }
 $dswork.page.join = function(td, menu, id){
 	$(menu).append($('<div iconCls="menuTool-graph">预览</div>').bind("click", function(){
