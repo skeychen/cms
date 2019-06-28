@@ -36,7 +36,6 @@ $(function(){
 	}});
 	$('#dataTable tr.list_body').eq(0).click();
 });
-$dswork.doAjax = true;
 $dswork.callback = function(){if($dswork.result.code == 1){
 	location.href = "getRecycledCategory.htm?siteid=${siteid}";
 }};

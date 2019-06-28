@@ -19,7 +19,6 @@ request.setAttribute("param", map);
 $(function(){
 	$dswork.page.menu("delDsCmsSite.jsp", "updDsCmsSite1.jsp", "getDsCmsSiteById.jsp", "${pageModel.page}");
 });
-$dswork.doAjax = true;
 $dswork.callback = function(){if($dswork.result.code == 1){
 	location.href = "getDsCmsSite.jsp?page=${pageModel.page}";
 }};

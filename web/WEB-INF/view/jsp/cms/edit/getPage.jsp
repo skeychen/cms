@@ -15,7 +15,6 @@ $(function(){
 		$jskey.dialog.showDialog({title:'同步到栏目',fit:true,url:'copyPage1.htm?id=${po.id}&keyIndex='+id});
 	}));
 };</c:if>
-$dswork.doAjax = true;
 $dswork.callback = function(){if($dswork.result.code == 1){
 	location.href = "getPage.htm?id=${po.id}&page=${pageModel.page}";
 }};

@@ -8,7 +8,6 @@
 <%@include file="/commons/include/web.jsp"%>
 <script type="text/javascript">
 window.parent.setTextChange(false);
-$dswork.doAjax = true;
 $dswork.callback = function(){if($dswork.result.code == 1){
 	window.parent.setTextChange(false);
 }};

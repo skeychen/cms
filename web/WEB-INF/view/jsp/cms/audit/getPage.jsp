@@ -10,7 +10,6 @@
 $(function(){
 	$dswork.page.menu("", "", "", "");
 });
-$dswork.doAjax = true;
 $dswork.callback = function(){if($dswork.result.code == 1){
 	location.href = "getPage.htm?id=${po.id}&page=${pageModel.page}";
 }};
