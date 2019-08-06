@@ -121,9 +121,13 @@ public class DsCmsCategoryController extends DsCmsBaseController
 		{
 			Long siteid = req().getLong("siteid");
 			DsCmsSite s = service.getSite(siteid);
-			put("enablemobile", s.getEnablemobile() == 1);
+			boolean mobile = s.getEnablemobile() == 1;
+			put("enablemobile", mobile);
 			put("templates", getTemplateName(s.getFolder(), false));
-			put("mtemplates", getTemplateName(s.getFolder(), true));
+			if(mobile)
+			{
+				put("mtemplates", getTemplateName(s.getFolder(), true));
+			}
 			put("list", queryCategory(siteid, true, 0));
 			return "/cms/category/addCategory.jsp";
 		}
@@ -355,9 +359,13 @@ public class DsCmsCategoryController extends DsCmsBaseController
 				{
 					put("po", po);
 					put("list", queryCategory(po.getSiteid(), true, id));
-					put("enablemobile", s.getEnablemobile() == 1);
+					boolean mobile = s.getEnablemobile() == 1;
+					put("enablemobile", mobile);
 					put("templates", getTemplateName(s.getFolder(), false));
-					put("mtemplates", getTemplateName(s.getFolder(), true));
+					if(mobile)
+					{
+						put("mtemplates", getTemplateName(s.getFolder(), true));
+					}
 					put("columns", GsonUtil.toBean(po.getJsontable(), List.class));
 					return "/cms/category/updCategory.jsp";
 				}

@@ -52,9 +52,13 @@ public class DsCmsSpecialController extends DsCmsBaseController
 				put("site", s);
 				put("siteid", s.getId());
 				put("list", service.querySpecialList(s.getId()));
-				put("enablemobile", s.getEnablemobile() == 1);
+				boolean mobile = s.getEnablemobile() == 1;
+				put("enablemobile", mobile);
 				put("templates", getTemplateName(s.getFolder(), false));
-				put("mtemplates", getTemplateName(s.getFolder(), true));
+				if(mobile)
+				{
+					put("mtemplates", getTemplateName(s.getFolder(), true));
+				}
 			}
 			else
 			{
