@@ -11,6 +11,6 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <javaElement handleIdentifier="=cms/dswork-authown&lt;dswork.authown"/>
+        <javaElement handleIdentifier="=cms/dswork-authown\/src\/main\/java"/>
     </selectedElements>
 </jardesc>

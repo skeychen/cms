@@ -8,10 +8,10 @@
 <url>https://github.com/skeychen/cms</url>
 
 <dependencies>
-	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-javaweb</artifactId><version>8.8.6</version><type>pom</type></dependency>
-	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-html</artifactId><version>8.8.6</version></dependency>
-	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-sso</artifactId><version>8.8.6</version></dependency>
-	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-ee</artifactId><version>8.8.6</version><scope>provided</scope></dependency>
+	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-javaweb</artifactId><version>8.8.7</version><type>pom</type></dependency>
+	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-html</artifactId><version>8.8.7</version></dependency>
+	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-sso</artifactId><version>8.8.7</version></dependency>
+	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-ee</artifactId><version>8.8.7</version><scope>provided</scope></dependency>
 <!--
 -->
 <!--
