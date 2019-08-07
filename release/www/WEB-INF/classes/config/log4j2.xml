@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="off">
 	<Appenders>
-		<RollingFile name="logfile" fileName="${web:rootDir}/../../logs${web:contextPath}/log4j.log" filePattern="${web:rootDir}/../../logs${web:contextPath}/log4j%d{yyyy-MM-dd}-%i.txt.gz" ignoreExceptions="false">
+		<RollingFile name="logfile" fileName="${sys:logsDir}${sys:contextPath}/log4j.log" filePattern="${sys:logsDir}${sys:contextPath}/log4j%d{yyyy-MM-dd}-%i.txt.gz" ignoreExceptions="false">
 			<PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss,SSS} [%p] %c - %m%n" />
 			<Policies>
 				<TimeBasedTriggeringPolicy interval="24" modulate="true" />
