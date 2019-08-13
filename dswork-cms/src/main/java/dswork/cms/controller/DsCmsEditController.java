@@ -91,6 +91,14 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
+			if(po.getPbegin() == 0)
+			{
+				po.setPbegin(po.getPend() > 0 ? po.getPend() : Long.parseLong(TimeUtil.getCurrentTime("yyyyMMdd000000")));
+			}
+			if(po.getPend() == 0)
+			{
+				po.setPend(po.getPbegin() > 0 ? po.getPbegin() : Long.parseLong(TimeUtil.getCurrentTime("yyyyMMdd235959")));
+			}
 			Long categoryid = req().getLong("categoryid");
 			int autosave = req().getInt("autosave", 0);
 			DsCmsCategory c = service.getCategory(categoryid);
@@ -230,6 +238,7 @@ public class DsCmsEditController extends DsCmsBaseController
 		{
 			Long categoryid = req().getLong("id");
 			DsCmsCategory c = service.getCategory(categoryid);
+			put("category", c);
 			if(c.getScope() == 0)
 			{
 				DsCmsSite s = service.getSite(c.getSiteid());
@@ -371,6 +380,14 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		try
 		{
+			if(po.getPbegin() == 0)
+			{
+				po.setPbegin(po.getPend() > 0 ? po.getPend() : Long.parseLong(TimeUtil.getCurrentTime("yyyyMMdd000000")));
+			}
+			if(po.getPend() == 0)
+			{
+				po.setPend(po.getPbegin() > 0 ? po.getPbegin() : Long.parseLong(TimeUtil.getCurrentTime("yyyyMMdd235959")));
+			}
 			int autosave = req().getInt("autosave", 0);
 			DsCmsPageEdit p = service.getPageEdit(po.getId());
 			DsCmsSite s = service.getSite(p.getSiteid());
