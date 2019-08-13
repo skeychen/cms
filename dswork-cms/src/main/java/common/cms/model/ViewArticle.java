@@ -7,6 +7,7 @@ import common.cms.GsonUtil;
 
 public class ViewArticle
 {
+	private static long _time = 10000000000000L;
 	private Long id;
 	private Long siteid;
 	private Long categoryid;
@@ -21,8 +22,13 @@ public class ViewArticle
 	private String releasesource = "";
 	private String releaseuser = "";
 	private String img = "";
+	private String ptype = "";
+	private long pbegin = 0;
+	private long pend = 0;
 	private String content = "";
 	private String jsondata = "";
+	@SuppressWarnings("rawtypes")
+	private Map map = null;
 
 	public Long getId()
 	{
@@ -164,6 +170,56 @@ public class ViewArticle
 		this.img = img;
 	}
 
+	public String getPtype()
+	{
+		return ptype;
+	}
+
+	public void setPtype(String ptype)
+	{
+		this.ptype = ptype;
+	}
+
+	public long getPbegin()
+	{
+		return pbegin;
+	}
+
+	public String getPbegindate()
+	{
+		if(pbegin > _time)
+		{
+			String s = String.valueOf(pbegin);
+			return s.substring(0, 4) + "-" + s.substring(4, 6) + "-" + s.substring(6, 8);
+		}
+		return "";
+	}
+
+	public void setPbegin(long pbegin)
+	{
+		this.pbegin = pbegin;
+	}
+
+	public long getPend()
+	{
+		return pend;
+	}
+
+	public String getPenddate()
+	{
+		if(pend > _time)
+		{
+			String s = String.valueOf(pend);
+			return s.substring(0, 4) + "-" + s.substring(4, 6) + "-" + s.substring(6, 8);
+		}
+		return "";
+	}
+
+	public void setPend(long pend)
+	{
+		this.pend = pend;
+	}
+
 	public String getContent()
 	{
 		return content;
@@ -187,10 +243,17 @@ public class ViewArticle
 	@SuppressWarnings("rawtypes")
 	public Map getVo()
 	{
-		if(jsondata == null || jsondata.length() < 2)
+		if(map == null)
 		{
-			return new HashMap();
+			if(jsondata == null || jsondata.length() < 2)
+			{
+				map = new HashMap();
+			}
+			else
+			{
+				map = GsonUtil.toBean(jsondata, Map.class);
+			}
 		}
-		return GsonUtil.toBean(jsondata, Map.class);
+		return map;
 	}
 }

@@ -90,6 +90,11 @@ public class DsCmsbuildController extends BaseController
 			put("releaseuser", p.getReleaseuser());
 			put("img", p.getImg());
 			put("url", p.getUrl());
+			put("ptype", p.getPtype());
+			put("pbegin", p.getPbegin());
+			put("pend", p.getPend());
+			put("pbegindate", p.getPbegindate());
+			put("penddate", p.getPenddate());
 			put("content", p.getContent());
 			return "/" + s.getFolder() + (mobile ? "/templates/m/" + c.getMpageviewsite() : "/templates/" + c.getPageviewsite());
 		}

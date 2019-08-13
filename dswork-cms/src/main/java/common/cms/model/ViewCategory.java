@@ -30,6 +30,8 @@ public class ViewCategory
 	private String img = "";
 	private String content = "";
 	private String jsondata = "";
+	@SuppressWarnings("rawtypes")
+	private Map map = null;
 
 	private transient ViewCategory parent;
 	private List<ViewCategory> list = new ArrayList<ViewCategory>();
@@ -267,10 +269,17 @@ public class ViewCategory
 	@SuppressWarnings("rawtypes")
 	public Map getVo()
 	{
-		if(jsondata == null || jsondata.length() < 2)
+		if(map == null)
 		{
-			return new HashMap();
+			if(jsondata == null || jsondata.length() < 2)
+			{
+				map = new HashMap();
+			}
+			else
+			{
+				map = GsonUtil.toBean(jsondata, Map.class);
+			}
 		}
-		return GsonUtil.toBean(jsondata, Map.class);
+		return map;
 	}
 }
