@@ -49,7 +49,7 @@ public class DsCmsDao extends MyBatisDao
 		return (ViewArticle)executeSelect("get", map);
 	}
 
-	public Page<ViewArticle> queryArticlePage(Long siteid, int currentPage, int pageSize, String idArray, Boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String keyvalue)
+	public Page<ViewArticle> queryArticlePage(Long siteid, int currentPage, int pageSize, String idArray, Boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, String keyvalue)
 	{
 		if(currentPage <= 0){currentPage = 1;}
 		if(pageSize <= 0){pageSize = 25;}
@@ -62,7 +62,9 @@ public class DsCmsDao extends MyBatisDao
 		rq.getFilters().put("pagetop", onlyPageTop?"1":"");
 		rq.getFilters().put("releasetime", TimeUtil.getCurrentTime());
 		rq.getFilters().put("status", "8");// 已发布
-		rq.getFilters().put("keyvalue", keyvalue);
+		rq.getFilters().put("ptype", ptype);
+		rq.getFilters().put("pbegin", pbegin);
+		rq.getFilters().put("pend", pend);
 		return queryPage("query", rq, "queryCount", rq);
 	}
 

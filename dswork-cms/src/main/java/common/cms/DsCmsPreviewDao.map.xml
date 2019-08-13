@@ -48,6 +48,9 @@
 		<if test="@Ognl@isNotEmpty(imgtop)"> and IMGTOP=1 </if>
 		<if test="@Ognl@isNotEmpty(pagetop)"> and PAGETOP=1 </if>
 		<if test="@Ognl@isNotEmpty(releasetime)"> and RELEASETIME&lt;=#{releasetime} </if>
+		<if test="@Ognl@isNotEmpty(ptype)"> and PTYPE=#{ptype} </if>
+		<if test="pbegin &gt; 0"> and PBEGIN&gt;=#{pbegin} </if>
+		<if test="pend &gt; 0"> and PEND&lt;=#{pend} </if>
 		<if test="@Ognl@isNotEmpty(keyvalue)"> and (TITLE like #{keyvalue, typeHandler=LikeTypeHandler} or SUMMARY like #{keyvalue, typeHandler=LikeTypeHandler} or CONTENT like #{keyvalue, typeHandler=LikeTypeHandler}) </if>
 	order by RELEASETIME ${order}
 </select>
@@ -58,6 +61,9 @@
 		<if test="@Ognl@isNotEmpty(imgtop)"> and IMGTOP=1 </if>
 		<if test="@Ognl@isNotEmpty(pagetop)"> and PAGETOP=1 </if>
 		<if test="@Ognl@isNotEmpty(releasetime)"> and RELEASETIME&lt;=#{releasetime} </if>
+		<if test="@Ognl@isNotEmpty(ptype)"> and PTYPE=#{ptype} </if>
+		<if test="pbegin &gt; 0"> and PBEGIN&gt;=#{pbegin} </if>
+		<if test="pend &gt; 0"> and PEND&lt;=#{pend} </if>
 		<if test="@Ognl@isNotEmpty(keyvalue)"> and (TITLE like #{keyvalue, typeHandler=LikeTypeHandler} or SUMMARY like #{keyvalue, typeHandler=LikeTypeHandler} or CONTENT like #{keyvalue, typeHandler=LikeTypeHandler}) </if>
 </select>
 <select id="queryCategory" resultType="common.cms.model.ViewCategory">
