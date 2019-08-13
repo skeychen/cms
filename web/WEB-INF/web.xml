@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app metadata-complete="false">
 
-<!--
 	<filter>
 		<filter-name>websso</filter-name>
 		<filter-class>dswork.sso.WebFilter</filter-class>
 	</filter>
 	<filter-mapping><filter-name>websso</filter-name><url-pattern>/cms/*</url-pattern></filter-mapping>
--->
+
 
 	<filter>
 		<filter-name>authOwnSSOFilter</filter-name>
