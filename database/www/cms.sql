@@ -133,6 +133,9 @@ CREATE TABLE IF NOT EXISTS DS_CMS_LOG
    IMG                  VARCHAR(300) COMMENT '图片',
    IMGTOP               INT COMMENT '焦点图(0否,1是)',
    PAGETOP              INT COMMENT '首页推荐(0否,1是)',
+   PTYPE                VARCHAR(30) COMMENT '分类',
+   PBEGIN               BIGINT(14) COMMENT '开始时间',
+   PEND                 BIGINT(14) COMMENT '结束时间',
    CONTENT              MEDIUMTEXT COMMENT '内容',
    PRIMARY KEY (ID)
 ) COMMENT '网站日志';
