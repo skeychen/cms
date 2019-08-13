@@ -121,7 +121,7 @@ function myend(p){
 	</tr>
 <c:if test="${category.scope==0}">
 	<c:if test="${fn:length(category.ptype) > 0}"><tr>
-		<td class="form_title">${fn:escapeXml(c.ptype)}</td>
+		<td class="form_title">${fn:escapeXml(category.ptype)}</td>
 		<td class="form_input"><input type="text" name="ptype" maxlength="100" style="width:300px;" value="" /></td>
 	</tr></c:if>
 	<tr${fn:length(category.pname) > 0 ? "" : " style='display:none;'"}>
