@@ -21,14 +21,23 @@ $(function(){
 			$("#pageviewsite").val("${po.pageviewsite}");
 			$("#mviewsite").val("${po.mviewsite}");
 			$("#mpageviewsite").val("${po.mpageviewsite}");
+			$("#ptype").val("${fn:escapeXml(po.ptype)}");
+			$("#pname").val("${fn:escapeXml(po.pname)}");
+			$("#mycustom").show();
 			break;
 		case '1':
 			$('#listTable').append($('#scope_0_1').html());
 			$("#viewsite").val("${po.viewsite}");
 			$("#mviewsite").val("${po.mviewsite}");
+			$("#ptype").val("");
+			$("#pname").val("");
+			$("#mycustom").hide();
 			break;
 		case '2':
 			$('#listTable').append($('#scope_2').html());
+			$("#ptype").val("");
+			$("#pname").val("");
+			$("#mycustom").hide();
 			break;
 		}
 	});
@@ -113,6 +122,22 @@ $(function(){
 			</select>
 		</td>
 	</tr>
+	<tbody id="mycustom">
+	<tr>
+		<td class="form_title">定义分类</td>
+		<td class="form_input">分类名称 <input type="text" id="ptype" name="ptype" maxlength="10" datatype="!RequireTrim" value="${fn:escapeXml(po.ptype)}" /></td>
+	</tr>
+	<tr>
+		<td class="form_title">定义日期</td>
+		<td class="form_input">日期名称 <span><input type="text" id="pname" name="pname" maxlength="10" datatype="!RequireTrim" value="${fn:escapeXml(po.pname)}" /></span>
+			&nbsp;格式
+			<select id="pformat" name="pformat" style="width:100px;" v="${fn:escapeXml(po.pformat)}">
+				<option value="yyyyMMdd000000">yyyyMMdd</option>
+				<option value="yyyyMMddHHmmss">yyyyMMddHHmmss</option>
+			</select>
+		</td>
+	</tr>
+	</tbody>
 </table>
 <div class="line"></div>
 <table id="contactTable" border="0" cellspacing="1" cellpadding="0" class="listTable">

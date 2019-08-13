@@ -20,6 +20,10 @@ $(function(){
 			$(".viewsite").val("");
 			$(".pageviewsite").val("");
 			$("#url").attr("datatype", "Require");
+
+			$("#ptype").val("");
+			$("#pname").val("");
+			$("#mycustom").hide();
 		}
 		else if($("#scope").val() == 1){
 			$("#mylink").val("").hide();
@@ -27,12 +31,18 @@ $(function(){
 			$("#template_page").val("").hide();
 			$(".pageviewsite").val("");
 			$("#url").attr("datatype", "!Require");
+
+			$("#ptype").val("");
+			$("#pname").val("");
+			$("#mycustom").hide();
 		}
 		else{
 			$("#mylink").val("").hide();
 			$("#template_category").show();
 			$("#template_page").show();
 			$("#url").attr("datatype", "!Require");
+			
+			$("#mycustom").show();
 		}
 	}).bind("change", function(){
 		$("#scope").click();
@@ -76,6 +86,22 @@ $(function(){
 			</select>
 		</td>
 	</tr>
+	<tbody id="mycustom">
+	<tr>
+		<td class="form_title">定义分类</td>
+		<td class="form_input">分类名称 <input type="text" id="ptype" name="ptype" maxlength="10" datatype="!RequireTrim" value="" /></td>
+	</tr>
+	<tr>
+		<td class="form_title">定义日期</td>
+		<td class="form_input">日期名称 <span><input type="text" id="pname" name="pname" maxlength="10" datatype="!RequireTrim" value="" /></span>
+			&nbsp;格式
+			<select id="pformat" name="pformat" style="width:100px;">
+				<option value="yyyyMMdd000000">yyyyMMdd</option>
+				<option value="yyyyMMddHHmmss">yyyyMMddHHmmss</option>
+			</select>
+		</td>
+	</tr>
+	</tbody>
 	<tbody id="mylink">
 	<tr>
 		<td class="form_title">链接</td>

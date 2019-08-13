@@ -37,7 +37,8 @@ $dswork.callback = function(){if($dswork.result.code == 1){
 }};
 </script>
 <style type="text/css">
-.v{padding-left:3px;}
+.v{text-align:left!important;padding:0 0 0 3px!important;line-height:33px!important;}
+.v label{font-size:18px!important;line-height:18px!important;margin:7px 3px 0 0;float:left;}
 .v img{line-height:20px;vertical-align:middle;}
 .k{padding:0px;margin:0px;}
 .k input{border:none;background-color:transparent;text-align:center;}
@@ -75,7 +76,7 @@ $dswork.callback = function(){if($dswork.result.code == 1){
 		<td class="menuTool" keyIndex="${d.id}">&nbsp;</td>
 		<td><input name="seq" type="text" style="width:24px;" value="${d.seq}" /></td>
 		<td class="k"><input name="keyIndex" type="text" style="width:100%;" readonly="readonly" value="${d.id}" /></td>
-		<td class="v" style="text-align:left;">${d.label}${fn:escapeXml(d.name)}&nbsp;<a onclick="return false;" href="#" title="${fn:escapeXml(d.url)}">[${d.scope==0?'列表':d.scope==1?'单页':'外链'}]</a></td>
+		<td class="v"><label>${d.label}</label> ${fn:escapeXml(d.name)}&nbsp;<a title="${fn:escapeXml(d.url)}"><span class="warn">[${d.scope==0?'列表':d.scope==1?'单页':'外链'}]</span></a><c:if test="${fn:length(d.ptype)>0}">&nbsp;<span class="info">[${fn:escapeXml(d.ptype)}]</span></c:if></td>
 		<td>${fn:replace(d.viewsite,'.jsp','')}</td>
 		<td>${fn:replace(d.pageviewsite,'.jsp','')}</td>
 	<c:if test="${enablemobile}">

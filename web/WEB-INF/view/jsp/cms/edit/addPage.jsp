@@ -42,6 +42,12 @@ $(function(){
 	show();
 	$dswork.readySubmit = function(){if($("#inputImg").val()==""){fill();}};
 });
+function mybegin(p){
+	$("#pbegin").val(p.value ? p.value : 0);
+}
+function myend(p){
+	$("#pend").val(p.value ? p.value : 0);
+}
 </script>
 </head>
 <body>
@@ -113,6 +119,19 @@ $(function(){
 		<td class="form_title">作者</td>
 		<td class="form_input"><input type="text" name="releaseuser" maxlength="100" style="width:300px;" value="" /></td>
 	</tr>
+<c:if test="${category.scope==0}">
+	<c:if test="${fn:length(category.ptype) > 0}"><tr>
+		<td class="form_title">${fn:escapeXml(c.ptype)}</td>
+		<td class="form_input"><input type="text" name="ptype" maxlength="100" style="width:300px;" value="" /></td>
+	</tr></c:if>
+	<tr${fn:length(category.pname) > 0 ? "" : " style='display:none;'"}>
+		<td class="form_title">${fn:escapeXml(category.pname)}</td>
+		<td class="form_input"><input type="text" class="WebDate" format="${fn:escapeXml(category.pformat)}" fn="mybegin" value="" />
+			至
+			<input type="text" class="WebDate" format="${fn:escapeXml(category.pformat)}" fn="myend" value="" />
+		</td>
+	</tr>
+</c:if>
 	<tr>
 		<td class="form_title">内容</td>
 		<td class="form_input"><textarea id="content" name="content" style="width:99%;height:300px;"></textarea></td>
@@ -143,6 +162,11 @@ $(function(){
 </c:forEach>
 </table>
 <input type="hidden" id="autosubmit" name="autosubmit" value="" />
+<c:if test="category.scope!=0">
+<input type="hidden" name="ptype" value="" />
+</c:if>
+<input type="hidden" id="pbegin" name="pbegin" value="0" />
+<input type="hidden" id="pend" name="pend" value="0" />
 </form>
 </body>
 </html>
