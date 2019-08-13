@@ -46,13 +46,18 @@ public class DsCmsCategory
 	private String releaseuser = "";
 	// 图片
 	private String img = "";
+	// 分类名称
+	private String ptype = "";
+	// 时间名称
+	private String pname = "";
+	// 时间格式
+	private String pformat = "";
 	// 内容
 	private String content = "";
 	// 数据结构
 	private String jsontable = "[]";
 	// 数据集
 	private String jsondata = "{}";
-
 	// 子栏目
 	private List<DsCmsCategory> list = new ArrayList<DsCmsCategory>();
 	// 级别(管理时扩展显示)
@@ -250,6 +255,36 @@ public class DsCmsCategory
 	public void setImg(String img)
 	{
 		this.img = img;
+	}
+
+	public String getPtype()
+	{
+		return ptype;
+	}
+
+	public void setPtype(String ptype)
+	{
+		this.ptype = ptype;
+	}
+
+	public String getPname()
+	{
+		return pname;
+	}
+
+	public void setPname(String pname)
+	{
+		this.pname = pname;
+	}
+
+	public String getPformat()
+	{
+		return pformat;
+	}
+
+	public void setPformat(String pformat)
+	{
+		this.pformat = pformat;
 	}
 
 	public String getContent()

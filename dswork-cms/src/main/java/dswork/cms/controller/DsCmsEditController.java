@@ -81,6 +81,7 @@ public class DsCmsEditController extends DsCmsBaseController
 	{
 		put("releasetime", TimeUtil.getCurrentTime());
 		DsCmsCategory c = service.getCategory(req().getLong("categoryid"));
+		put("category", c);
 		put("columns", GsonUtil.toBean(c.getJsontable(), List.class));
 		return "/cms/edit/addPage.jsp";
 	}
@@ -336,6 +337,7 @@ public class DsCmsEditController extends DsCmsBaseController
 			)
 			{
 				DsCmsCategory c = service.getCategory(po.getCategoryid());
+				put("category", c);
 				List<Map<String, String>> jsontable = GsonUtil.toBean(c.getJsontable(), List.class);
 				try
 				{
@@ -396,21 +398,24 @@ public class DsCmsEditController extends DsCmsBaseController
 					{
 						DsCmsPage page = service.getPage(po.getId());
 						p.setScope(page.getScope());
-						p.setUrl(page.getUrl());
+						p.setStatus(1);
 						p.setTitle(page.getTitle());
+						p.setUrl(page.getUrl());
 						p.setMetakeywords(page.getMetakeywords());
 						p.setMetadescription(page.getMetadescription());
 						p.setSummary(page.getSummary());
-						p.setContent(page.getContent());
 						p.setReleasetime(page.getReleasetime());
 						p.setReleasesource(page.getReleasesource());
 						p.setReleaseuser(page.getReleaseuser());
 						p.setImg(page.getImg());
 						p.setImgtop(page.getImgtop());
 						p.setPagetop(page.getPagetop());
+						p.setPtype(page.getPtype());
+						p.setPbegin(page.getPbegin());
+						p.setPend(page.getPend());
 						p.setAuditstatus(DsCmsPageEdit.PASS);
+						p.setContent(page.getContent());
 						p.setJsondata(page.getJsondata());
-						p.setStatus(1);
 						service.updatePageEdit(p, false, s.isWriteLog(), getAccount(), getName());
 					}
 					print(1);
@@ -418,16 +423,20 @@ public class DsCmsEditController extends DsCmsBaseController
 				}
 
 				p.setScope(po.getScope());
-				p.setUrl(po.getUrl());
+				p.setStatus(0);
 				p.setTitle(po.getTitle());
-				p.setSummary(po.getSummary());
+				p.setUrl(po.getUrl());
 				p.setMetakeywords(po.getMetakeywords());
 				p.setMetadescription(po.getMetadescription());
+				p.setSummary(po.getSummary());
 				p.setReleasesource(po.getReleasesource());
 				p.setReleaseuser(po.getReleaseuser());
 				p.setReleasetime(po.getReleasetime());
 				p.setImgtop(po.getImgtop());
 				p.setPagetop(po.getPagetop());
+				p.setPtype(po.getPtype());
+				p.setPbegin(po.getPbegin());
+				p.setPend(po.getPend());
 				if(autosave == 1)
 				{
 					p.setImg(changeImageToLocal(s, po.getImg()));
@@ -438,7 +447,6 @@ public class DsCmsEditController extends DsCmsBaseController
 					p.setImg(po.getImg());
 					p.setContent(po.getContent());
 				}
-				p.setStatus(0);
 
 				Map<String, String> map = new LinkedHashMap<String, String>();
 				String[] ctitleArr = req().getStringArray("ctitle", false);

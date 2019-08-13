@@ -56,9 +56,12 @@ public class DsCmsLogDao extends BaseDao<DsCmsLog, Long>
 		log.setReleasesource(po.getReleasesource());
 		log.setReleaseuser(po.getReleaseuser());
 		log.setImg(po.getImg());
-		log.setContent(po.getContent());
 		log.setImgtop(po.getImgtop());
 		log.setPagetop(po.getPagetop());
+		log.setPtype(po.getPtype());
+		log.setPbegin(po.getPbegin());
+		log.setPend(po.getPend());
+		log.setContent(po.getContent());
 		save(log);
 	}
 

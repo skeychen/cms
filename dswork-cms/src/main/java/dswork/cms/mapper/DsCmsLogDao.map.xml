@@ -7,9 +7,9 @@
 
 <insert id="insert" parameterType="dswork.cms.model.DsCmsLog">
 	insert into DS_CMS_LOG
-	(ID, SITEID, CATEGORYID, PAGEID, EDITID, EDITNAME, EDITTIME, AUDITID, AUDITMSG, AUDITNAME, AUDITTIME, PUBLISHID, PUBLISHNAME, PUBLISHTIME, STATUS, AUDITSTATUS, TITLE, SCOPE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, CONTENT, IMGTOP, PAGETOP)
+	(ID, SITEID, CATEGORYID, PAGEID, EDITID, EDITNAME, EDITTIME, AUDITID, AUDITMSG, AUDITNAME, AUDITTIME, PUBLISHID, PUBLISHNAME, PUBLISHTIME, STATUS, AUDITSTATUS, TITLE, SCOPE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, PTYPE, PBEGIN, PEND, CONTENT)
 	values
-	(#{id}, #{siteid}, #{categoryid}, #{pageid}, #{editid}, #{editname}, #{edittime}, #{auditid}, #{auditmsg}, #{auditname}, #{audittime}, #{publishid}, #{publishname}, #{publishtime}, #{status}, #{auditstatus}, #{title}, #{scope}, #{url}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{content}, #{imgtop}, #{pagetop})
+	(#{id}, #{siteid}, #{categoryid}, #{pageid}, #{editid}, #{editname}, #{edittime}, #{auditid}, #{auditmsg}, #{auditname}, #{audittime}, #{publishid}, #{publishname}, #{publishtime}, #{status}, #{auditstatus}, #{title}, #{scope}, #{url}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{imgtop}, #{pagetop}, #{ptype}, #{pbegin}, #{pend}, #{content})
 </insert>
 
 <resultMap id="result" type="dswork.cms.model.DsCmsLog">
@@ -39,12 +39,15 @@
 	<result property="releasesource" column="RELEASESOURCE" />
 	<result property="releaseuser" column="RELEASEUSER" />
 	<result property="img" column="IMG" />
-	<result property="content" column="CONTENT" />
 	<result property="imgtop" column="IMGTOP" />
 	<result property="pagetop" column="PAGETOP" />
+	<result property="ptype" column="PTYPE" />
+	<result property="pbegin" column="PBEGIN" />
+	<result property="pend" column="PEND" />
+	<result property="content" column="CONTENT" />
 </resultMap>
 
-<sql id="columns">ID, SITEID, CATEGORYID, PAGEID, EDITID, EDITNAME, EDITTIME, AUDITID, AUDITMSG, AUDITNAME, AUDITTIME, PUBLISHID, PUBLISHNAME, PUBLISHTIME, STATUS, AUDITSTATUS, TITLE, SCOPE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, CONTENT, IMGTOP, PAGETOP</sql>
+<sql id="columns">ID, SITEID, CATEGORYID, PAGEID, EDITID, EDITNAME, EDITTIME, AUDITID, AUDITMSG, AUDITNAME, AUDITTIME, PUBLISHID, PUBLISHNAME, PUBLISHTIME, STATUS, AUDITSTATUS, TITLE, SCOPE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, PTYPE, PBEGIN, PEND, CONTENT</sql>
 	
 <sql id="dynamicWhere">
 	<where>

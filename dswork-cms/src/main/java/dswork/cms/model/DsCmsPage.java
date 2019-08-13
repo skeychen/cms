@@ -37,6 +37,12 @@ public class DsCmsPage
 	private int imgtop = 0;
 	// 首页推荐(0否,1是)
 	private int pagetop = 0;
+	// 分类名称
+	private String ptype = "";
+	// 开始时间
+	private long pbegin = 0L;
+	// 结束时间
+	private long pend = 0L;
 	// 内容
 	private String content = "";
 	// 数据集
@@ -200,6 +206,36 @@ public class DsCmsPage
 	public void setPagetop(int pagetop)
 	{
 		this.pagetop = pagetop;
+	}
+
+	public String getPtype()
+	{
+		return ptype;
+	}
+
+	public void setPtype(String ptype)
+	{
+		this.ptype = ptype;
+	}
+
+	public long getPbegin()
+	{
+		return pbegin;
+	}
+
+	public void setPbegin(long pbegin)
+	{
+		this.pbegin = pbegin;
+	}
+
+	public long getPend()
+	{
+		return pend;
+	}
+
+	public void setPend(long pend)
+	{
+		this.pend = pend;
 	}
 
 	public String getContent()

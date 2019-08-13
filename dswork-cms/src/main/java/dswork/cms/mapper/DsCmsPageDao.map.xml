@@ -10,9 +10,9 @@
 		<include refid="dswork.cms.rowid" />
 	</selectKey>
 	insert into DS_CMS_PAGE
-	(<if test="id!=null and id!=0">ID, </if>SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, CONTENT, JSONDATA)
+	(<if test="id!=null and id!=0">ID, </if>SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, PTYPE, PBEGIN, PEND, CONTENT, JSONDATA)
 	values
-	(<if test="id!=null and id!=0">#{id}, </if>#{siteid}, #{categoryid}, #{scope}, #{status}, #{title}, #{url}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{imgtop}, #{pagetop}, #{content}, #{jsondata})
+	(<if test="id!=null and id!=0">#{id}, </if>#{siteid}, #{categoryid}, #{scope}, #{status}, #{title}, #{url}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{imgtop}, #{pagetop}, #{ptype}, #{pbegin}, #{pend}, #{content}, #{jsondata})
 </insert>
 
 <delete id="delete">
@@ -42,6 +42,9 @@
 		IMG=#{img},
 		IMGTOP=#{imgtop},
 		PAGETOP=#{pagetop},
+		PTYPE=#{ptype}, 
+		PBEGIN=#{pbegin}, 
+		PEND=#{pend}, 
 		CONTENT=#{content},
 		JSONDATA=#{jsondata}
 	where ID=#{id}
@@ -68,12 +71,15 @@
 	<result property="img" column="IMG" />
 	<result property="imgtop" column="IMGTOP" />
 	<result property="pagetop" column="PAGETOP" />
+	<result property="ptype" column="PTYPE" />
+	<result property="pbegin" column="PBEGIN" />
+	<result property="pend" column="PEND" />
 	<result property="content" column="CONTENT" />
 	<result property="jsondata" column="JSONDATA" />
 </resultMap>
 
 <sql id="columns">
-	ID, SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, CONTENT, JSONDATA
+	ID, SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, PTYPE, PBEGIN, PEND, CONTENT, JSONDATA
 </sql>
 
 <sql id="dynamicWhere">

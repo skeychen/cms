@@ -54,21 +54,23 @@ public class DsCmsEditService
 			p.setId(po.getId());
 			p.setSiteid(po.getSiteid());
 			p.setCategoryid(po.getCategoryid());
-			p.setStatus(po.getStatus());
+			p.setScope(po.getScope());
+			p.setStatus(0);// page设置为新建未发布状态
 			p.setTitle(po.getTitle());
+			p.setUrl(po.getUrl());
 			p.setMetakeywords(po.getMetakeywords());
 			p.setMetadescription(po.getMetadescription());
 			p.setSummary(po.getSummary());
-			p.setContent(po.getContent());
 			p.setReleasetime(po.getReleasetime());
 			p.setReleasesource(po.getReleasesource());
 			p.setReleaseuser(po.getReleaseuser());
 			p.setImg(po.getImg());
 			p.setImgtop(po.getImgtop());
 			p.setPagetop(po.getPagetop());
-			p.setScope(po.getScope());
-			p.setStatus(0);// page设置为新建未发布状态
-			p.setUrl(po.getUrl());
+			p.setPtype(po.getPtype());
+			p.setPbegin(po.getPbegin());
+			p.setPend(po.getPend());
+			p.setContent(po.getContent());
 			p.setJsondata(po.getJsondata());
 			pageDao.save(p);
 		}
@@ -153,20 +155,23 @@ public class DsCmsEditService
 				p.setCategoryid(po.getCategoryid());
 				save = true;
 			}
+			p.setScope(po.getScope());
 			p.setStatus(po.getStatus());
 			p.setTitle(po.getTitle());
+			p.setUrl(po.getUrl());
 			p.setMetakeywords(po.getMetakeywords());
 			p.setMetadescription(po.getMetadescription());
 			p.setSummary(po.getSummary());
-			p.setContent(po.getContent());
 			p.setReleasetime(po.getReleasetime());
 			p.setReleasesource(po.getReleasesource());
 			p.setReleaseuser(po.getReleaseuser());
 			p.setImg(po.getImg());
 			p.setImgtop(po.getImgtop());
 			p.setPagetop(po.getPagetop());
-			p.setScope(po.getScope());
-			p.setUrl(po.getUrl());
+			p.setPtype(po.getPtype());
+			p.setPbegin(po.getPbegin());
+			p.setPend(po.getPend());
+			p.setContent(po.getContent());
 			p.setJsondata(po.getJsondata());
 			if(save)
 			{

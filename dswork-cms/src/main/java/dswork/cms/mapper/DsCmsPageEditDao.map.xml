@@ -10,9 +10,9 @@
 		<include refid="dswork.cms.rowid" />
 	</selectKey>
 	insert into DS_CMS_PAGE_EDIT
-	(SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, CONTENT, JSONDATA, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, AUDITMSG, PUSHKEY)
+	(SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, PTYPE, PBEGIN, PEND, CONTENT, JSONDATA, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, AUDITMSG, PUSHKEY)
 	values
-	(#{siteid}, #{categoryid}, #{scope}, #{status}, #{title}, #{url}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{imgtop}, #{pagetop}, #{content}, #{jsondata}, #{editid}, #{editname}, #{edittime}, #{auditstatus}, #{auditid}, #{auditname}, #{audittime}, #{auditmsg}, #{pushkey})
+	(#{siteid}, #{categoryid}, #{scope}, #{status}, #{title}, #{url}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{imgtop}, #{pagetop}, #{ptype}, #{pbegin}, #{pend}, #{content}, #{jsondata}, #{editid}, #{editname}, #{edittime}, #{auditstatus}, #{auditid}, #{auditname}, #{audittime}, #{auditmsg}, #{pushkey})
 </insert>
 
 <delete id="delete">
@@ -42,6 +42,9 @@
 		IMG=#{img},
 		IMGTOP=#{imgtop},
 		PAGETOP=#{pagetop},
+		PTYPE=#{ptype}, 
+		PBEGIN=#{pbegin}, 
+		PEND=#{pend}, 
 		CONTENT=#{content},
 		JSONDATA=#{jsondata},
 		EDITID=#{editid},
@@ -59,25 +62,7 @@
 	update DS_CMS_PAGE set URL=#{url} where ID=#{id}
 </update>
 
-<resultMap id="result" type="dswork.cms.model.DsCmsPageEdit">
-	<id property="id" column="ID" />
-	<result property="siteid" column="SITEID" />
-	<result property="categoryid" column="CATEGORYID" />
-	<result property="scope" column="SCOPE" />
-	<result property="status" column="STATUS" />
-	<result property="title" column="TITLE" />
-	<result property="url" column="URL" />
-	<result property="metakeywords" column="METAKEYWORDS" />
-	<result property="metadescription" column="METADESCRIPTION" />
-	<result property="summary" column="SUMMARY" />
-	<result property="releasetime" column="RELEASETIME" />
-	<result property="releasesource" column="RELEASESOURCE" />
-	<result property="releaseuser" column="RELEASEUSER" />
-	<result property="img" column="IMG" />
-	<result property="imgtop" column="IMGTOP" />
-	<result property="pagetop" column="PAGETOP" />
-	<result property="content" column="CONTENT" />
-	<result property="jsondata" column="JSONDATA" />
+<resultMap id="result" type="dswork.cms.model.DsCmsPageEdit" extends="dswork.cms.dao.DsCmsPageDao.result">
 	<result property="editid" column="EDITID" />
 	<result property="editname" column="EDITNAME" />
 	<result property="edittime" column="EDITTIME" />
@@ -89,7 +74,7 @@
 	<result property="pushkey" column="PUSHKEY" />
 </resultMap>
 
-<sql id="columns">ID, SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, CONTENT, JSONDATA, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, AUDITMSG, PUSHKEY</sql>
+<sql id="columns">ID, SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, PTYPE, PBEGIN, PEND, CONTENT, JSONDATA, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, AUDITMSG, PUSHKEY</sql>
 	
 <sql id="dynamicWhere">
 	<where>
