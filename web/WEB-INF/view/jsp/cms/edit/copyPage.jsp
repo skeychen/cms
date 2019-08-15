@@ -42,7 +42,7 @@ $dswork.validCallBack = function(){
 		</td>
 	</tr>
 </table>
-<input type="hidden" name="keyIndex" value="${param.keyIndex}" />
+<input type="hidden" name="keyIndex" value="${fn:escapeXml(param.keyIndex)}" />
 </form>
 </body>
 </html>
