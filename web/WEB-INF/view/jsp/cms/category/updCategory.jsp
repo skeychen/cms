@@ -137,6 +137,10 @@ $(function(){
 			</select>
 		</td>
 	</tr>
+	<tr>
+		<td class="form_title">特殊说明</td>
+		<td class="form_input"><input type="text" name="pmemo" maxlength="100" style="width:400px;" datatype="!Require" value="${fn:escapeXml(po.pmemo)}" /></td>
+	</tr>
 	</tbody>
 </table>
 <div class="line"></div>

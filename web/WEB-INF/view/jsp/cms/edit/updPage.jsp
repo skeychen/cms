@@ -115,6 +115,10 @@ function myend(p){
 <c:if test="${!po.audit}">
 <table border="0" cellspacing="1" cellpadding="0" class="listTable">
 	<tr>
+		<td class="form_title">特殊说明</td>
+		<td class="form_input"><span class="imp">${category.pmemo}</span></td>
+	</tr>
+	<tr>
 		<td class="form_title">转换外链</td>
 		<td class="form_input"><label><input type="checkbox" name="autosave" value="1" />是否自动转换外链图片为本地图片</label></td>
 	</tr>
