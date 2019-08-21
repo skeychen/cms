@@ -56,21 +56,15 @@ public class CmsFactory
 			for(ViewSpecial v : slist)
 			{
 				specialMap.put(String.valueOf(v.getId()), v);
-				if(mobile)
-				{
-					v.setUrl("/m" + v.getUrl());
-				}
+				v.setUrl(site.getUrl() + (mobile ? "/m" : "") + v.getUrl());
 			}
 			specialList = slist;
 			List<ViewCategory> clist = getDao().queryCategoryList(siteid);
 			for(ViewCategory v : clist)
 			{
-				if(mobile)
+				if(v.getScope() != 2 || (v.getScope() == 2 && v.getUrl().startsWith("/a/")))
 				{
-					if(v.getScope() != 2 || (v.getScope() == 2 && v.getUrl().startsWith("/a/")))
-					{
-						v.setUrl("/m" + v.getUrl());
-					}
+					v.setUrl(site.getUrl() + (mobile ? "/m" : "") + v.getUrl());
 				}
 				if(v.getPid() == null)
 				{
@@ -122,18 +116,10 @@ public class CmsFactory
 
 	public ViewArticle get(String pageid)
 	{
-		ViewArticle m;
-		if(this.mobile)
+		ViewArticle m = getDao().getArticle(site.getId(), toLong(pageid));
+		if(m.getScope() != 2 || (m.getScope() == 2 && m.getUrl().startsWith("/a/")))
 		{
-			m = getDao().getArticle(site.getId(), toLong(pageid));
-			if(m.getScope() != 2 || (m.getScope() == 2 && m.getUrl().startsWith("/a/")))
-			{
-				m.setUrl("/m" + m.getUrl());
-			}
-		}
-		else
-		{
-			m = getDao().getArticle(site.getId(), toLong(pageid));
+			m.setUrl(site.getUrl() + (this.mobile ? "/m" : "") + m.getUrl());
 		}
 		return m;
 	}
@@ -195,14 +181,11 @@ public class CmsFactory
 			}
 		}
 		Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, ptype, 0, 0, null);
-		if(this.mobile)
+		for(ViewArticle va : pageModel.getResult())
 		{
-			for(ViewArticle va : pageModel.getResult())
+			if(va.getScope() != 2 || (va.getScope() == 2 && va.getUrl().startsWith("/a/")))
 			{
-				if(va.getScope() != 2 || (va.getScope() == 2 && va.getUrl().startsWith("/a/")))
-				{
-					va.setUrl("/m" + va.getUrl());
-				}
+				va.setUrl(site.getUrl() + (this.mobile ? "/m" : "") + va.getUrl());
 			}
 		}
 		return pageModel.getResult();
@@ -229,14 +212,11 @@ public class CmsFactory
 			set.setPage(pageModel.getPage());
 			set.setPagesize(pageModel.getPagesize());
 			set.setTotalpage(pageModel.getTotalpage());
-			if(this.mobile)
+			for(ViewArticle va : pageModel.getResult())
 			{
-				for(ViewArticle va : pageModel.getResult())
+				if(va.getScope() != 2 || (va.getScope() == 2 && va.getUrl().startsWith("/a/")))
 				{
-					if(va.getScope() != 2 || (va.getScope() == 2 && va.getUrl().startsWith("/a/")))
-					{
-						va.setUrl("/m" + va.getUrl());
-					}
+					va.setUrl(site.getUrl() + (this.mobile ? "/m" : "") + va.getUrl());
 				}
 			}
 			set.addRowsAll(pageModel.getResult());
@@ -306,14 +286,11 @@ public class CmsFactory
 		StringBuilder idArray = new StringBuilder();
 		idArray.append(toLong(categoryid));
 		Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, null, 0, 0, null);
-		if(this.mobile)
+		for(ViewArticle va : pageModel.getResult())
 		{
-			for(ViewArticle va : pageModel.getResult())
+			if(va.getScope() != 2 || (va.getScope() == 2 && va.getUrl().startsWith("/a/")))
 			{
-				if(va.getScope() != 2 || (va.getScope() == 2 && va.getUrl().startsWith("/a/")))
-				{
-					va.setUrl("/m" + va.getUrl());
-				}
+				va.setUrl(site.getUrl() + (this.mobile ? "/m" : "") + va.getUrl());
 			}
 		}
 		ViewArticleNav nav = new ViewArticleNav();

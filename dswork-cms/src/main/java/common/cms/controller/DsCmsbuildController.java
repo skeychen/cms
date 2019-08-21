@@ -56,6 +56,7 @@ public class DsCmsbuildController extends BaseController
 		else
 		{
 			cms = new CmsFactory(siteid, mobile, isedit);
+			
 		}
 		cms.setRequest(request());
 		put("cms", cms);
@@ -65,12 +66,9 @@ public class DsCmsbuildController extends BaseController
 		put("mobile", "/m");
 		if(view || isedit)
 		{
-			put("ctx", request().getContextPath() + "/pvctx/" + (isedit ? "_" + s.getId() : s.getId()));
+			cms.getSite().setUrl(request().getContextPath() + "/pvctx/" + (isedit ? "_" + s.getId() : s.getId()));
 		}
-		else
-		{
-			put("ctx", s.getUrl());
-		}
+		put("ctx", cms.getSite().getUrl());
 		put("categorylist", cms.queryCategory("0"));// 顶层节点列表
 		put("speciallist", cms.querySpecial());
 		if(pageid > 0)// 内容页
