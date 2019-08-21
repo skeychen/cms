@@ -40,6 +40,7 @@ public class DsCmsbuildController extends BaseController
 				if(cms == null || (cms != null && (siteid != cms.getSite().getId())))
 				{
 					cms = new CmsFactory(siteid, mobile, false);
+					cms.refreshCategoryURL();
 					session().setAttribute(CMS_FACTORY_KEY_M, cms);
 				}
 			}
@@ -49,6 +50,7 @@ public class DsCmsbuildController extends BaseController
 				if(cms == null || (cms != null && (siteid != cms.getSite().getId())))
 				{
 					cms = new CmsFactory(siteid, mobile, false);
+					cms.refreshCategoryURL();
 					session().setAttribute(CMS_FACTORY_KEY, cms);
 				}
 			}
@@ -58,6 +60,7 @@ public class DsCmsbuildController extends BaseController
 			cms = new CmsFactory(siteid, mobile, isedit);
 			ViewSite s = cms.getSite();
 			cms.getSite().setUrl(request().getContextPath() + "/pvctx/" + (isedit ? "_" + s.getId() : s.getId()));
+			cms.refreshCategoryURL();
 		}
 		cms.setRequest(request());
 		put("cms", cms);

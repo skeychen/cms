@@ -53,18 +53,31 @@ public class CmsFactory
 		if(this.site != null)
 		{
 			List<ViewSpecial> slist = getDao().querySpecialList(siteid);
-			for(ViewSpecial v : slist)
+			if(mobile)
 			{
-				specialMap.put(String.valueOf(v.getId()), v);
-				v.setUrl(site.getUrl() + (mobile ? "/m" : "") + v.getUrl());
+				for(ViewSpecial v : slist)
+				{
+					specialMap.put(String.valueOf(v.getId()), v);
+					v.setUrl("/m" + v.getUrl());
+				}
+			}
+			else
+			{
+				for(ViewSpecial v : slist)
+				{
+					specialMap.put(String.valueOf(v.getId()), v);
+				}
 			}
 			specialList = slist;
 			List<ViewCategory> clist = getDao().queryCategoryList(siteid);
 			for(ViewCategory v : clist)
 			{
-				if(v.getScope() != 2 || (v.getScope() == 2 && v.getUrl().startsWith("/a/")))
+				if(mobile)
 				{
-					v.setUrl(site.getUrl() + (mobile ? "/m" : "") + v.getUrl());
+					if(v.getScope() != 2 || (v.getScope() == 2 && v.getUrl().startsWith("/a/")))
+					{
+						v.setUrl("/m" + v.getUrl());
+					}
 				}
 				if(v.getPid() == null)
 				{
@@ -84,6 +97,17 @@ public class CmsFactory
 					v.setParent(_v);// 上级
 					_v.addList(v);// 下级
 				}
+			}
+		}
+	}
+	
+	public void refreshCategoryURL()
+	{
+		for(ViewCategory v : categoryList)
+		{
+			if(v.getUrl().startsWith("/a/") || v.getUrl().startsWith("/m/a/"))
+			{
+				v.setUrl(site.getUrl() + v.getUrl());
 			}
 		}
 	}
