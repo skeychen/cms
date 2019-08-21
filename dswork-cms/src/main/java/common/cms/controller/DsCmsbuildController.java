@@ -85,6 +85,7 @@ public class DsCmsbuildController extends BaseController
 			put("summary", p.getSummary());
 			put("metakeywords", p.getMetakeywords());
 			put("metadescription", p.getMetadescription());
+			put("releasedate", p.getReleasedate());
 			put("releasetime", p.getReleasetime());
 			put("releasesource", p.getReleasesource());
 			put("releaseuser", p.getReleaseuser());

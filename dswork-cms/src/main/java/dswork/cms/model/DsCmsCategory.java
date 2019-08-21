@@ -52,6 +52,8 @@ public class DsCmsCategory
 	private String pname = "";
 	// 时间格式
 	private String pformat = "";
+	// 特殊说明
+	private String pmemo = "";
 	// 内容
 	private String content = "";
 	// 数据结构
@@ -285,6 +287,16 @@ public class DsCmsCategory
 	public void setPformat(String pformat)
 	{
 		this.pformat = pformat;
+	}
+
+	public String getPmemo()
+	{
+		return pmemo;
+	}
+
+	public void setPmemo(String pmemo)
+	{
+		this.pmemo = pmemo;
 	}
 
 	public String getContent()
