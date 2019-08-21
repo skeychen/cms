@@ -48,7 +48,7 @@ public class DsCmsFilter implements Filter
 				String siteid = myURI.substring(0, myURI.indexOf("/"));
 				String rURI   = myURI.replace(siteid, ""); // /f/* , /a/* , /m/f/* , /m/a/* , /isedit/f/* , /isedit/a/* , /m/isedit/f/* , /m/isedit/a/*
 				String qs     = req.getQueryString();
-				String vURI   = req.getContextPath() + pvurl + "?";
+				String vURI   = req.getContextPath() + pvurl + "?auto=true";
 				if(rURI.startsWith(pvm))// 移动版
 				{
 					rURI = rURI.replace(pvm, "/");
