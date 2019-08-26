@@ -54,17 +54,18 @@ public class DsCmsDao extends MyBatisDao
 		if(currentPage <= 0){currentPage = 1;}
 		if(pageSize <= 0){pageSize = 25;}
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("siteid", siteid);
+		map.put("idArray", idArray);
+		map.put("order", isDesc==null||isDesc?" desc ":"");
+		map.put("imgtop", onlyImageTop?"1":"");
+		map.put("pagetop", onlyPageTop?"1":"");
+		map.put("releasetime", TimeUtil.getCurrentTime());
+		map.put("status", "8");// 已发布
+		map.put("ptype", ptype);
+		map.put("pbegin", pbegin);
+		map.put("pend", pend);
+		map.put("keyvalue", keyvalue);
 		PageRequest rq = new PageRequest(currentPage, pageSize, map);
-		rq.getFilters().put("siteid", siteid);
-		rq.getFilters().put("idArray", idArray);
-		rq.getFilters().put("order", isDesc==null||isDesc?" desc ":"");
-		rq.getFilters().put("imgtop", onlyImageTop?"1":"");
-		rq.getFilters().put("pagetop", onlyPageTop?"1":"");
-		rq.getFilters().put("releasetime", TimeUtil.getCurrentTime());
-		rq.getFilters().put("status", "8");// 已发布
-		rq.getFilters().put("ptype", ptype);
-		rq.getFilters().put("pbegin", pbegin);
-		rq.getFilters().put("pend", pend);
 		return queryPage("query", rq, "queryCount", rq);
 	}
 
