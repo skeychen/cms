@@ -92,6 +92,13 @@ $(function(){
 		<td class="form_input">分类名称 <input type="text" id="ptype" name="ptype" maxlength="10" datatype="!RequireTrim" value="" /></td>
 	</tr>
 	<tr>
+		<td class="form_title">分类选项</td>
+		<td class="form_input">
+			分类名称不为空时可填写，换行或空格分隔多个选项<br/>
+			<textarea id="ptypeitem" name="ptypeitem" style="width:400px;height:60px;"></textarea>
+		</td>
+	</tr>
+	<tr>
 		<td class="form_title">定义日期</td>
 		<td class="form_input">日期名称 <span><input type="text" id="pname" name="pname" maxlength="10" datatype="!RequireTrim" value="" /></span>
 			&nbsp;格式

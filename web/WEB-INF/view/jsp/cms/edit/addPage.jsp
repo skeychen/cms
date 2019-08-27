@@ -126,7 +126,12 @@ function myend(p){
 <c:if test="${category.scope==0}">
 	<c:if test="${fn:length(category.ptype) > 0}"><tr>
 		<td class="form_title">${fn:escapeXml(category.ptype)}</td>
-		<td class="form_input"><input type="text" name="ptype" maxlength="100" style="width:300px;" value="" /></td>
+		<td class="form_input">
+			<c:if test="${fn:length(category.ptypeitemList) == 0}"><input type="text" name="ptype" maxlength="100" style="width:300px;" value="" /></c:if>
+			<c:if test="${fn:length(category.ptypeitemList) > 0}"><select name="ptype">
+				<c:forEach items="${category.ptypeitemList}" var="d"><option value="${fn:escapeXml(d)}">${fn:escapeXml(d)}</option></c:forEach>
+			</select></c:if>
+		</td>
 	</tr></c:if>
 	<tr${fn:length(category.pname) > 0 ? "" : " style='display:none;'"}>
 		<td class="form_title">${fn:escapeXml(category.pname)}</td>
