@@ -193,7 +193,7 @@ public class CmsFactory
 //		return doQueryPage(page, pagesize, isDesc, false, false, ptype, 0, 0, categoryids);
 //	}
 
-	private List<ViewArticle> doQueryList(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, Object... categoryids)
+	private List<ViewArticle> doQueryList(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, String keyvalue, Object... categoryids)
 	{
 		StringBuilder idArray = new StringBuilder();
 		if(categoryids.length > 0)
@@ -204,7 +204,7 @@ public class CmsFactory
 				idArray.append(",").append(toLong(categoryids[i]));
 			}
 		}
-		Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, ptype, pbegin, pend, null);
+		Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, ptype, pbegin, pend, keyvalue);
 		for(ViewArticle va : pageModel.getResult())
 		{
 			if(va.getScope() != 2 || (va.getScope() == 2 && va.getUrl().startsWith("/a/")))
@@ -215,7 +215,7 @@ public class CmsFactory
 		return pageModel.getResult();
 	}
 
-	private ViewArticleSet doQueryPage(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, Object... categoryids)
+	private ViewArticleSet doQueryPage(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, String keyvalue, Object... categoryids)
 	{
 		StringBuilder idArray = new StringBuilder();
 		if(categoryids.length > 0)
@@ -229,7 +229,7 @@ public class CmsFactory
 		ViewArticleSet set = new ViewArticleSet();
 		try
 		{
-			Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, ptype, pbegin, pend, null);
+			Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, ptype, pbegin, pend, keyvalue);
 			set.setStatus(1);// success
 			set.setMsg("success");
 			set.setSize(pageModel.getTotalsize());
@@ -255,18 +255,18 @@ public class CmsFactory
 
 	public void put(String name, boolean listOrPage, int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, Object... categoryids)
 	{
-		put(name, listOrPage, pagesize, pagesize, isDesc, onlyImageTop, onlyPageTop, ptype, 0, 0, categoryids);
+		put(name, listOrPage, pagesize, pagesize, isDesc, onlyImageTop, onlyPageTop, ptype, 0, 0, null, categoryids);
 	}
 
-	public void put(String name, boolean listOrPage, int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, Object... categoryids)
+	public void put(String name, boolean listOrPage, int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, String keyvalue, Object... categoryids)
 	{
 		if(listOrPage)
 		{
-			request.setAttribute(name, doQueryList(page, pagesize, isDesc, onlyImageTop, onlyPageTop, ptype, pbegin, pend, categoryids));
+			request.setAttribute(name, doQueryList(page, pagesize, isDesc, onlyImageTop, onlyPageTop, ptype, pbegin, pend, keyvalue, categoryids));
 		}
 		else
 		{
-			request.setAttribute(name, doQueryPage(page, pagesize, isDesc, onlyImageTop, onlyPageTop, ptype, pbegin, pend, categoryids));
+			request.setAttribute(name, doQueryPage(page, pagesize, isDesc, onlyImageTop, onlyPageTop, ptype, pbegin, pend, keyvalue, categoryids));
 		}
 	}
 
