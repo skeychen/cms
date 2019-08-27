@@ -182,18 +182,18 @@ public class CmsFactory
 	{
 		return specialList;
 	}
+//
+//	public List<ViewArticle> queryList(int page, int pagesize, boolean onlyImageTop, boolean onlyPageTop, boolean isDesc, Object... categoryids)
+//	{
+//		return doQueryList(page, pagesize, isDesc, onlyImageTop, onlyPageTop, null, 0, 0, categoryids);
+//	}
+//
+//	public ViewArticleSet queryPage(int page, int pagesize, boolean isDesc, String ptype, Object... categoryids)
+//	{
+//		return doQueryPage(page, pagesize, isDesc, false, false, ptype, 0, 0, categoryids);
+//	}
 
-	public List<ViewArticle> queryList(int page, int pagesize, boolean onlyImageTop, boolean onlyPageTop, boolean isDesc, Object... categoryids)
-	{
-		return doQueryList(page, pagesize, isDesc, onlyImageTop, onlyPageTop, null, categoryids);
-	}
-
-	public ViewArticleSet queryPage(int page, int pagesize, boolean isDesc, String keyvalue, Object... categoryids)
-	{
-		return doQueryPage(page, pagesize, isDesc, false, false, keyvalue, categoryids);
-	}
-
-	private List<ViewArticle> doQueryList(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, Object... categoryids)
+	private List<ViewArticle> doQueryList(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, Object... categoryids)
 	{
 		StringBuilder idArray = new StringBuilder();
 		if(categoryids.length > 0)
@@ -204,7 +204,7 @@ public class CmsFactory
 				idArray.append(",").append(toLong(categoryids[i]));
 			}
 		}
-		Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, ptype, 0, 0, null);
+		Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, ptype, pbegin, pend, null);
 		for(ViewArticle va : pageModel.getResult())
 		{
 			if(va.getScope() != 2 || (va.getScope() == 2 && va.getUrl().startsWith("/a/")))
@@ -215,7 +215,7 @@ public class CmsFactory
 		return pageModel.getResult();
 	}
 
-	private ViewArticleSet doQueryPage(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, Object... categoryids)
+	private ViewArticleSet doQueryPage(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, Object... categoryids)
 	{
 		StringBuilder idArray = new StringBuilder();
 		if(categoryids.length > 0)
@@ -229,7 +229,7 @@ public class CmsFactory
 		ViewArticleSet set = new ViewArticleSet();
 		try
 		{
-			Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, ptype, 0, 0, null);
+			Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, ptype, pbegin, pend, null);
 			set.setStatus(1);// success
 			set.setMsg("success");
 			set.setSize(pageModel.getTotalsize());
@@ -255,13 +255,18 @@ public class CmsFactory
 
 	public void put(String name, boolean listOrPage, int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, Object... categoryids)
 	{
+		put(name, listOrPage, pagesize, pagesize, isDesc, onlyImageTop, onlyPageTop, ptype, 0, 0, categoryids);
+	}
+
+	public void put(String name, boolean listOrPage, int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, Object... categoryids)
+	{
 		if(listOrPage)
 		{
-			request.setAttribute(name, doQueryList(page, pagesize, isDesc, onlyImageTop, onlyPageTop, ptype, categoryids));
+			request.setAttribute(name, doQueryList(page, pagesize, isDesc, onlyImageTop, onlyPageTop, ptype, pbegin, pend, categoryids));
 		}
 		else
 		{
-			request.setAttribute(name, doQueryPage(page, pagesize, isDesc, onlyImageTop, onlyPageTop, ptype, categoryids));
+			request.setAttribute(name, doQueryPage(page, pagesize, isDesc, onlyImageTop, onlyPageTop, ptype, pbegin, pend, categoryids));
 		}
 	}
 
@@ -292,11 +297,22 @@ public class CmsFactory
 	 * @param key 键
 	 * @param val 值
 	 */
-	public void value(String key, String val)
+	public void value(String key, Object val)
 	{
 		request.setAttribute(key, val);
 	}
 
+	/**
+	 * 仅用在生产栏目列表页时使用
+	 * @param page 当前页
+	 * @param pagesize 每页几条
+	 * @param onlyImageTop 是否推荐图
+	 * @param onlyPageTop 是否首页推荐
+	 * @param isDesc 是否发布时间倒序
+	 * @param url 相对url
+	 * @param categoryid 读取的栏目id
+	 * @return ViewArticleNav
+	 */
 	public ViewArticleNav queryPage(int page, int pagesize, boolean onlyImageTop, boolean onlyPageTop, boolean isDesc, String url, Object categoryid)
 	{
 		if(page <= 0)
@@ -393,7 +409,7 @@ public class CmsFactory
 		return nav;
 	}
 
-	protected int initpage(int page, int total)
+	private int initpage(int page, int total)
 	{
 		if(page <= 0)
 		{
