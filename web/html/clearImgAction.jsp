@@ -40,14 +40,14 @@ private String cleanImage(String path, String htmlRoot)
 		String u = file.getName().split("\\.", -1)[0];
 		String pp = file.getPath().replace(htmlRoot, "").replace("\\", "/");
 		DsCmsAnyDao dao = (DsCmsAnyDao)BeanFactory.getBean("dsCmsAnyDao");
-		String sql1 = "SELECT COUNT(1) FROM DS_CMS_CATEGORY WHERE CONTENT LIKE '%" + u + "%' OR IMG LIKE '%" + u + "%' OR SUMMARY LIKE '%" + u + "%'";
+		String sql1 = "SELECT COUNT(1) FROM DS_CMS_CATEGORY_EDIT WHERE CONTENT LIKE '%" + u + "%' OR IMG LIKE '%" + u + "%' OR SUMMARY LIKE '%" + u + "%'";
 		int count = 0;
 		count = (Integer)dao.executeCount(DsCmsAnyDao.initSql(sql1));
 		if(count > 0)
 		{
 			return "";
 		}
-		String sql2 = "SELECT COUNT(1) FROM DS_CMS_PAGE WHERE CONTENT LIKE '%" + u + "%' OR IMG LIKE '%" + u + "%' OR SUMMARY LIKE '%" + u + "%'";
+		String sql2 = "SELECT COUNT(1) FROM DS_CMS_PAGE_EDIT WHERE CONTENT LIKE '%" + u + "%' OR IMG LIKE '%" + u + "%' OR SUMMARY LIKE '%" + u + "%'";
 		count = (Integer)dao.executeCount(DsCmsAnyDao.initSql(sql2));
 		if(count > 0)
 		{
