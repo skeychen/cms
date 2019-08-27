@@ -35,11 +35,17 @@ p.title{font-size:20px;padding-bottom:5px;border-bottom:solid 1px #ccc;}
 			<p><span class="v">summary</span><span class="c">文章摘要</span><span class="t">String</span></p>
 			<p><span class="v">metakeywords</span><span class="c">文章页的metakeywords</span><span class="t">String</span></p>
 			<p><span class="v">metadescription</span><span class="c">文章页的metadescription</span><span class="t">String</span></p>
-			<p><span class="v">releasetime</span><span class="c">文章页的发布时间</span><span class="t">String</span></p>
+			<p><span class="v">releasetime</span><span class="c">文章页的发布时间</span><span class="t">String(yyyy-MM-dd HH:mm:ss)</span></p>
+			<p><span class="v">releasedate</span><span class="c">文章页的发布日期</span><span class="t">String(yyyy-MM-dd)</span></p>
 			<p><span class="v">releasesource</span><span class="c">文章来源</span><span class="t">String</span></p>
 			<p><span class="v">releaseuser</span><span class="c">文章作者</span><span class="t">String</span></p>
 			<p><span class="v">img</span><span class="c">文章图片封面</span><span class="t">String</span></p>
 			<p><span class="v">url</span><span class="c">文章URL</span><span class="t">String</span></p>
+			<p><span class="v">ptype</span><span class="c">自定义分类</span><span class="t">String</span></p>
+			<p><span class="v">pbegin</span><span class="c">开始时间</span><span class="t">long(yyyyMMdd000000)</span></p>
+			<p><span class="v">pend</span><span class="c">结束时间</span><span class="t">long(yyyyMMdd235959)</span></p>
+			<p><span class="v">pbegindate</span><span class="c">开始日期</span><span class="t">String(yyyy-MM-dd)</span></p>
+			<p><span class="v">penddate</span><span class="c">结束日期</span><span class="t">String(yyyy-MM-dd)</span></p>
 			<p><span class="v">content</span><span class="c">文章内容</span><span class="t">String</span></p>
 		</div>
 		<div class="box">
@@ -67,6 +73,9 @@ p.title{font-size:20px;padding-bottom:5px;border-bottom:solid 1px #ccc;}
 				<p><span class="v">isDesc</span><span class="c">是否倒序</span><span class="t">boolean</span></p>
 				<p><span class="v">onlyImageTop</span><span class="c">是否只查有焦点图的</span><span class="t">boolean</span></p>
 				<p><span class="v">onlyPageTop</span><span class="c">是否只查首页推荐的</span><span class="t">boolean</span></p>
+				<p><span class="v">ptype</span><span class="c">分类值</span><span class="t">String</span></p>
+				<p><span class="v">pbegin</span><span class="c">开始时间点</span><span class="t">long(yyyyMMddHHmmss)</span></p>
+				<p><span class="v">pend</span><span class="c">结束时间点</span><span class="t">long(yyyyMMddHHmmss)</span></p>
 				<p><span class="v">keyvalue</span><span class="c">查询关键字</span><span class="t">String</span></p>
 				<p><span class="v">categoryids</span><span class="c">栏目数组，可以为变长参数</span><span class="t">Long...或String...</span></p>
 			</div>
@@ -120,7 +129,8 @@ p.title{font-size:20px;padding-bottom:5px;border-bottom:solid 1px #ccc;}
 			<p><span class="v">metakeywords</span><span class="c">meta关键词</span><span class="t">String</span></p>
 			<p><span class="v">metadescription</span><span class="c">meta描述</span><span class="t">String</span></p>
 			<p><span class="v">summary</span><span class="c">摘要</span><span class="t">String</span></p>
-			<p><span class="v">releasetime</span><span class="c">创建时间</span><span class="t">String</span></p>
+			<p><span class="v">releasetime</span><span class="c">发布时间</span><span class="t">String(yyyy-MM-dd HH:mm:ss)</span></p>
+			<p><span class="v">releasedate</span><span class="c">发布日期</span><span class="t">String(yyyy-MM-dd)</span></p>
 			<p><span class="v">releasesource</span><span class="c">来源</span><span class="t">String</span></p>
 			<p><span class="v">releaseuser</span><span class="c">作者</span><span class="t">String</span></p>
 			<p><span class="v">img</span><span class="c">图片</span><span class="t">String</span></p>
@@ -140,10 +150,16 @@ p.title{font-size:20px;padding-bottom:5px;border-bottom:solid 1px #ccc;}
 			<p><span class="v">metakeywords</span><span class="c">meta关键词</span><span class="t">String</span></p>
 			<p><span class="v">metadescription</span><span class="c">meta描述</span><span class="t">String</span></p>
 			<p><span class="v">summary</span><span class="c">摘要</span><span class="t">String</span></p>
-			<p><span class="v">releasetime</span><span class="c">发布时间</span><span class="t">String</span></p>
+			<p><span class="v">releasetime</span><span class="c">发布时间</span><span class="t">String(yyyy-MM-dd HH:mm:ss)</span></p>
+			<p><span class="v">releasedate</span><span class="c">发布日期</span><span class="t">String(yyyy-MM-dd)</span></p>
 			<p><span class="v">releasesource</span><span class="c">来源</span><span class="t">String</span></p>
 			<p><span class="v">releaseuser</span><span class="c">作者</span><span class="t">String</span></p>
 			<p><span class="v">img</span><span class="c">图片</span><span class="t">String</span></p>
+			<p><span class="v">ptype</span><span class="c">分类值</span><span class="t">String</span></p>
+			<p><span class="v">pbegin</span><span class="c">开始时间点</span><span class="t">long(yyyyMMddHHmmss)</span></p>
+			<p><span class="v">pend</span><span class="c">结束时间点</span><span class="t">long(yyyyMMddHHmmss)</span></p>
+			<p><span class="v">pbegindate</span><span class="c">开始日期</span><span class="t">String(yyyy-MM-dd)</span></p>
+			<p><span class="v">penddate</span><span class="c">结束日期</span><span class="t">String(yyyy-MM-dd)</span></p>
 			<p><span class="v">content</span><span class="c">内容</span><span class="t">String</span></p>
 			<p><span class="v">vo</span><span class="c">自定义字段</span><span class="t">Map</span></p>
 		</div>
