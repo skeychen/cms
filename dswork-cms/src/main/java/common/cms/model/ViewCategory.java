@@ -185,6 +185,15 @@ public class ViewCategory
 	{
 		this.summary = summary;
 	}
+	
+	public String getReleasedate()
+	{
+		if(releasetime.length() > 10)
+		{
+			return releasetime.substring(0, 10);
+		}
+		return releasetime;
+	}
 
 	public String getReleasetime()
 	{
