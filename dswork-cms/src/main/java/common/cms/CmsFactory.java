@@ -193,7 +193,7 @@ public class CmsFactory
 //		return doQueryPage(page, pagesize, isDesc, false, false, ptype, 0, 0, categoryids);
 //	}
 
-	private List<ViewArticle> doQueryList(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, String keyvalue, Object... categoryids)
+	private List<ViewArticle> doQueryList(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, String keyvalue, long... categoryids)
 	{
 		StringBuilder idArray = new StringBuilder();
 		if(categoryids.length > 0)
@@ -201,7 +201,7 @@ public class CmsFactory
 			idArray.append("0");
 			for(int i = 0; i < categoryids.length; i++)
 			{
-				idArray.append(",").append(toLong(categoryids[i]));
+				idArray.append(",").append(categoryids[i]);
 			}
 		}
 		Page<ViewArticle> pageModel = getDao().queryArticlePage(site.getId(), page, pagesize, idArray.toString(), isDesc, onlyImageTop, onlyPageTop, ptype, pbegin, pend, keyvalue);
@@ -215,7 +215,7 @@ public class CmsFactory
 		return pageModel.getResult();
 	}
 
-	private ViewArticleSet doQueryPage(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, String keyvalue, Object... categoryids)
+	private ViewArticleSet doQueryPage(int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, String keyvalue, long... categoryids)
 	{
 		StringBuilder idArray = new StringBuilder();
 		if(categoryids.length > 0)
@@ -223,7 +223,7 @@ public class CmsFactory
 			idArray.append("0");
 			for(int i = 0; i < categoryids.length; i++)
 			{
-				idArray.append(",").append(toLong(categoryids[i]));
+				idArray.append(",").append(categoryids[i]);
 			}
 		}
 		ViewArticleSet set = new ViewArticleSet();
@@ -252,13 +252,13 @@ public class CmsFactory
 		}
 		return set;
 	}
-
-	public void put(String name, boolean listOrPage, int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, Object... categoryids)
+	
+	public void put(String name, boolean listOrPage, int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long... categoryids)
 	{
 		put(name, listOrPage, pagesize, pagesize, isDesc, onlyImageTop, onlyPageTop, ptype, 0, 0, null, categoryids);
 	}
 
-	public void put(String name, boolean listOrPage, int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, String keyvalue, Object... categoryids)
+	public void put(String name, boolean listOrPage, int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, String keyvalue, long... categoryids)
 	{
 		if(listOrPage)
 		{
