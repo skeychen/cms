@@ -10,9 +10,9 @@
 		<include refid="dswork.cms.rowid" />
 	</selectKey>
 	insert into DS_CMS_CATEGORY
-	(PID, SITEID, SCOPE, STATUS, NAME, URL, SEQ, VIEWSITE, PAGEVIEWSITE, MVIEWSITE, MPAGEVIEWSITE, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, PTYPE, PNAME, PFORMAT, PMEMO, CONTENT, JSONTABLE, JSONDATA)
+	(PID, SITEID, SCOPE, STATUS, NAME, URL, SEQ, VIEWSITE, PAGEVIEWSITE, MVIEWSITE, MPAGEVIEWSITE, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, PTYPE, PTYPEITEM, PNAME, PFORMAT, PMEMO, CONTENT, JSONTABLE, JSONDATA)
 	values
-	(<if test="null==pid or 0&gt;=pid">null</if><if test="0 &lt; pid">#{pid}</if>, #{siteid}, #{scope}, #{status}, #{name}, #{url}, #{seq}, #{viewsite}, #{pageviewsite}, #{mviewsite}, #{mpageviewsite}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{ptype}, #{pname}, #{pformat}, #{pmemo}, #{content}, #{jsontable}, #{jsondata})
+	(<if test="null==pid or 0&gt;=pid">null</if><if test="0 &lt; pid">#{pid}</if>, #{siteid}, #{scope}, #{status}, #{name}, #{url}, #{seq}, #{viewsite}, #{pageviewsite}, #{mviewsite}, #{mpageviewsite}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{ptype}, #{ptypeitem}, #{pname}, #{pformat}, #{pmemo}, #{content}, #{jsontable}, #{jsondata})
 </insert>
 
 <delete id="delete">
@@ -29,6 +29,7 @@
 		MVIEWSITE=#{mviewsite},
 		MPAGEVIEWSITE=#{mpageviewsite},
 		PTYPE=#{ptype},
+		PTYPEITEM=#{ptypeitem},
 		PNAME=#{pname},
 		PFORMAT=#{pformat},
 		PMEMO=#{pmemo},
@@ -90,6 +91,7 @@
 	<result property="releaseuser" column="RELEASEUSER" />
 	<result property="img" column="IMG" />
 	<result property="ptype" column="PTYPE" />
+	<result property="ptypeitem" column="PTYPEITEM" />
 	<result property="pname" column="PNAME" />
 	<result property="pformat" column="PFORMAT" />
 	<result property="pmemo" column="PMEMO" />
@@ -99,7 +101,7 @@
 </resultMap>
 
 <sql id="columns">
-	ID, PID, SITEID, SCOPE, STATUS, NAME, SEQ, VIEWSITE, PAGEVIEWSITE, MVIEWSITE, MPAGEVIEWSITE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, PTYPE, PNAME, PFORMAT, PMEMO, CONTENT, JSONTABLE, JSONDATA
+	ID, PID, SITEID, SCOPE, STATUS, NAME, SEQ, VIEWSITE, PAGEVIEWSITE, MVIEWSITE, MPAGEVIEWSITE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, PTYPE, PTYPEITEM, PNAME, PFORMAT, PMEMO, CONTENT, JSONTABLE, JSONDATA
 </sql>
 
 <sql id="dynamicWhere">

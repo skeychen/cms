@@ -48,6 +48,8 @@ public class DsCmsCategory
 	private String img = "";
 	// 分类名称
 	private String ptype = "";
+	// 分类选项
+	private String ptypeitem = "";
 	// 时间名称
 	private String pname = "";
 	// 时间格式
@@ -68,6 +70,8 @@ public class DsCmsCategory
 	private String label = "";
 	// 审核/待发布计数
 	private int count = 0;
+	//
+	private List<String> ptypeitemList = new ArrayList<String>();
 
 	public Long getId()
 	{
@@ -267,6 +271,39 @@ public class DsCmsCategory
 	public void setPtype(String ptype)
 	{
 		this.ptype = ptype;
+	}
+
+	public String getPtypeitem()
+	{
+		return ptypeitem;
+	}
+
+	public void setPtypeitem(String ptypeitem)
+	{
+		this.ptypeitem = ptypeitem;
+	}
+
+	public List<String> getPtypeitemList()
+	{
+		if(ptype.length() > 0 && ptypeitem.length() > 0 && ptypeitemList.size() == 0)
+		{
+			ptypeitem = ptypeitem.trim().replaceAll("\r", " ").replaceAll("\n", " ").replaceAll("  ", " ");
+			String[] arr = ptypeitem.split(" ");
+			for(String s : arr)
+			{
+				s = s.trim();
+				if(s.length() > 0)
+				{
+					ptypeitemList.add(s);
+				}
+			}
+		}
+		return ptypeitemList;
+	}
+
+	public void setList(List<DsCmsCategory> list)
+	{
+		this.list = list;
 	}
 
 	public String getPname()
