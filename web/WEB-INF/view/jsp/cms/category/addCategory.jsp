@@ -20,7 +20,7 @@ $(function(){
 			$(".viewsite").val("");
 			$(".pageviewsite").val("");
 			$("#url").attr("datatype", "Require");
-
+			$("#template_pagesize").hide();
 			$("#ptype").val("");
 			$("#pname").val("");
 			$("#mycustom").hide();
@@ -31,7 +31,7 @@ $(function(){
 			$("#template_page").val("").hide();
 			$(".pageviewsite").val("");
 			$("#url").attr("datatype", "!Require");
-
+			$("#template_pagesize").hide();
 			$("#ptype").val("");
 			$("#pname").val("");
 			$("#mycustom").hide();
@@ -41,9 +41,11 @@ $(function(){
 			$("#template_category").show();
 			$("#template_page").show();
 			$("#url").attr("datatype", "!Require");
-			
+			$("#template_pagesize").show();
 			$("#mycustom").show();
 		}
+		$("#viewpagesize").val("25");
+		
 	}).bind("change", function(){
 		$("#scope").click();
 	});
@@ -113,6 +115,12 @@ $(function(){
 	<tr>
 		<td class="form_title">链接</td>
 		<td class="form_input"><input type="text" id="url" name="url" maxlength="100" style="width:400px;" datatype="!Require" value="" /></td>
+	</tr>
+	</tbody>
+	<tbody id="template_pagesize">
+	<tr>
+		<td class="form_title">每页条数</td>
+		<td class="form_input"><input type="number" id="viewpagesize" name="viewpagesize" min="1" max="99999" step="1" datatype="Range" style="width:50px;" value="25" /></td>
 	</tr>
 	</tbody>
 	<tbody id="template_category">

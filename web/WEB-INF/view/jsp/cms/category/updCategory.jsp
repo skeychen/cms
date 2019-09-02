@@ -21,6 +21,7 @@ $(function(){
 			$("#pageviewsite").val("${po.pageviewsite}");
 			$("#mviewsite").val("${po.mviewsite}");
 			$("#mpageviewsite").val("${po.mpageviewsite}");
+			$("#template_pagesize").show();
 			$("#ptype").val("${fn:escapeXml(po.ptype)}");
 			$("#pname").val("${fn:escapeXml(po.pname)}");
 			$("#mycustom").show();
@@ -29,17 +30,20 @@ $(function(){
 			$('#listTable').append($('#scope_0_1').html());
 			$("#viewsite").val("${po.viewsite}");
 			$("#mviewsite").val("${po.mviewsite}");
+			$("#template_pagesize").hide();
 			$("#ptype").val("");
 			$("#pname").val("");
 			$("#mycustom").hide();
 			break;
 		case '2':
 			$('#listTable').append($('#scope_2').html());
+			$("#template_pagesize").hide();
 			$("#ptype").val("");
 			$("#pname").val("");
 			$("#mycustom").hide();
 			break;
 		}
+		$("#viewpagesize").val("${po.viewpagesize}");
 	});
 	$('#scope').change();
 });
@@ -122,6 +126,12 @@ $(function(){
 			</select>
 		</td>
 	</tr>
+	<tbody id="template_pagesize">
+	<tr>
+		<td class="form_title">每页条数</td>
+		<td class="form_input"><input type="number" id="viewpagesize" name="viewpagesize" min="1" max="99999" step="1" datatype="Range" style="width:50px;" value="${po.viewpagesize}" /></td>
+	</tr>
+	</tbody>
 	<tbody id="mycustom">
 	<tr>
 		<td class="form_title">定义分类</td>

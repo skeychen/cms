@@ -31,13 +31,13 @@ function unbuild(pageid){
 $dswork.page.join = function(td, menu, id){
 	$(menu).append($('<div iconCls="menuTool-graph">预览</div>').bind("click", function(){
 		var url = td.attr("url");
-		if(!url){url = "${ctx}/cmsbuild/buildHTML.chtml?view=true&siteid=${po.siteid}&categoryid=${po.id}&pageid=" + id;}
+		if(!url){url = "${ctx}/cmsbuild/preview.chtml?siteid=${po.siteid}&categoryid=${po.id}&pageid=" + id;}
 		window.open(url);
 	}));
 <c:if test="${enablemobile}">
 	$(menu).append($('<div iconCls="menuTool-graph">预览移动版</div>').bind("click", function(){
 		var url = td.attr("url");
-		if(!url){url = "${ctx}/cmsbuild/buildHTML.chtml?view=true&siteid=${po.siteid}&categoryid=${po.id}&mobile=true&pageid=" + id;}
+		if(!url){url = "${ctx}/cmsbuild/preview.chtml?siteid=${po.siteid}&categoryid=${po.id}&mobile=true&pageid=" + id;}
 		window.open(url);
 	}));
 </c:if>
@@ -87,14 +87,14 @@ $(function(){
 			<a class="delete" id="btn_page_d" href="#">删除发布内容</a>
 			&nbsp;<a class="vline" href="#"></a>&nbsp;
 			<a class="graph" id="btn_category" href="#">发布栏目首页</a>
-			<a class="look" target="_blank" href="${ctx}/cmsbuild/buildHTML.chtml?view=true&siteid=${po.siteid}&categoryid=${po.id}">预览栏目首页</a><c:if test="${enablemobile}">
-			<a class="look" target="_blank" href="${ctx}/cmsbuild/buildHTML.chtml?view=true&siteid=${po.siteid}&categoryid=${po.id}&mobile=true">预览移动版栏目首页</a></c:if>
+			<a class="look" target="_blank" href="${ctx}/cmsbuild/preview.chtml?siteid=${po.siteid}&categoryid=${po.id}">预览栏目首页</a><c:if test="${enablemobile}">
+			<a class="look" target="_blank" href="${ctx}/cmsbuild/preview.chtml?siteid=${po.siteid}&categoryid=${po.id}&mobile=true">预览移动版栏目首页</a></c:if>
 			&nbsp;<a class="vline" href="#"></a>&nbsp;
 			<a class="graph" id="btn_page" href="#">发布栏目内容</a>
 			&nbsp;<a class="vline" href="#"></a>&nbsp;
 			<a class="graph" id="btn_site" href="#">发布首页</a>
-			<a class="look" target="_blank" href="${ctx}/cmsbuild/buildHTML.chtml?view=true&siteid=${po.siteid}">预览首页</a><c:if test="${enablemobile}">
-			<a class="look" target="_blank" href="${ctx}/cmsbuild/buildHTML.chtml?view=true&siteid=${po.siteid}&mobile=true">预览移动版首页</a></c:if>
+			<a class="look" target="_blank" href="${ctx}/cmsbuild/preview.chtml?siteid=${po.siteid}">预览首页</a><c:if test="${enablemobile}">
+			<a class="look" target="_blank" href="${ctx}/cmsbuild/preview.chtml?siteid=${po.siteid}&mobile=true">预览移动版首页</a></c:if>
 		</td>
 	</tr>
 </table>

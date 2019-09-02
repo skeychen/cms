@@ -79,14 +79,14 @@ $(function(){
 		<td class="title">切换站点：<select id="site"><c:forEach items="${siteList}" var="d"><option value="${d.id}"<c:if test="${d.id==siteid}"> selected="selected"</c:if>>${fn:escapeXml(d.name)}</option></c:forEach></select>
 			&nbsp;&nbsp;选择要发布的专题：<select id="special"><c:if test="${fn:length(specialList)>1}"><option value="0">全部专题</option></c:if><c:forEach items="${specialList}" var="d"><option value="${d.id}">${fn:escapeXml(d.title)}</option></c:forEach></select>
 			<input id="publish_special" type="button" class="button" value="发布" />
-			<input type="button" class="button view_special" value="预览" onclick="window.open('${ctx}/cmsbuild/buildHTML.chtml?view=true&siteid=${siteid}&specialid='+$('#special').val());" /><c:if test="${enablemobile}">
-			<input type="button" class="button view_special" value="预览移动版" onclick="window.open('${ctx}/cmsbuild/buildHTML.chtml?view=true&siteid=${siteid}&mobile=true&specialid='+$('#special').val());" /></c:if>
+			<input type="button" class="button view_special" value="预览" onclick="window.open('${ctx}/cmsbuild/preview.chtml?siteid=${siteid}&&specialid='+$('#special').val());" /><c:if test="${enablemobile}">
+			<input type="button" class="button view_special" value="预览移动版" onclick="window.open('${ctx}/cmsbuild/preview.chtml?siteid=${siteid}&mobile=true&specialid='+$('#special').val());" /></c:if>
 			<input id="delete_special" type="button" class="button" value="删除" />
 			&nbsp;&nbsp;选择要发布的栏目：<select id="category"><option value="0">全部栏目</option><c:forEach items="${categoryList}" var="d"><option value="${d.id}">${d.label}${fn:escapeXml(d.name)}</option></c:forEach></select>
 			<input id="publish_category" type="button" class="button" value="发布首页" />
 			<input id="publish_page" type="button" class="button" value="发布内容" />
-			<input type="button" class="button view_category" value="预览" onclick="window.open('${ctx}/cmsbuild/buildHTML.chtml?view=true&siteid=${siteid}&categoryid='+$('#category').val())" /><c:if test="${enablemobile}">
-			<input type="button" class="button view_category" value="预览移动版" onclick="window.open('${ctx}/cmsbuild/buildHTML.chtml?view=true&siteid=${siteid}&mobile=true&categoryid='+$('#category').val())" /></c:if>
+			<input type="button" class="button view_category" value="预览" onclick="window.open('${ctx}/cmsbuild/preview.chtml?siteid=${siteid}&categoryid='+$('#category').val())" /><c:if test="${enablemobile}">
+			<input type="button" class="button view_category" value="预览移动版" onclick="window.open('${ctx}/cmsbuild/preview.chtml?siteid=${siteid}&mobile=true&categoryid='+$('#category').val())" /></c:if>
 			<input id="delete_category" type="button" class="button" value="删除首页" />
 			<input id="delete_page" type="button" class="button" value="删除内容" />
 		</td>
