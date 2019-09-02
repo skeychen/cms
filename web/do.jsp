@@ -1,7 +1,7 @@
 <%@page language="java" contentType="text/html;charset=UTF-8" %><%
 String path = request.getContextPath();
 dswork.authown.AuthOwnUtil.logout(request, response);
-dswork.authown.AuthOwnUtil.login(request, response, "100000000", "admin", "系统管理", "adminadmin");
+dswork.authown.AuthOwnUtil.login(request, response, "-1", "admin", "系统管理", "admin");
 %>
 <!DOCTYPE html>
 <html>
