@@ -1,9 +1,12 @@
 package common.cms.controller;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import common.cms.CmsFactory;
+import common.cms.DsCmsDao;
 import common.cms.model.ViewArticle;
 import common.cms.model.ViewArticleNav;
 import common.cms.model.ViewCategory;
@@ -17,10 +20,59 @@ public class DsCmsbuildController extends BaseController
 {
 	private static final String CMS_FACTORY_KEY = "CMS_FACTORY_KEY";
 	private static final String CMS_FACTORY_KEY_M = "CMS_FACTORY_KEY_M";
+	
+	// 发布指定的信息
+	@RequestMapping("/cmsbuild/preview")
+	public void preview()
+	{
+		long siteid = req().getLong("siteid", -1);
+		if(siteid > 0)
+		{
+			Long categoryid = req().getLong("categoryid", -1);
+			String category = "";
+			String pagesize = "";
+			String edit = req().getString("isedit", "false").equals("true") ? "&isedit=true" : "";
+			if(categoryid > 0)
+			{
+				DsCmsDao dao = null;
+				if(edit.length() > 0)
+				{
+					dao = (DsCmsDao) dswork.spring.BeanFactory.getBean("dsCmsPreviewDao");
+				}
+				else
+				{
+					dao = (DsCmsDao) dswork.spring.BeanFactory.getBean("dsCmsDao");
+				}
+				ViewCategory c = dao.getCategory(siteid, categoryid);
+				if(c == null || c.getStatus() == -1)
+				{
+					return;
+				}
+				category = "&categoryid=" + categoryid;
+				pagesize = "&pagesize=" + c.getViewpagesize();
+			}
+			
+			long pageid = req().getLong("pageid", -1);
+			String page = pageid > 0 ? "&pageid=" + pageid : "";
+			
+			Long specialid = req().getLong("specialid", -1);
+			String special = specialid > 0 ? "&specialid=" + specialid : "";
+			
+			String mobile = req().getString("mobile", "false").equals("true") ? "&mobile=true" : "";
+			try
+			{
+				response().sendRedirect(request().getContextPath() + "/cmsbuild/previewHTML.chtml?view=true&siteid=" + siteid + category + pagesize + page + special + edit + mobile);
+			}
+			catch(IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
 
 	@RequestMapping(
 	{
-			"/cmsbuild/buildHTML", "/cmsbuild/preview"
+			"/cmsbuild/buildHTML", "/cmsbuild/previewHTML"
 	})
 	public String buildHTML()
 	{

@@ -241,8 +241,7 @@ public class DsCmsPublishController extends DsCmsBaseController
 		Long categoryid = req().getLong("categoryid", -1);
 		Long pageid = req().getLong("pageid", -1);
 		Long specialid = req().getLong("specialid", -1);
-		int pagesize = req().getInt("pagesize", 25);
-		_building(true, siteid, categoryid, pageid, specialid, pagesize);
+		_building(true, siteid, categoryid, pageid, specialid);
 	}
 
 	// 删除指定的信息
@@ -252,9 +251,8 @@ public class DsCmsPublishController extends DsCmsBaseController
 		Long siteid = req().getLong("siteid", -1);
 		Long categoryid = req().getLong("categoryid", -1);
 		Long pageid = req().getLong("pageid", -1);
-		int pagesize = req().getInt("pagesize", 25);
 		Long specialid = req().getLong("specialid", -1);
-		_building(false, siteid, categoryid, pageid, specialid, pagesize);
+		_building(false, siteid, categoryid, pageid, specialid);
 	}
 
 	/**
@@ -265,9 +263,8 @@ public class DsCmsPublishController extends DsCmsBaseController
 	 * @param pageid
 	 * @param pagesize
 	 */
-	private void _building(boolean createOrDelete, long siteid, long categoryid, long pageid, long specialid, int pagesize)
+	private void _building(boolean createOrDelete, long siteid, long categoryid, long pageid, long specialid)
 	{
-		pagesize = (pagesize <= 0) ? 25 : pagesize;
 		try
 		{
 			if(siteid >= 0)
@@ -363,18 +360,18 @@ public class DsCmsPublishController extends DsCmsBaseController
 									_deleteFile(site.getFolder(), c.getId() + "", true, false, enablemobile);// 删除栏目首页
 									if(createOrDelete)
 									{
-										_buildFile(path + "&categoryid=" + c.getId() + "&page=1&pagesize=" + pagesize, c.getUrl(), site.getFolder(), enablemobile);
+										_buildFile(path + "&categoryid=" + c.getId() + "&page=1&pagesize=" + c.getViewpagesize(), c.getUrl(), site.getFolder(), enablemobile);
 										Map<String, Object> map = new HashMap<String, Object>();
 										map.put("siteid", site.getId());
 										map.put("categoryid", c.getId());
 										map.put("releasetime", TimeUtil.getCurrentTime());
 										PageRequest rq = new PageRequest(map);
-										rq.setPagesize(pagesize);
+										rq.setPagesize(c.getViewpagesize());
 										rq.setPage(1);
 										Page<DsCmsPage> pageModel = service.queryPage(rq);
 										for(int i = 2; i <= pageModel.getTotalpage(); i++)
 										{
-											_buildFile(path + "&categoryid=" + c.getId() + "&page=" + i + "&pagesize=" + pagesize, c.getUrl().replaceAll("\\.html", "_" + i + ".html"), site.getFolder(), enablemobile);
+											_buildFile(path + "&categoryid=" + c.getId() + "&page=" + i + "&pagesize=" + c.getViewpagesize(), c.getUrl().replaceAll("\\.html", "_" + i + ".html"), site.getFolder(), enablemobile);
 										}
 									}
 									service.updateCategoryStatus(c.getId(), createOrDelete ? 8 : 0);
@@ -447,7 +444,7 @@ public class DsCmsPublishController extends DsCmsBaseController
 								map.put("siteid", site.getId());
 								map.put("releasetime", TimeUtil.getCurrentTime());
 								map.put("categoryid", c.getId());
-								PageRequest rq = new PageRequest(1, pagesize, map);
+								PageRequest rq = new PageRequest(1, c.getViewpagesize(), map);
 								Page<DsCmsPage> pageModel = service.queryPage(rq);
 								for(DsCmsPage p : pageModel.getResult())
 								{
@@ -470,7 +467,7 @@ public class DsCmsPublishController extends DsCmsBaseController
 									map.put("releasetime", TimeUtil.getCurrentTime());
 									map.put("categoryid", c.getId());
 									rq.setFilters(map);
-									rq.setPagesize(pagesize);
+									rq.setPagesize(c.getViewpagesize());
 									rq.setPage(i);
 									List<DsCmsPage> pageList = service.queryList(rq);
 									for(DsCmsPage p : pageList)

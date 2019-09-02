@@ -22,6 +22,8 @@ public class DsCmsCategory
 	private String name = "";
 	// 排序
 	private int seq = 0;
+	// 栏目页每页条数
+	private int viewpagesize = 25;
 	// 栏目模板
 	private String viewsite = "";
 	// 内容模板
@@ -141,6 +143,16 @@ public class DsCmsCategory
 	public void setSeq(int seq)
 	{
 		this.seq = seq;
+	}
+
+	public int getViewpagesize()
+	{
+		return viewpagesize;
+	}
+
+	public void setViewpagesize(int viewpagesize)
+	{
+		this.viewpagesize = (viewpagesize <= 0 || viewpagesize > 100000) ? 25 : viewpagesize;
 	}
 
 	public String getViewsite()

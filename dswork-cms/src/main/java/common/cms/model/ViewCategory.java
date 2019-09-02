@@ -17,6 +17,7 @@ public class ViewCategory
 	private int scope;
 	private int status;
 	private String url = "";
+	private int viewpagesize = 25;
 	private String viewsite = "";
 	private String pageviewsite = "";
 	private String mviewsite = "";
@@ -116,6 +117,16 @@ public class ViewCategory
 		this.url = url;
 	}
 
+	public int getViewpagesize()
+	{
+		return viewpagesize;
+	}
+
+	public void setViewpagesize(int viewpagesize)
+	{
+		this.viewpagesize = (viewpagesize <= 0 || viewpagesize > 100000) ? 25 : viewpagesize;
+	}
+	
 	public String getViewsite()
 	{
 		return viewsite;
