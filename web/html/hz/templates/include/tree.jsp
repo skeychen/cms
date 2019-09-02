@@ -1,4 +1,5 @@
 <%@page language="java" pageEncoding="UTF-8"%>
+<%--上面这个是三级导航树全出来的写法--%>
 <%--
 <c:if test="${category.id != 10}">
 <c:if test="${category.parent == category}">
@@ -21,6 +22,7 @@
 </c:if>
 --%>
 
+<%--下面这个是仅出来当前级别导航树的写法--%>
 <c:if test="${category.id != 10}">
 <c:if test="${category.parent == category}">
 	<c:set var="xpid" value="${category.id}" scope="request" />
@@ -34,6 +36,9 @@
 	<c:set var="xpid" value="${category.parent.parent.id}" scope="request" />
 	<c:set var="xname" value="${category.parent.parent.name}" scope="request" />
 </c:if>
+
+
+<%--按上面两种配置出来的导航--%>
 <div class="title vus-text-center vus-color--white vus-fs-20">${xname}</div>
 <ul class="vus-hidden vus-text-center">
 	<%cms.putCategory("list", true, request.getAttribute("xpid"));%>
