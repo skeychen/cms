@@ -245,11 +245,13 @@
 	更新dswork-cms.jar，修复删除栏目未删文件的bug
 
 
-2019.08.13 增加可分类的分类名称、日期和日期格式
+2019.09.02 增加可分类的分类名称、日期和日期格式，栏目列表页每页条数可设置
 	运行以下SQL修改排序字段列
 	ALTER TABLE DS_CMS_CATEGORY 
+	ADD COLUMN VIEWPAGESIZE int(5) NULL COMMENT '栏目页每页条数' AFTER SEQ,
 	ADD COLUMN PTYPE varchar(30) COMMENT '分类名称' AFTER IMG,
-	ADD COLUMN PNAME varchar(30) COMMENT '时间名称' AFTER PTYPE,
+	ADD COLUMN PTYPEITEM varchar(999) COMMENT '分类选项' AFTER PTYPE,
+	ADD COLUMN PNAME varchar(30) COMMENT '时间名称' AFTER PTYPEITEM,
 	ADD COLUMN PFORMAT varchar(30) COMMENT '时间格式' AFTER PNAME,
 	ADD COLUMN PMEMO varchar(300) COMMENT '特殊说明' AFTER PFORMAT;
 	
