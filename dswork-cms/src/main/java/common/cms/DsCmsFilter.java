@@ -22,7 +22,7 @@ public class DsCmsFilter implements Filter
 	private String pvf    = "/f/";
 	private String pva    = "/a/";
 	private String pvm    = "/m/";
-	private String pvurl  = "/cmsbuild/buildHTML.chtml";
+	private String pvurl  = "/cmsbuild/preview.chtml";
 	
 	public void init(FilterConfig config)
 	{

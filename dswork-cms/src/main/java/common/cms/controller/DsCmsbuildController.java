@@ -31,6 +31,8 @@ public class DsCmsbuildController extends BaseController
 			Long categoryid = req().getLong("categoryid", -1);
 			String category = "";
 			String pagesize = "";
+			int p = req().getInt("page", 1);
+			String pagenumber = p > 1 ? "&page=" + p : "";
 			String edit = req().getString("isedit", "false").equals("true") ? "&isedit=true" : "";
 			if(categoryid > 0)
 			{
@@ -61,7 +63,7 @@ public class DsCmsbuildController extends BaseController
 			String mobile = req().getString("mobile", "false").equals("true") ? "&mobile=true" : "";
 			try
 			{
-				response().sendRedirect(request().getContextPath() + "/cmsbuild/previewHTML.chtml?view=true&siteid=" + siteid + category + pagesize + page + special + edit + mobile);
+				response().sendRedirect(request().getContextPath() + "/cmsbuild/previewHTML.chtml?view=true&siteid=" + siteid + category + pagesize + page + special + edit + mobile + pagenumber);
 			}
 			catch(IOException e)
 			{
