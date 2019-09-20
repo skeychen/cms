@@ -21,6 +21,7 @@ import dswork.core.page.Page;
 import dswork.core.page.PageNav;
 import dswork.core.page.PageRequest;
 import dswork.core.util.FileUtil;
+import dswork.core.util.IdUtil;
 import dswork.core.util.TimeUtil;
 import dswork.http.HttpUtil;
 
@@ -241,6 +242,19 @@ public class DsCmsPublishController extends DsCmsBaseController
 		Long categoryid = req().getLong("categoryid", -1);
 		Long pageid = req().getLong("pageid", -1);
 		Long specialid = req().getLong("specialid", -1);
+		
+		try
+		{
+			java.util.Map<String, Object> map = new java.util.HashMap<String,Object>();
+			map.put("id", IdUtil.genId());
+			map.put("msg", getName() + ".执行了发布，参数为：categoryid=" + categoryid + ", pageid=" + pageid + ",specialid=" + specialid);
+			map.put("sql", "insert into DS_EXCEPTION (ID,MSG) values (#{id}, #{msg})");
+			dswork.cms.dao.DsCmsAnyDao dao = (dswork.cms.dao.DsCmsAnyDao)dswork.spring.BeanFactory.getBean("dsCmsAnyDao");
+			dao.executeInsert(map);
+		}
+		catch(Exception ee)
+		{
+		}
 		_building(true, siteid, categoryid, pageid, specialid);
 	}
 

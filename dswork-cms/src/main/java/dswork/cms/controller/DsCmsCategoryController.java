@@ -19,6 +19,7 @@ import dswork.cms.model.DsCmsSite;
 import dswork.cms.service.DsCmsCategoryService;
 import dswork.core.page.Page;
 import dswork.core.page.PageNav;
+import dswork.core.page.PageRequest;
 import dswork.core.util.FileUtil;
 
 @Controller
@@ -330,6 +331,9 @@ public class DsCmsCategoryController extends DsCmsBaseController
 				put("enablemobile", s.getEnablemobile() == 1);
 				if(po.getScope() == 0)
 				{
+					PageRequest pr = getPageRequest();
+					pr.getFilters().put("siteid", po.getSiteid());
+					pr.getFilters().put("categoryid", po.getId());
 					Page<DsCmsPageEdit> page = service.queryPagePageEdit(getPageRequest());
 					put("pageModel", page);
 					put("pageNav", new PageNav<DsCmsPageEdit>(request(), page));
