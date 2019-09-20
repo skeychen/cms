@@ -93,6 +93,9 @@
 			or CONTENT like #{keyvalue, typeHandler=LikeTypeHandler}
 		 )
 		</if>
+		<if test="@Ognl@isNotEmpty(ptype)"> PTYPE=#{ptype} </if>
+		<if test="@Ognl@isNotEmpty(pbegin)"> and PEND&gt;=#{pbegin} </if>
+		<if test="@Ognl@isNotEmpty(pend)"> and PBEGIN&lt;=#{pend} </if>
 	</where>
 </sql>
 
