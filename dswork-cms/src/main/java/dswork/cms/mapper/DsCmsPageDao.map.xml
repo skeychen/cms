@@ -96,9 +96,9 @@
 		 )
 		</if>
 		<if test="@Ognl@isNotEmpty(releasetime)"> and RELEASETIME&lt;=#{releasetime} </if>
-		<if test="@Ognl@isNotEmpty(ptype)"> PTYPE=#{ptype} </if>
-		<if test="@Ognl@isNotEmpty(pbegin)"> and PEND&gt;=#{pbegin} </if>
-		<if test="@Ognl@isNotEmpty(pend)"> and PBEGIN&lt;=#{pend} </if>
+		<if test="@Ognl@isNotEmpty(ptype)"> and PTYPE=#{ptype} </if>
+		<if test="pbegin &gt; 0"> and PEND&gt;=#{pbegin} </if>
+		<if test="pend &gt; 0"> and PBEGIN&lt;=#{pend} </if>
 	</where>
 </sql>
 
