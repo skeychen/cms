@@ -27,13 +27,28 @@
 		pbegin1 = "0";
 	}
 	Long pbegin = Long.parseLong(pbegin1);
+	
+	String pend1 = req.getString("pend");
+	if(pend1 != null && pend1.length() > 0)
+	{
+		pend1 = pend1 + "000000";
+		if(pbegin == 0)
+		{
+			pend1 = "0";
+		}
+	}
+	else
+	{
+		pend1 = "0";
+	}
+	Long pend = Long.parseLong(pend1);
 	//城市
 	String ptype = req.getString("ptype");
 	//关键字
 	String keyvalue = req.getString("keyvalue");
 	int currentPage = req.getInt("page");//当前页
 	int pagesize = req.getInt("pagesize");//一页数据显示大小
-	dswork.core.page.Page<common.cms.model.ViewArticle> pageModel = dao.queryArticlePage(siteid, currentPage, pagesize, String.valueOf(categoryid), true, false, false, ptype, pbegin, 0, keyvalue);
+	dswork.core.page.Page<common.cms.model.ViewArticle> pageModel = dao.queryArticlePage(siteid, currentPage, pagesize, String.valueOf(categoryid), true, false, false, ptype, pbegin, pend, keyvalue);
 	data.put("rows", pageModel.getResult());
 	data.put("size", pageModel.getTotalsize());
 	data.put("page", pageModel.getPage());
