@@ -102,7 +102,23 @@ $(function(){
 <form id="queryForm" method="post" action="getPage.htm?id=${po.id}">
 <table border="0" cellspacing="0" cellpadding="0" class="queryTable">
 	<tr>
-		<td class="input">&nbsp;关键字：<input type="text" class="text" name="keyvalue" style="width:300px;" value="${fn:escapeXml(param.keyvalue)}" /></td>
+		<td class="input">
+			关键字：<input type="text" class="text" name="keyvalue" style="width:300px;" value="${fn:escapeXml(param.keyvalue)}" />
+			<c:if test="${category.scope==0}">
+				<c:if test="${fn:length(category.ptype) > 0}">
+					&nbsp;${fn:escapeXml(category.ptype)}：<c:if test="${fn:length(category.ptypeitemList) == 0}"><input type="text" name="ptype" maxlength="100" style="width:100px;" value="${fn:escapeXml(param.ptype)}"
+					/></c:if><c:if test="${fn:length(category.ptypeitemList) > 0}"><select name="ptype" v="${fn:escapeXml(param.ptype)}">
+						<c:forEach items="${category.ptypeitemList}" var="d"><option value="${fn:escapeXml(d)}">${fn:escapeXml(d)}</option></c:forEach>
+					</select></c:if>
+				</c:if>
+				<c:if test="${fn:length(category.pname) > 0}">
+					&nbsp;${fn:escapeXml(category.pname)}：
+					<input type="text" name="pbegin" class="WebDate" format="${fn:escapeXml(category.pformat)}" value="${param.pbegin>0?param.pbegin:''}" />
+					至
+					<input type="text" name="pend" class="WebDate" format="${fn:escapeXml(category.pformat)}" value="${param.pend>0?param.pend:''}" />
+				</c:if>
+			</c:if>
+		</td>
 		<td class="query"><input id="_querySubmit_" type="button" class="button" value="查询" /></td>
 	</tr>
 </table>
