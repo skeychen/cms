@@ -39,7 +39,7 @@ new Swiper('.swiper-container-banner', {
 
 
 
-<%cms.put("listGg", true, 1, 3, true, false, false, 49); %>
+<%cms.put("listGg", true, 1, 3, true, true, true, 49); %>
 <div class="mg-notice vus-pt-20">
 	<div class="vus-pt-10 vus-pb-10 vus-bg--white vus-h-px-50">
 		<div class="title vus-fl vus-pl-20 vus-pr-15">
@@ -176,7 +176,7 @@ new Swiper('.swiper-container-notice', {
 				</a>
 			</div>
 		</div>
-		<%cms.put("listZhpq", true, 1, 4, true, false, true, 10);%>
+		<%cms.put("listZhpq", true, 1, 4, true, true, true, 10);%>
 		<div class="vus-pt-20 vus-pb-20 vus-clearfix">
 			<c:set var="zhpqcount" value="0" scope="request" /><c:forEach items="${listZhpq}" var="d"
 			><c:if test="${fn:length(d.img)>0}"
@@ -242,7 +242,7 @@ new Swiper('.swiper-container-notice', {
 		</div>
 		<div style="height:300px;overflow:hidden;">
 		<%long year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);%>
-		<%cms.put("listZhpqFull", true, 1, 10000, true, false, true, null, year*10000000000L, year*10000000000L+1231999999L, null, 48);%>
+		<%cms.put("listZhpqFull", true, 1, 10000, true, true, true, null, year*10000000000L, year*10000000000L+1231999999L, null, 48);%>
 		<c:forEach var="zhpqIndex" begin="1" end="12">
 		<ul id="month_${zhpqIndex}" class="date-list vus-pt-5 vus-pb-20 vus-clearfix" style="display:none;"><c:set var="zhpqcount" value="0" scope="request" />
 			<c:forEach items="${listZhpqFull}" var="d"
@@ -305,7 +305,7 @@ new Swiper('.swiper-container-notice', {
 		</div>
 		<div class="vus-pt-10 vus-pb-10 vus-hidden">
 			<ul id="exhibition1" class="vus-pb-20 vus-clearfix list-1">
-				<%cms.put("listBzZcfg", true, 1, 10, true, false, false, 51);%>
+				<%cms.put("listBzZcfg", true, 1, 10, true, true, true, 51);%>
 				<c:forEach items="${listBzZcfg}" var="d">
 				<li class="vus-w-50 item">
 					<div class="vus-border-bottom-1 vus-clearfix">
@@ -319,7 +319,7 @@ new Swiper('.swiper-container-notice', {
 			</ul>
 
 			<ul id="exhibition2" class="ul-1 vus-pt-10 vus-clearfix" style="display: none;">
-				<%cms.put("listBzZgtj", true, 1, 8, true, false, false, 11);%><%--场馆推荐--%>
+				<%cms.put("listBzZgtj", true, 1, 8, true, true, true, 11);%><%--场馆推荐--%>
 				<c:forEach items="${listBzZgtj}" var="d">
 				<li class="item vus-mr-20 vus-fl">
 					<div class="img vus-hidden vus-bg--gray-smoke vus-relative mg-up-layer-hover">
@@ -345,7 +345,7 @@ new Swiper('.swiper-container-notice', {
 			</ul>
 
 			<ul id="exhibition3" class="ul-1 vus-pt-10 vus-clearfix" style="display: none;">
-				<%cms.put("listBzHzhb", true, 1, 8, true, false, false, 17, 18, 19, 39, 40, 41);%><%--合作伙伴--%>
+				<%cms.put("listBzHzhb", true, 1, 8, true, true, true, 17, 18, 19, 39, 40, 41);%><%--合作伙伴--%>
 				<c:forEach items="${listBzHzhb}" var="d">
 				<li class="item vus-mr-20 vus-fl">
 					<div class="img vus-hidden vus-bg--gray-smoke vus-relative mg-up-layer-hover">
@@ -375,7 +375,7 @@ new Swiper('.swiper-container-notice', {
 			</ul>
 
 			<ul id="exhibition4" class="ul-1 vus-pt-10 vus-clearfix" style="display: none;"><%--min-height:438px;--%>
-				<%cms.put("listBzJzpt", true, 1, 8, true, false, false, 13);%><%--酒店配套--%>
+				<%cms.put("listBzJzpt", true, 1, 8, true, true, true, 13);%><%--酒店配套--%>
 				<c:forEach items="${listBzJzpt}" var="d">
 				<li class="item vus-mr-20 vus-fl">
 					<div class="img vus-hidden vus-bg--gray-smoke vus-relative mg-up-layer-hover">
@@ -431,7 +431,7 @@ new Swiper('.swiper-container-notice', {
 			<div id="exhibition6" class="vus-pt-10 vus-pb-10 vus-clearfix" style="display: none;">
 				<div class="swiper-container swiper-container-travel">
 					<ul class="swiper-wrapper">
-						<%cms.put("listBzJzpt", true, 1, 24, true, false, false, 31, 32, 33);%><%--旅游文化--%>
+						<%cms.put("listBzJzpt", true, 1, 24, true, true, true, 31, 32, 33);%><%--旅游文化--%>
 						<c:forEach items="${listBzJzpt}" var="d">
 						<li class="swiper-slide">
 							<div class="vus-mx-auto vus-w-100 travel-img">
@@ -476,7 +476,7 @@ new Swiper('.swiper-container-notice', {
 		<div class="item vus-h-px-30 vus-hidden vus-fl">
 			<div class="swiper-container vus-h-px-30 swiper-container-money">
 				<ul class="swiper-wrapper">
-				<%cms.put("listFwZjsq", true, 1, 3, true, false, false, 50);%>
+				<%cms.put("listFwZjsq", true, 1, 3, true, true, true, 50);%>
 				<c:forEach items="${listFwZjsq}" var="d">
 					<li class="swiper-slide">
 						<div class="vus-w-max-75 vus-fl vus-text-ellipsis">
@@ -536,7 +536,7 @@ new Swiper('.swiper-container-money', {
 </div>
 
 <!-- 会展人才 -->
-<%cms.put("listRcAD", true, 1, 4, true, false, false, 47);%><%--首页会展人才广告--%>
+<%cms.put("listRcAD", true, 1, 4, true, true, true, 47);%><%--首页会展人才广告--%>
 <div class="mg-job vus-pt-20">
 	<div class="vus-bg--white vus-clearfix vus-pl-20 vus-pr-20">
 		<!-- 标题 -->
@@ -553,7 +553,7 @@ new Swiper('.swiper-container-money', {
 				</ul>
 			</div>
 			<div class="vus-fr vus-h-100">
-				<a href="job.html" class="vus-color--dark">
+				<a href="${ctx}/a/24/index.html" class="vus-color--dark">
 					<span class="vus-inline-block vus-align-middle">更多</span>
 					<img src="${ctx}/f/res/image/more.png" class="vus-inline-block vus-align-middle">
 				</a>
@@ -752,7 +752,7 @@ new Swiper('.swiper-container-money', {
 			</div>
 			<div id="job2" class="vus-clearfix" style="display: none;">
 				<ul class="vus-fl mg-calc-3 vus-pr-30">
-					<%cms.put("listRcZcgl", true, 1, 4, true, false, true, 25);%><%-- 职场攻略 --%>
+					<%cms.put("listRcZcgl", true, 1, 4, true, true, true, 25);%><%-- 职场攻略 --%>
 					<c:forEach items="${listRcZcgl}" var="d">
 					<li class="j-item vus-clearfix vus-pt-15 vus-pb-15">
 						<div class="vus-w-px-120 vus-h-px-90 vus-hidden vus-fl vus-bg--gray-smoke">
@@ -794,7 +794,7 @@ new Swiper('.swiper-container-money', {
 			</div>
 			<div id="job3" class="vus-clearfix" style="display: none;">
 				<ul class="vus-fl mg-calc-3 vus-pr-30">
-					<%cms.put("listRcHzsxy", true, 1, 4, true, false, true, 26);%><%-- 会展商学院 --%>
+					<%cms.put("listRcHzsxy", true, 1, 4, true, true, true, 26);%><%-- 会展商学院 --%>
 					<c:forEach items="${listRcHzsxy}" var="d">
 					<li class="j-item vus-clearfix vus-pt-15 vus-pb-15">
 						<div class="vus-w-px-120 vus-h-px-90 vus-hidden vus-fl vus-bg--gray-smoke">
@@ -855,7 +855,7 @@ new Swiper('.swiper-container-money', {
 		<div class="vus-fl mg-calc-4">
 			<div class="swiper-container swiper-container-link">
 				<ul class="swiper-wrapper">
-					<%cms.put("listLink", true, 1, 100, true, false, false, 6);%>
+					<%cms.put("listLink", true, 1, 100, true, true, true, 6);%>
 					<c:forEach items="${listLink}" var="d">
 					<li class="swiper-slide vus-bg--white vus-hidden">
 						<a href="${d.url}" class="mg-bg-cover hover vus-anim-all" style="background-image: url(${d.img})"></a>

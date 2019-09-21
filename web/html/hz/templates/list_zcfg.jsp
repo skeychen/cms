@@ -45,6 +45,7 @@
 					<span class="vus-mr-15 vus-cursor-pointer" v="YZ">Y Z</span>
 				</div>
 				<div id="d_ptype" class="vus-pt-8 vus-pl-10 vus-pr-10 vus-pb-8 vus-bg--light vus-mt-10">
+					<span class="vus-mr-15 vus-cursor-pointer mg-color-1" vv="GHI">广州</span>
 					<span class="vus-mr-15 vus-cursor-pointer" vv="ABC">澳门</span>
 					<span class="vus-mr-15 vus-cursor-pointer" vv="ABC">北京</span>
 					<span class="vus-mr-15 vus-cursor-pointer" vv="ABC">长春</span>
@@ -60,7 +61,6 @@
 					<span class="vus-mr-15 vus-cursor-pointer" vv="DEF">福州</span>
 					
 					<span class="vus-mr-15 vus-cursor-pointer" vv="GHI">桂林</span>
-					<span class="vus-mr-15 vus-cursor-pointer" vv="GHI">广州</span>
 					<span class="vus-mr-15 vus-cursor-pointer" vv="GHI">贵阳</span>
 					<span class="vus-mr-15 vus-cursor-pointer" vv="GHI">哈尔滨</span>
 					<span class="vus-mr-15 vus-cursor-pointer" vv="GHI">合肥</span>
@@ -155,7 +155,7 @@
 <script src="${ctx}/f/res/js/jskey-page-min.js"></script>
 <script type="text/javascript">
 var tt = laytpl(document.getElementById('tpl').innerHTML);
-var json = {siteid:${site.id}, categoryid:51, ptype:"", pbegin:null, isedit:${cms.isedit}};<%--${category.id}--%>
+var json = {siteid:${site.id}, categoryid:51, ptype:"广州", pbegin:null, isedit:${cms.isedit}};<%--${category.id}--%>
 //获取今天前多少天n的日期
 function getBeforeDate(n){
 	var n = n;
@@ -172,7 +172,7 @@ function getBeforeDate(n){
 	s = year+(mon<10?('0'+mon):mon)+(day<10?('0'+day):day);  
 	return s;  
 }
-var mypageobj = $jskey.page({object:'dpage',size:999,page:1,pagesize:10, prev:"上一页",next:"下一页",
+var mypageobj = $jskey.page({object:'dpage',size:999,page:1,pagesize:10, template:1, prev:"上一页",next:"下一页",
 	dom:{"tag":"ul", "style":{"className":"pages large bordered warning"},
 		"item":{
 			"tag":"li", 

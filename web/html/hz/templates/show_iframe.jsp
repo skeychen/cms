@@ -13,7 +13,7 @@
 </head>
 <body>
 <%@include file="include/header.jsp"%>
-<iframe name="cmsiframe" id="cmsiframe" src="${category.releasesource}" frameborder="0" scrolling="no" style="border:none;width:800px;height:1000px;"></iframe>
+<iframe name="cmsiframe" id="cmsiframe" src="${category.releasesource}" frameborder="0" scrolling="no" style="border:none;width:100%;height:600px;"></iframe>
 <%@include file="include/footer.jsp"%>
 </body>
 </html>
