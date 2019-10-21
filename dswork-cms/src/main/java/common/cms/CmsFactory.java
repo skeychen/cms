@@ -255,7 +255,7 @@ public class CmsFactory
 	
 	public void put(String name, boolean listOrPage, int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, long... categoryids)
 	{
-		put(name, listOrPage, pagesize, pagesize, isDesc, onlyImageTop, onlyPageTop, null, 0, 0, null, categoryids);
+		put(name, listOrPage, page, pagesize, isDesc, onlyImageTop, onlyPageTop, null, 0, 0, null, categoryids);
 	}
 
 	public void put(String name, boolean listOrPage, int page, int pagesize, boolean isDesc, boolean onlyImageTop, boolean onlyPageTop, String ptype, long pbegin, long pend, String keyvalue, long... categoryids)
