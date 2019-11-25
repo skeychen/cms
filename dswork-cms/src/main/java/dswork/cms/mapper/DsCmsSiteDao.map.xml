@@ -6,9 +6,6 @@
 <mapper namespace="dswork.cms.dao.DsCmsSiteDao">
 
 <insert id="insert" parameterType="dswork.cms.model.DsCmsSite">
-	<selectKey resultType="Long" order="AFTER" keyProperty="id">
-		<include refid="dswork.cms.rowid" />
-	</selectKey>
 	insert into DS_CMS_SITE
 	(ID, OWN, NAME, FOLDER, URL, IMG, ENABLELOG, ENABLEMOBILE, METAKEYWORDS, METADESCRIPTION)
 	values
