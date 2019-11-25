@@ -89,11 +89,10 @@ public class DsCmsEditService
 		return 1;
 	}
 
-	public void updateCategoryEdit(DsCmsCategoryEdit po, boolean writeCategory, boolean enablelog, String editid, String editname)
+	public void updateCategoryEdit(DsCmsCategory c, DsCmsCategoryEdit po, boolean writeCategory, boolean enablelog, String editid, String editname)
 	{
 		if(writeCategory)
 		{
-			DsCmsCategory c = (DsCmsCategory) categoryDao.get(po.getId());
 			c.setSummary(po.getSummary());
 			c.setReleasesource(po.getReleasesource());
 			c.setReleaseuser(po.getReleasetime());

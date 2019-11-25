@@ -614,7 +614,7 @@ public class DsCmsEditController extends DsCmsBaseController
 						p.setUrl(c.getUrl());
 						p.setAuditstatus(DsCmsCategoryEdit.PASS);
 						p.setJsondata(c.getJsondata());
-						service.updateCategoryEdit(p, false, s.isWriteLog(), getAccount(), getName());
+						service.updateCategoryEdit(c, p, false, s.isWriteLog(), getAccount(), getName());
 					}
 					print(1);
 					return;
@@ -626,7 +626,6 @@ public class DsCmsEditController extends DsCmsBaseController
 				p.setReleasetime(po.getReleasetime());
 				p.setReleasesource(po.getReleasesource());
 				p.setReleaseuser(po.getReleaseuser());
-				p.setUrl(po.getUrl());
 				p.pushEditidAndEditname(getAccount(), getName());
 				p.setEdittime(TimeUtil.getCurrentTime());
 				if(autosave == 1)
@@ -650,12 +649,15 @@ public class DsCmsEditController extends DsCmsBaseController
 				}
 				p.setJsondata(GsonUtil.toJson(map));
 
+
+				p.setUrl(c.getScope() != 2 ? c.getUrl() : po.getUrl());
+				
 				if("save".equals(autosubmit))
 				{
 					if(p.isEdit() || p.isNopass() || p.isPass())
 					{
 						p.setAuditstatus(DsCmsCategoryEdit.EDIT);
-						service.updateCategoryEdit(p, false, s.isWriteLog(), getAccount(), getName());
+						service.updateCategoryEdit(c, p, false, s.isWriteLog(), getAccount(), getName());
 						print(1);
 						return;
 					}
@@ -668,14 +670,14 @@ public class DsCmsEditController extends DsCmsBaseController
 					{
 						p.setStatus(1);
 						po.setAuditstatus(DsCmsCategoryEdit.EDIT);
-						service.updateCategoryEdit(p, true, s.isWriteLog(), getAccount(), getName());
+						service.updateCategoryEdit(c, p, true, s.isWriteLog(), getAccount(), getName());
 						print(1);
 						return;
 					}
 					if(p.isEdit() || p.isNopass() || p.isPass())
 					{
 						p.setAuditstatus(DsCmsCategoryEdit.AUDIT);
-						service.updateCategoryEdit(p, false, s.isWriteLog(), getAccount(), getName());
+						service.updateCategoryEdit(c, p, false, s.isWriteLog(), getAccount(), getName());
 						print(1);
 						return;
 					}
