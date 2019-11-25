@@ -23,4 +23,9 @@ public class DsCmsSiteService extends BaseService<DsCmsSite, Long>
 	{
 		return dao;
 	}
+	
+	public int save(DsCmsSite po)
+	{
+		return dao.save(po);
+	}
 }

@@ -6,13 +6,10 @@
 <mapper namespace="dswork.cms.dao.DsCmsPageEditDao">
 
 <insert id="insert" parameterType="dswork.cms.model.DsCmsPageEdit">
-	<selectKey resultType="Long" order="AFTER" keyProperty="id">
-		<include refid="dswork.cms.rowid" />
-	</selectKey>
 	insert into DS_CMS_PAGE_EDIT
-	(SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, PTYPE, PBEGIN, PEND, CONTENT, JSONDATA, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, AUDITMSG, PUSHKEY)
+	(ID, SITEID, CATEGORYID, SCOPE, STATUS, TITLE, URL, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, IMGTOP, PAGETOP, PTYPE, PBEGIN, PEND, CONTENT, JSONDATA, EDITID, EDITNAME, EDITTIME, AUDITSTATUS, AUDITID, AUDITNAME, AUDITTIME, AUDITMSG, PUSHKEY)
 	values
-	(#{siteid}, #{categoryid}, #{scope}, #{status}, #{title}, #{url}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{imgtop}, #{pagetop}, #{ptype}, #{pbegin}, #{pend}, #{content}, #{jsondata}, #{editid}, #{editname}, #{edittime}, #{auditstatus}, #{auditid}, #{auditname}, #{audittime}, #{auditmsg}, #{pushkey})
+	(#{id}, #{siteid}, #{categoryid}, #{scope}, #{status}, #{title}, #{url}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{imgtop}, #{pagetop}, #{ptype}, #{pbegin}, #{pend}, #{content}, #{jsondata}, #{editid}, #{editname}, #{edittime}, #{auditstatus}, #{auditid}, #{auditname}, #{audittime}, #{auditmsg}, #{pushkey})
 </insert>
 
 <delete id="delete">

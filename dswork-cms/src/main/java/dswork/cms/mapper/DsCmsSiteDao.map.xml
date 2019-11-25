@@ -10,9 +10,9 @@
 		<include refid="dswork.cms.rowid" />
 	</selectKey>
 	insert into DS_CMS_SITE
-	(OWN, NAME, FOLDER, URL, IMG, ENABLELOG, ENABLEMOBILE, METAKEYWORDS, METADESCRIPTION)
+	(ID, OWN, NAME, FOLDER, URL, IMG, ENABLELOG, ENABLEMOBILE, METAKEYWORDS, METADESCRIPTION)
 	values
-	(#{own}, #{name}, #{folder}, #{url}, #{img}, #{enablelog}, #{enablemobile}, #{metakeywords}, #{metadescription})
+	(#{id}, #{own}, #{name}, #{folder}, #{url}, #{img}, #{enablelog}, #{enablemobile}, #{metakeywords}, #{metadescription})
 </insert>
 
 <delete id="delete">

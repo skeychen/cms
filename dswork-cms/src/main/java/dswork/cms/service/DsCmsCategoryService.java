@@ -24,6 +24,7 @@ import dswork.core.db.BaseService;
 import dswork.core.db.EntityDao;
 import dswork.core.page.Page;
 import dswork.core.page.PageRequest;
+import dswork.core.util.IdUtil;
 
 @Service
 @SuppressWarnings("all")
@@ -49,12 +50,12 @@ public class DsCmsCategoryService extends BaseService<DsCmsCategory, Long>
 	@Override
 	public int save(DsCmsCategory po)
 	{
-		dao.save(po);
+		po.setId(IdUtil.genId());
 		if(po.getScope() != 2)
 		{
 			po.setUrl("/a/" + po.getId() + "/index.html");
-			dao.update(po);
 		}
+		dao.save(po);
 		return 1;
 	}
 

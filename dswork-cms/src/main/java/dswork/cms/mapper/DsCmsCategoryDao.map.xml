@@ -6,13 +6,10 @@
 <mapper namespace="dswork.cms.dao.DsCmsCategoryDao">
 
 <insert id="insert" parameterType="dswork.cms.model.DsCmsCategory">
-	<selectKey resultType="Long" order="AFTER" keyProperty="id">
-		<include refid="dswork.cms.rowid" />
-	</selectKey>
 	insert into DS_CMS_CATEGORY
-	(PID, SITEID, SCOPE, STATUS, NAME, URL, SEQ, VIEWPAGESIZE, VIEWSITE, PAGEVIEWSITE, MVIEWSITE, MPAGEVIEWSITE, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, PTYPE, PTYPEITEM, PNAME, PFORMAT, PMEMO, CONTENT, JSONTABLE, JSONDATA)
+	(ID, PID, SITEID, SCOPE, STATUS, NAME, URL, SEQ, VIEWPAGESIZE, VIEWSITE, PAGEVIEWSITE, MVIEWSITE, MPAGEVIEWSITE, METAKEYWORDS, METADESCRIPTION, SUMMARY, RELEASETIME, RELEASESOURCE, RELEASEUSER, IMG, PTYPE, PTYPEITEM, PNAME, PFORMAT, PMEMO, CONTENT, JSONTABLE, JSONDATA)
 	values
-	(<if test="null==pid or 0&gt;=pid">null</if><if test="0 &lt; pid">#{pid}</if>, #{siteid}, #{scope}, #{status}, #{name}, #{url}, #{seq}, #{viewpagesize}, #{viewsite}, #{pageviewsite}, #{mviewsite}, #{mpageviewsite}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{ptype}, #{ptypeitem}, #{pname}, #{pformat}, #{pmemo}, #{content}, #{jsontable}, #{jsondata})
+	(#{id}, <if test="null==pid or 0&gt;=pid">null</if><if test="0 &lt; pid">#{pid}</if>, #{siteid}, #{scope}, #{status}, #{name}, #{url}, #{seq}, #{viewpagesize}, #{viewsite}, #{pageviewsite}, #{mviewsite}, #{mpageviewsite}, #{metakeywords}, #{metadescription}, #{summary}, #{releasetime}, #{releasesource}, #{releaseuser}, #{img}, #{ptype}, #{ptypeitem}, #{pname}, #{pformat}, #{pmemo}, #{content}, #{jsontable}, #{jsondata})
 </insert>
 
 <delete id="delete">

@@ -23,6 +23,7 @@ import dswork.cms.model.DsCmsPage;
 import dswork.cms.model.DsCmsSite;
 import dswork.core.page.Page;
 import dswork.core.page.PageRequest;
+import dswork.core.util.IdUtil;
 
 @Service
 @SuppressWarnings("unchecked")
@@ -43,11 +44,12 @@ public class DsCmsEditService
 
 	public void savePageEdit(DsCmsPageEdit po, boolean writePage, boolean enablelog, String editid, String editname)
 	{
-		pageEditDao.save(po);
+		po.setId(IdUtil.genId());
 		if(po.getScope() != 2) // 不为外链
 		{
 			po.setUrl("/a/" + po.getCategoryid() + "/" + po.getId() + ".html");
 		}
+		pageEditDao.save(po);
 		if(writePage)
 		{
 			DsCmsPage p = new DsCmsPage();
@@ -74,7 +76,6 @@ public class DsCmsEditService
 			p.setJsondata(po.getJsondata());
 			pageDao.save(p);
 		}
-		pageEditDao.update(po);
 		if((po.isAudit() || po.isPass()) && enablelog)// 只记录提交时的日志
 		{
 			logDao.saveForEditPage(po, 0, editid, editname);

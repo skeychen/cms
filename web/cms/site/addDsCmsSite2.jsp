@@ -6,7 +6,8 @@ try
 	DsCmsSite po = new DsCmsSite();
 	MyRequest req = new MyRequest(request);
 	req.getFillObject(po);
-	((DsCmsSiteService)dswork.spring.BeanFactory.getBean("dsCmsSiteService")).update(po);
+	po.setId(IdUtil.genId());
+	((DsCmsSiteService)dswork.spring.BeanFactory.getBean("dsCmsSiteService")).save(po);
 	out.print(1);
 }
 catch (Exception e)
