@@ -12,13 +12,13 @@ public class DsCmsPermission
 	// 用户账号
 	private String account = "";
 	// 可采编栏目
-	private String editall = "";
+	private String canEditall = "";
 	// 可采编栏目（限个人）
-	private String editown = "";
+	private String canEditown = "";
 	// 可审核栏目
-	private String audit = "";
+	private String canAudit = "";
 	// 可发布栏目
-	private String publish = "";
+	private String canPublish = "";
 
 	public Long getId()
 	{
@@ -56,9 +56,9 @@ public class DsCmsPermission
 	 * 一个逗号或空字符串表示没有配置任何栏目的采编权限
 	 * @return String
 	 */
-	public String getEditall()
+	public String getCanEditall()
 	{
-		return editall;
+		return canEditall;
 	}
 
 	/**
@@ -67,9 +67,9 @@ public class DsCmsPermission
 	 * 一个逗号或空字符串表示没有配置任何栏目的采编权限
 	 * @param idsArray 格式：[,[栏目ID,[栏目ID,...]]]
 	 */
-	public void setEditall(String idsArray)
+	public void setCanEditall(String idsArray)
 	{
-		this.editall = idsArray;
+		this.canEditall = idsArray;
 	}
 
 	/**
@@ -78,9 +78,9 @@ public class DsCmsPermission
 	 * 一个逗号或空字符串表示没有配置任何栏目的个人采编权限
 	 * @return String
 	 */
-	public String getEditown()
+	public String getCanEditown()
 	{
-		return editown;
+		return canEditown;
 	}
 
 	/**
@@ -89,9 +89,9 @@ public class DsCmsPermission
 	 * 一个逗号或空字符串表示没有配置任何栏目的个人采编权限
 	 * @param idsArray 格式：[,[栏目ID,[栏目ID,...]]]
 	 */
-	public void setEditown(String idsArray)
+	public void setCanEditown(String idsArray)
 	{
-		this.editown = idsArray;
+		this.canEditown = idsArray;
 	}
 
 	/**
@@ -100,9 +100,9 @@ public class DsCmsPermission
 	 * 一个逗号或空字符串表示没有配置任何栏目的审核权限
 	 * @return String
 	 */
-	public String getAudit()
+	public String getCanAudit()
 	{
-		return audit;
+		return canAudit;
 	}
 
 	/**
@@ -111,9 +111,9 @@ public class DsCmsPermission
 	 * 一个逗号或空字符串表示没有配置任何栏目的审核权限
 	 * @param idsArray 格式：[,[栏目ID,[栏目ID,...]]]
 	 */
-	public void setAudit(String idsArray)
+	public void setCanAudit(String idsArray)
 	{
-		this.audit = idsArray;
+		this.canAudit = idsArray;
 	}
 
 	/**
@@ -122,9 +122,9 @@ public class DsCmsPermission
 	 * 一个逗号或空字符串表示没有配置任何栏目的发布权限
 	 * @return String
 	 */
-	public String getPublish()
+	public String getCanPublish()
 	{
-		return publish;
+		return canPublish;
 	}
 
 	/**
@@ -133,8 +133,8 @@ public class DsCmsPermission
 	 * 一个逗号或空字符串表示没有配置任何栏目的发布权限
 	 * @param idsArray 格式：[,[栏目ID,[栏目ID,...]]]
 	 */
-	public void setPublish(String idsArray)
+	public void setCanPublish(String idsArray)
 	{
-		this.publish = idsArray;
+		this.canPublish = idsArray;
 	}
 }

@@ -45,10 +45,10 @@ public class DsCmsBaseController extends BaseController
 			Map<Long, Map<String, Set<String>>> map1 = new HashMap<Long, Map<String, Set<String>>>();
 			for(DsCmsPermission permission : permissionList)
 			{
-				refreshMap2(map1, Arrays.asList(permission.getEditall().split(",")), "editall", permission);
-				refreshMap2(map1, Arrays.asList(permission.getEditown().split(",")), "editown", permission);
-				refreshMap2(map1, Arrays.asList(permission.getPublish().split(",")), "publish", permission);
-				refreshMap2(map1, Arrays.asList(permission.getAudit().split(",")), "audit", permission);
+				refreshMap2(map1, Arrays.asList(permission.getCanEditall().split(",")), "editall", permission);
+				refreshMap2(map1, Arrays.asList(permission.getCanEditown().split(",")), "editown", permission);
+				refreshMap2(map1, Arrays.asList(permission.getCanPublish().split(",")), "publish", permission);
+				refreshMap2(map1, Arrays.asList(permission.getCanAudit().split(",")), "audit", permission);
 			}
 			if(map1.size() > 0)
 			{

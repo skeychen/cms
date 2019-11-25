@@ -112,7 +112,7 @@ public class DsCmsPermissionController extends DsCmsBaseController
 			}
 
 			String msg = "";
-			String audit_old = po.getAudit();
+			String audit_old = po.getCanAudit();
 			String audit_new = req().getString("audit", "");
 			if(audit_old.length() > 2)
 			{
@@ -126,7 +126,7 @@ public class DsCmsPermissionController extends DsCmsBaseController
 					{
 						if(!p.getAccount().equals(po.getAccount()))
 						{
-							set.removeAll(Arrays.asList(p.getAudit().split(",")));
+							set.removeAll(Arrays.asList(p.getCanAudit().split(",")));
 						}
 					}
 					if(set.size() > 0)
@@ -165,10 +165,10 @@ public class DsCmsPermissionController extends DsCmsBaseController
 					}
 				}
 			}
-			po.setAudit(audit_new);
-			po.setEditall(req().getString("editall", ""));
-			po.setEditown(req().getString("editown", ""));
-			po.setPublish(req().getString("publish", ""));
+			po.setCanAudit(audit_new);
+			po.setCanEditall(req().getString("editall", ""));
+			po.setCanEditown(req().getString("editown", ""));
+			po.setCanPublish(req().getString("publish", ""));
 			service.save(po);
 			super.refresh();
 			print(msg.length() > 0 ? "2:" + msg : 1);

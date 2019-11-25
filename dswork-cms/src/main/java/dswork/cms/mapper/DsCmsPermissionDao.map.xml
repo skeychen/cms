@@ -7,9 +7,9 @@
 
 <insert id="insert" parameterType="dswork.cms.model.DsCmsPermission">
 	insert into DS_CMS_PERMISSION
-	(ID, SITEID, ACCOUNT, AUDIT, EDITALL, EDITOWN, PUBLISH)
+	(ID, SITEID, ACCOUNT, CANAUDIT, CANEDITALL, CANEDITOWN, CANPUBLISH)
 	values
-	(#{id}, #{siteid}, #{account}, #{audit}, #{editall}, #{editown}, #{publish})
+	(#{id}, #{siteid}, #{account}, #{canAudit}, #{canEditall}, #{canEditown}, #{canPublish})
 </insert>
 
 <delete id="delete">
@@ -18,10 +18,10 @@
 
 <update id="update" parameterType="dswork.cms.model.DsCmsPermission">
 	update DS_CMS_PERMISSION set
-		AUDIT=#{audit},
-		EDITALL=#{editall},
-		EDITOWN=#{editown},
-		PUBLISH=#{publish}
+		CANAUDIT=#{canAudit},
+		CANEDITALL=#{canEditall},
+		CANEDITOWN=#{canEditown},
+		CANPUBLISH=#{canPublish}
 	where SITEID=#{siteid} and ACCOUNT=#{account}
 </update>
 
@@ -29,13 +29,13 @@
 	<id property="id" column="ID" />
 	<result property="siteid" column="SITEID" />
 	<result property="account" column="ACCOUNT" />
-	<result property="audit" column="AUDIT" />
-	<result property="editall" column="EDITALL" />
-	<result property="editown" column="EDITOWN" />
-	<result property="publish" column="PUBLISH" />
+	<result property="canAudit"   column="CANAUDIT" />
+	<result property="canEditall" column="CANEDITALL" />
+	<result property="canEditown" column="CANEDITOWN" />
+	<result property="canPublish" column="CANPUBLISH" />
 </resultMap>
 
-<sql id="columns">ID, SITEID, ACCOUNT, AUDIT, EDITALL, EDITOWN, PUBLISH</sql>
+<sql id="columns">ID, SITEID, ACCOUNT, CANAUDIT, CANEDITALL, CANEDITOWN, CANPUBLISH</sql>
 
 <select id="select" resultMap="result">
 	select <include refid="columns" /> from DS_CMS_PERMISSION where SITEID=#{siteid} and ACCOUNT=#{account}
