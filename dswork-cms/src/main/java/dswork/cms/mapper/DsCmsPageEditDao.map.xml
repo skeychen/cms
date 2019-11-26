@@ -55,10 +55,6 @@
 	where ID=#{id}
 </update>
 
-<update id="updateUrl">
-	update DS_CMS_PAGE set URL=#{url} where ID=#{id}
-</update>
-
 <resultMap id="result" type="dswork.cms.model.DsCmsPageEdit" extends="dswork.cms.dao.DsCmsPageDao.result">
 	<result property="editid" column="EDITID" />
 	<result property="editname" column="EDITNAME" />

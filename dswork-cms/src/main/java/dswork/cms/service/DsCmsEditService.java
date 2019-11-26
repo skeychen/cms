@@ -139,7 +139,7 @@ public class DsCmsEditService
 
 	public void updatePageEdit(DsCmsPageEdit po, boolean writePage, boolean enablelog, String editid, String editname)
 	{
-		if(po.getScope() != 2)
+		if(po.getScope() != 2) // 不为外链
 		{
 			po.setUrl("/a/" + po.getCategoryid() + "/" + po.getId() + ".html");
 		}
