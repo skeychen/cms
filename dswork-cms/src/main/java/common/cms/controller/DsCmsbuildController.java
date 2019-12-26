@@ -1,6 +1,8 @@
 package common.cms.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -113,7 +115,22 @@ public class DsCmsbuildController extends BaseController
 		{
 			cms = new CmsFactory(siteid, mobile, isedit);
 			ViewSite s = cms.getSite();
-			cms.getSite().setUrl(request().getContextPath() + "/pvctx/" + (isedit ? "_" + s.getId() : s.getId()));
+			String encodeUrl = "/";
+			if(s.getUrl().length() > 0)
+			{
+				try
+				{
+					encodeUrl = encodeUrl + URLEncoder.encode(URLEncoder.encode(s.getUrl(), "UTF-8"), "UTF-8");
+				}
+				catch(UnsupportedEncodingException e)
+				{
+				}
+			}
+			else 
+			{
+				encodeUrl = encodeUrl + "_";
+			}
+			cms.getSite().setUrl(request().getContextPath() + "/pvctx/" + (isedit ? "_" + s.getId() : s.getId()) + encodeUrl + "/");
 			cms.refreshCategoryURL();
 		}
 		cms.setRequest(request());

@@ -1,5 +1,6 @@
 package common.cms;
 
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.Filter;
@@ -46,7 +47,11 @@ public class DsCmsFilter implements Filter
 			{
 				myURI = myURI.replace(pvctx, "");
 				String siteid = myURI.substring(0, myURI.indexOf("/"));
-				String rURI   = myURI.replace(siteid, ""); // /f/* , /a/* , /m/f/* , /m/a/* , /isedit/f/* , /isedit/a/* , /m/isedit/f/* , /m/isedit/a/*
+				String rURI   = myURI.replace(siteid, ""); // /siteUrl/f/* , /siteUrl/a/* , /siteUrl/m/f/* , /siteUrl/m/a/* , /siteUrl/isedit/f/* , /siteUrl/isedit/a/* , /siteUrl/m/isedit/f/* , /siteUrl/m/isedit/a/*
+				String siteUrl = rURI.substring(rURI.indexOf("/") + 1);
+				siteUrl = siteUrl.substring(0, siteUrl.indexOf("/"));
+				rURI = rURI.replace("/" + siteUrl, "");
+				siteUrl = URLDecoder.decode(URLDecoder.decode(siteUrl, "UTF-8"), "UTF-8");
 				String qs     = req.getQueryString();
 				String vURI   = req.getContextPath() + pvurl + "?auto=true";
 				if(rURI.startsWith(pvm))// 移动版
@@ -67,7 +72,7 @@ public class DsCmsFilter implements Filter
 				}
 				if(rURI.startsWith(pvf))
 				{
-					res.sendRedirect(rURI + (qs != null ? "?" + qs : ""));
+					res.sendRedirect(siteUrl + rURI + (qs != null ? "?" + qs : ""));
 					return;
 				}
 				else if(rURI.startsWith(pva))
