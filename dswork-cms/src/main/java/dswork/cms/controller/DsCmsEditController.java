@@ -790,7 +790,7 @@ public class DsCmsEditController extends DsCmsBaseController
 					byteArray = file.getFileData();
 					ext = file.getFileExt();
 				}
-				if(!ext.equals("") && "bmp,doc,docx,gif,jpeg,jpg,pdf,png,ppt,pptx,rar,rtf,txt,xls,xlsx,zip,7z".indexOf(ext) != -1)
+				if(!ext.equals("") && "bmp,doc,docx,gif,jpeg,jpg,pdf,png,ppt,pptx,rar,rtf,txt,xls,xlsx,zip,7z,avi,mov,rmvb,rm,flv,mp4,3gp".indexOf(ext) != -1)
 				{
 					String root = getPathRoot();
 					String ym = TimeUtil.getCurrentTime("yyyyMM");
