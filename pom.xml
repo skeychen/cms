@@ -8,10 +8,11 @@
 <url>https://github.com/skeychen/cms</url>
 
 <dependencies>
-	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-javaweb</artifactId><version>8.8.8</version><type>pom</type></dependency>
-	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-html</artifactId><version>8.8.8</version></dependency>
-	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-sso</artifactId><version>8.8.8</version></dependency>
-	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-ee</artifactId><version>8.8.8</version><scope>provided</scope></dependency>
+	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-javaweb</artifactId><version>9.0.0</version><type>pom</type></dependency>
+	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-html</artifactId><version>9.0.0</version></dependency>
+	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-sso</artifactId><version>9.0.0</version></dependency>
+	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-authown</artifactId><version>9.0.0</version></dependency>
+	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-ee</artifactId><version>9.0.0</version><scope>provided</scope></dependency>
 <!--
 	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-javaweb</artifactId><version>0.0.0-SNAPSHOT</version><type>pom</type></dependency>
 	<dependency><groupId>com.github.skeychen</groupId><artifactId>dswork-html</artifactId><version>0.0.0-SNAPSHOT</version></dependency>
