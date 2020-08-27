@@ -9,7 +9,7 @@
 	<where>
 		<if test="@Ognl@isNotEmpty(account)"> and ACCOUNT like #{account, typeHandler=LikeTypeHandler} </if>
 		<if test="@Ognl@isNotEmpty(name)"> and NAME like #{name, typeHandler=LikeTypeHandler} </if>
-		<if test="@Ognl@isNotEmpty(own)"> and OWN like #{own, typeHandler=LikeTypeHandler} </if>
+		<if test="@Ognl@isNotEmpty(ownList)"> and OWN in <foreach item="item" collection="ownList" separator="," open="(" close=")" index="index">#{item}</foreach> </if>
 	</where>
 </sql>
 

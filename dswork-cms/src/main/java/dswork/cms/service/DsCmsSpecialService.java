@@ -43,10 +43,9 @@ public class DsCmsSpecialService
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<DsCmsSite> querySiteList(Map<String, Object> map)
+	public List<DsCmsSite> queryListSite(List<String> ownList)
 	{
-		return siteDao.queryList(map);
+		return siteDao.queryList(ownList);
 	}
 
 	public DsCmsSite getSite(long id)

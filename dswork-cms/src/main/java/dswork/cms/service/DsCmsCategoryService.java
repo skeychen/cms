@@ -122,9 +122,9 @@ public class DsCmsCategoryService extends BaseService<DsCmsCategory, Long>
 		return (DsCmsSite) siteDao.get(siteid);
 	}
 
-	public List<DsCmsSite> queryListSite(Map<String, Object> map)
+	public List<DsCmsSite> queryListSite(List<String> ownList)
 	{
-		return siteDao.queryList(map);
+		return siteDao.queryList(ownList);
 	}
 
 	public List<DsCmsCategory> queryListByPid(long pid)

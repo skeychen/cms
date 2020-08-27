@@ -41,9 +41,9 @@ public class AuthOwnSSOFilter implements Filter
 					{
 						if(m.getStatus() != 0)
 						{
-							String c = String.valueOf(m.getWorkcard()).trim();
-							AuthOwnUtil.login(req, res, String.valueOf(m.getId()), m.getAccount(), m.getName(), (c.length() > 0 ? m.getWorkcard() : "admin" + m.getAccount()));
-							AuthOwnUtil.setUser(req, String.valueOf(m.getId()), m.getAccount(), m.getName(), (c.length() > 0 ? m.getWorkcard() : "admin" + m.getAccount()));
+							String c = String.valueOf(m.getOwn()).trim();
+							AuthOwnUtil.login(req, res, String.valueOf(m.getId()), m.getAccount(), m.getName(), c);
+							AuthOwnUtil.setUser(req, String.valueOf(m.getId()), m.getAccount(), m.getName(), c);
 							chain.doFilter(request, response);
 							return;
 						}

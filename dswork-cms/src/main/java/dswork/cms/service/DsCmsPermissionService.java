@@ -67,9 +67,9 @@ public class DsCmsPermissionService
 		return dao.get(siteid, account);
 	}
 
-	public List<DsCmsSite> queryListSite(Map<String, Object> map)
+	public List<DsCmsSite> queryListSite(List<String> ownList)
 	{
-		return siteDao.queryList(map);
+		return siteDao.queryList(ownList);
 	}
 
 	public List<DsCmsCategory> queryListCategory(Long siteid)

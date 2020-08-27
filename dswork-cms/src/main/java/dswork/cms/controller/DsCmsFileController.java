@@ -37,9 +37,7 @@ public class DsCmsFileController extends DsCmsBaseController
 		try
 		{
 			Long id = req().getLong("siteid"), siteid = -1L;
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("own", getOwn());
-			List<DsCmsSite> siteList = service.queryList(map);
+			List<DsCmsSite> siteList = service.queryListSite(getOwnList());
 			if(siteList != null && siteList.size() > 0)
 			{
 				put("siteList", siteList);

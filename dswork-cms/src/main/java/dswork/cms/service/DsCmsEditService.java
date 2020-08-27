@@ -253,9 +253,9 @@ public class DsCmsEditService
 		return (DsCmsPage) pageDao.get(id);
 	}
 
-	public List<DsCmsSite> queryListSite(String own)
+	public List<DsCmsSite> queryListSite(List<String> ownList)
 	{
-		return siteDao.queryList(own);
+		return siteDao.queryList(ownList);
 	}
 
 	public Page<DsCmsPageEdit> queryPagePageEdit(PageRequest pr)

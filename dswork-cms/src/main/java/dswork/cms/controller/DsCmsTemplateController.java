@@ -4,9 +4,7 @@
 package dswork.cms.controller;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -134,9 +132,7 @@ public class DsCmsTemplateController extends DsCmsBaseController
 		try
 		{
 			Long id = req().getLong("siteid"), siteid = -1L;
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("own", getOwn());
-			List<DsCmsSite> siteList = service.queryList(map);
+			List<DsCmsSite> siteList = service.queryListSite(getOwnList());
 			if(siteList != null && siteList.size() > 0)
 			{
 				put("siteList", siteList);

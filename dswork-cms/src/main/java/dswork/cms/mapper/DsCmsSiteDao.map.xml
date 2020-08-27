@@ -47,7 +47,7 @@
 
 <sql id="dynamicWhere">
 	<where>
-		<if test="@Ognl@isNotEmpty(own)"> OWN=#{own} </if>
+		<if test="@Ognl@isNotEmpty(ownList)"> and OWN in <foreach item="item" collection="ownList" separator="," open="(" close=")" index="index">#{item}</foreach> </if>
 		<if test="@Ognl@isNotEmpty(name)"> and NAME like #{name, typeHandler=LikeTypeHandler} </if>
 		<if test="@Ognl@isNotEmpty(folder)"> and FOLDER=#{folder} </if>
 	</where>

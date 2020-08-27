@@ -36,7 +36,7 @@ public class DsCmsPermissionController extends DsCmsBaseController
 		try
 		{
 			PageRequest pr = getPageRequest();
-			pr.getFilters().put("own", getOwn());
+			pr.getFilters().put("ownList", getOwnList());
 			Page<Map<String, Object>> pageModel = service.queryPageUser(pr);
 			put("pageModel", pageModel);
 			put("pageNav", new PageNav<Map<String, Object>>(request(), pageModel));
@@ -60,10 +60,7 @@ public class DsCmsPermissionController extends DsCmsBaseController
 			{
 				return null;
 			}
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("siteid", siteid);
-			map.put("own", getOwn());
-			List<DsCmsSite> siteList = service.queryListSite(map);
+			List<DsCmsSite> siteList = service.queryListSite(getOwnList());
 			List<DsCmsCategory> categoryList = null;
 			if(siteList != null && siteList.size() > 0)
 			{
@@ -187,9 +184,7 @@ public class DsCmsPermissionController extends DsCmsBaseController
 		{
 			long siteid = req().getLong("siteid", -1);
 			List<DsCmsCategory> list = null;
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("own", getOwn());
-			List<DsCmsSite> siteList = service.queryListSite(map);
+			List<DsCmsSite> siteList = service.queryListSite(getOwnList());
 			if(siteList != null && siteList.size() > 0)
 			{
 				for(DsCmsSite s : siteList)

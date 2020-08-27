@@ -3,9 +3,7 @@ package dswork.cms.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,9 +29,7 @@ public class DsCmsSpecialController extends DsCmsBaseController
 		{
 			Long id = req().getLong("siteid");
 			DsCmsSite s = null;
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("own", getOwn());
-			List<DsCmsSite> siteList = service.querySiteList(map);
+			List<DsCmsSite> siteList = service.queryListSite(getOwnList());
 			if(siteList != null && siteList.size() > 0)
 			{
 				put("siteList", siteList);

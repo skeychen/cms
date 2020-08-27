@@ -161,7 +161,7 @@ public class DsCmsBaseController extends BaseController
 
 	public static boolean checkOwn(long siteid)
 	{
-		return getOwn().equals(ownMap.get(siteid));
+		return getOwnList().contains(ownMap.get(siteid));
 	}
 
 	private static void categorySettingList(DsCmsCategory m, List<DsCmsCategory> list)
@@ -330,6 +330,7 @@ public class DsCmsBaseController extends BaseController
 
 	private static final ThreadLocal<String> id = new ThreadLocal<String>();
 	private static final ThreadLocal<String> own = new ThreadLocal<String>();
+	private static final ThreadLocal<List<String>> ownList = new ThreadLocal<List<String>>();
 	private static final ThreadLocal<String> account = new ThreadLocal<String>();
 	private static final ThreadLocal<String> name = new ThreadLocal<String>();
 
@@ -338,7 +339,30 @@ public class DsCmsBaseController extends BaseController
 	{
 		AuthOwn m = AuthOwnUtil.getUser(request);
 		id.set(m.getId());
-		own.set(m.getOwn());
+		List<String> owns = new ArrayList<String>();
+		String[] arr = String.valueOf(m.getOwn()).split(",", -1);
+		for(String str : arr)
+		{
+			str = str.trim();
+			if(str.length() > 0)
+			{
+				if(!owns.contains(str))
+				{
+					owns.add(str);
+				}
+			}
+		}
+		StringBuilder sb = new StringBuilder();
+		if(owns.size() > 0)
+		{
+			sb.append(owns.get(0));
+			for(int i = 1; i < owns.size(); i++)
+			{
+				sb.append(",").append(owns.get(i));
+			}
+		}
+		own.set(sb.toString());
+		ownList.set(owns);
 		account.set(m.getAccount());
 		name.set(m.getName());
 	}
@@ -363,11 +387,16 @@ public class DsCmsBaseController extends BaseController
 		return name.get();
 	}
 
-	protected static String getOwn()
+	protected static String getOwn2()
 	{
 		return own.get();
 	}
 
+	protected static List<String> getOwnList()
+	{
+		return ownList.get();
+	}
+	
 	protected String getPathRoot()
 	{
 		return session().getServletContext().getRealPath("/") + "/";

@@ -8,26 +8,34 @@ SET FOREIGN_KEY_CHECKS=0;
 -- DROP TABLE IF EXISTS DS_CMS_CATEGORY;
 -- DROP TABLE IF EXISTS DS_CMS_SITE;
 
-CREATE TABLE IF NOT EXISTS DS_COMMON_USER
-(
-   ID                   BIGINT(18) NOT NULL COMMENT '主键',
-   ACCOUNT              VARCHAR(64) NOT NULL COMMENT '帐号',
-   PASSWORD             VARCHAR(256) COMMENT '密码',
-   NAME                 VARCHAR(30) COMMENT '姓名',
-   IDCARD               VARCHAR(64) COMMENT '身份证号',
-   STATUS               INT(1) COMMENT '状态(1启用,0禁用)',
-   EMAIL                VARCHAR(300) COMMENT '电子邮件',
-   MOBILE               VARCHAR(30) COMMENT '手机',
-   PHONE                VARCHAR(30) COMMENT '电话',
-   WORKCARD             VARCHAR(64) COMMENT '工作证号',
-   CAKEY                VARCHAR(1024) COMMENT 'CA证书的KEY',
-   CREATETIME           VARCHAR(19) COMMENT '创建时间',
-   ORGPID               BIGINT(18) COMMENT '所属单位',
-   ORGID                BIGINT(18) COMMENT '所属部门',
-   PRIMARY KEY (ID)
-) COMMENT '系统用户';
+CREATE TABLE IF NOT EXISTS DS_BASE_USER (
+  ID                    BIGINT(16)    COMMENT '主键ID' NOT NULL,
+  STATUS                INT(1)        COMMENT '状态(1启用,0禁用)' NOT NULL,
+  OWN                   VARCHAR(256)  COMMENT '扩展用户身份标识',
+  SSQY                  VARCHAR(64)   COMMENT '最长12位的区域编码-区域名称',
+  NAME                  VARCHAR(30)   COMMENT '姓名',
+  MOBILE                VARCHAR(30)   COMMENT '手机',
+  ACCOUNT               VARCHAR(64)   COMMENT '自定义账号' NOT NULL,
+  PASSWORD              VARCHAR(64)   COMMENT '密码',
+  WORKCARD              VARCHAR(64)   COMMENT '工作证号',
+  SEX                   INT(1)        COMMENT '性别(0未知,1男,2女)',
+  AVATAR                VARCHAR(300)  COMMENT '头像',
+  IDCARD                VARCHAR(18)   COMMENT '身份证号',
+  EMAIL                 VARCHAR(300)  COMMENT '电子邮箱',
+  PHONE                 VARCHAR(30)   COMMENT '电话',
+  ORGPID                BIGINT(16)    COMMENT '单位ID',
+  ORGID                 BIGINT(16)    COMMENT '部门ID',
+  TYPE                  VARCHAR(300)  COMMENT '类型',
+  TYPENAME              VARCHAR(300)  COMMENT '类型名称',
+  EXALIAS               VARCHAR(300)  COMMENT '类型扩展标识',
+  EXNAME                VARCHAR(300)  COMMENT '类型扩展名称',
+  CREATETIME            VARCHAR(19)   COMMENT '创建时间',
+  LASTTIME              BIGINT(16)    COMMENT '最后更新时间',
+  EXDATA                VARCHAR(64)   COMMENT '扩展字段，如需要放大数据，自动修改为TEXT或CLOB字段',
+  PRIMARY KEY (ID)
+) COMMENT='系统用户';
 
-CREATE VIEW IF NOT EXISTS DS_CMS_USER AS SELECT ID, ACCOUNT, NAME, concat('admin', ACCOUNT) AS OWN FROM DS_COMMON_USER;
+CREATE VIEW IF NOT EXISTS DS_CMS_USER AS SELECT ID, ACCOUNT, NAME, OWN FROM DS_BASE_USER;
 
 CREATE TABLE IF NOT EXISTS DS_CMS_SITE
 (

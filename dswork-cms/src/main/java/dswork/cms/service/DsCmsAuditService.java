@@ -56,9 +56,9 @@ public class DsCmsAuditService
 		return (DsCmsCategory) categoryDao.get(categoryid);
 	}
 
-	public List<DsCmsSite> queryListSite(String own)
+	public List<DsCmsSite> queryListSite(List<String> ownList)
 	{
-		return siteDao.queryList(own);
+		return siteDao.queryList(ownList);
 	}
 
 	public List<DsCmsCategory> queryListCategory(Long siteid)
