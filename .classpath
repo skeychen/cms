@@ -15,10 +15,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Lib/module/dswork/db/dswork-db-redis.jar" sourcepath="/DsWorkJava">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="web/WEB-INF/classes"/>
 </classpath>
