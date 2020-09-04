@@ -387,11 +387,6 @@ public class DsCmsBaseController extends BaseController
 		return name.get();
 	}
 
-	protected static String getOwn2()
-	{
-		return own.get();
-	}
-
 	protected static List<String> getOwnList()
 	{
 		return ownList.get();
